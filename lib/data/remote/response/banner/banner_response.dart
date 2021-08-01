@@ -1,4 +1,4 @@
-import 'package:nilam/data/remote/model/banner/banner.dart';
+import 'package:go_share/data/remote/model/banner/banner.dart';
 
 class BannerResponse {
   late List<Banner> items;

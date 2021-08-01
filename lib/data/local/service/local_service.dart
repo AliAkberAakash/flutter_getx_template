@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:nilam/constants.dart';
-import 'package:nilam/data/remote/response/site_settings/site_settings_response.dart';
-import 'package:nilam/util/helper/text.dart';
-import 'package:nilam/util/lib/preference.dart';
+import 'package:go_share/constants.dart';
+import 'package:go_share/data/remote/response/site_settings/site_settings_response.dart';
+import 'package:go_share/util/helper/text.dart';
+import 'package:go_share/util/lib/preference.dart';
 
 class LocalService extends GetxService {
   late PreferenceUtil _preferenceUtil;

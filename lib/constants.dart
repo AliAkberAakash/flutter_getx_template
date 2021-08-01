@@ -60,7 +60,7 @@ const String baseDevelopmentUrl = "";
 const String baseLiveUrl = "";
 const String baseUrl = baseDevelopmentUrl;
 
-const String baseAppDevelopmentUrl = "https://demoapi.nilam.xyz";
+const String baseAppDevelopmentUrl = "https://demoapi.go_share.xyz";
 const String baseAppLiveUrl = "";
 const String baseAppUrl = baseAppDevelopmentUrl;
 

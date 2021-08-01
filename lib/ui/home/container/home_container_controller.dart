@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nilam/ui/home/content/home_content_view.dart';
+import 'package:go_share/ui/home/content/home_content_view.dart';
 
 class HomeContainerController extends GetxController {
   late Widget body;

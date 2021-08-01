@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:nilam/constants.dart';
-import 'package:nilam/ui/home/container/home_container_controller.dart';
+import 'package:go_share/constants.dart';
+import 'package:go_share/ui/home/container/home_container_controller.dart';
 
 import '../../../constants.dart';
 

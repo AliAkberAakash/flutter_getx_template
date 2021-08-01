@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:nilam/ui/auth/registration/registration_controller.dart';
+import 'package:go_share/ui/auth/registration/registration_controller.dart';
 
 class RegistrationBinding extends Bindings {
   @override

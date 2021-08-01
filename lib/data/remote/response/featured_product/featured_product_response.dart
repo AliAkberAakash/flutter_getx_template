@@ -1,4 +1,4 @@
-import 'package:nilam/data/remote/model/product/product.dart';
+import 'package:go_share/data/remote/model/product/product.dart';
 
 class FeaturedProductResponse {
   late List<Product> items;

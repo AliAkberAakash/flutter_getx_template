@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nilam/constants.dart';
-import 'package:nilam/util/lib/preference.dart';
+import 'package:go_share/constants.dart';
+import 'package:go_share/util/lib/preference.dart';
 
 class ThemeService extends GetxService {
   late PreferenceUtil _preferenceUtil;

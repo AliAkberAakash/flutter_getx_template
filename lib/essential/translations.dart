@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:nilam/constants.dart';
+import 'package:go_share/constants.dart';
 
 class Messages extends Translations {
   @override

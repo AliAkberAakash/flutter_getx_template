@@ -1,14 +1,14 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
-import 'package:nilam/base/exception/app_exception.dart';
-import 'package:nilam/data/local/service/local_service.dart';
-import 'package:nilam/data/remote/response/site_settings/site_settings_response.dart';
-import 'package:nilam/data/remote/service/remote_service.dart';
-import 'package:nilam/ui/home/container/home_container_binding.dart';
-import 'package:nilam/ui/home/container/home_container_view.dart';
-import 'package:nilam/util/helper/text.dart';
-import 'package:nilam/util/lib/toast.dart';
+import 'package:go_share/base/exception/app_exception.dart';
+import 'package:go_share/data/local/service/local_service.dart';
+import 'package:go_share/data/remote/response/site_settings/site_settings_response.dart';
+import 'package:go_share/data/remote/service/remote_service.dart';
+import 'package:go_share/ui/home/container/home_container_binding.dart';
+import 'package:go_share/ui/home/container/home_container_view.dart';
+import 'package:go_share/util/helper/text.dart';
+import 'package:go_share/util/lib/toast.dart';
 
 class SplashController extends GetxController {
   late LocalService _localService;

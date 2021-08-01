@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:nilam/data/local/service/local_service.dart';
-import 'package:nilam/data/local/service/theme_service.dart';
-import 'package:nilam/data/remote/service/remote_service.dart';
-import 'package:nilam/essential/translations.dart';
-import 'package:nilam/ui/auth/splash/splash_binding.dart';
-import 'package:nilam/ui/auth/splash/splash_view.dart';
+import 'package:go_share/data/local/service/local_service.dart';
+import 'package:go_share/data/local/service/theme_service.dart';
+import 'package:go_share/data/remote/service/remote_service.dart';
+import 'package:go_share/essential/translations.dart';
+import 'package:go_share/ui/auth/splash/splash_binding.dart';
+import 'package:go_share/ui/auth/splash/splash_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

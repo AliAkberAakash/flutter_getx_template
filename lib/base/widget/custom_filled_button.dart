@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nilam/constants.dart';
+import 'package:go_share/constants.dart';
 
 class CustomFilledButton extends StatefulWidget {
   final String title;

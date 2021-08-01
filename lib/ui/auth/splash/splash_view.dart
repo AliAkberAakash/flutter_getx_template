@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:nilam/constants.dart';
-import 'package:nilam/ui/auth/splash/splash_controller.dart';
+import 'package:go_share/constants.dart';
+import 'package:go_share/ui/auth/splash/splash_controller.dart';
 
 class SplashView extends GetView<SplashController> {
   @override

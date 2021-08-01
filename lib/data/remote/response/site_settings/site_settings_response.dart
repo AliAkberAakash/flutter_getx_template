@@ -1,11 +1,11 @@
+import 'package:go_share/constants.dart';
+import 'package:go_share/data/remote/model/site_settings/address/site_address.dart';
+import 'package:go_share/data/remote/model/site_settings/application_policy/site_application_policy.dart';
+import 'package:go_share/data/remote/model/site_settings/bank_details/site_bank_details.dart';
+import 'package:go_share/data/remote/model/site_settings/footer_menu/site_footer_menu.dart';
+import 'package:go_share/data/remote/model/site_settings/media_configuration/site_media_configuration.dart';
+import 'package:go_share/data/remote/model/site_settings/social_address/site_social_address.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:nilam/constants.dart';
-import 'package:nilam/data/remote/model/site_settings/address/site_address.dart';
-import 'package:nilam/data/remote/model/site_settings/application_policy/site_application_policy.dart';
-import 'package:nilam/data/remote/model/site_settings/bank_details/site_bank_details.dart';
-import 'package:nilam/data/remote/model/site_settings/footer_menu/site_footer_menu.dart';
-import 'package:nilam/data/remote/model/site_settings/media_configuration/site_media_configuration.dart';
-import 'package:nilam/data/remote/model/site_settings/social_address/site_social_address.dart';
 
 part 'site_settings_response.g.dart';
 

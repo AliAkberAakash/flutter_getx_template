@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_share/constants.dart';
+import 'package:go_share/data/remote/model/product/product.dart';
+import 'package:go_share/util/extension/data_extension.dart';
+import 'package:go_share/util/helper/text.dart';
 import 'package:intl/intl.dart';
-import 'package:nilam/constants.dart';
-import 'package:nilam/data/remote/model/product/product.dart';
-import 'package:nilam/util/extension/data_extension.dart';
-import 'package:nilam/util/helper/text.dart';
 import 'package:path/path.dart';
 
 class AuctionItem extends StatelessWidget {

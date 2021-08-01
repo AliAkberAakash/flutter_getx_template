@@ -4,13 +4,13 @@ import 'dart:io';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:nilam/constants.dart';
-import 'package:nilam/data/remote/response/banner/banner_response.dart';
-import 'package:nilam/data/remote/response/featured_product/featured_product_response.dart';
-import 'package:nilam/data/remote/response/site_settings/site_settings_response.dart';
-import 'package:nilam/data/remote/response/token/token_response.dart';
-import 'package:nilam/util/helper/text.dart';
-import 'package:nilam/util/lib/network/api.dart';
+import 'package:go_share/constants.dart';
+import 'package:go_share/data/remote/response/banner/banner_response.dart';
+import 'package:go_share/data/remote/response/featured_product/featured_product_response.dart';
+import 'package:go_share/data/remote/response/site_settings/site_settings_response.dart';
+import 'package:go_share/data/remote/response/token/token_response.dart';
+import 'package:go_share/util/helper/text.dart';
+import 'package:go_share/util/lib/network/api.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class RemoteService extends GetxService {

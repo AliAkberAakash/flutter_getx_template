@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nilam/data/local/service/local_service.dart';
-import 'package:nilam/data/remote/response/banner/banner_response.dart';
-import 'package:nilam/data/remote/response/featured_product/featured_product_response.dart';
-import 'package:nilam/data/remote/response/site_settings/site_settings_response.dart';
-import 'package:nilam/data/remote/service/remote_service.dart';
-import 'package:nilam/util/helper/text.dart';
+import 'package:go_share/data/local/service/local_service.dart';
+import 'package:go_share/data/remote/response/banner/banner_response.dart';
+import 'package:go_share/data/remote/response/featured_product/featured_product_response.dart';
+import 'package:go_share/data/remote/response/site_settings/site_settings_response.dart';
+import 'package:go_share/data/remote/service/remote_service.dart';
+import 'package:go_share/util/helper/text.dart';
 
 class HomeContentController extends GetxController {
   late RxBool isLoading;

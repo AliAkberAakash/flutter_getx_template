@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nilam/constants.dart';
-import 'package:nilam/ui/auth/forgot_password/forgot_password_controller.dart';
+import 'package:go_share/constants.dart';
+import 'package:go_share/ui/auth/forgot_password/forgot_password_controller.dart';
 
 class ForgotPasswordView extends GetView<ForgotPasswordController> {
   @override
