@@ -9,6 +9,7 @@ import 'package:nilam/data/remote/service/remote_service.dart';
 import 'package:nilam/essential/translations.dart';
 import 'package:nilam/ui/auth/splash/splash_binding.dart';
 import 'package:nilam/ui/auth/splash/splash_view.dart';
+import 'package:nilam/ui/navigation_container/navigation_container.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,8 +52,8 @@ class MyApp extends StatelessWidget {
       theme: Get.find<ThemeService>().getTheme,
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.cupertino,
-      home: SplashView(),
-      initialBinding: SplashBinding(),
+      home: NavigationContainer(),
+      //initialBinding: SplashBinding(),
       enableLog: kDebugMode,
     );
   }
