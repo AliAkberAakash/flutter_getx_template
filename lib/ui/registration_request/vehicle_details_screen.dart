@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nilam/ui/common_widgets/outlined_material_button.dart';
 import 'package:nilam/ui/common_widgets/text_field_headline.dart';
 import 'package:nilam/ui/common_widgets/text_field_value_widget.dart';
 import 'package:nilam/ui/registration_request/widgets/registration_Items_list.dart';
 import 'package:nilam/ui/registration_request/widgets/status_chip.dart';
 import 'package:nilam/ui/registration_request/widgets/vehicle_request_item.dart';
+import 'package:nilam/ui/update_vehicle/update_vehicle_screen.dart';
 import 'package:nilam/utils/colors.dart';
 import 'package:nilam/utils/dimens.dart';
 import 'package:nilam/utils/spacers.dart';
@@ -91,6 +94,14 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                       TextFieldHeadline(headline: "Attendant number"),
                       VSpacer10(),
                       TextFieldValueWidget(headline: "+242267682"),
+                      VSpacer40(),
+                      OutlinedMaterialButton(
+                        color: grey,
+                        onClick: (){
+                          Get.to(UpdateVehicleScreen());
+                        },
+                        text: "Update your vehicle",
+                      ),
                       VSpacer20(),
                     ],
                   ),

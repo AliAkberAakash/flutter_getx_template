@@ -7,8 +7,13 @@ class OutlinedMaterialButton extends StatelessWidget {
 
   final Function() onClick;
   final String text;
+  final Color color;
 
-  const OutlinedMaterialButton({required this.onClick, required this.text});
+  const OutlinedMaterialButton({
+    required this.onClick, 
+    required this.text,
+    this.color = accent,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +22,7 @@ class OutlinedMaterialButton extends StatelessWidget {
       onPressed: onClick,
       shape: RoundedRectangleBorder(
         side: BorderSide(
-          color: accent,
+          color: color,
         ),
         borderRadius: BorderRadius.all(
           Radius.circular(
@@ -28,7 +33,7 @@ class OutlinedMaterialButton extends StatelessWidget {
       child: Text(
         text,
         style: GoogleFonts.manrope(
-          color: accent,
+          color: color,
         ),
       ),
     );
