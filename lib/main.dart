@@ -7,13 +7,7 @@ import 'package:nilam/data/local/service/local_service.dart';
 import 'package:nilam/data/local/service/theme_service.dart';
 import 'package:nilam/data/remote/service/remote_service.dart';
 import 'package:nilam/essential/translations.dart';
-import 'package:nilam/ui/auth/splash/splash_binding.dart';
-import 'package:nilam/ui/auth/splash/splash_view.dart';
 import 'package:nilam/ui/navigation_container/navigation_container.dart';
-import 'package:nilam/ui/registration_request/registration_request_screen.dart';
-import 'package:nilam/ui/registration_request/vehicle_details_screen.dart';
-import 'package:nilam/ui/reset_vehicle_login/reset_vehicle_list.dart';
-import 'package:nilam/ui/vehicle_free_busy_list/vehicle_free_busy_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,7 +50,7 @@ class MyApp extends StatelessWidget {
       theme: Get.find<ThemeService>().getTheme,
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.cupertino,
-      home: ResetVehicleList(),
+      home: NavigationContainer(),
       //initialBinding: SplashBinding(),
       enableLog: kDebugMode,
     );

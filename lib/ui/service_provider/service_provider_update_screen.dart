@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nilam/ui/common_widgets/text_field_headline.dart';
 import 'package:nilam/ui/common_widgets/text_field_value_widget.dart';
+import 'package:nilam/ui/edit_profile/edit_profile_screen.dart';
 import 'package:nilam/ui/service_provider/widgets/update_button.dart';
 import 'package:nilam/utils/colors.dart';
 import 'package:nilam/utils/dimens.dart';
@@ -57,7 +59,10 @@ class _ServiceProviderUpdateScreenState
             VSpacer5(),
             TextFieldValueWidget(headline: '21321314'),
             VSpacer40(),
-            UpdateButton(text: 'Update My Profile', onClicked: () {})
+            UpdateButton(text: 'Update My Profile', onClicked: () {
+              Get.to(EditProfileScreen());
+            }),
+            VSpacer60(),
           ],
         ),
       ),

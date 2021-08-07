@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nilam/ui/edit_profile/edit_profile_screen.dart';
 import 'package:nilam/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:nilam/ui/navigation_container/widgets/menu_items.dart';
+import 'package:nilam/ui/registration_request/registration_request_screen.dart';
+import 'package:nilam/ui/reset_vehicle_login/reset_vehicle_list.dart';
+import 'package:nilam/ui/reset_vehicle_login/reset_vehicle_login_screen.dart';
+import 'package:nilam/ui/service_provider/service_provider_screen.dart';
+import 'package:nilam/ui/service_provider/service_provider_update_screen.dart';
+import 'package:nilam/ui/vehicle_free_busy_list/vehicle_free_busy_screen.dart';
 import 'package:nilam/utils/colors.dart';
 import 'package:nilam/utils/constants.dart';
 import 'package:nilam/utils/dimens.dart';
@@ -17,13 +25,14 @@ class NavigationContainer extends StatefulWidget {
 
 class _NavigationContainerState extends State<NavigationContainer> {
 
-  int _selectedItem = 0;
+  int _selectedItem = 5;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (ctx, constraints) {
         return Scaffold(
+          body: _getBody(),
           floatingActionButton: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -31,7 +40,9 @@ class _NavigationContainerState extends State<NavigationContainer> {
                 child: SvgPicture.asset(
                   AssetConstants.ic_bus_svg,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  changePage(2);
+                },
                 backgroundColor: accent,
               ),
               VSpacer10(),
@@ -129,40 +140,58 @@ class _NavigationContainerState extends State<NavigationContainer> {
                     child: ListView(
                       children: [
                         MenuItem(
-                            isSelected: false,
-                            index: 0,
-                            title: "My Profile",
-                            icon: AssetConstants.ic_profile
+                          isSelected: 3==_selectedItem,
+                          index: 3,
+                          title: "My Profile",
+                          icon: AssetConstants.ic_profile,
+                          onClick:(index) {
+                            changePage(index);
+                          },
                         ),
                         MenuItem(
-                            isSelected: true,
-                            index: 0,
-                            title: "My Vehicle List",
-                            icon: AssetConstants.ic_profile
+                          isSelected: 4==_selectedItem,
+                          index: 4,
+                          title: "My Vehicle List",
+                          icon: AssetConstants.ic_profile,
+                          onClick:(index) {
+                            changePage(index);
+                          },
                         ),
                         MenuItem(
-                            isSelected: false,
-                            index: 0,
-                            title: "Vehicle Free Busy List",
-                            icon: AssetConstants.ic_profile
+                          isSelected: 5==_selectedItem,
+                          index: 5,
+                          title: "Vehicle Free Busy List",
+                          icon: AssetConstants.ic_profile,
+                          onClick:(index) {
+                            changePage(index);
+                          },
                         ),
                         MenuItem(
-                            isSelected: false,
-                            index: 0,
-                            title: "Notification",
-                            icon: AssetConstants.ic_profile
+                          isSelected: 6==_selectedItem,
+                          index: 6,
+                          title: "Notification",
+                          icon: AssetConstants.ic_profile,
+                          onClick:(index) {
+                            changePage(index);
+                          },
                         ),
                         MenuItem(
-                            isSelected: false,
-                            index: 0,
-                            title: "Reset Vehicle Login",
-                            icon: AssetConstants.ic_profile
+                          isSelected: 7==_selectedItem,
+                          index: 7,
+                          title: "Reset Vehicle Login",
+                          icon: AssetConstants.ic_profile,
+                          onClick:(index) {
+                            changePage(index);
+                          },
                         ),
                         MenuItem(
-                            isSelected: false,
-                            index: 0,
-                            title: "Sign out",
-                            icon: AssetConstants.ic_profile
+                          isSelected: 8==_selectedItem,
+                          index: 8,
+                          title: "Sign out",
+                          icon: AssetConstants.ic_profile,
+                          onClick: (index) {
+                            changePage(index);
+                          },
                         ),
                       ],
                     ),
@@ -174,5 +203,27 @@ class _NavigationContainerState extends State<NavigationContainer> {
         );
       },
     );
+  }
+
+  changePage(int index){
+
+    if(index!=2)
+    Get.back();
+    if(index != _selectedItem){
+      setState(() {
+        _selectedItem=index;
+      });
+    }
+  }
+
+  Widget _getBody(){
+    switch(_selectedItem){
+      case 2: return ServiceProviderScreen();
+      case 3: return ServiceProviderUpdateScreen();
+      case 4: return RegistrationRequestScreen();
+      case 5: return VehicleFreeBusyList();
+      case 7: return ResetVehicleList();
+      default: return Container();
+    }
   }
 }
