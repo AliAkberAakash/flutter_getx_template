@@ -12,6 +12,7 @@ import 'package:nilam/ui/auth/splash/splash_view.dart';
 import 'package:nilam/ui/navigation_container/navigation_container.dart';
 import 'package:nilam/ui/registration_request/registration_request_screen.dart';
 import 'package:nilam/ui/registration_request/vehicle_details_screen.dart';
+import 'package:nilam/ui/vehicle_free_busy_list/vehicle_free_busy_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,7 +55,7 @@ class MyApp extends StatelessWidget {
       theme: Get.find<ThemeService>().getTheme,
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.cupertino,
-      home:RegistrationRequestScreen(),
+      home: VehicleFreeBusyList(),
       //initialBinding: SplashBinding(),
       enableLog: kDebugMode,
     );
