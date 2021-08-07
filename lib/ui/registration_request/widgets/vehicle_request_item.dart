@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nilam/ui/common_widgets/outlined_material_button.dart';
+import 'package:nilam/ui/registration_request/vehicle_details_screen.dart';
 import 'package:nilam/ui/registration_request/widgets/status_chip.dart';
 import 'package:nilam/ui/registration_request/widgets/vehicle_info_widget.dart';
 import 'package:nilam/utils/colors.dart';
@@ -12,8 +14,9 @@ import 'package:nilam/utils/spacers.dart';
 class VehicleRequestItem extends StatefulWidget {
 
   final ChipStatus status;
+  final bool showButton;
 
-  const VehicleRequestItem({required this.status});
+  const VehicleRequestItem({required this.status, this.showButton = true});
 
   @override
   _VehicleRequestItemState createState() => _VehicleRequestItemState();
@@ -125,12 +128,16 @@ class _VehicleRequestItemState extends State<VehicleRequestItem> {
             ),
           ),
 
-          Padding(
+          widget.showButton ? Padding(
             padding: const EdgeInsets.all(dp20),
             child: OutlinedMaterialButton(
-              onClick: () {  },
+              onClick: () {
+                Get.to(VehicleDetailsScreen());
+              },
               text: "Vehicle Details",
             ),
+          ) : Container(
+            height: dp10,
           ),
         ],
       ),

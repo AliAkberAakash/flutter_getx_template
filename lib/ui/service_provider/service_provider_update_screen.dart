@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nilam/ui/common_widgets/text_field_headline.dart';
-import 'package:nilam/ui/common_widgets/text_field_valie_widget.dart';
+import 'package:nilam/ui/common_widgets/text_field_value_widget.dart';
 import 'package:nilam/ui/service_provider/widgets/update_button.dart';
 import 'package:nilam/utils/colors.dart';
 import 'package:nilam/utils/dimens.dart';
