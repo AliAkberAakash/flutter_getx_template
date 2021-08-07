@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nilam/ui/common_widgets/outlined_material_button.dart';
 import 'package:nilam/ui/registration_request/widgets/status_chip.dart';
 import 'package:nilam/ui/registration_request/widgets/vehicle_info_widget.dart';
+import 'package:nilam/ui/reset_vehicle_login/reset_vehicle_login_screen.dart';
 import 'package:nilam/utils/colors.dart';
 import 'package:nilam/utils/dimens.dart';
 import 'package:nilam/utils/spacers.dart';
@@ -128,7 +129,7 @@ class ResetVehicleItem extends StatelessWidget {
             padding: const EdgeInsets.all(dp20),
             child: OutlinedMaterialButton(
               onClick: () {
-
+                Get.to(ResetVehicleLoginScreen());
               },
               text: "Reset Login",
             ),
