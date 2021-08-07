@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nilam/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:nilam/ui/navigation_container/widgets/menu_items.dart';
 import 'package:nilam/utils/colors.dart';
 import 'package:nilam/utils/constants.dart';
@@ -14,6 +16,9 @@ class NavigationContainer extends StatefulWidget {
 }
 
 class _NavigationContainerState extends State<NavigationContainer> {
+
+  int _selectedItem = 0;
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -23,6 +28,9 @@ class _NavigationContainerState extends State<NavigationContainer> {
             mainAxisSize: MainAxisSize.min,
             children: [
               FloatingActionButton(
+                child: SvgPicture.asset(
+                  AssetConstants.ic_bus_svg,
+                ),
                 onPressed: () {},
                 backgroundColor: accent,
               ),
@@ -34,22 +42,25 @@ class _NavigationContainerState extends State<NavigationContainer> {
               FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: BottomAppBar(
             child: Container(
-              height: 60,
+              height: 80,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  InkWell(
-                    child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Text("Home"),
-                    ),
+                  BottomBarItem(
+                    iconString: AssetConstants.ic_home_svg,
+                    isSelected: _selectedItem == 0,
+                    title: "Home",
+                    index: 0,
+                    onTap: _onBottomBarTap,
                   ),
-                  InkWell(
-                    onTap: () => _showMenu(constraints.maxHeight),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Text("Menu"),
-                    ),
+                  BottomBarItem(
+                    iconString: AssetConstants.ic_menu_svg,
+                    isSelected: _selectedItem == 1,
+                    title: "Menu",
+                    index: 1,
+                    onTap:(int position){
+                      _showMenu(constraints.maxHeight);
+                    },
                   ),
                 ],
               ),
@@ -58,6 +69,12 @@ class _NavigationContainerState extends State<NavigationContainer> {
         );
       },
     );
+  }
+
+  void _onBottomBarTap(int index){
+    setState(() {
+      _selectedItem = index;
+    });
   }
 
   _showMenu(double height) {
