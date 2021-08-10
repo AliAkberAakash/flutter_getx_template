@@ -54,7 +54,7 @@ class _VehicleFreeBusyListState extends State<VehicleFreeBusyList> {
                             text: "Free",
                           ),
                           Tab(
-                            text: "Buse",
+                            text: "Busy",
                           ),
                         ],
                       ),
@@ -69,20 +69,23 @@ class _VehicleFreeBusyListState extends State<VehicleFreeBusyList> {
                         children: [
                           ListView.builder(
                             itemCount: 10,
-                            itemBuilder: (ctx, idx){
-                              return VehicleFreeBusyItem(status: ChipStatus.FREE);
+                            itemBuilder: (ctx, idx) {
+                              return VehicleFreeBusyItem(
+                                  status: ChipStatus.FREE);
                             },
                           ),
                           ListView.builder(
                             itemCount: 10,
-                            itemBuilder: (ctx, idx){
-                              return VehicleFreeBusyItem(status: ChipStatus.FREE);
+                            itemBuilder: (ctx, idx) {
+                              return VehicleFreeBusyItem(
+                                  status: ChipStatus.FREE);
                             },
                           ),
                           ListView.builder(
                             itemCount: 10,
-                            itemBuilder: (ctx, idx){
-                              return VehicleFreeBusyItem(status: ChipStatus.BUSY);
+                            itemBuilder: (ctx, idx) {
+                              return VehicleFreeBusyItem(
+                                  status: ChipStatus.BUSY);
                             },
                           ),
                         ],

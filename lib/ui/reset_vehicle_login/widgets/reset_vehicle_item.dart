@@ -10,15 +10,12 @@ import 'package:nilam/utils/dimens.dart';
 import 'package:nilam/utils/spacers.dart';
 
 class ResetVehicleItem extends StatelessWidget {
-
   final ChipStatus status;
   final bool showButton;
 
-  const ResetVehicleItem({
-    Key? key,
-    required this.status,
-    this.showButton = true
-  }) : super(key: key);
+  const ResetVehicleItem(
+      {Key? key, required this.status, this.showButton = true})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +44,13 @@ class ResetVehicleItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Vehicle Number",
+                      "Vehicle number",
                       style: GoogleFonts.manrope(
                         color: darkText,
                       ),
                     ),
                     Text(
-                      "VA 07097",
+                      "VA 112414",
                       style: GoogleFonts.manrope(
                         color: darkText,
                         fontSize: dp20,
@@ -70,7 +67,6 @@ class ResetVehicleItem extends StatelessWidget {
             color: greyBorder,
             height: 2,
           ),
-
           Padding(
             padding: EdgeInsets.all(dp15),
             child: Row(
@@ -91,7 +87,7 @@ class ResetVehicleItem extends StatelessWidget {
                           VSpacer20(),
                           VehicleInfoWidget(
                             title: "Driver name",
-                            value: "John Doe",
+                            value: "Jhon Doe",
                           ),
                         ],
                       ),
@@ -113,29 +109,29 @@ class ResetVehicleItem extends StatelessWidget {
                           VSpacer20(),
                           VehicleInfoWidget(
                             title: "Pending duration",
-                            value: "28 hrs",
+                            value: "N/A",
                           ),
                         ],
                       ),
-
                     ],
                   ),
                 ),
               ],
             ),
           ),
-
-          showButton ? Padding(
-            padding: const EdgeInsets.all(dp20),
-            child: OutlinedMaterialButton(
-              onClick: () {
-                Get.to(ResetVehicleLoginScreen());
-              },
-              text: "Reset Login",
-            ),
-          ) : Container(
-            height: dp10,
-          ),
+          showButton
+              ? Padding(
+                  padding: const EdgeInsets.all(dp20),
+                  child: OutlinedMaterialButton(
+                    onClick: () {
+                      Get.to(ResetVehicleLoginScreen());
+                    },
+                    text: "Reset Login",
+                  ),
+                )
+              : Container(
+                  height: dp10,
+                ),
         ],
       ),
     );

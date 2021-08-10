@@ -3,7 +3,6 @@ import 'package:nilam/utils/colors.dart';
 import 'package:nilam/utils/dimens.dart';
 
 class PositiveButton extends StatelessWidget {
-
   final String text;
   final Function() onClicked;
 
@@ -22,12 +21,11 @@ class PositiveButton extends StatelessWidget {
       ),
       onPressed: onClicked,
       color: Colors.green,
-      child:Text(
+      child: Text(
         text,
         style: TextStyle(
           color: white,
           fontSize: dp20,
-          fontWeight: FontWeight.bold,
         ),
       ),
     );

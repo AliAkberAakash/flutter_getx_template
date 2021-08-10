@@ -26,7 +26,6 @@ class UpdateButton extends StatelessWidget {
         style: TextStyle(
           color: accent,
           fontSize: dp20,
-          fontWeight: FontWeight.bold,
         ),
       ),
     );

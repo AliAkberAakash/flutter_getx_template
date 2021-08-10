@@ -24,7 +24,6 @@ class NavigationContainer extends StatefulWidget {
 }
 
 class _NavigationContainerState extends State<NavigationContainer> {
-
   int _selectedItem = 5;
 
   @override
@@ -69,7 +68,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                     isSelected: _selectedItem == 1,
                     title: "Menu",
                     index: 1,
-                    onTap:(int position){
+                    onTap: (int position) {
                       _showMenu(constraints.maxHeight);
                     },
                   ),
@@ -82,7 +81,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
     );
   }
 
-  void _onBottomBarTap(int index){
+  void _onBottomBarTap(int index) {
     setState(() {
       _selectedItem = index;
     });
@@ -140,52 +139,52 @@ class _NavigationContainerState extends State<NavigationContainer> {
                     child: ListView(
                       children: [
                         MenuItem(
-                          isSelected: 3==_selectedItem,
+                          isSelected: 3 == _selectedItem,
                           index: 3,
-                          title: "My Profile",
+                          title: "My profile",
                           icon: AssetConstants.ic_profile,
-                          onClick:(index) {
+                          onClick: (index) {
                             changePage(index);
                           },
                         ),
                         MenuItem(
-                          isSelected: 4==_selectedItem,
+                          isSelected: 4 == _selectedItem,
                           index: 4,
-                          title: "My Vehicle List",
+                          title: "My vehicle list",
                           icon: AssetConstants.ic_profile,
-                          onClick:(index) {
+                          onClick: (index) {
                             changePage(index);
                           },
                         ),
                         MenuItem(
-                          isSelected: 5==_selectedItem,
+                          isSelected: 5 == _selectedItem,
                           index: 5,
-                          title: "Vehicle Free Busy List",
+                          title: "Vehicle free busy list",
                           icon: AssetConstants.ic_profile,
-                          onClick:(index) {
+                          onClick: (index) {
                             changePage(index);
                           },
                         ),
                         MenuItem(
-                          isSelected: 6==_selectedItem,
+                          isSelected: 6 == _selectedItem,
                           index: 6,
                           title: "Notification",
                           icon: AssetConstants.ic_profile,
-                          onClick:(index) {
+                          onClick: (index) {
                             changePage(index);
                           },
                         ),
                         MenuItem(
-                          isSelected: 7==_selectedItem,
+                          isSelected: 7 == _selectedItem,
                           index: 7,
-                          title: "Reset Vehicle Login",
+                          title: "Reset vehicle login",
                           icon: AssetConstants.ic_profile,
-                          onClick:(index) {
+                          onClick: (index) {
                             changePage(index);
                           },
                         ),
                         MenuItem(
-                          isSelected: 8==_selectedItem,
+                          isSelected: 8 == _selectedItem,
                           index: 8,
                           title: "Sign out",
                           icon: AssetConstants.ic_profile,
@@ -205,25 +204,29 @@ class _NavigationContainerState extends State<NavigationContainer> {
     );
   }
 
-  changePage(int index){
-
-    if(index!=2)
-    Get.back();
-    if(index != _selectedItem){
+  changePage(int index) {
+    if (index != 2) Get.back();
+    if (index != _selectedItem) {
       setState(() {
-        _selectedItem=index;
+        _selectedItem = index;
       });
     }
   }
 
-  Widget _getBody(){
-    switch(_selectedItem){
-      case 2: return ServiceProviderScreen();
-      case 3: return ServiceProviderUpdateScreen();
-      case 4: return RegistrationRequestScreen();
-      case 5: return VehicleFreeBusyList();
-      case 7: return ResetVehicleList();
-      default: return Container();
+  Widget _getBody() {
+    switch (_selectedItem) {
+      case 2:
+        return ServiceProviderScreen();
+      case 3:
+        return ServiceProviderUpdateScreen();
+      case 4:
+        return RegistrationRequestScreen();
+      case 5:
+        return VehicleFreeBusyList();
+      case 7:
+        return ResetVehicleList();
+      default:
+        return Container();
     }
   }
 }

@@ -85,6 +85,7 @@ class _ServiceProviderScreenState extends State<ServiceProviderScreen> {
             CommonTextField(controller: TextEditingController()),
             VSpacer40(),
             PositiveButton(text: "Submit", onClicked: () {}),
+            VSpacer60(),
           ],
         ),
       ),

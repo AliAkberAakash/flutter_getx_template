@@ -30,7 +30,7 @@ class _ResetVehicleListState extends State<ResetVehicleList> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     LargeHeadlineWidget(
-                      headline: "Reset Vehicle Login",
+                      headline: "Reset vehicle login",
                     ),
                     VSpacer10(),
                     SizedBox(
@@ -54,7 +54,7 @@ class _ResetVehicleListState extends State<ResetVehicleList> {
                             text: "Free",
                           ),
                           Tab(
-                            text: "Buse",
+                            text: "Busy",
                           ),
                         ],
                       ),
@@ -69,19 +69,19 @@ class _ResetVehicleListState extends State<ResetVehicleList> {
                         children: [
                           ListView.builder(
                             itemCount: 10,
-                            itemBuilder: (ctx, idx){
+                            itemBuilder: (ctx, idx) {
                               return ResetVehicleItem(status: ChipStatus.FREE);
                             },
                           ),
                           ListView.builder(
                             itemCount: 10,
-                            itemBuilder: (ctx, idx){
+                            itemBuilder: (ctx, idx) {
                               return ResetVehicleItem(status: ChipStatus.FREE);
                             },
                           ),
                           ListView.builder(
                             itemCount: 10,
-                            itemBuilder: (ctx, idx){
+                            itemBuilder: (ctx, idx) {
                               return ResetVehicleItem(status: ChipStatus.BUSY);
                             },
                           ),

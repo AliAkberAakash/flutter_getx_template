@@ -10,7 +10,6 @@ import 'package:nilam/utils/dimens.dart';
 import 'package:nilam/utils/spacers.dart';
 
 class VehicleFreeBusyItem extends StatelessWidget {
-
   final ChipStatus status;
   final bool showButton;
 
@@ -53,7 +52,7 @@ class VehicleFreeBusyItem extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "VA 07097",
+                      "VA 112414",
                       style: GoogleFonts.manrope(
                         color: darkText,
                         fontSize: dp20,
@@ -70,7 +69,6 @@ class VehicleFreeBusyItem extends StatelessWidget {
             color: greyBorder,
             height: 2,
           ),
-
           Padding(
             padding: EdgeInsets.all(dp15),
             child: Row(
@@ -85,13 +83,13 @@ class VehicleFreeBusyItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           VehicleInfoWidget(
-                            title: "Vehicle number",
-                            value: "VA 112414",
+                            title: "Driver name",
+                            value: "Jhon Walter",
                           ),
                           VSpacer20(),
                           VehicleInfoWidget(
-                            title: "Driver name",
-                            value: "John Doe",
+                            title: "Attendant name",
+                            value: "Jhon Doe",
                           ),
                         ],
                       ),
@@ -107,35 +105,35 @@ class VehicleFreeBusyItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           VehicleInfoWidget(
-                            title: "Request date",
+                            title: "Registration date",
                             value: "19 May, 2021",
                           ),
                           VSpacer20(),
                           VehicleInfoWidget(
-                            title: "Pending duration",
-                            value: "28 hrs",
+                            title: "Booked Seat",
+                            value: "0/12",
                           ),
                         ],
                       ),
-
                     ],
                   ),
                 ),
               ],
             ),
           ),
-
-          showButton ? Padding(
-            padding: const EdgeInsets.all(dp20),
-            child: OutlinedMaterialButton(
-              onClick: () {
-                Get.to(VehicleFreeBusyDetails());
-              },
-              text: "Vehicle Details",
-            ),
-          ) : Container(
-            height: dp10,
-          ),
+          showButton
+              ? Padding(
+                  padding: const EdgeInsets.all(dp20),
+                  child: OutlinedMaterialButton(
+                    onClick: () {
+                      Get.to(VehicleFreeBusyDetails());
+                    },
+                    text: "Vehicle Details",
+                  ),
+                )
+              : Container(
+                  height: dp10,
+                ),
         ],
       ),
     );

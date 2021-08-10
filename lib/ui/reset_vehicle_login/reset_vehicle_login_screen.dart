@@ -10,7 +10,8 @@ class ResetVehicleLoginScreen extends StatefulWidget {
   const ResetVehicleLoginScreen({Key? key}) : super(key: key);
 
   @override
-  _ResetVehicleLoginScreenState createState() => _ResetVehicleLoginScreenState();
+  _ResetVehicleLoginScreenState createState() =>
+      _ResetVehicleLoginScreenState();
 }
 
 class _ResetVehicleLoginScreenState extends State<ResetVehicleLoginScreen> {
@@ -18,43 +19,43 @@ class _ResetVehicleLoginScreenState extends State<ResetVehicleLoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: LayoutBuilder(
-          builder: (ctx, constraints){
-            return Container(
-              padding: EdgeInsets.all(dp20),
-              child: ListView(
-                children: [
-                  LargeHeadlineWidget(
-                    headline: "Vehicle free/busy list",
+        builder: (ctx, constraints) {
+          return Container(
+            padding: EdgeInsets.all(dp20),
+            child: ListView(
+              children: [
+                LargeHeadlineWidget(
+                  headline: "Vehicle free/busy list",
+                ),
+                VSpacer10(),
+                SizedBox(
+                  width: constraints.maxWidth * 0.6,
+                  child: TextFieldHeadline(
+                    headline: "It’s time to rock n role!"
+                        " Let’s get started now.",
                   ),
-                  VSpacer10(),
-                  SizedBox(
-                    width: constraints.maxWidth * 0.6,
-                    child: TextFieldHeadline(
-                      headline: "It’s time to rock n role!"
-                          " Let’s get started now.",
-                    ),
-                  ),
-                  VSpacer40(),
-                  CommonTextField(
-                    controller: TextEditingController(),
-                    hint: "Service Partner Password",
-                  ),
-                  VSpacer20(),
-                  CommonTextField(
-                    controller: TextEditingController(),
-                    hint: "Service Partner Password",
-                  ),
-                  VSpacer20(),
-                  CommonTextField(
-                    controller: TextEditingController(),
-                    hint: "Service Partner Password",
-                  ),
-                  VSpacer60(),
-                  PositiveButton(text: "Submit", onClicked: (){})
-                ],
-              ),
-            );
-          },
+                ),
+                VSpacer40(),
+                CommonTextField(
+                  controller: TextEditingController(),
+                  hint: "Service Partner password",
+                ),
+                VSpacer20(),
+                CommonTextField(
+                  controller: TextEditingController(),
+                  hint: "New password",
+                ),
+                VSpacer20(),
+                CommonTextField(
+                  controller: TextEditingController(),
+                  hint: "Confirm new password",
+                ),
+                VSpacer60(),
+                PositiveButton(text: "Submit", onClicked: () {})
+              ],
+            ),
+          );
+        },
       ),
     );
   }
