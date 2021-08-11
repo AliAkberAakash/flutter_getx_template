@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nilam/ui/add_vehicle/add_vehicle.dart';
 import 'package:nilam/ui/edit_profile/edit_profile_screen.dart';
 import 'package:nilam/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:nilam/ui/navigation_container/widgets/menu_items.dart';
@@ -51,7 +52,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
               ),
             ),
             onPressed: () {
-              changePage(2);
+              changePage(1);
             },
             backgroundColor: accent,
           ),
@@ -229,6 +230,10 @@ class _NavigationContainerState extends State<NavigationContainer> {
 
   Widget _getBody() {
     switch (_selectedItem) {
+      case 0:
+        return ServiceProviderScreen();
+      case 1:
+        return AddVehicleScreen();
       case 2:
         return ServiceProviderScreen();
       case 3:
