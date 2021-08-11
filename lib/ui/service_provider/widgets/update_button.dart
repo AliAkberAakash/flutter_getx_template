@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nilam/utils/colors.dart';
 import 'package:nilam/utils/dimens.dart';
 
@@ -23,9 +24,9 @@ class UpdateButton extends StatelessWidget {
       onPressed: onClicked,
       child: Text(
         text,
-        style: TextStyle(
+        style: GoogleFonts.manrope(
           color: accent,
-          fontSize: dp20,
+
         ),
       ),
     );
