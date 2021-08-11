@@ -11,7 +11,7 @@ class CommonTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
+    return TextField(
       controller: controller,
       style: TextStyle(
         color: darkText,
@@ -20,6 +20,7 @@ class CommonTextField extends StatelessWidget {
       ),
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.only(left: 10),
         hintText: hint,
         hintStyle: GoogleFonts.manrope(
           color: light_grey,
