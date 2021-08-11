@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 const black = Color(0xff000000);
 const black_5 = Color(0xff424242);
 const white = Color(0xffffffff);
-const accent = Color(0xff00c853);
+const accent = Color(0xff009E35);
 const primaryDark = Color(0xff002923);
 const darkText = Color(0xff002923);
 const blueText = Color(0xff092C4C);
@@ -15,6 +15,9 @@ const grey = Color(0xff999999);
 const deep_blue = Color(0xff3B5998);
 const red = Color(0xffd32f2f);
 const yellow = Color(0xffffee58);
+
+const gradientDark = Color(0xff22A848);
+const gradientLight = Color(0xff36A792);
 
 const approvedChipColor = Color(0xff2395D6);
 const pendingChipColor = Color(0xffFEA400);

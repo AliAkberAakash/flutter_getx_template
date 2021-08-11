@@ -34,9 +34,13 @@ class BottomBarItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
+            iconString.isEmpty ?
+            SizedBox(height: 30,) :
             SvgPicture.asset(
               iconString,
-              color: /*isSelected ? accent :*/ grey,
+              color: /*isSelected ? accent :*/ darkText,
+              height: 30,
+              width: 30,
             ),
             Text(
               title,

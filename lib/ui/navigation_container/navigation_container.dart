@@ -32,21 +32,28 @@ class _NavigationContainerState extends State<NavigationContainer> {
       builder: (ctx, constraints) {
         return Scaffold(
           body: _getBody(),
-          floatingActionButton: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              FloatingActionButton(
+          floatingActionButton: FloatingActionButton(
+            child: Container(
+              height: 60,
+              width: 60,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    colors: [gradientDark, gradientLight],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight
+                  )
+              ),
+              child: Center(
                 child: SvgPicture.asset(
                   AssetConstants.ic_bus_svg,
                 ),
-                onPressed: () {
-                  changePage(2);
-                },
-                backgroundColor: accent,
               ),
-              VSpacer10(),
-              Text("Book a Bus"),
-            ],
+            ),
+            onPressed: () {
+              changePage(2);
+            },
+            backgroundColor: accent,
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
@@ -60,6 +67,13 @@ class _NavigationContainerState extends State<NavigationContainer> {
                     iconString: AssetConstants.ic_home_svg,
                     isSelected: _selectedItem == 0,
                     title: "Home",
+                    index: 0,
+                    onTap: _onBottomBarTap,
+                  ),
+                  BottomBarItem(
+                    iconString: "",
+                    isSelected: _selectedItem == 0,
+                    title: "Add a Bus",
                     index: 0,
                     onTap: _onBottomBarTap,
                   ),
