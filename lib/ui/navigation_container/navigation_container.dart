@@ -157,7 +157,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           isSelected: 3 == _selectedItem,
                           index: 3,
                           title: "My profile",
-                          icon: AssetConstants.ic_profile,
+                          icon: AssetConstants.ic_profile_svg,
                           onClick: (index) {
                             changePage(index);
                           },
@@ -166,7 +166,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           isSelected: 4 == _selectedItem,
                           index: 4,
                           title: "My vehicle list",
-                          icon: AssetConstants.ic_profile,
+                          icon: AssetConstants.ic_vehicle_list_svg,
                           onClick: (index) {
                             changePage(index);
                           },
@@ -175,7 +175,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           isSelected: 5 == _selectedItem,
                           index: 5,
                           title: "Vehicle free busy list",
-                          icon: AssetConstants.ic_profile,
+                          icon: AssetConstants.ic_free_busy_list_svg,
                           onClick: (index) {
                             changePage(index);
                           },
@@ -184,7 +184,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           isSelected: 6 == _selectedItem,
                           index: 6,
                           title: "Notification",
-                          icon: AssetConstants.ic_profile,
+                          icon: AssetConstants.ic_notification_svg,
                           onClick: (index) {
                             changePage(index);
                           },
@@ -193,7 +193,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           isSelected: 7 == _selectedItem,
                           index: 7,
                           title: "Reset vehicle login",
-                          icon: AssetConstants.ic_profile,
+                          icon: AssetConstants.ic_settings_svg,
                           onClick: (index) {
                             changePage(index);
                           },
@@ -202,7 +202,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           isSelected: 8 == _selectedItem,
                           index: 8,
                           title: "Sign out",
-                          icon: AssetConstants.ic_profile,
+                          icon: AssetConstants.ic_sign_out_svg,
                           onClick: (index) {
                             changePage(index);
                           },
