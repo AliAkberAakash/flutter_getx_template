@@ -20,7 +20,7 @@ class PositiveButton extends StatelessWidget {
         ),
       ),
       onPressed: onClicked,
-      color: Colors.green,
+      color: accent,
       child: Text(
         text,
         style: TextStyle(

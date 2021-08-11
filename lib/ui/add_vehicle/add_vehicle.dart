@@ -84,6 +84,7 @@ class _AddVehicleScreenState extends State<AddVehicleScreen> {
             VSpacer40(),
             _agreeToTerms(),
             PositiveButton(text: "Submit", onClicked: () {}),
+            VSpacer20(),
           ],
         ),
       ),
