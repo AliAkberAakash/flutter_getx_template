@@ -3,31 +3,44 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 
 // Default values
-const bool defaultBoolean = false;
-const int defaultInt = 0;
-const double defaultDouble = 0.0;
-const String defaultString = "";
-const String spaceString = " ";
-const String newLineString = "\n";
+const defaultBoolean = false;
+const defaultInt = 0;
+const defaultDouble = 0.0;
+const defaultString = "";
+const spaceString = " ";
+const newLineString = "\n";
 
 // App colors (main)
-const Color colorPrimary = const Color(0xFF353A44);
-const Color colorAccent = const Color(0xFF258633);
+const colorPrimary = const Color(0xFF353A44);
+const colorAccent = const Color(0xFF258633);
 
 // App colors (light)
-const Color colorLightGray1 = const Color(0xFF353A44);
-const Color colorLightGray2 = const Color(0xFF404551);
-const Color colorLightGray3 = const Color(0xFF6A6B6D);
-const Color colorLightGray4 = const Color(0xFF8F949E);
-const Color colorLightGray5 = const Color(0xFF272B31);
-const Color colorLightGray6 = const Color(0xFFD5D5D5);
-const Color colorLightGray7 = const Color(0xFF333741);
-const Color colorLightWhite1 = const Color(0xFFFAFAFA);
-const Color colorLightWhite2 = const Color(0xFFDBDBDB);
-const Color colorLightGreen1 = const Color(0xFF0ABB87);
-const Color colorLightGreenAccent1 = const Color(0xFF20C3AF);
-const Color colorLightGreenAccent2 = const Color(0xFFDDF6F3);
-const Color colorLightOrange1 = const Color(0xFFFF9900);
+const colorLightGray1 = const Color(0xFF353A44);
+const colorLightGray2 = const Color(0xFF404551);
+const colorLightGray3 = const Color(0xFF6A6B6D);
+const colorLightGray4 = const Color(0xFF8F949E);
+const colorLightGray5 = const Color(0xFF272B31);
+const colorLightGray6 = const Color(0xFFD5D5D5);
+const colorLightGray7 = const Color(0xFF333741);
+const colorLightWhite1 = const Color(0xFFFAFAFA);
+const colorLightWhite2 = const Color(0xFFDBDBDB);
+const colorLightGreen1 = const Color(0xFF0ABB87);
+const colorLightGreenAccent1 = const Color(0xFF20C3AF);
+const colorLightGreenAccent2 = const Color(0xFFDDF6F3);
+const colorLightOrange1 = const Color(0xFFFF9900);
+
+const colorGreenNormal = Color(0xFF5BC652);
+const colorGreenSecondary = Color(0xFF009E35);
+const colorGreenPrimary = Color(0xFF0B6C2C);
+const colorGreenLight = Color(0xFFDEF4DC);
+const colorGrayPrimary = Color(0xFF002923);
+const colorGraySecondary = Color(0xFF555958);
+const colorGrayNormal = Color(0xFFA9ABAB);
+const colorPending = Color(0xFFFEA400);
+const colorTextRegular = Color(0xFF092C4C);
+const colorTextSecondary = Color(0xFF555958);
+const colorTextBold = Color(0xFF002923);
+const colorTextLight = Color(0xFF0C0A0A);
 
 // App colors (others)
 const Color colorSplashNavigationBarBackground = const Color(0xFF0B0C0E);
@@ -36,9 +49,9 @@ const Color colorPageBackground = const Color(0xFFF4F5F7);
 // Service
 const SystemUiOverlayStyle systemUiOverlayStyleGlobal =
     const SystemUiOverlayStyle(
-  systemNavigationBarColor: colorPageBackground,
+  systemNavigationBarColor: Colors.white,
   systemNavigationBarIconBrightness: Brightness.dark,
-  statusBarIconBrightness: Brightness.dark,
+  statusBarIconBrightness: Brightness.light,
   statusBarColor: Colors.transparent,
   statusBarBrightness: Brightness.dark,
 );

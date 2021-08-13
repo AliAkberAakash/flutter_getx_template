@@ -65,8 +65,6 @@ flutter:
           weight: 700
         - asset: fonts/manrope_extra_bold.ttf
           weight: 800
-        - asset: fonts/manrope_black.ttf
-          weight: 900
 
     - family: Nunito Sans
       fonts:

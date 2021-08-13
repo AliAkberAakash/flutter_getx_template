@@ -7,8 +7,7 @@ import 'package:go_share/data/local/service/local_service.dart';
 import 'package:go_share/data/local/service/theme_service.dart';
 import 'package:go_share/data/remote/service/remote_service.dart';
 import 'package:go_share/essential/translations.dart';
-import 'package:go_share/ui/auth/splash/splash_binding.dart';
-import 'package:go_share/ui/auth/splash/splash_view.dart';
+import 'package:go_share/ui/container/CreateNewAccount/CreateNewAccount.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,8 +50,7 @@ class MyApp extends StatelessWidget {
       theme: Get.find<ThemeService>().getTheme,
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.cupertino,
-      home: SplashView(),
-      initialBinding: SplashBinding(),
+      home: CreateNewAccount(),
       enableLog: kDebugMode,
     );
   }

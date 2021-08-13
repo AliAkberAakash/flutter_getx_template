@@ -37,28 +37,51 @@ class Messages extends Translations {
               "Password should contain at least $minimumPasswordLength characters",
           "weak_password": "The password provided is too weak.",
           "duplicate_email": "The account already exists for that email.",
-          "splash_title": "The Nilam App",
-          "splash_error_fetching_token": "Could not get the token",
-          "splash_error_fetching_site_settings":
-              "Could not fetch site settings",
-          "home": "Home",
-          "my_auction": "My Auction",
-          "notifications": "Notifications",
-          "profile": "Profile",
-          "view_more": "View more",
-          "current_bid": "Current bid",
-          "bid_start": "Bid start",
-          "app_currency": "BDT",
-          "home_content_featured_auctions": "Featured auctions",
-          "home_content_featured_products": "Featured products",
-          "home_content_recommended_products": "Recommended for you",
-          "home_content_error_no_featured_products":
-              "No featured product was found",
-          "home_content_error_no_featured_auctions":
-              "No featured auction was found",
-          "home_content_error_no_recommended_products":
-              "No recommended product was found",
-          "home_content_ended": "Ended",
+          "home_title": "Discover \nMaking every \nday better.",
+          "home_subtitle":
+              "More than 10 years of \ntransporting experience at your \nservice.",
+          "home_book_a_bus": "Book a Bus",
+          "home_be_a_service_provider": "Be a Service Provider",
+          "home_offer_and_promotion": "Offer & Promotion",
+          "home_more_detail": "More Detail",
+          "faq_title": "FAQ",
+          "faq_subtitle":
+              "More than 10 years of \ntransporting experience at your \nservice.",
+          "book_a_bus_title": "Book a Bus",
+          "book_a_bus_subtitle": "Experience at your service",
+          "book_a_bus_contact_with_us": "Or, Contact with us",
+          "contact_us_title": "Contact Us",
+          "contact_us_subtitle":
+              "More than 10 years of \ntransporting experience at your \nservice.",
+          "contact_us_company_information": "Company Information",
+          "contact_us_full_name": "Full Name",
+          "contact_us_phone_number": "Phone Number",
+          "contact_us_email_address": "Email Address",
+          "contact_us_address": "Address",
+          "contact_us_website_url": "Website URL",
+          "contact_us_your_feedback": "Send us your feedback",
+          "lost_and_found_title": "Lost & Found",
+          "lost_and_found_subtitle":
+              "More than 10 years of \ntransporting experience at your \nservice.",
+          "lost_and_found_booking_id": "Booking ID",
+          "lost_and_found_vehicle_number": "Vehicle Number",
+          "lost_and_found_time_and_date": "Time and Date",
+          "lost_and_found_description": "Description",
+          "terms_and_conditions_title": "Terms & Conditions",
+          "terms_and_conditions_subtitle":
+              "More than 10 years of \ntransporting experience at your \nservice.",
+          "privacy_and_concern_title": "Terms & Conditions",
+          "privacy_and_concern_subtitle":
+              "More than 10 years of \ntransporting experience at your \nservice.",
+          "our_service_title": "Our Service",
+          "our_service_subtitle":
+              "More than 10 years of \ntransporting experience at your \nservice.",
+          "about_us_title": "About Us",
+          "about_us_subtitle":
+              "More than 10 years of \ntransporting experience at your \nservice.",
+          "container_home": "Home",
+          "container_book_a_bus": "Book a Bus",
+          "container_menu": "Menu",
         },
       };
 }
