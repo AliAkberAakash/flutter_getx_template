@@ -1,14 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
+import 'package:go_share/ui/common_widgets/text_field_headline.dart';
+import 'package:go_share/ui/service_provider/widgets/common_text_field.dart';
+import 'package:go_share/ui/service_provider/widgets/positive_button.dart';
+import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/dimens.dart';
+import 'package:go_share/utils/spacers.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:nilam/ui/common_widgets/large_headline_widget.dart';
-import 'package:nilam/ui/common_widgets/text_field_headline.dart';
-import 'package:nilam/ui/service_provider/widgets/common_text_field.dart';
-import 'package:nilam/ui/service_provider/widgets/positive_button.dart';
-import 'package:nilam/utils/colors.dart';
-import 'package:nilam/utils/dimens.dart';
-import 'package:nilam/utils/spacers.dart';
 
 class AddVehicleScreen extends StatefulWidget {
   const AddVehicleScreen({Key? key}) : super(key: key);

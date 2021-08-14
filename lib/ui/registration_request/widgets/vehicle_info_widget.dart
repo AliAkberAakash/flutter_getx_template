@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_share/ui/common_widgets/text_field_headline.dart';
+import 'package:go_share/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nilam/ui/common_widgets/text_field_headline.dart';
-import 'package:nilam/utils/colors.dart';
 
 class VehicleInfoWidget extends StatelessWidget {
   final String title, value;
@@ -18,8 +18,10 @@ class VehicleInfoWidget extends StatelessWidget {
         ),
         Text(
           value,
-          style:
-              GoogleFonts.manrope(fontWeight: FontWeight.w600, color: blueText),
+          style: GoogleFonts.manrope(
+            fontWeight: FontWeight.w600,
+            color: blueText,
+          ),
         ),
       ],
     );

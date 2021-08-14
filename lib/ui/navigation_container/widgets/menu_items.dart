@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/dimens.dart';
+import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nilam/utils/colors.dart';
-import 'package:nilam/utils/dimens.dart';
-import 'package:nilam/utils/spacers.dart';
-
 
 class MenuItem extends StatelessWidget {
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nilam/ui/registration_request/widgets/status_chip.dart';
-import 'package:nilam/ui/registration_request/widgets/vehicle_request_item.dart';
+import 'package:go_share/ui/registration_request/widgets/status_chip.dart';
+import 'package:go_share/ui/registration_request/widgets/vehicle_request_item.dart';
 
 class RegistrationItemsList extends StatefulWidget {
 

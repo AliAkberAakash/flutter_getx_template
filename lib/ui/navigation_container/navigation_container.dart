@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:go_share/ui/add_vehicle/add_vehicle.dart';
+import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
+import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
+import 'package:go_share/ui/registration_request/registration_request_screen.dart';
+import 'package:go_share/ui/reset_vehicle_login/reset_vehicle_list.dart';
+import 'package:go_share/ui/service_provider/service_provider_screen.dart';
+import 'package:go_share/ui/service_provider/service_provider_update_screen.dart';
+import 'package:go_share/ui/vehicle_free_busy_list/vehicle_free_busy_screen.dart';
+import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/constants.dart';
+import 'package:go_share/utils/dimens.dart';
+import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nilam/ui/add_vehicle/add_vehicle.dart';
-import 'package:nilam/ui/edit_profile/edit_profile_screen.dart';
-import 'package:nilam/ui/navigation_container/widgets/bottom_bar_item.dart';
-import 'package:nilam/ui/navigation_container/widgets/menu_items.dart';
-import 'package:nilam/ui/registration_request/registration_request_screen.dart';
-import 'package:nilam/ui/reset_vehicle_login/reset_vehicle_list.dart';
-import 'package:nilam/ui/reset_vehicle_login/reset_vehicle_login_screen.dart';
-import 'package:nilam/ui/service_provider/service_provider_screen.dart';
-import 'package:nilam/ui/service_provider/service_provider_update_screen.dart';
-import 'package:nilam/ui/vehicle_free_busy_list/vehicle_free_busy_screen.dart';
-import 'package:nilam/utils/colors.dart';
-import 'package:nilam/utils/constants.dart';
-import 'package:nilam/utils/dimens.dart';
-import 'package:nilam/utils/spacers.dart';
 
 class NavigationContainer extends StatefulWidget {
   const NavigationContainer({Key? key}) : super(key: key);
@@ -62,7 +60,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
             child: Container(
               height: 80,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   BottomBarItem(
                     iconString: AssetConstants.ic_home_svg,

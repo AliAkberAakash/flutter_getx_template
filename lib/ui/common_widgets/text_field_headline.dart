@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nilam/utils/colors.dart';
-import 'package:nilam/utils/dimens.dart';
+import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/dimens.dart';
 
 class TextFieldHeadline extends StatelessWidget {
 

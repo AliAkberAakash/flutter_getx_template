@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nilam/utils/colors.dart';
-import 'package:nilam/utils/dimens.dart';
 
 class PositiveButton extends StatelessWidget {
   final String text;

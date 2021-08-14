@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nilam/utils/colors.dart';
-import 'package:nilam/utils/dimens.dart';
-import 'package:nilam/utils/spacers.dart';
 
 class BottomBarItem extends StatelessWidget {
 
@@ -39,13 +38,14 @@ class BottomBarItem extends StatelessWidget {
             SvgPicture.asset(
               iconString,
               color: /*isSelected ? accent :*/ darkText,
-              height: 30,
-              width: 30,
+              height: 32,
+              width: 32,
             ),
             Text(
               title,
               style: GoogleFonts.manrope(
                 color: /*isSelected ? accent :*/ grey,
+                fontSize: 14
               ),
             ),
           ],

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_share/ui/common_widgets/text_field_headline.dart';
+import 'package:go_share/ui/common_widgets/text_field_value_widget.dart';
+import 'package:go_share/ui/registration_request/widgets/status_chip.dart';
+import 'package:go_share/ui/vehicle_free_busy_list/widgets/vehicle_free_busy_item.dart';
+import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/dimens.dart';
+import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nilam/ui/common_widgets/text_field_headline.dart';
-import 'package:nilam/ui/common_widgets/text_field_value_widget.dart';
-import 'package:nilam/ui/registration_request/widgets/status_chip.dart';
-import 'package:nilam/ui/vehicle_free_busy_list/widgets/vehicle_free_busy_item.dart';
-import 'package:nilam/utils/colors.dart';
-import 'package:nilam/utils/dimens.dart';
-import 'package:nilam/utils/spacers.dart';
 
 class VehicleFreeBusyDetails extends StatefulWidget {
   const VehicleFreeBusyDetails({Key? key}) : super(key: key);

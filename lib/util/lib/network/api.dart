@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' as GetX;
-import 'package:nilam/base/exception/app_exception.dart';
-import 'package:nilam/data/local/service/local_service.dart';
-import 'package:nilam/util/helper/text.dart';
+import 'package:go_share/base/exception/app_exception.dart';
+import 'package:go_share/data/local/service/local_service.dart';
+import 'package:go_share/util/helper/text.dart';
 
 class ApiUtil {
   static Dio? client;

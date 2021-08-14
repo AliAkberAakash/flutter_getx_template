@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nilam/ui/common_widgets/text_field_headline.dart';
-import 'package:nilam/ui/common_widgets/text_field_value_widget.dart';
-import 'package:nilam/ui/edit_profile/edit_profile_screen.dart';
-import 'package:nilam/ui/service_provider/widgets/update_button.dart';
-import 'package:nilam/utils/colors.dart';
-import 'package:nilam/utils/dimens.dart';
-import 'package:nilam/utils/spacers.dart';
+import 'package:go_share/ui/common_widgets/text_field_headline.dart';
+import 'package:go_share/ui/common_widgets/text_field_value_widget.dart';
+import 'package:go_share/ui/edit_profile/edit_profile_screen.dart';
+import 'package:go_share/ui/service_provider/widgets/update_button.dart';
+import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/dimens.dart';
+import 'package:go_share/utils/spacers.dart';
 
 class ServiceProviderUpdateScreen extends StatefulWidget {
   const ServiceProviderUpdateScreen({Key? key}) : super(key: key);

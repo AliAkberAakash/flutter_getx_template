@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nilam/ui/common_widgets/large_headline_widget.dart';
-import 'package:nilam/ui/common_widgets/text_field_headline.dart';
-import 'package:nilam/ui/registration_request/widgets/registration_Items_list.dart';
-import 'package:nilam/ui/registration_request/widgets/status_chip.dart';
-import 'package:nilam/utils/colors.dart';
-import 'package:nilam/utils/dimens.dart';
-import 'package:nilam/utils/spacers.dart';
+import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
+import 'package:go_share/ui/common_widgets/text_field_headline.dart';
+import 'package:go_share/ui/registration_request/widgets/registration_Items_list.dart';
+import 'package:go_share/ui/registration_request/widgets/status_chip.dart';
+import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/dimens.dart';
+import 'package:go_share/utils/spacers.dart';
 
 class RegistrationRequestScreen extends StatefulWidget {
   const RegistrationRequestScreen();
