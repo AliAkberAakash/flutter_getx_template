@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
+import 'package:go_share/section4/Widgets/create_account_button.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
@@ -38,42 +39,50 @@ class _Sec4WelcomeScreenState extends State<Sec4WelcomeScreen> {
                         GSSizeConstants.zero),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
+                      //mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         //Get start text
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            GSStrings.get_started + "\n",
-                            textAlign: TextAlign.start,
-                            //style: GSTextStyles.make18xw400Style(),
-                            style: GoogleFonts.manrope(
-                              color: white,
-                              fontSize: dp18,
-                              fontWeight: FontWeight.normal,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: GSSizeConstants.padding20),
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              GSStrings.get_started + "\n",
+                              textAlign: TextAlign.start,
+                              //style: GSTextStyles.make18xw400Style(),
+                              style: GoogleFonts.manrope(
+                                color: white,
+                                fontSize: dp18,
+                                fontWeight: FontWeight.normal,
+                              ),
                             ),
                           ),
                         ),
 
                         // Description text
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            "Millions of\n"
-                            "people use to\n"
-                            "turn their ideas\n",
-                            //style: GSTextStyles.make34xw700Style(),
-                            style: GoogleFonts.manrope(
-                              color: white,
-                              fontSize: dp30,
-                              fontWeight: FontWeight.bold,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: GSSizeConstants.padding20),
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Millions of\n"
+                              "people use to\n"
+                              "turn their ideas\n",
+                              //style: GSTextStyles.make34xw700Style(),
+                              style: GoogleFonts.manrope(
+                                color: white,
+                                fontSize: dp30,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
 
                         SizedBox(
-                          height: GSSizeConstants.padding44,
+                          height: GSSizeConstants.padding30,
                         ),
                         GSButton(
                           text: GSStrings.sign_in,
@@ -81,9 +90,9 @@ class _Sec4WelcomeScreenState extends State<Sec4WelcomeScreen> {
                         SizedBox(
                           height: GSSizeConstants.padding22,
                         ),
-                        GSButtonOutlineStock(),
+                        CreateAccountButtonOutlineStock(),
                         SizedBox(
-                          height: GSSizeConstants.padding22,
+                          height: GSSizeConstants.padding55,
                         ),
                       ],
                     ))),

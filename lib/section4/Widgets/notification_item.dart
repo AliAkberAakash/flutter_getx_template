@@ -5,6 +5,8 @@ import 'package:go_share/section4/pending_bottom_sheet/pending_bottom_sheet.dart
 import 'package:go_share/section4/show_menu/show_menu_bottom_sheet.dart';
 import 'package:go_share/section4/successful_bottom_sheet/successful_bottom_sheet.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
+import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
+import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -48,12 +50,12 @@ class Sec4NotificationItem extends StatelessWidget {
                           padding: const EdgeInsets.only(right: 10),
                           child: SvgPicture.asset(
                             type == 1
-                                ? adminNoticeIcon
+                                ? AssetConstants.adminNoticeIcon
                                 : type == 2
-                                    ? vehicleIcon
+                                    ? AssetConstants.vehicleIcon
                                     : type == 3
-                                        ? billingIcon
-                                        : billingIcon,
+                                        ? AssetConstants.billingIcon
+                                        : AssetConstants.billingIcon,
                           ),
                         ),
                         Text(
@@ -66,7 +68,7 @@ class Sec4NotificationItem extends StatelessWidget {
                                       : "Billing",
                           style: GoogleFonts.manrope(
                             color: GSColors.gray_secondary,
-                            fontSize: dp12,
+                            fontSize: dp15,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -83,7 +85,9 @@ class Sec4NotificationItem extends StatelessWidget {
                                     : Colors.red[100],
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: GSSizeConstants.padding12,
+                          vertical: GSSizeConstants.padding2),
                       child: Text(
                         condition == 1
                             ? "Successful"
@@ -100,7 +104,7 @@ class Sec4NotificationItem extends StatelessWidget {
                                   : condition == 3
                                       ? Colors.red[800]
                                       : Colors.red[800],
-                          fontSize: dp10,
+                          fontSize: dp14,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -108,24 +112,24 @@ class Sec4NotificationItem extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 15,
                 ),
                 Text(
                   msg,
                   style: GoogleFonts.manrope(
                     color: GSColors.gray_primary,
-                    fontSize: dp14,
+                    fontSize: dp16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 15,
                 ),
                 Text(
                   datetime,
                   style: GoogleFonts.manrope(
                     color: GSColors.gray_normal,
-                    fontSize: dp10,
+                    fontSize: dp14,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

@@ -5,6 +5,7 @@ import 'package:go_share/constants.dart';
 import 'package:go_share/section4/Widgets/pending_button.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -28,7 +29,7 @@ void modalBottomSheetMenuPending(BuildContext context) {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   SvgPicture.asset(
-                    pendingIcon,
+                    AssetConstants.pendingIcon,
                   ),
                   Column(
                     children: [

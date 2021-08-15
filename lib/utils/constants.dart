@@ -16,19 +16,24 @@ class AssetConstants {
   static const ic_sign_out_svg = base_icon_path + "ic_sign_out.svg";
   static const ic_vehicle_list_svg = base_icon_path + "ic_vehicle_list.svg";
 
-
+  static const adminNoticeIcon = base_icon_path + "ic_admin_notice.svg";
+  static const billingIcon = base_icon_path + "ic_billing.svg";
+  static const pendingIcon = base_icon_path + "ic_pending.svg";
+  static const successfulIcon = base_icon_path + "ic_successful.svg";
+  static const vehicleIcon = base_icon_path + "ic_vehicle.svg";
+  static const lostandFoundIcon = base_icon_path + "ic_lost_and_found.svg";
 }
 
-class NetworkConstants{
+class NetworkConstants {
   //urls
-  static const BASE_URL = "https://raw.githubusercontent.com/AliAkberAakash/hello_world/main/response.json";
+  static const BASE_URL =
+      "https://raw.githubusercontent.com/AliAkberAakash/hello_world/main/response.json";
 
   //header parameters
   static const ACCEPT = "Accept";
   static const ACCEPT_TYPE = "application/json";
   static const AUTHORIZATION = "Authorization";
   static const CONTENT_TYPE = "content-Type";
-
 }
 
 class PreferenceKey {
@@ -43,7 +48,7 @@ class DefaultValue {
   static const String kDefaultString = '';
 }
 
-class KeyConstants{
+class KeyConstants {
   static const TOKEN_KEY = "token";
   static const EMAIL_VERIFIED_KEY = "email_verified";
   static const DEVICE_VERIFIED_KEY = "device_verified";

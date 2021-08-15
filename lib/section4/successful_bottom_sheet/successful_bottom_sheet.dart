@@ -4,6 +4,7 @@ import 'package:go_share/base/widget/GSButtonWidget.dart';
 import 'package:go_share/constants.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -27,7 +28,7 @@ void modalBottomSheetMenuSuccess(BuildContext context) {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   SvgPicture.asset(
-                    successfulIcon,
+                    AssetConstants.successfulIcon,
                   ),
                   Column(
                     children: [
