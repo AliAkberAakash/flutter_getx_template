@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_share/constants.dart';
 import 'package:go_share/section4/successful_bottom_sheet/successful_bottom_sheet.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/utils/dimens.dart';
@@ -33,8 +34,11 @@ class Sec4NotificationItem extends StatelessWidget {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SvgPicture.asset(
-                          "images/icons_sec4/ic_admin_notice.svg",
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10),
+                          child: SvgPicture.asset(
+                            vehicleIcon,
+                          ),
                         ),
                         Text(
                           "Admin Notice",

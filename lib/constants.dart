@@ -118,3 +118,9 @@ const String regularExpressionEmail =
 const String regularExpressionPhone =
     "(\\+[0-9]+[\\- \\.]*)?(\\([0-9]+\\)[\\- \\.]*)?" +
         "([0-9][0-9\\- \\.]+[0-9])";
+
+const String adminNoticeIcon = "images/icons/ic_admin_notice.svg";
+const String billingIcon = "images/icons/ic_billing.svg";
+const String pendingIcon = "images/icons/ic_pending.svg";
+const String successfulIcon = "images/icons/ic_successful.svg";
+const String vehicleIcon = "images/icons/ic_vehicle.svg";
