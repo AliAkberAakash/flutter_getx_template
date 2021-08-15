@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_share/section4/Widgets/notification_item.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
+import 'package:go_share/ui/section4/widgets/notification_item.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({Key? key}) : super(key: key);

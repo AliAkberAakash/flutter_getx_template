@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_share/constants.dart';
-import 'package:go_share/section4/pending_bottom_sheet/pending_bottom_sheet.dart';
-import 'package:go_share/section4/show_menu/show_menu_bottom_sheet.dart';
-import 'package:go_share/section4/successful_bottom_sheet/successful_bottom_sheet.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
+import 'package:go_share/ui/section4/pending_bottom_sheet/pending_bottom_sheet.dart';
+import 'package:go_share/ui/section4/show_menu/show_menu_bottom_sheet.dart';
+import 'package:go_share/ui/section4/successful_bottom_sheet/successful_bottom_sheet.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,8 +27,9 @@ class Sec4NotificationItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        modalBottomSheetMenuSuccess(context);
-        //showMenuBottomSheet(MediaQuery.of(context).size.height, context);
+        //modalBottomSheetMenuSuccess(context);
+        //modalBottomSheetMenuPending(context);
+        showMenuBottomSheet(MediaQuery.of(context).size.height, context);
       },
       child: Column(
         children: [

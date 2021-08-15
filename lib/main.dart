@@ -7,9 +7,9 @@ import 'package:go_share/data/local/service/local_service.dart';
 import 'package:go_share/data/local/service/theme_service.dart';
 import 'package:go_share/data/remote/service/remote_service.dart';
 import 'package:go_share/essential/translations.dart';
-import 'package:go_share/section4/Notification/notification_screen.dart';
-import 'package:go_share/section4/Welcome/welcome_screen.dart';
-import 'package:go_share/section4/sign_in/sign_in_screen.dart';
+import 'package:go_share/ui/section4/notification/notification_screen.dart';
+import 'package:go_share/ui/section4/sign_in/sign_in_screen.dart';
+import 'package:go_share/ui/section4/welcome/welcome_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
