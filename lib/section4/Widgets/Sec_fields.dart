@@ -3,6 +3,7 @@ import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
+import 'dart:math' as math;
 
 class Sec4TextField extends StatelessWidget {
   String hints;
@@ -51,23 +52,30 @@ class Sec4PasswordTextField extends StatelessWidget {
       ),
       child: TextField(
         decoration: InputDecoration(
-            border: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            enabledBorder: InputBorder.none,
-            errorBorder: InputBorder.none,
-            disabledBorder: InputBorder.none,
-            contentPadding: EdgeInsets.all(
-              GSSizeConstants.padding16,
+          border: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          enabledBorder: InputBorder.none,
+          errorBorder: InputBorder.none,
+          disabledBorder: InputBorder.none,
+          contentPadding: EdgeInsets.all(
+            GSSizeConstants.padding16,
+          ),
+          hintText: GSStrings.password,
+          suffixIcon: Transform(
+            alignment: Alignment.center,
+            transform: Matrix4.rotationY(math.pi),
+            child: Icon(
+              Icons.visibility_off_rounded,
+              color: Colors.black.withOpacity(.4),
             ),
-            hintText: GSStrings.password,
-            suffix: Padding(
-              padding: const EdgeInsets.only(
-                  top: GSSizeConstants.padding20,
-                  right: GSSizeConstants.padding12),
-              child: Icon(
-                Icons.visibility_off,
-              ), // myIcon is a 48px-wide widget.
-            )),
+          ),
+          suffix: Padding(
+            padding: const EdgeInsets.only(
+                top: GSSizeConstants.padding20,
+                right: GSSizeConstants.padding12),
+            // myIcon is a 48px-wide widget.
+          ),
+        ),
         style: GSTextStyles.make18xw400Style(color: GSColors.gray_primary),
       ),
     );
@@ -75,20 +83,36 @@ class Sec4PasswordTextField extends StatelessWidget {
 }
 
 class Sec4TextButton extends StatelessWidget {
-  String text;
+  String text1;
+  String text2;
 
-  Sec4TextButton({required this.text});
+  Sec4TextButton({required this.text1, required this.text2});
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: Text(
-        text,
-        style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w500,
-            fontStyle: FontStyle.normal,
-            fontSize: GSFontSizes.font16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            text1 + " ",
+            style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w400,
+                fontStyle: FontStyle.normal,
+                fontSize: GSFontSizes.font16),
+          ),
+          Text(
+            text2,
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w400,
+              fontStyle: FontStyle.normal,
+              fontSize: GSFontSizes.font16,
+              decoration: TextDecoration.underline,
+            ),
+          ),
+        ],
       ),
       onPressed: () {
         print('Pressed');

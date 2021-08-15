@@ -33,6 +33,7 @@ dependencies:
   google_fonts: ^2.1.0
   flutter_svg: ^0.22.0
   image_picker: ^0.8.2
+  custom_check_box: ^0.0.4
 
   # Data
   get_storage: ^2.0.1

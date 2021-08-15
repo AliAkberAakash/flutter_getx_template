@@ -1,22 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_share/constants.dart';
+import 'package:go_share/section4/pending_bottom_sheet/pending_bottom_sheet.dart';
+import 'package:go_share/section4/show_menu/show_menu_bottom_sheet.dart';
 import 'package:go_share/section4/successful_bottom_sheet/successful_bottom_sheet.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Sec4NotificationItem extends StatelessWidget {
-  const Sec4NotificationItem({Key? key}) : super(key: key);
+  int type;
+  int condition;
+  String msg;
+  String datetime;
+  Sec4NotificationItem(
+      {this.type = 1,
+      this.condition = 1,
+      this.msg = "",
+      required this.datetime});
 
-  final String msg =
-      "Hey Erin, thanks for shopping at Clothstore! We’ve got tons of exciting deals in our upcoming Fall Collection. Stay tuned or visit www.cstore.com to learn more.";
+  //const Sec4NotificationItem({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        modalBottomSheetMenu(context);
+        //modalBottomSheetMenuPending(context);
+        showMenuBottomSheet(MediaQuery.of(context).size.height, context);
       },
       child: Column(
         children: [
@@ -37,11 +47,23 @@ class Sec4NotificationItem extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(right: 10),
                           child: SvgPicture.asset(
-                            vehicleIcon,
+                            type == 1
+                                ? adminNoticeIcon
+                                : type == 2
+                                    ? vehicleIcon
+                                    : type == 3
+                                        ? billingIcon
+                                        : billingIcon,
                           ),
                         ),
                         Text(
-                          "Admin Notice",
+                          type == 1
+                              ? "Admin Notice"
+                              : type == 2
+                                  ? "Vehicle"
+                                  : type == 3
+                                      ? "Billing"
+                                      : "Billing",
                           style: GoogleFonts.manrope(
                             color: GSColors.gray_secondary,
                             fontSize: dp12,
@@ -52,14 +74,32 @@ class Sec4NotificationItem extends StatelessWidget {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        color: GSColors.green_light,
+                        color: condition == 1
+                            ? GSColors.green_light
+                            : condition == 2
+                                ? colorPending.withOpacity(0.2)
+                                : condition == 3
+                                    ? Colors.red[100]
+                                    : Colors.red[100],
                         borderRadius: BorderRadius.circular(10),
                       ),
                       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                       child: Text(
-                        "Successful",
+                        condition == 1
+                            ? "Successful"
+                            : condition == 2
+                                ? "Processing"
+                                : condition == 3
+                                    ? "Fail"
+                                    : "Fail",
                         style: GoogleFonts.manrope(
-                          color: GSColors.green_primary,
+                          color: condition == 1
+                              ? GSColors.green_primary
+                              : condition == 2
+                                  ? colorPending
+                                  : condition == 3
+                                      ? Colors.red[800]
+                                      : Colors.red[800],
                           fontSize: dp10,
                           fontWeight: FontWeight.bold,
                         ),
@@ -77,13 +117,12 @@ class Sec4NotificationItem extends StatelessWidget {
                     fontSize: dp14,
                     fontWeight: FontWeight.bold,
                   ),
-                  overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
-                  "March 12, 2020    10:00 PM",
+                  datetime,
                   style: GoogleFonts.manrope(
                     color: GSColors.gray_normal,
                     fontSize: dp10,

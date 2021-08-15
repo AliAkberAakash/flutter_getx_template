@@ -1,3 +1,4 @@
+import 'package:custom_check_box/custom_check_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,7 +47,7 @@ class _Sec4SignInScreenState extends State<Sec4SignInScreen> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.3,
+                    height: MediaQuery.of(context).size.height * 0.2,
                   ),
 
                   //Get start text
@@ -61,7 +62,7 @@ class _Sec4SignInScreenState extends State<Sec4SignInScreen> {
                   ),
 
                   SizedBox(
-                    height: GSSizeConstants.padding4,
+                    height: GSSizeConstants.padding10,
                   ),
 
                   // Description test
@@ -91,24 +92,25 @@ class _Sec4SignInScreenState extends State<Sec4SignInScreen> {
             ),
             Sec4PasswordTextField(),
             Container(
-              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 5),
               child: Row(
                 children: [
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    alignment: Alignment.center,
-                    width: 14,
-                    height: 14,
-                    color: Colors.white60,
-                    child: Checkbox(
-                        checkColor: Colors.yellowAccent, // color of tick Mark
-                        activeColor: GSColors.green_normal,
-                        value: value,
-                        onChanged: (v) {
-                          setState(() {
-                            value = v == true ? true : false;
-                          });
-                        }),
+                  CustomCheckBox(
+                    value: value,
+                    shouldShowBorder: true,
+                    borderColor: Colors.white,
+                    uncheckedFillColor: Colors.white60,
+                    checkedFillColor: GSColors.green_normal,
+                    borderRadius: 2,
+                    borderWidth: 1,
+                    checkBoxSize: 15,
+                    uncheckedIconColor: Colors.transparent,
+                    onChanged: (val) {
+                      //do your stuff here
+                      setState(() {
+                        value = val;
+                      });
+                    },
                   ),
                   Text(
                     "Keep me signed in",
@@ -146,7 +148,8 @@ class _Sec4SignInScreenState extends State<Sec4SignInScreen> {
               height: GSSizeConstants.padding7,
             ),
             Sec4TextButton(
-              text: GSStrings.forget_password_reset_here,
+              text1: "Forgot Password?",
+              text2: "Reset here",
             ),
             SizedBox(
               height: GSSizeConstants.padding25,

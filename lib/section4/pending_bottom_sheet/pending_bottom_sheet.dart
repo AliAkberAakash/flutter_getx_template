@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
 import 'package:go_share/constants.dart';
+import 'package:go_share/section4/Widgets/pending_button.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void modalBottomSheetMenuSuccess(BuildContext context) {
+void modalBottomSheetMenuPending(BuildContext context) {
   showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -27,16 +28,16 @@ void modalBottomSheetMenuSuccess(BuildContext context) {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   SvgPicture.asset(
-                    successfulIcon,
+                    pendingIcon,
                   ),
                   Column(
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(
-                          "Successful!",
+                          "Pending",
                           style: GoogleFonts.manrope(
-                            color: GSColors.green_secondary,
+                            color: colorPending,
                             fontSize: dp25,
                             fontWeight: FontWeight.bold,
                           ),
@@ -58,8 +59,8 @@ void modalBottomSheetMenuSuccess(BuildContext context) {
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 20),
-                    child: GSButton(
-                      text: "Go To Home",
+                    child: PendingButton(
+                      text: "Contact Support Team",
                       onClick: () {
                         //Get.to(WidgetContainerView());
                       },
