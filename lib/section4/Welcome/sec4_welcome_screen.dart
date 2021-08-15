@@ -45,7 +45,7 @@ class _Sec4WelcomeScreenState extends State<Sec4WelcomeScreen> {
                         Align(
                           alignment: Alignment.topLeft,
                           child: Text(
-                            GSStrings.get_started,
+                            GSStrings.get_started + "\n",
                             textAlign: TextAlign.start,
                             //style: GSTextStyles.make18xw400Style(),
                             style: GoogleFonts.manrope(
@@ -57,13 +57,18 @@ class _Sec4WelcomeScreenState extends State<Sec4WelcomeScreen> {
                         ),
 
                         // Description text
-                        Text(
-                          GSStrings.welcome_description,
-                          //style: GSTextStyles.make34xw700Style(),
-                          style: GoogleFonts.manrope(
-                            color: white,
-                            fontSize: dp24,
-                            fontWeight: FontWeight.bold,
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            "Millions of\n"
+                            "people use to\n"
+                            "turn their ideas\n",
+                            //style: GSTextStyles.make34xw700Style(),
+                            style: GoogleFonts.manrope(
+                              color: white,
+                              fontSize: dp30,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
 
