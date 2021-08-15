@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
 import 'package:go_share/section4/Widgets/create_account_button.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
-import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
 import 'package:go_share/utils/colors.dart';
@@ -11,13 +10,13 @@ import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // UI
-class Sec4WelcomeScreen extends StatefulWidget {
+class WelcomeScreen extends StatefulWidget {
   @override
   _Sec4WelcomeScreenState createState() => _Sec4WelcomeScreenState();
 } //: UI
 
 // State
-class _Sec4WelcomeScreenState extends State<Sec4WelcomeScreen> {
+class _Sec4WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

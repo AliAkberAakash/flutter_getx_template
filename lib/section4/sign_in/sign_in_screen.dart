@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
 import 'package:go_share/base/widget/GSTextField.dart';
-import 'package:go_share/section4/Widgets/Sec_fields.dart';
+import 'package:go_share/section4/Widgets/text_fields.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
@@ -16,13 +16,13 @@ import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // UI
-class Sec4SignInScreen extends StatefulWidget {
+class SignInScreen extends StatefulWidget {
   @override
   _Sec4SignInScreenState createState() => _Sec4SignInScreenState();
 } //: UI
 
 // State
-class _Sec4SignInScreenState extends State<Sec4SignInScreen> {
+class _Sec4SignInScreenState extends State<SignInScreen> {
   bool value = false;
   @override
   Widget build(BuildContext context) {

@@ -7,12 +7,9 @@ import 'package:go_share/data/local/service/local_service.dart';
 import 'package:go_share/data/local/service/theme_service.dart';
 import 'package:go_share/data/remote/service/remote_service.dart';
 import 'package:go_share/essential/translations.dart';
-import 'package:go_share/section4/Notification/sec4_notification_screen.dart';
-import 'package:go_share/section4/SignIn/sec4_sign_in_screen.dart';
-import 'package:go_share/section4/Welcome/sec4_welcome_screen.dart';
-import 'package:go_share/ui/container/SignIn/SignInScreen.dart';
-import 'package:go_share/ui/container/widget_container/widget_container.dart';
-import 'package:go_share/ui/navigation_container/navigation_container.dart';
+import 'package:go_share/section4/Notification/notification_screen.dart';
+import 'package:go_share/section4/Welcome/welcome_screen.dart';
+import 'package:go_share/section4/sign_in/sign_in_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,7 +52,7 @@ class MyApp extends StatelessWidget {
       theme: Get.find<ThemeService>().getTheme,
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.cupertino,
-      home: Sec4NotificationScreen(),
+      home: NotificationScreen(),
       enableLog: kDebugMode,
     );
   }

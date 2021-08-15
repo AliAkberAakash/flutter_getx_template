@@ -27,8 +27,8 @@ class Sec4NotificationItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        //modalBottomSheetMenuPending(context);
-        showMenuBottomSheet(MediaQuery.of(context).size.height, context);
+        modalBottomSheetMenuSuccess(context);
+        //showMenuBottomSheet(MediaQuery.of(context).size.height, context);
       },
       child: Column(
         children: [
