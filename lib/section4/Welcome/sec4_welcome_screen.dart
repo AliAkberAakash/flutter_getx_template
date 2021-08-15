@@ -50,7 +50,7 @@ class _Sec4WelcomeScreenState extends State<Sec4WelcomeScreen> {
                             //style: GSTextStyles.make18xw400Style(),
                             style: GoogleFonts.manrope(
                               color: white,
-                              fontSize: dp15,
+                              fontSize: dp18,
                               fontWeight: FontWeight.normal,
                             ),
                           ),
