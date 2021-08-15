@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
+import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,7 +12,7 @@ void modalBottomSheetMenu(BuildContext context) {
       isScrollControlled: true,
       builder: (builder) {
         return new Container(
-          height: 500.0,
+          height: 450.0,
           color: Color(0xFF737373), //could change this to Color(0xFF737373),
           //so you don't have to change MaterialApp canvasColor
           child: new Container(
@@ -21,15 +23,37 @@ void modalBottomSheetMenu(BuildContext context) {
                       topLeft: const Radius.circular(20.0),
                       topRight: const Radius.circular(20.0))),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text(
-                    "Successful!",
-                    style: GoogleFonts.manrope(
-                      color: white,
-                      fontSize: dp18,
-                      fontWeight: FontWeight.normal,
-                    ),
+                  SvgPicture.asset(
+                    "images/icons_sec4/ic_successful.svg",
+                  ),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                          "Successful!",
+                          style: GoogleFonts.manrope(
+                            color: GSColors.green_secondary,
+                            fontSize: dp25,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                          "Your charity program has been successfully created.\n Now you can check and maintain in your\n'activity' menu.",
+                          style: GoogleFonts.manrope(
+                            color: GSColors.text_secondary,
+                            fontSize: dp12,
+                            fontWeight: FontWeight.normal,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 20),
