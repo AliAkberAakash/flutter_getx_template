@@ -27,7 +27,7 @@ class BottomBarItem extends StatelessWidget {
     return InkWell(
       onTap:()=> onTap(index),
       child: Container(
-        padding: EdgeInsets.all(dp10),
+        padding: EdgeInsets.all(dp5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -38,14 +38,14 @@ class BottomBarItem extends StatelessWidget {
             SvgPicture.asset(
               iconString,
               color: /*isSelected ? accent :*/ darkText,
-              height: 32,
-              width: 32,
+              height: 25,
+              width: 25,
             ),
             Text(
               title,
               style: GoogleFonts.manrope(
                 color: /*isSelected ? accent :*/ grey,
-                fontSize: 14
+                fontSize: 12
               ),
             ),
           ],

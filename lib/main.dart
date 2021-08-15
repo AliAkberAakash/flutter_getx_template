@@ -7,6 +7,8 @@ import 'package:go_share/data/local/service/local_service.dart';
 import 'package:go_share/data/local/service/theme_service.dart';
 import 'package:go_share/data/remote/service/remote_service.dart';
 import 'package:go_share/essential/translations.dart';
+import 'package:go_share/ui/container/SignIn/SignInScreen.dart';
+import 'package:go_share/ui/container/widget_container/widget_container.dart';
 import 'package:go_share/ui/navigation_container/navigation_container.dart';
 
 
@@ -51,7 +53,7 @@ class MyApp extends StatelessWidget {
       theme: Get.find<ThemeService>().getTheme,
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.cupertino,
-      home: NavigationContainer(),
+      home: SignInScreen(),
       enableLog: kDebugMode,
     );
   }

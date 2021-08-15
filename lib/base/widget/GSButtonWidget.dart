@@ -6,8 +6,9 @@ import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
 
 class GSButton extends StatelessWidget {
   String text;
+  Function? onClick;
 
-  GSButton({required this.text});
+  GSButton({required this.text, this.onClick});
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +37,8 @@ class GSButton extends StatelessWidget {
           minimumSize: GSSizes.size316x56),
       onPressed: () {
         print('Pressed');
+        if(onClick != null)
+          onClick!();
       },
     );
 

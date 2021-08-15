@@ -58,7 +58,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
               FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: BottomAppBar(
             child: Container(
-              height: 80,
+              height: 60,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

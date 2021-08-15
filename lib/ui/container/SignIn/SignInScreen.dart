@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
 import 'package:go_share/base/widget/GSTextField.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
+import 'package:go_share/ui/container/widget_container/widget_container.dart';
+import 'package:go_share/ui/navigation_container/navigation_container.dart';
 
 // UI
 class SignInScreen extends StatefulWidget {
@@ -71,13 +74,25 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
         GSButton(
           text: GSStrings.sign_in,
+          onClick: (){
+            Get.to(WidgetContainerView());
+          },
+        ),
+        SizedBox(
+          height: GSSizeConstants.padding7,
+        ),
+        GSButton(
+          text: "Sign in as a merchant",
+          onClick: (){
+            Get.to(NavigationContainer());
+          },
         ),
         SizedBox(
           height: GSSizeConstants.padding7,
         ),
         GSTextButton(
           text: GSStrings.forget_password_reset_here,
-        )
+        ),
       ],
     )));
   } //: Widget
