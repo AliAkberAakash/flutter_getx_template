@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
 import 'package:go_share/base/widget/GSTextField.dart';
-import 'package:go_share/section4/Component/Sec_fields.dart';
+import 'package:go_share/section4/Widgets/Sec_fields.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
@@ -147,6 +147,9 @@ class _Sec4SignInScreenState extends State<Sec4SignInScreen> {
             ),
             Sec4TextButton(
               text: GSStrings.forget_password_reset_here,
+            ),
+            SizedBox(
+              height: GSSizeConstants.padding25,
             ),
           ],
         )),
