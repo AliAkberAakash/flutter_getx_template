@@ -4,6 +4,7 @@ class AssetConstants {
   static const ic_settings = base_path + "ic_settings.svg";
   static const ic_language = base_path + "ic_language.svg";
   static const img_banner_demo = base_path + "img_banner_demo.png";
+  static const ic_welcome = "images/ic_welcome.jpg";
 
   static const base_icon_path = "images/icons/";
   static const ic_menu_svg = base_icon_path + "ic_menu.svg";

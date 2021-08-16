@@ -6,6 +6,7 @@ import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
 import 'package:go_share/ui/section4/widgets/create_account_button.dart';
 import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -24,7 +25,7 @@ class _Sec4WelcomeScreenState extends State<WelcomeScreen> {
         body: Stack(
           children: [
             Image.asset(
-              "images/ic_background_one.png",
+              AssetConstants.ic_welcome,
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               fit: BoxFit.cover,

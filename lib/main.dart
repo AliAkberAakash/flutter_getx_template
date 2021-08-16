@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
       theme: Get.find<ThemeService>().getTheme,
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.cupertino,
-      home: NotificationScreen(),
+      home: SignInScreen(),
       enableLog: kDebugMode,
     );
   }

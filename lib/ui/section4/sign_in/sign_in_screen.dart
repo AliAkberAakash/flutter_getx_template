@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
 import 'package:go_share/base/widget/GSTextField.dart';
-import 'package:go_share/section4/Widgets/text_fields.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
 import 'package:go_share/ui/container/widget_container/widget_container.dart';
 import 'package:go_share/ui/navigation_container/navigation_container.dart';
+import 'package:go_share/ui/section4/widgets/text_fields.dart';
 import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -31,7 +32,7 @@ class _Sec4SignInScreenState extends State<SignInScreen> {
         body: Stack(
       children: [
         Image.asset(
-          "images/ic_background_one.png",
+          AssetConstants.ic_welcome,
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           fit: BoxFit.cover,
