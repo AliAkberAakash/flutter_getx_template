@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
+import 'package:go_share/ui/section4/successful_bottom_sheet/successful_bottom_sheet.dart';
 import 'package:go_share/ui/service_provider/widgets/common_text_field.dart';
 import 'package:go_share/ui/service_provider/widgets/positive_button.dart';
 import 'package:go_share/utils/colors.dart';
@@ -84,7 +85,9 @@ class _ServiceProviderScreenState extends State<ServiceProviderScreen> {
             VSpacer10(),
             CommonTextField(controller: TextEditingController()),
             VSpacer40(),
-            PositiveButton(text: "Submit", onClicked: () {}),
+            PositiveButton(text: "Submit", onClicked: () {
+              modalBottomSheetMenuSuccess(context);
+            }),
             VSpacer60(),
           ],
         ),

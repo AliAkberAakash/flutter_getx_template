@@ -85,8 +85,9 @@ class Sec4PasswordTextField extends StatelessWidget {
 class Sec4TextButton extends StatelessWidget {
   String text1;
   String text2;
+  final Function? onClicked;
 
-  Sec4TextButton({required this.text1, required this.text2});
+  Sec4TextButton({required this.text1, required this.text2, this.onClicked});
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +116,8 @@ class Sec4TextButton extends StatelessWidget {
         ],
       ),
       onPressed: () {
-        print('Pressed');
+        if(onClicked!=null)
+          onClicked!();
       },
     );
   }

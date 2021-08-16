@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
+import 'package:go_share/ui/container/CreateNewAccount/CreateNewAccount.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
+import 'package:go_share/ui/section4/sign_in/sign_in_screen.dart';
 import 'package:go_share/ui/section4/widgets/create_account_button.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
@@ -86,11 +89,18 @@ class _Sec4WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                         GSButton(
                           text: GSStrings.sign_in,
+                          onClick: (){
+                            Get.to(SignInScreen());
+                          },
                         ),
                         SizedBox(
                           height: GSSizeConstants.padding22,
                         ),
-                        CreateAccountButtonOutlineStock(),
+                        CreateAccountButtonOutlineStock(
+                          onClick: (){
+                            Get.to(CreateNewAccount());
+                          },
+                        ),
                         SizedBox(
                           height: GSSizeConstants.padding55,
                         ),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
 import 'package:go_share/base/widget/GSTextField.dart';
+import 'package:go_share/ui/container/ForgotPassword/ForgotPassword.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
@@ -129,7 +130,7 @@ class _Sec4SignInScreenState extends State<SignInScreen> {
               child: GSButton(
                 text: GSStrings.sign_in,
                 onClick: () {
-                  Get.to(WidgetContainerView());
+                  Get.to(NavigationContainer());
                 },
               ),
             ),
@@ -151,6 +152,9 @@ class _Sec4SignInScreenState extends State<SignInScreen> {
             Sec4TextButton(
               text1: "Forgot Password?",
               text2: "Reset here",
+              onClicked: (){
+                Get.to(ForgotPassword());
+              },
             ),
             SizedBox(
               height: GSSizeConstants.padding25,

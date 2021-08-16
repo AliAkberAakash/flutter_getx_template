@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:go_share/ui/add_vehicle/add_vehicle.dart';
+import 'package:go_share/ui/container/home/home.dart';
 import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
 import 'package:go_share/ui/registration_request/registration_request_screen.dart';
@@ -23,7 +24,7 @@ class NavigationContainer extends StatefulWidget {
 }
 
 class _NavigationContainerState extends State<NavigationContainer> {
-  int _selectedItem = 5;
+  int _selectedItem = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -71,16 +72,18 @@ class _NavigationContainerState extends State<NavigationContainer> {
                   ),
                   BottomBarItem(
                     iconString: "",
-                    isSelected: _selectedItem == 0,
+                    isSelected: _selectedItem == 1,
                     title: "Add a Bus",
-                    index: 0,
-                    onTap: _onBottomBarTap,
+                    index: 1,
+                    onTap: (int position){
+
+                    },
                   ),
                   BottomBarItem(
                     iconString: AssetConstants.ic_menu_svg,
-                    isSelected: _selectedItem == 1,
+                    isSelected: _selectedItem == 2,
                     title: "Menu",
-                    index: 1,
+                    index: 2,
                     onTap: (int position) {
                       _showMenu(constraints.maxHeight);
                     },
@@ -218,8 +221,12 @@ class _NavigationContainerState extends State<NavigationContainer> {
   }
 
   changePage(int index) {
-    if (index != 2) Get.back();
+
     if (index != _selectedItem) {
+
+      if(index != 0 && index != 1)
+        Get.back();
+
       setState(() {
         _selectedItem = index;
       });
@@ -229,7 +236,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
   Widget _getBody() {
     switch (_selectedItem) {
       case 0:
-        return ServiceProviderScreen();
+        return HomeView();
       case 1:
         return AddVehicleScreen();
       case 2:

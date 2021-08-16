@@ -5,6 +5,11 @@ import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
 import 'package:go_share/utils/colors.dart';
 
 class CreateAccountButtonOutlineStock extends StatelessWidget {
+
+  final Function? onClick;
+
+  const CreateAccountButtonOutlineStock({Key? key, this.onClick}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
@@ -24,7 +29,8 @@ class CreateAccountButtonOutlineStock extends StatelessWidget {
         minimumSize: GSSizes.size316x56,
       ),
       onPressed: () {
-        print('Pressed');
+        if(onClick != null)
+          onClick!();
       },
     );
   }
