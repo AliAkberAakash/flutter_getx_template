@@ -7,6 +7,7 @@ import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
 import 'package:go_share/ui/registration_request/registration_request_screen.dart';
 import 'package:go_share/ui/reset_vehicle_login/reset_vehicle_list.dart';
+import 'package:go_share/ui/section4/notification/notification_screen.dart';
 import 'package:go_share/ui/service_provider/service_provider_screen.dart';
 import 'package:go_share/ui/service_provider/service_provider_update_screen.dart';
 import 'package:go_share/ui/vehicle_free_busy_list/vehicle_free_busy_screen.dart';
@@ -247,6 +248,8 @@ class _NavigationContainerState extends State<NavigationContainer> {
         return RegistrationRequestScreen();
       case 5:
         return VehicleFreeBusyList();
+      case 6:
+        return NotificationScreen();
       case 7:
         return ResetVehicleList();
       default:
