@@ -18,6 +18,9 @@ class InfoScreen extends StatefulWidget {
 }
 
 class _InfoScreenState extends State<InfoScreen> {
+
+  int seat=0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,6 +89,71 @@ class _InfoScreenState extends State<InfoScreen> {
                     ],
                   ),
                 ),
+              ],
+            ),
+            VSpacer20(),
+            Row(
+              children: [
+                Expanded(
+                  child: TextFieldHeadline(headline: "Seat"),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(
+                        dp5,
+                      ),
+                    ),
+                    border: Border.all(
+                      color: light_grey
+                    )
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: (){
+                          setState(() {
+                            seat++;
+                          });
+                        },
+                        icon: Icon(
+                          Icons.add,
+                          color: accent,
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 50,
+                        color: light_grey,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: dp20),
+                        child: Text(
+                          seat.toString(),
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 50,
+                        color: light_grey,
+                      ),
+                      IconButton(
+                        onPressed: (){
+                          setState(() {
+                            if(seat>0)
+                              seat--;
+                          });
+                        },
+                        icon: Icon(
+                          Icons.remove,
+                          color: accent,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
             VSpacer20(),
