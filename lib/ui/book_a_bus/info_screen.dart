@@ -20,6 +20,7 @@ class InfoScreen extends StatefulWidget {
 class _InfoScreenState extends State<InfoScreen> {
 
   int seat=1;
+  String timeFormat="AM";
   List<Widget> childWidgetList = [];
 
   @override
@@ -196,10 +197,7 @@ class _InfoScreenState extends State<InfoScreen> {
                     children: [
                       TextFieldHeadline(headline: "Start Date*"),
                       VSpacer20(),
-                      CommonTextField(
-                        controller: TextEditingController(),
-                        hint: "Start Date",
-                      ),
+                      _datePicker(TextEditingController(), "Start date"),
                     ],
                   ),
                 ),
@@ -210,10 +208,7 @@ class _InfoScreenState extends State<InfoScreen> {
                     children: [
                       TextFieldHeadline(headline: "End Date*"),
                       VSpacer20(),
-                      CommonTextField(
-                        controller: TextEditingController(),
-                        hint: "End Date",
-                      ),
+                      _datePicker(TextEditingController(), "End Date"),
                     ],
                   ),
                 ),
@@ -237,16 +232,43 @@ class _InfoScreenState extends State<InfoScreen> {
                   ),
                 ),
                 HSpacer20(),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      CommonTextField(
-                        controller: TextEditingController(),
-                        hint: "10:00 AM",
-                      ),
-                    ],
+                Container(
+                  padding: EdgeInsets.only(left: dp10),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: grey
+                    ),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(dp10),
+                    ),
+                  ),
+                  child: DropdownButton<String>(
+                    style: GoogleFonts.manrope(
+                      color: darkText,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    value: timeFormat,
+                    icon: Icon(
+                      Icons.keyboard_arrow_down,
+                    ),
+                    underline: Container(),
+                    items: <String>['AM', 'PM'].map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: GoogleFonts.manrope(
+                            color: darkText,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (String? value) {
+                      setState(() {
+                        timeFormat=value!;
+                      });
+                    },
                   ),
                 ),
               ],
@@ -266,6 +288,69 @@ class _InfoScreenState extends State<InfoScreen> {
     );
   }
 
+  DateTime selectedDate = DateTime.now();
 
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        builder: (ctx, child){
+          return Theme(
+            data: ThemeData.light().copyWith(
+              colorScheme: ColorScheme.light(primary: accent),
+              // buttonTheme: ButtonThemeData(
+              //     textTheme: acce
+              // ),
+            ),
+            child: child!,
+          );
+        },
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101)
+    );
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
+  }
+
+  _datePicker(TextEditingController controller, String hint){
+    return TextField(
+      readOnly: true,
+      controller: controller,
+      style: TextStyle(
+        color: darkText,
+        fontSize: dp18,
+        fontWeight: FontWeight.bold,
+      ),
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        suffixIcon: IconButton(
+          onPressed: (){
+            _selectDate(context);
+          },
+          icon: Icon(
+            Icons.date_range,
+            color: accent,
+          ),
+        ),
+        contentPadding: EdgeInsets.only(left: 10),
+        hintText: hint,
+        hintStyle: GoogleFonts.manrope(
+            color: light_grey,
+            fontSize: 14
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(dp10),
+          borderSide: BorderSide(color: grey),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(dp10),
+          borderSide: BorderSide(color: accent),
+        ),
+      ),
+      cursorColor: accent,
+    );
+  }
 
 }
