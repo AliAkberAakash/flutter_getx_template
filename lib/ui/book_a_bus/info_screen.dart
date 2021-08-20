@@ -19,7 +19,31 @@ class InfoScreen extends StatefulWidget {
 
 class _InfoScreenState extends State<InfoScreen> {
 
-  int seat=0;
+  int seat=1;
+  List<Widget> childWidgetList = [];
+
+  @override
+  void initState() {
+    childWidgetList.add(
+      _childWidget()
+    );
+    super.initState();
+  }
+
+  _childWidget(){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        VSpacer20(),
+        TextFieldHeadline(headline: "Child Name*"),
+        VSpacer20(),
+        CommonTextField(
+          controller: TextEditingController(),
+          hint: "Child Name",
+        ),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,6 +140,7 @@ class _InfoScreenState extends State<InfoScreen> {
                         onPressed: (){
                           setState(() {
                             seat++;
+                            childWidgetList.add(_childWidget());
                           });
                         },
                         icon: Icon(
@@ -142,8 +167,10 @@ class _InfoScreenState extends State<InfoScreen> {
                       IconButton(
                         onPressed: (){
                           setState(() {
-                            if(seat>0)
+                            if(seat>1)
                               seat--;
+                            if(childWidgetList.length>1)
+                              childWidgetList.removeLast();
                           });
                         },
                         icon: Icon(
@@ -156,12 +183,9 @@ class _InfoScreenState extends State<InfoScreen> {
                 )
               ],
             ),
-            VSpacer20(),
-            TextFieldHeadline(headline: "Child Name*"),
-            VSpacer20(),
-            CommonTextField(
-              controller: TextEditingController(),
-              hint: "Child Name",
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: childWidgetList,
             ),
             VSpacer20(),
             Row(
@@ -241,4 +265,7 @@ class _InfoScreenState extends State<InfoScreen> {
       ),
     );
   }
+
+
+
 }
