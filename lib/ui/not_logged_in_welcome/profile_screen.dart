@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:get/get.dart';
 import 'package:go_share/ui/common_widgets/outlined_material_button.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
 import 'package:go_share/ui/common_widgets/text_field_value_widget.dart';
@@ -7,6 +8,8 @@ import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'edit_profile_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -99,7 +102,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
         VSpacer20(),
-        OutlinedMaterialButton(onClick: (){}, text: "Update Profile"),
+        OutlinedMaterialButton(onClick: (){
+          Get.to(EditProfileScreen());
+        }, text: "Update Profile"),
       ],
     );
   }
