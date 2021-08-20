@@ -34,6 +34,7 @@ dependencies:
   flutter_svg: ^0.22.0
   image_picker: ^0.8.2
   custom_check_box: ^0.0.4
+  expandable: ^5.0.1
 
   # Data
   get_storage: ^2.0.1
