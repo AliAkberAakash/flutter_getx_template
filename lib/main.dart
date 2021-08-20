@@ -14,6 +14,8 @@ import 'package:go_share/ui/section4/notification/notification_screen.dart';
 import 'package:go_share/ui/section4/sign_in/sign_in_screen.dart';
 import 'package:go_share/ui/section4/welcome/welcome_screen.dart';
 
+import 'ui/book_a_bus/info_screen.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeAppEssentials();
@@ -55,7 +57,7 @@ class MyApp extends StatelessWidget {
       theme: Get.find<ThemeService>().getTheme,
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.cupertino,
-      home: PaymentScreen(),
+      home: InfoScreen(),
       enableLog: kDebugMode,
     );
   }
