@@ -63,7 +63,7 @@ class _AddressScreenState extends State<AddressScreen> {
                       VSpacer10(),
                       Container(
                         height: dp5,
-                        color: light_grey,
+                        color: accent,
                       ),
                     ],
                   ),
