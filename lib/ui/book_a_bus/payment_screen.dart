@@ -151,7 +151,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   value: "p",
                   groupValue: selectedPayment,
                   onChanged: (String? value){
-                    selectedPayment = value!;
+                    setState(() {
+                      selectedPayment = value!;
+                    });
                   },
                 ),
                 HSpacer20(),
@@ -192,7 +194,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   value: "v",
                   groupValue: selectedPayment,
                   onChanged: (String? value){
-                    selectedPayment = value!;
+                    setState(() {
+                      selectedPayment = value!;
+                    });
                   },
                 ),
                 HSpacer20(),
