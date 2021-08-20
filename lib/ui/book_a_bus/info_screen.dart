@@ -139,12 +139,14 @@ class _InfoScreenState extends State<InfoScreen> {
                       IconButton(
                         onPressed: (){
                           setState(() {
-                            seat++;
-                            childWidgetList.add(_childWidget());
+                            if(seat>1)
+                              seat--;
+                            if(childWidgetList.length>1)
+                              childWidgetList.removeLast();
                           });
                         },
                         icon: Icon(
-                          Icons.add,
+                          Icons.remove,
                           color: accent,
                         ),
                       ),
@@ -167,14 +169,12 @@ class _InfoScreenState extends State<InfoScreen> {
                       IconButton(
                         onPressed: (){
                           setState(() {
-                            if(seat>1)
-                              seat--;
-                            if(childWidgetList.length>1)
-                              childWidgetList.removeLast();
+                            seat++;
+                            childWidgetList.add(_childWidget());
                           });
                         },
                         icon: Icon(
-                          Icons.remove,
+                          Icons.add,
                           color: accent,
                         ),
                       ),
