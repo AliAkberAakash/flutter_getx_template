@@ -1,7 +1,9 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
+import 'package:go_share/ui/book_a_bus/invoice_screen.dart';
 import 'package:go_share/ui/common_widgets/grey_button.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/outlined_material_button.dart';
@@ -441,7 +443,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         children: [
                           Expanded(
                             child: OutlinedMaterialButton(
-                              onClick: (){},
+                              onClick: (){
+                                Get.to(
+                                  InvoiceScreen(),
+                                );
+                              },
                               text: "View Invoice",
                             ),
                           ),
