@@ -15,6 +15,8 @@ import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../profile_screen.dart';
+
 class NavigationContainer extends StatefulWidget {
   const NavigationContainer({Key? key}) : super(key: key);
 
@@ -254,7 +256,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
       case 2:
         return HomeView();
       case 3:
-        return HomeView();
+        return ProfileScreen();
       case 4:
         return HomeView();
       case 5:
