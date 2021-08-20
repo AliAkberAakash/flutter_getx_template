@@ -13,6 +13,8 @@ import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'sign_in_screen.dart';
+
 // UI
 class NotLoggedInWelcome extends StatefulWidget {
   @override
@@ -90,7 +92,7 @@ class _Sec4WelcomeScreenState extends State<NotLoggedInWelcome> {
                         GSButton(
                           text: GSStrings.sign_in,
                           onClick: (){
-                            Get.to(SignInScreen());
+                            Get.to(NSignInScreen());
                           },
                         ),
                         SizedBox(
