@@ -6,8 +6,13 @@ import 'package:google_fonts/google_fonts.dart';
 class GreyButton extends StatelessWidget {
 
   final String title;
+  final Function? onClick;
 
-  const GreyButton({Key? key, required this.title}) : super(key: key);
+  const GreyButton({
+    Key? key,
+    required this.title,
+    this.onClick,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +23,10 @@ class GreyButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(dp10),
       ),
-      onPressed: () {},
+      onPressed: () {
+        if(onClick!=null)
+        onClick!();
+      },
       child: Text(
         title,
         style: GoogleFonts.manrope(

@@ -116,7 +116,7 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
           VSpacer40(),
           OutlinedMaterialButton(
             onClick: (){},
-            text: "View Invoice",
+            text: "Print Invoice",
           ),
           VSpacer40(),
           VSpacer40(),

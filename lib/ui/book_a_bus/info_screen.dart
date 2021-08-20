@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:go_share/ui/book_a_bus/address_screen.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
 import 'package:go_share/ui/service_provider/widgets/common_text_field.dart';
@@ -161,7 +163,9 @@ class _InfoScreenState extends State<InfoScreen> {
             PositiveButton(
               text: "Next",
               onClicked: () {
-
+                Get.to(
+                  AddressScreen(),
+                );
               },
             ),
           ],

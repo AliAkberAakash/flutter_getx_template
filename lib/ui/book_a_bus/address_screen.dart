@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:go_share/base/widget/custom_text_form_field.dart';
 import 'package:go_share/constants.dart';
 import 'package:go_share/ui/common_widgets/grey_button.dart';
@@ -10,6 +11,8 @@ import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'payment_screen.dart';
 
 class AddressScreen extends StatefulWidget {
   const AddressScreen({Key? key}) : super(key: key);
@@ -159,14 +162,20 @@ class _AddressScreenState extends State<AddressScreen> {
               children: [
                 Expanded(
                   child: GreyButton(
+                    onClick: (){
+                      Get.back();
+                    },
                     title: "Back",
                   ),
                 ),
                 HSpacer10(),
                 Expanded(
-                  child: PositiveButton(text: "Next", onClicked: () {
-
-                  }),
+                  child: PositiveButton(
+                    text: "Next",
+                    onClicked: () {
+                      Get.to(PaymentScreen());
+                    },
+                  ),
                 ),
               ],
             ),

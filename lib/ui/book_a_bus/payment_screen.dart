@@ -237,6 +237,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
               children: [
                 Expanded(
                   child: GreyButton(
+                    onClick: (){
+                      Get.back();
+                    },
                     title: "Back",
                   ),
                 ),
@@ -430,7 +433,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             child: PositiveButton(
                               text: "Go To Home",
                               onClicked: (){
-
+                                Get.back();
+                                Get.back();
+                                Get.back();
+                                Get.back();
                               },
                             ),
                           ),
@@ -444,6 +450,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           Expanded(
                             child: OutlinedMaterialButton(
                               onClick: (){
+                                Get.back();
                                 Get.to(
                                   InvoiceScreen(),
                                 );

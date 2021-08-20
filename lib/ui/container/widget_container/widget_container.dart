@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:go_share/ui/book_a_bus/info_screen.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
@@ -64,7 +65,9 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
           height: 32.0,
         ),
         onPressed: () {
-          _changeBottomBarIndex(1);
+          Get.to(
+              InfoScreen(),
+          );
         },
       ),
       body: body,
