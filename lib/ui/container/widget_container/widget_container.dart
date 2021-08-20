@@ -16,6 +16,7 @@ import 'package:go_share/ui/container/our_service/our_service.dart';
 import 'package:go_share/ui/container/privacy_and_concern/privacy_and_concern.dart';
 import 'package:go_share/ui/container/terms_and_conditions/terms_and_conditions.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
+import 'package:go_share/ui/not_logged_in_welcome/welcome_screen.dart';
 import 'package:go_share/ui/section4/widgets/menu_page_button.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
@@ -220,9 +221,17 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                                 fontSize: dp16,
                               ),
                             ),
-                            Text(
-                              "Tap to login",
-                              style: GoogleFonts.manrope(),
+                            InkWell(
+                              onTap: (){
+                                Get.back();
+                                Get.to(
+                                  NotLoggedInWelcome(),
+                                );
+                              },
+                              child: Text(
+                                "Tap to login",
+                                style: GoogleFonts.manrope(),
+                              ),
                             ),
                           ],
                         ),
