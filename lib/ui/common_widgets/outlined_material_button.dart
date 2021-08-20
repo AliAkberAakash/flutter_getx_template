@@ -18,6 +18,7 @@ class OutlinedMaterialButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
+      padding: EdgeInsets.all(dp10),
       minWidth: double.infinity,
       onPressed: onClick,
       shape: RoundedRectangleBorder(
@@ -34,6 +35,7 @@ class OutlinedMaterialButton extends StatelessWidget {
         text,
         style: GoogleFonts.manrope(
           color: color,
+          fontSize: dp20,
         ),
       ),
     );
