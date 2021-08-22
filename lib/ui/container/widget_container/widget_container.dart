@@ -49,7 +49,6 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
 
   @override
   Widget build(BuildContext context) {
-
     hp = MediaQuery.of(context).size.height;
 
     return Scaffold(
@@ -70,7 +69,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
       body: body,
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0.0,
-        currentIndex: selectedBottomBarIndex<=1 ? selectedBottomBarIndex : 1,
+        currentIndex: selectedBottomBarIndex <= 1 ? selectedBottomBarIndex : 1,
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
         showUnselectedLabels: true,
@@ -101,7 +100,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
           ),
         ],
         onTap: (index) {
-          if(index==2)
+          if (index == 2)
             showMenuBottomSheet(hp, context);
           else
             _changeBottomBarIndex(index);
@@ -128,9 +127,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
   }
 
   void _changeBottomBarIndex(int index) {
-
-    if(index>=3)
-      Get.back();
+    if (index >= 3) Get.back();
 
     setState(() {
       selectedBottomBarIndex = index;
@@ -304,5 +301,4 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
       },
     );
   }
-  
 }
