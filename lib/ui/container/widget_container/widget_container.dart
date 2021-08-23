@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:go_share/ui/book_a_bus/info_screen.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
@@ -16,6 +17,7 @@ import 'package:go_share/ui/container/privacy_and_concern/privacy_and_concern.da
 import 'package:go_share/ui/container/terms_and_conditions/terms_and_conditions.dart';
 import 'package:go_share/ui/driver_login/driver_login_screen.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
+import 'package:go_share/ui/not_logged_in_welcome/welcome_screen.dart';
 import 'package:go_share/ui/section4/widgets/menu_page_button.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
@@ -64,7 +66,9 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
           height: 32.0,
         ),
         onPressed: () {
-          _changeBottomBarIndex(1);
+          Get.to(
+              InfoScreen(),
+          );
         },
       ),
       body: body,
@@ -215,9 +219,17 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                                 fontSize: dp16,
                               ),
                             ),
-                            Text(
-                              "Tap to login",
-                              style: GoogleFonts.manrope(),
+                            InkWell(
+                              onTap: (){
+                                Get.back();
+                                Get.to(
+                                  NotLoggedInWelcome(),
+                                );
+                              },
+                              child: Text(
+                                "Tap to login",
+                                style: GoogleFonts.manrope(),
+                              ),
                             ),
                           ],
                         ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:go_share/base/widget/custom_app_promotion_widget.dart';
 import 'package:go_share/base/widget/custom_bus_time_widget.dart';
 import 'package:go_share/base/widget/custom_filled_button.dart';
+import 'package:go_share/ui/book_a_bus/info_screen.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/Fonts.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
@@ -321,7 +323,11 @@ class TitleWidget extends StatelessWidget {
                 backgroundColor: GSColors.green_normal,
                 textColor: Colors.white,
                 title: GSStrings.home_book_a_bus,
-                onTap: () {},
+                onTap: () {
+                  Get.to(
+                    InfoScreen(),
+                  );
+                },
               ),
               CustomFilledButton(
                 margin: const EdgeInsets.only(top: 24.0),
