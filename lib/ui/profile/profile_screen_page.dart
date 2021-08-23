@@ -33,7 +33,9 @@ class _ProfileScreenPageState extends State<ProfileScreenPage> {
             VSpacer60(),
             CircleAvatar(
               radius: dp60,
-              backgroundColor: accent,
+              backgroundImage: NetworkImage(
+                "https://images.unsplash.com/photo-1563306406-e66174fa3787",
+              ),
             ),
             SizedBox(height: dp40),
             Text(
