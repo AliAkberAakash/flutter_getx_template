@@ -3,6 +3,7 @@ import 'package:go_share/ui/service_provider/widgets/update_button.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
+import 'package:go_share/utils/spacers.dart';
 
 class ProfileScreenPage extends StatefulWidget {
   const ProfileScreenPage({Key? key}) : super(key: key);
@@ -21,13 +22,6 @@ class _ProfileScreenPageState extends State<ProfileScreenPage> {
 
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        title: Text(
-          'Profile',
-          style: TextStyle(color: white),
-        ),
-        centerTitle: true,
-      ),
       body: Container(
         height: hp,
         width: wp,
@@ -35,6 +29,8 @@ class _ProfileScreenPageState extends State<ProfileScreenPage> {
         padding: EdgeInsets.symmetric(horizontal: dp15, vertical: dp15),
         child: Column(
           children: [
+            VSpacer60(),
+            VSpacer60(),
             CircleAvatar(
               radius: dp60,
               backgroundColor: accent,
@@ -67,7 +63,11 @@ class _ProfileScreenPageState extends State<ProfileScreenPage> {
                   color: black, fontWeight: FontWeight.bold, fontSize: dp18),
             ),
             SizedBox(height: dp40),
-            UpdateButton(text: 'Change Password', onClicked: () {})
+            Row(
+              children: [
+                Expanded(child: UpdateButton(text: 'Change Password', onClicked: () {})),
+              ],
+            )
           ],
         ),
       ),
