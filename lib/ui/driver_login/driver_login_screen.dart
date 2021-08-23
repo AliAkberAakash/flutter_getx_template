@@ -85,14 +85,14 @@ class _DriverLoginScreenState extends State<DriverLoginScreen> {
                 ),
                 GSPasswordTextField(),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 30, horizontal: 5),
+                  padding: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
                   child: Row(
                     children: [
                       CustomCheckBox(
                         value: value,
                         shouldShowBorder: true,
                         borderColor: Colors.white,
-                        uncheckedFillColor: Colors.white60,
+                        uncheckedFillColor: Colors.grey,
                         checkedFillColor: GSColors.green_normal,
                         borderRadius: 2,
                         borderWidth: 1,

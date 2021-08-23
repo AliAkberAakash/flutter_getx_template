@@ -14,6 +14,7 @@ import 'package:go_share/ui/container/lost_and_found/lost_and_found.dart';
 import 'package:go_share/ui/container/our_service/our_service.dart';
 import 'package:go_share/ui/container/privacy_and_concern/privacy_and_concern.dart';
 import 'package:go_share/ui/container/terms_and_conditions/terms_and_conditions.dart';
+import 'package:go_share/ui/driver_login/driver_login_screen.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
 import 'package:go_share/ui/section4/widgets/menu_page_button.dart';
 import 'package:go_share/utils/colors.dart';
@@ -287,6 +288,17 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                           icon: AssetConstants.ic_sign_out_svg,
                           onClick: (index) {
                             _changeBottomBarIndex(9);
+                          },
+                        ),
+                        MenuItem(
+                          isSelected: 9 == selectedBottomBarIndex,
+                          index: 9,
+                          title: "Driver Login",
+                          icon: AssetConstants.ic_profile_svg,
+                          onClick: (index) {
+                            Get.to(
+                                DriverLoginScreen(),
+                            );
                           },
                         ),
                         MenuButtonOutlineStock(),
