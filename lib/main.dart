@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
       theme: Get.find<ThemeService>().getTheme,
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.cupertino,
-      home: ProfileScreenPage(),
+      home: NotificationScreenPage(),
       enableLog: kDebugMode,
     );
   }
