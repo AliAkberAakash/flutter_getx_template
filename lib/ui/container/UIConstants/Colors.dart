@@ -11,6 +11,7 @@ abstract class GSColors {
   static const gray_normal = Color(0xFFA9ABAB);
 
   static const pending_Color = Color(0xFFFEA400);
+  static const active_Color = Color(0xFF2395D6);
 
   static const text_regular = Color(0xFF092C4C);
   static const text_secondary = Color(0xFF555958);

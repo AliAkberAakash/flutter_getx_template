@@ -17,6 +17,19 @@ class GSTextStyles {
     );
   }
 
+  static TextStyle make16xw400Style({
+    Color color = GSColors.gray_primary,
+    String fontFamily = GSFonts.appFont,
+  }) {
+    return TextStyle(
+      color: color,
+      fontSize: GSFontSizes.font16,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.w400,
+      fontFamily: fontFamily,
+    );
+  }
+
   static TextStyle make18xw400Style({Color color = Colors.white}) {
     return TextStyle(
       color: color,
