@@ -5,6 +5,8 @@ import 'package:go_share/ui/book_a_bus/info_screen.dart';
 import 'package:go_share/ui/container/about_us/about_us.dart';
 import 'package:go_share/ui/container/faq/faq.dart';
 import 'package:go_share/ui/container/home/home.dart';
+import 'package:go_share/ui/container/refund_request_details/refund_request_details.dart';
+import 'package:go_share/ui/container/my_bookings/my_bookings.dart';
 import 'package:go_share/ui/container/our_service/our_service.dart';
 import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
@@ -26,7 +28,7 @@ class NavigationContainer extends StatefulWidget {
 
 class _NavigationContainerState extends State<NavigationContainer> {
 
-  int _selectedItem = 2;
+  int _selectedItem = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -258,9 +260,9 @@ class _NavigationContainerState extends State<NavigationContainer> {
       case 3:
         return ProfileScreen();
       case 4:
-        return HomeView();
+        return MyBookingsView();
       case 5:
-        return HomeView();
+        return RefundRequestDetailsView();
       case 6:
         return NotificationScreen();
       case 7:

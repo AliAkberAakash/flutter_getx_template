@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:go_share/base/widget/custom_filled_button.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
@@ -83,7 +84,9 @@ class _BodyWidgetState extends State<BodyWidget> {
             backgroundColor: Colors.transparent,
             textColor: GSColors.green_secondary,
             title: "Go to home",
-            onTap: () {},
+            onTap: () {
+              Get.back();
+            },
           ),
         ],
       ),

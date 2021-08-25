@@ -1,11 +1,13 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:go_share/base/widget/custom_filled_button.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/Fonts.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
+import 'package:go_share/ui/container/my_booking_details_one/my_booking_details_one.dart';
 
 class MyBookingsView extends StatefulWidget {
   const MyBookingsView({Key? key}) : super(key: key);
@@ -315,7 +317,9 @@ class BookingItemBodyWidget extends StatelessWidget {
           backgroundColor: Colors.transparent,
           textColor: GSColors.green_secondary,
           title: "Booking Details",
-          onTap: () {},
+          onTap: () {
+            Get.to(MyBookingDetailsOneView());
+          },
         ),
       ],
     );

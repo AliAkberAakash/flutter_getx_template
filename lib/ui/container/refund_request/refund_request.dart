@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:go_share/base/widget/custom_filled_button.dart';
 import 'package:go_share/base/widget/custom_text_form_field.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
+import 'package:go_share/ui/container/refund_request_message/refund_request_message.dart';
 import 'package:go_share/ui/container/UIConstants/Fonts.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
+import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/dimens.dart';
 
 class RefundRequestView extends StatefulWidget {
   const RefundRequestView({Key? key}) : super(key: key);
@@ -46,6 +50,9 @@ class BodyWidget extends StatefulWidget {
 }
 
 class _BodyWidgetState extends State<BodyWidget> {
+
+  var hp;
+
   late TextEditingController reasonController;
 
   @override
@@ -62,6 +69,9 @@ class _BodyWidgetState extends State<BodyWidget> {
 
   @override
   Widget build(BuildContext context) {
+
+    hp = MediaQuery.of(context).size.height;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,11 +104,38 @@ class _BodyWidgetState extends State<BodyWidget> {
           backgroundColor: GSColors.green_secondary,
           textColor: Colors.white,
           title: "Submit Request",
-          onTap: () {},
+          onTap: () {
+            _showMessage(600);
+          },
         ),
       ],
     );
   }
+
+  _showMessage(double height) {
+    showModalBottomSheet(
+      backgroundColor: white,
+      isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(dp20),
+          topRight: Radius.circular(dp20),
+        ),
+      ),
+      context: context,
+      builder: (context) {
+        return Wrap(
+          children: [
+            Container(
+              height: hp,
+              child: RefundRequestMessageView(),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 }
 
 class TitleWidget extends StatelessWidget {
