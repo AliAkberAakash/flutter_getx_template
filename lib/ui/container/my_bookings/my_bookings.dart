@@ -8,6 +8,8 @@ import 'package:go_share/ui/container/UIConstants/Fonts.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/my_booking_details_one/my_booking_details_one.dart';
+import 'package:go_share/ui/container/my_booking_details_two/my_booking_details_two.dart';
+import 'package:go_share/utils/colors.dart';
 
 class MyBookingsView extends StatefulWidget {
   const MyBookingsView({Key? key}) : super(key: key);
@@ -153,7 +155,7 @@ class _BodyWidgetState extends State<BodyWidget>
               BookingListWidget(),
               BookingListWidget(),
               BookingListWidget(),
-              BookingListWidget(),
+              BookingListWidget2(),
             ],
           ),
         ),
@@ -174,7 +176,29 @@ class BookingListWidget extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       scrollDirection: Axis.vertical,
       itemBuilder: (BuildContext context, int index) {
-        return BookingItemWidget();
+        return BookingItemWidget(type: 0,);
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return SizedBox(height: 30.0);
+      },
+      itemCount: 10,
+    );
+  }
+}
+
+class BookingListWidget2 extends StatelessWidget {
+  const BookingListWidget2({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      padding: const EdgeInsets.only(bottom: 32.0, top: 32.0),
+      physics: BouncingScrollPhysics(),
+      scrollDirection: Axis.vertical,
+      itemBuilder: (BuildContext context, int index) {
+        return BookingItemWidget(type: 1,);
       },
       separatorBuilder: (BuildContext context, int index) {
         return SizedBox(height: 30.0);
@@ -185,8 +209,12 @@ class BookingListWidget extends StatelessWidget {
 }
 
 class BookingItemWidget extends StatelessWidget {
+
+  final int type;
+
   const BookingItemWidget({
     Key? key,
+    required this.type,
   }) : super(key: key);
 
   @override
@@ -211,7 +239,7 @@ class BookingItemWidget extends StatelessWidget {
               left: 20.0,
               right: 20.0,
             ),
-            child: BookingItemHeaderWidget(),
+            child: BookingItemHeaderWidget(type: type,),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -226,7 +254,7 @@ class BookingItemWidget extends StatelessWidget {
               left: 20.0,
               right: 20.0,
             ),
-            child: BookingItemBodyWidget(),
+            child: BookingItemBodyWidget(type: type,),
           ),
         ],
       ),
@@ -235,8 +263,12 @@ class BookingItemWidget extends StatelessWidget {
 }
 
 class BookingItemBodyWidget extends StatelessWidget {
+
+  final int type;
+
   const BookingItemBodyWidget({
     Key? key,
+    required this.type,
   }) : super(key: key);
 
   @override
@@ -318,7 +350,9 @@ class BookingItemBodyWidget extends StatelessWidget {
           textColor: GSColors.green_secondary,
           title: "Booking Details",
           onTap: () {
-            Get.to(MyBookingDetailsOneView());
+            if(type==0)
+              Get.to(MyBookingDetailsOneView());
+            else Get.to(MyBookingDetailsTwoView());
           },
         ),
       ],
@@ -327,8 +361,12 @@ class BookingItemBodyWidget extends StatelessWidget {
 }
 
 class BookingItemHeaderWidget extends StatelessWidget {
+
+  final int type;
+
   const BookingItemHeaderWidget({
     Key? key,
+    required this.type,
   }) : super(key: key);
 
   @override
@@ -362,7 +400,7 @@ class BookingItemHeaderWidget extends StatelessWidget {
         ),
         Container(
           decoration: BoxDecoration(
-            color: GSColors.pending_Color.withOpacity(0.1),
+            color: type == 0 ? GSColors.pending_Color.withOpacity(0.1) : approvedChipColor.withOpacity(0.1),
             borderRadius: const BorderRadius.all(
               const Radius.circular(12.0),
             ),
@@ -372,9 +410,9 @@ class BookingItemHeaderWidget extends StatelessWidget {
             vertical: 8.0,
           ),
           child: Text(
-            "Pending",
+            type == 0 ?"Pending" : "Finished",
             style: GSTextStyles.make13xw700Style(
-              color: GSColors.pending_Color,
+              color: type == 0 ? GSColors.pending_Color : approvedChipColor,
             ),
             textAlign: TextAlign.start,
           ),

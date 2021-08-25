@@ -1,10 +1,12 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:go_share/base/widget/custom_filled_button.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/Fonts.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
+import 'package:go_share/ui/container/provide_feedback/provide_feedback.dart';
 
 class MyBookingDetailsTwoView extends StatefulWidget {
   const MyBookingDetailsTwoView({Key? key}) : super(key: key);
@@ -62,7 +64,9 @@ class BodyWidget extends StatelessWidget {
           backgroundColor: Colors.transparent,
           textColor: GSColors.green_secondary,
           title: "Give Feedback",
-          onTap: () {},
+          onTap: () {
+            Get.to(ProvideFeedbackView());
+          },
         ),
       ],
     );

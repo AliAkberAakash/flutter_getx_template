@@ -36,6 +36,7 @@ dependencies:
   custom_check_box: ^0.0.4
   expandable: ^5.0.1
   dotted_line: ^3.0.0
+  flutter_rating_bar: ^4.0.0
 
   # Data
   get_storage: ^2.0.1
