@@ -194,6 +194,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
 
   showMenuBottomSheet(double height, BuildContext context) {
     showModalBottomSheet(
+      backgroundColor: Colors.white,
       isScrollControlled: true,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
