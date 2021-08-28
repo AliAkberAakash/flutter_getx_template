@@ -13,6 +13,7 @@ const double dp15 = 15.0;
 const double dp16 = 16.0;
 const double dp18 = 18.0;
 const double dp20 = 20.0;
+const double dp23 = 23.0;
 const double dp25 = 25.0;
 const double dp24 = 24.0;
 const double dp30 = 30.0;

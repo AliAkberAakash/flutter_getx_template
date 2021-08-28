@@ -39,6 +39,11 @@ class Sec4TextField extends StatelessWidget {
 }
 
 class Sec4PasswordTextField extends StatelessWidget {
+
+  final String hint;
+
+  const Sec4PasswordTextField({this.hint = "Password"});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -51,6 +56,8 @@ class Sec4PasswordTextField extends StatelessWidget {
         border: Border.all(color: GSColors.gray_normal),
       ),
       child: TextField(
+        obscureText: true,
+        obscuringCharacter: '*',
         decoration: InputDecoration(
           border: InputBorder.none,
           focusedBorder: InputBorder.none,
@@ -60,7 +67,7 @@ class Sec4PasswordTextField extends StatelessWidget {
           contentPadding: EdgeInsets.all(
             GSSizeConstants.padding16,
           ),
-          hintText: GSStrings.password,
+          hintText: hint,
           suffixIcon: Transform(
             alignment: Alignment.center,
             transform: Matrix4.rotationY(math.pi),
