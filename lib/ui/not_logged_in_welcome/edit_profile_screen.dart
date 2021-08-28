@@ -42,8 +42,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return Scaffold(
       body: SafeArea(
         child: ListView(
+          physics: BouncingScrollPhysics(),
           padding: EdgeInsets.all(dp20),
           children: [
+            VSpacer20(),
             _captureImage(),
             VSpacer40(),
             TextFieldHeadline(headline: 'Full Name'),
@@ -85,6 +87,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             PositiveButton(text: "Update Now", onClicked: () {
               Get.back();
             }),
+            VSpacer40(),
           ],
         ),
       ),
@@ -181,7 +184,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ),
           child: Center(
             child: Text(
-              'Upload Logo',
+              'Upload Photo',
               style: TextStyle(color: accent),
             ),
           ),

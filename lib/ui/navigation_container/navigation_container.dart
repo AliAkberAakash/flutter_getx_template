@@ -5,6 +5,7 @@ import 'package:go_share/ui/add_vehicle/add_vehicle.dart';
 import 'package:go_share/ui/container/home/home.dart';
 import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
+import 'package:go_share/ui/not_logged_in_welcome/profile_screen.dart';
 import 'package:go_share/ui/registration_request/registration_request_screen.dart';
 import 'package:go_share/ui/reset_vehicle_login/reset_vehicle_list.dart';
 import 'package:go_share/ui/section4/notification/notification_screen.dart';
@@ -106,6 +107,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
 
   _showMenu(double height) {
     showModalBottomSheet(
+      backgroundColor: Colors.white,
       isScrollControlled: true,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -241,7 +243,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
       case 1:
         return AddVehicleScreen();
       case 2:
-        return ServiceProviderScreen();
+        return ProfileScreen();
       case 3:
         return ServiceProviderUpdateScreen();
       case 4:

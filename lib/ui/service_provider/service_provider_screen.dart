@@ -41,6 +41,7 @@ class _ServiceProviderScreenState extends State<ServiceProviderScreen> {
     return Scaffold(
       body: SafeArea(
         child: ListView(
+          physics: BouncingScrollPhysics(),
           padding: EdgeInsets.all(dp20),
           children: [
             LargeHeadlineWidget(headline: 'Want to be a\nservice provider'),
@@ -88,7 +89,7 @@ class _ServiceProviderScreenState extends State<ServiceProviderScreen> {
             PositiveButton(text: "Submit", onClicked: () {
               modalBottomSheetMenuSuccess(context);
             }),
-            VSpacer60(),
+            VSpacer40(),
           ],
         ),
       ),

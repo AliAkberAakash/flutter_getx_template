@@ -87,7 +87,7 @@ class _Sec4SignInScreenState extends State<SignInScreen> {
               height: GSSizeConstants.padding55,
             ),
             Sec4TextField(
-              hints: GSStrings.email_field_hints,
+              hints: "Vehicle Number",
             ),
             SizedBox(
               height: GSSizeConstants.padding17,
