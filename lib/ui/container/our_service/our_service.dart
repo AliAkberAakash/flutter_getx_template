@@ -15,6 +15,7 @@ class OurServiceView extends StatefulWidget {
 }
 
 class _OurServiceViewState extends State<OurServiceView> {
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -97,6 +98,9 @@ class BodyWidget extends StatefulWidget {
 }
 
 class _BodyWidgetState extends State<BodyWidget> {
+
+  int status = 0;
+
   @override
   void initState() {
     super.initState();
@@ -120,14 +124,28 @@ class _BodyWidgetState extends State<BodyWidget> {
               padding: const EdgeInsets.all(30.0),
               child: Row(
                 children: [
-                  SessionWidget(),
+                  SessionWidget(
+                    index: 0,
+                    imagePath: "images/ic_morning.png",
+                    title: GSStrings.morning,
+                    isSelected: status == 0,
+                    onClick: (index){
+                      setState(() {
+                        status = index;
+                      });
+                    },
+                  ),
                   SizedBox(width: 16.0),
                   SessionWidget(
+                    index: 1,
                     imagePath: "images/ic_evening.png",
                     title: GSStrings.evening,
-                    textColor: GSColors.green_secondary,
-                    iconColor: GSColors.green_secondary,
-                    backgroundColor: GSColors.gray_normal.withOpacity(0.2),
+                    isSelected: status == 1,
+                    onClick: (index){
+                      setState(() {
+                        status = index;
+                      });
+                    },
                   ),
                 ],
               ),
@@ -159,50 +177,57 @@ class _BodyWidgetState extends State<BodyWidget> {
 
 class SessionWidget extends StatelessWidget {
   final String title, imagePath;
-  final Color textColor, backgroundColor, iconColor;
+  final bool isSelected;
+  final int index;
+  final Function(int index) onClick;
 
   const SessionWidget({
     Key? key,
     this.imagePath = "images/ic_morning.png",
     this.title = GSStrings.morning,
-    this.textColor = Colors.white,
-    this.iconColor = Colors.white,
-    this.backgroundColor = GSColors.green_secondary,
+    required this.isSelected,
+    required this.index,
+    required this.onClick,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 112.0,
-      height: 32.0,
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(
-          const Radius.circular(4.0),
+    return InkWell(
+      onTap: (){
+        onClick(index);
+      },
+      child: Container(
+        width: 112.0,
+        height: 32.0,
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(
+            const Radius.circular(4.0),
+          ),
+          color: isSelected ? GSColors.green_secondary : GSColors.gray_normal.withOpacity(0.2),
         ),
-        color: this.backgroundColor,
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            this.imagePath,
-            height: 18.0,
-            fit: BoxFit.contain,
-            color: this.iconColor,
-          ),
-          SizedBox(width: 6.0),
-          Text(
-            this.title,
-            textAlign: TextAlign.start,
-            style: GSTextStyles.make15xw600Style(
-              color: this.textColor,
-              fontFamily: GSFonts.appFont,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              this.imagePath,
+              height: 18.0,
+              fit: BoxFit.contain,
+              color: isSelected ? Colors.white :  GSColors.green_secondary,
             ),
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-          ),
-        ],
+            SizedBox(width: 6.0),
+            Text(
+              this.title,
+              textAlign: TextAlign.start,
+              style: GSTextStyles.make15xw600Style(
+                color: isSelected ? Colors.white :  GSColors.green_secondary,
+                fontFamily: GSFonts.appFont,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+            ),
+          ],
+        ),
       ),
     );
   }
