@@ -5,6 +5,7 @@ import 'package:go_share/base/widget/custom_text_form_field.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
+import 'package:go_share/utils/spacers.dart';
 
 class ContactUsView extends StatefulWidget {
   const ContactUsView({Key? key}) : super(key: key);
@@ -33,19 +34,6 @@ class _ContactUsViewState extends State<ContactUsView> {
             TitleWidget(),
             Expanded(
               child: FormListWidget(),
-            ),
-            CustomFilledButton(
-              margin: const EdgeInsets.only(
-                left: 30.0,
-                right: 30.0,
-                top: 32.0,
-                bottom: 16.0,
-              ),
-              borderRadius: 8.0,
-              backgroundColor: GSColors.green_secondary,
-              textColor: Colors.white,
-              title: GSStrings.submit,
-              onTap: () {},
             ),
           ],
         ),
@@ -197,6 +185,20 @@ class _FormListWidgetState extends State<FormListWidget> {
               hint: GSStrings.contact_us_your_feedback,
               isFieldExpanded: true,
             ),
+            CustomFilledButton(
+              margin: const EdgeInsets.only(
+                left: 30.0,
+                right: 30.0,
+                top: 32.0,
+                bottom: 16.0,
+              ),
+              borderRadius: 8.0,
+              backgroundColor: GSColors.green_secondary,
+              textColor: Colors.white,
+              title: GSStrings.submit,
+              onTap: () {},
+            ),
+            VSpacer40(),
           ],
         ),
       ),

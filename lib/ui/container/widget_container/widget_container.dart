@@ -258,7 +258,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                           title: "About Us",
                           icon: AssetConstants.ic_profile_svg,
                           onClick: (index) {
-                            _changeBottomBarIndex(3);
+                            _changeBottomBarIndex(index);
                           },
                         ),
                         MenuItem(
@@ -267,7 +267,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                           title: "Our Services",
                           icon: AssetConstants.ic_vehicle_list_svg,
                           onClick: (index) {
-                            _changeBottomBarIndex(4);
+                            _changeBottomBarIndex(index);
                           },
                         ),
                         MenuItem(
@@ -276,7 +276,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                           title: "FAQ",
                           icon: AssetConstants.ic_free_busy_list_svg,
                           onClick: (index) {
-                            _changeBottomBarIndex(5);
+                            _changeBottomBarIndex(index);
                           },
                         ),
                         MenuItem(
@@ -285,7 +285,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                           title: "Lost & Found",
                           icon: AssetConstants.lostandFoundIcon,
                           onClick: (index) {
-                            _changeBottomBarIndex(6);
+                            _changeBottomBarIndex(index);
                           },
                         ),
                         MenuItem(
@@ -294,7 +294,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                           title: "Terms & Condition",
                           icon: AssetConstants.ic_notification_svg,
                           onClick: (index) {
-                            _changeBottomBarIndex(7);
+                            _changeBottomBarIndex(index);
                           },
                         ),
                         MenuItem(
@@ -303,7 +303,8 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                           title: "Privacy & Concern",
                           icon: AssetConstants.ic_settings_svg,
                           onClick: (index) {
-                            _changeBottomBarIndex(8);
+                            print("8 is clicked?");
+                            _changeBottomBarIndex(index);
                           },
                         ),
                         MenuItem(
@@ -312,7 +313,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                           title: "Contact Us",
                           icon: AssetConstants.ic_sign_out_svg,
                           onClick: (index) {
-                            _changeBottomBarIndex(9);
+                            _changeBottomBarIndex(index);
                           },
                         ),
                         MenuButtonOutlineStock(),

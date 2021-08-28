@@ -77,7 +77,7 @@ abstract class GSStrings {
   static const terms_and_conditions_title = "Terms & Conditions";
   static const terms_and_conditions_subtitle =
       "More than 10 years of \ntransporting experience at your \nservice.";
-  static const privacy_and_concern_title = "Terms & Conditions";
+  static const privacy_and_concern_title = "Privacy and Concerns";
   static const privacy_and_concern_subtitle =
       "More than 10 years of \ntransporting experience at your \nservice.";
   static const our_service_title = "Our Service";
