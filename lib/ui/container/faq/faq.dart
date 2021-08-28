@@ -103,33 +103,33 @@ class FaqListWidget extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       scrollDirection: Axis.vertical,
       itemBuilder: (BuildContext context, int index) {
-        String title = "Lost & Found";
-        Widget nextPage = LostAndFoundView();
+        String title = "Billing";
+        Widget nextPage = BookABusView();
 
         switch (index) {
           case 0:
-            title = "Lost & Found";
-            nextPage = LostAndFoundView();
+            title = "Billing";
+            nextPage = BookABusView();
             break;
 
           case 1:
-            title = "Book a Bus";
+            title = "Billing";
             nextPage = BookABusView();
             break;
 
           case 2:
-            title = "Our Service";
-            nextPage = OurServiceView();
+            title = "Billing";
+            nextPage = BookABusView();
             break;
 
           case 3:
-            title = "Terms & Conditions";
-            nextPage = TermsAndConditionsView();
+            title = "Billing";
+            nextPage = BookABusView();
             break;
 
           case 4:
-            title = "Privacy & Concern";
-            nextPage = PrivacyAndConcernView();
+            title = "Billing";
+            nextPage = BookABusView();
             break;
         }
 

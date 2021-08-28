@@ -226,7 +226,7 @@ class _InfoScreenState extends State<InfoScreen> {
                       VSpacer20(),
                       CommonTextField(
                         controller: TextEditingController(),
-                        hint: "Child Name",
+                        hint: "Pickup time",
                       ),
                     ],
                   ),
