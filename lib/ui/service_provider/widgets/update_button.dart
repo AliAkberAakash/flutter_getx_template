@@ -26,7 +26,6 @@ class UpdateButton extends StatelessWidget {
         text,
         style: GoogleFonts.manrope(
           color: accent,
-
         ),
       ),
     );

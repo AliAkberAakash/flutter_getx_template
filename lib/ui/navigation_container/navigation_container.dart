@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:go_share/ui/add_vehicle/add_vehicle.dart';
 import 'package:go_share/ui/container/home/home.dart';
+import 'package:go_share/ui/driver_login/driver_login_screen.dart';
 import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
 import 'package:go_share/ui/not_logged_in_welcome/profile_screen.dart';
@@ -200,6 +201,17 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           icon: AssetConstants.ic_settings_svg,
                           onClick: (index) {
                             changePage(index);
+                          },
+                        ),
+                        MenuItem(
+                          isSelected: 9 == _selectedItem,
+                          index: 9,
+                          title: "Driver Login",
+                          icon: AssetConstants.ic_profile_svg,
+                          onClick: (index) {
+                            Get.to(
+                              DriverLoginScreen(),
+                            );
                           },
                         ),
                         MenuItem(

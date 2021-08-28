@@ -17,6 +17,7 @@ import 'package:go_share/ui/container/our_service/our_service.dart';
 import 'package:go_share/ui/container/privacy_and_concern/privacy_and_concern.dart';
 import 'package:go_share/ui/container/terms_and_conditions/terms_and_conditions.dart';
 import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
+import 'package:go_share/ui/driver_login/driver_login_screen.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
 import 'package:go_share/ui/not_logged_in_welcome/welcome_screen.dart';
 import 'package:go_share/ui/section4/widgets/menu_page_button.dart';
@@ -53,7 +54,6 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
 
   @override
   Widget build(BuildContext context) {
-
     hp = MediaQuery.of(context).size.height;
 
     return Scaffold(
@@ -86,6 +86,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
         },
       ),
       body: body,
+
       bottomNavigationBar: BottomAppBar(
         child: Container(
           height: 60,
@@ -142,9 +143,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
   }
 
   void _changeBottomBarIndex(int index) {
-
-    if(index>=3)
-      Get.back();
+    if (index >= 3) Get.back();
 
     setState(() {
       selectedBottomBarIndex = index;
@@ -316,6 +315,17 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                             _changeBottomBarIndex(index);
                           },
                         ),
+                        MenuItem(
+                          isSelected: 9 == selectedBottomBarIndex,
+                          index: 9,
+                          title: "Driver Login",
+                          icon: AssetConstants.ic_profile_svg,
+                          onClick: (index) {
+                            Get.to(
+                                DriverLoginScreen(),
+                            );
+                          },
+                        ),
                         MenuButtonOutlineStock(),
                       ],
                     ),
@@ -328,5 +338,4 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
       },
     );
   }
-  
 }

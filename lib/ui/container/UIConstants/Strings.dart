@@ -89,4 +89,10 @@ abstract class GSStrings {
   static const container_home = "Home";
   static const container_book_a_bus = "Book a Bus";
   static const container_menu = "Menu";
+  static const my_bookings_title = "My Booking List";
+  static const my_bookings_subtitle =
+      "It’s time to rock n role! Let’s get \nstarted now.";
+  static const refund_request_title = "Request a Refund";
+  static const refund_request_subtitle =
+      "It’s time to rock n role! Let’s get \nstarted now.";
 }
