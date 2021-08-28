@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:go_share/ui/book_a_bus/info_screen.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
@@ -15,6 +16,7 @@ import 'package:go_share/ui/container/lost_and_found/lost_and_found.dart';
 import 'package:go_share/ui/container/our_service/our_service.dart';
 import 'package:go_share/ui/container/privacy_and_concern/privacy_and_concern.dart';
 import 'package:go_share/ui/container/terms_and_conditions/terms_and_conditions.dart';
+import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
 import 'package:go_share/ui/not_logged_in_welcome/welcome_screen.dart';
 import 'package:go_share/ui/section4/widgets/menu_page_button.dart';
@@ -60,10 +62,22 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: GSColors.green_secondary,
-        child: Image.asset(
-          "images/ic_bus.png",
-          fit: BoxFit.contain,
-          height: 32.0,
+        child: Container(
+          height: 60,
+          width: 60,
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: LinearGradient(
+                  colors: [gradientDark, gradientLight],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight
+              )
+          ),
+          child: Center(
+            child: SvgPicture.asset(
+              AssetConstants.ic_bus_svg,
+            ),
+          ),
         ),
         onPressed: () {
           Get.to(
@@ -72,44 +86,40 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
         },
       ),
       body: body,
-      bottomNavigationBar: BottomNavigationBar(
-        elevation: 0.0,
-        currentIndex: selectedBottomBarIndex<=1 ? selectedBottomBarIndex : 1,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        showUnselectedLabels: true,
-        showSelectedLabels: true,
-        selectedItemColor: GSColors.gray_secondary,
-        unselectedItemColor: GSColors.gray_secondary,
-        selectedLabelStyle: GSTextStyles.make14xw600Style(
-          color: GSColors.gray_secondary,
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          height: 60,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              BottomBarItem(
+                iconString: AssetConstants.ic_home_svg,
+                isSelected: selectedBottomBarIndex == 0,
+                title: "Home",
+                index: 0,
+                onTap: _changeBottomBarIndex,
+              ),
+              BottomBarItem(
+                iconString: "",
+                isSelected: selectedBottomBarIndex == 1,
+                title: "Add a Bus",
+                index: 1,
+                onTap: (int position){
+
+                },
+              ),
+              BottomBarItem(
+                iconString: AssetConstants.ic_menu_svg,
+                isSelected: selectedBottomBarIndex == 2,
+                title: "Menu",
+                index: 2,
+                onTap: (int position) {
+                  showMenuBottomSheet(hp, context);
+                },
+              ),
+            ],
+          ),
         ),
-        unselectedLabelStyle: GSTextStyles.make14xw600Style(
-          color: GSColors.gray_secondary,
-        ),
-        items: [
-          getBottomBarItem(
-            'images/ic_home.png',
-            GSStrings.container_home,
-            0,
-          ),
-          getBottomBarItem(
-            "",
-            GSStrings.container_book_a_bus,
-            1,
-          ),
-          getBottomBarItem(
-            'images/ic_menu.png',
-            GSStrings.container_menu,
-            2,
-          ),
-        ],
-        onTap: (index) {
-          if(index==2)
-            showMenuBottomSheet(hp, context);
-          else
-            _changeBottomBarIndex(index);
-        },
       ),
     );
   }

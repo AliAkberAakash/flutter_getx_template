@@ -10,6 +10,7 @@ import 'package:go_share/ui/container/UIConstants/Fonts.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/contact_us/contact_us.dart';
+import 'package:go_share/ui/container/our_service/our_service.dart';
 import 'package:go_share/ui/section4/sign_in/sign_in_screen.dart';
 import 'package:go_share/ui/section4/welcome/welcome_screen.dart';
 
@@ -21,6 +22,9 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+
+  int status = 0;
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -70,15 +74,28 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     Row(
                       children: [
-                        SessionWidget(),
+                        SessionWidget(
+                          index: 0,
+                          imagePath: "images/ic_morning.png",
+                          title: GSStrings.morning,
+                          isSelected: status == 0,
+                          onClick: (index){
+                            setState(() {
+                              status = index;
+                            });
+                          },
+                        ),
                         SizedBox(width: 16.0),
                         SessionWidget(
+                          index: 1,
                           imagePath: "images/ic_evening.png",
                           title: GSStrings.evening,
-                          textColor: GSColors.green_secondary,
-                          iconColor: GSColors.green_secondary,
-                          backgroundColor:
-                              GSColors.gray_normal.withOpacity(0.2),
+                          isSelected: status == 1,
+                          onClick: (index){
+                            setState(() {
+                              status = index;
+                            });
+                          },
                         ),
                       ],
                     ),
@@ -149,11 +166,16 @@ class OfferWidget extends StatelessWidget {
                   color: GSColors.text_regular,
                 ),
               ),
-              Text(
-                GSStrings.show_all,
-                textAlign: TextAlign.start,
-                style: GSTextStyles.make14xw400Style(
-                  color: GSColors.green_secondary,
+              InkWell(
+                onTap: (){
+                  Get.to(OurServiceView());
+                },
+                child: Text(
+                  GSStrings.show_all,
+                  textAlign: TextAlign.start,
+                  style: GSTextStyles.make14xw400Style(
+                    color: GSColors.green_secondary,
+                  ),
                 ),
               ),
             ],
@@ -267,7 +289,9 @@ class OfferItemWidget extends StatelessWidget {
                 margin: const EdgeInsets.all(0.0),
                 padding: const EdgeInsets.all(8.0),
                 title: GSStrings.home_more_detail,
-                onTap: () {},
+                onTap: () {
+                  Get.to(OurServiceView());
+                },
               ),
             ],
           ),
@@ -355,50 +379,57 @@ class TitleWidget extends StatelessWidget {
 
 class SessionWidget extends StatelessWidget {
   final String title, imagePath;
-  final Color textColor, backgroundColor, iconColor;
+  final bool isSelected;
+  final int index;
+  final Function(int index) onClick;
 
   const SessionWidget({
     Key? key,
     this.imagePath = "images/ic_morning.png",
     this.title = GSStrings.morning,
-    this.textColor = Colors.white,
-    this.iconColor = Colors.white,
-    this.backgroundColor = GSColors.green_secondary,
+    required this.isSelected,
+    required this.index,
+    required this.onClick,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 112.0,
-      height: 32.0,
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(
-          const Radius.circular(4.0),
+    return InkWell(
+      onTap: (){
+        onClick(index);
+      },
+      child: Container(
+        width: 112.0,
+        height: 32.0,
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(
+            const Radius.circular(4.0),
+          ),
+          color: isSelected ? GSColors.green_secondary : GSColors.gray_normal.withOpacity(0.2),
         ),
-        color: this.backgroundColor,
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            this.imagePath,
-            height: 18.0,
-            fit: BoxFit.contain,
-            color: this.iconColor,
-          ),
-          SizedBox(width: 6.0),
-          Text(
-            this.title,
-            textAlign: TextAlign.start,
-            style: GSTextStyles.make15xw600Style(
-              color: this.textColor,
-              fontFamily: GSFonts.appFont,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              this.imagePath,
+              height: 18.0,
+              fit: BoxFit.contain,
+              color: isSelected ? Colors.white :  GSColors.green_secondary,
             ),
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-          ),
-        ],
+            SizedBox(width: 6.0),
+            Text(
+              this.title,
+              textAlign: TextAlign.start,
+              style: GSTextStyles.make15xw600Style(
+                color: isSelected ? Colors.white :  GSColors.green_secondary,
+                fontFamily: GSFonts.appFont,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+            ),
+          ],
+        ),
       ),
     );
   }
