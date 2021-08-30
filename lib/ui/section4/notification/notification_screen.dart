@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/section4/widgets/notification_item.dart';
+import 'package:go_share/utils/spacers.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({Key? key}) : super(key: key);
@@ -10,7 +11,9 @@ class NotificationScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: ListView(
+        physics: BouncingScrollPhysics(),
         children: [
+          VSpacer40(),
           Sec4NotificationItem(
             type: 1,
             condition: 1,
@@ -48,6 +51,7 @@ class NotificationScreen extends StatelessWidget {
             datetime: "March 10,2019   10:00PM",
             msg: "Transfer \$200 to Alex Hartman",
           ),
+          VSpacer40(),
         ],
       ),
     );
