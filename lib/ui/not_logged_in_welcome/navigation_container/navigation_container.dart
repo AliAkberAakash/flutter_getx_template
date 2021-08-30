@@ -3,11 +3,15 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:go_share/ui/book_a_bus/info_screen.dart';
 import 'package:go_share/ui/container/about_us/about_us.dart';
+import 'package:go_share/ui/container/contact_us/contact_us.dart';
 import 'package:go_share/ui/container/faq/faq.dart';
 import 'package:go_share/ui/container/home/home.dart';
+import 'package:go_share/ui/container/lost_and_found/lost_and_found.dart';
+import 'package:go_share/ui/container/privacy_and_concern/privacy_and_concern.dart';
 import 'package:go_share/ui/container/refund_request_details/refund_request_details.dart';
 import 'package:go_share/ui/container/my_bookings/my_bookings.dart';
 import 'package:go_share/ui/container/our_service/our_service.dart';
+import 'package:go_share/ui/container/terms_and_conditions/terms_and_conditions.dart';
 import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
 import 'package:go_share/ui/section4/notification/notification_screen.dart';
@@ -224,6 +228,44 @@ class _NavigationContainerState extends State<NavigationContainer> {
                             changePage(index);
                           },
                         ),
+                        MenuItem(
+                          isSelected: 10 == _selectedItem,
+                          index: 10,
+                          title: "Lost & Found",
+                          icon: AssetConstants.lostandFoundIcon,
+                          onClick: (index) {
+                            changePage(index);
+                          },
+                        ),
+                        MenuItem(
+                          isSelected: 11 == _selectedItem,
+                          index: 11,
+                          title: "Terms & Condition",
+                          icon: AssetConstants.ic_notification_svg,
+                          onClick: (index) {
+                            changePage(index);
+                          },
+                        ),
+                        MenuItem(
+                          isSelected: 12 == _selectedItem,
+                          index: 12,
+                          title: "Privacy & Concern",
+                          icon: AssetConstants.ic_settings_svg,
+                          onClick: (index) {
+                            print("8 is clicked?");
+                            changePage(index);
+                          },
+                        ),
+                        MenuItem(
+                          isSelected: 13 == _selectedItem,
+                          index: 13,
+                          title: "Contact Us",
+                          icon: AssetConstants.ic_sign_out_svg,
+                          onClick: (index) {
+                            changePage(index);
+                          },
+                        ),
+                        VSpacer40(),
                       ],
                     ),
                   ),
@@ -271,6 +313,14 @@ class _NavigationContainerState extends State<NavigationContainer> {
         return OurServiceView();
       case 9:
         return FaqView();
+      case 10:
+        return LostAndFoundView();
+      case 11:
+        return TermsAndConditionsView();
+      case 12:
+        return PrivacyAndConcernView();
+      case 13:
+        return ContactUsView();
       default:
         return Container();
     }
