@@ -234,7 +234,7 @@ class _InfoScreenState extends State<InfoScreen> {
                     ],
                   ),
                 ),
-                HSpacer20(),
+                /*HSpacer20(),
                 Container(
                   padding: EdgeInsets.only(left: dp10),
                   decoration: BoxDecoration(
@@ -273,7 +273,7 @@ class _InfoScreenState extends State<InfoScreen> {
                       });
                     },
                   ),
-                ),
+                ),*/
               ],
             ),
             VSpacer20(),
