@@ -74,63 +74,71 @@ class _DriverLoginScreenState extends State<DriverLoginScreen> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: GSSizeConstants.padding55,
-                ),
-                GSTextField(
-                  hints: GSStrings.email_field_hints,
-                ),
-                SizedBox(
-                  height: GSSizeConstants.padding17,
-                ),
-                GSPasswordTextField(),
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-                  child: Row(
-                    children: [
-                      CustomCheckBox(
-                        value: value,
-                        shouldShowBorder: true,
-                        borderColor: Colors.white,
-                        uncheckedFillColor: Colors.grey,
-                        checkedFillColor: GSColors.green_normal,
-                        borderRadius: 2,
-                        borderWidth: 1,
-                        checkBoxSize: 15,
-                        uncheckedIconColor: Colors.transparent,
-                        onChanged: (val) {
-                          //do your stuff here
-                          setState(() {
-                            value = val;
-                          });
-                        },
-                      ),
-                      Text(
-                        "Keep me signed in",
-                        style: GoogleFonts.manrope(
-                          color: grey,
-                          fontSize: dp18,
-                          fontWeight: FontWeight.normal,
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: GSSizeConstants.padding55,
                         ),
-                      )
-                    ],
+                        GSTextField(
+                          hints: "Vehicle Number"
+                        ),
+                        SizedBox(
+                          height: GSSizeConstants.padding17,
+                        ),
+                        GSPasswordTextField(),
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                          child: Row(
+                            children: [
+                              CustomCheckBox(
+                                value: value,
+                                shouldShowBorder: true,
+                                borderColor: Colors.white,
+                                uncheckedFillColor: Colors.grey,
+                                checkedFillColor: GSColors.green_normal,
+                                borderRadius: 2,
+                                borderWidth: 1,
+                                checkBoxSize: 15,
+                                uncheckedIconColor: Colors.transparent,
+                                onChanged: (val) {
+                                  //do your stuff here
+                                  setState(() {
+                                    value = val;
+                                  });
+                                },
+                              ),
+                              Text(
+                                "Keep me signed in",
+                                style: GoogleFonts.manrope(
+                                  color: grey,
+                                  fontSize: dp18,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        VSpacer20(),
+                        GSButton(
+                          text: GSStrings.sign_in,
+                          onClick: (){
+                            Get.to(DriverContainer());
+                          },
+                        ),
+                        SizedBox(
+                          height: GSSizeConstants.padding7,
+                        ),
+                        SizedBox(
+                          height: GSSizeConstants.padding7,
+                        ),
+                        GSTextButton(
+                          text: GSStrings.forget_password_reset_here,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                VSpacer20(),
-                GSButton(
-                  text: GSStrings.sign_in,
-                  onClick: (){
-                    Get.to(DriverContainer());
-                  },
-                ),
-                SizedBox(
-                  height: GSSizeConstants.padding7,
-                ),
-                SizedBox(
-                  height: GSSizeConstants.padding7,
-                ),
-                GSTextButton(
-                  text: GSStrings.forget_password_reset_here,
                 ),
               ],
             )));

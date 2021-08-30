@@ -47,6 +47,7 @@ class GSPasswordTextField extends StatelessWidget {
         border: Border.all(color: GSColors.gray_normal),
       ),
       child: TextField(
+        obscureText: true,
         decoration: InputDecoration(
             border: InputBorder.none,
             focusedBorder: InputBorder.none,
