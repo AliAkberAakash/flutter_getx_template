@@ -86,6 +86,8 @@ class _BodyWidgetState extends State<BodyWidget> {
             title: "Go to home",
             onTap: () {
               Get.back();
+              Get.back();
+              Get.back();
             },
           ),
         ],
