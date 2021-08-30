@@ -79,7 +79,7 @@ class _BodyWidgetState extends State<BodyWidget> {
           padding: const EdgeInsets.symmetric(vertical: 12.0),
           child: Center(
             child: RatingBar.builder(
-              initialRating: 3,
+              initialRating: 5,
               minRating: 0,
               direction: Axis.horizontal,
               allowHalfRating: true,

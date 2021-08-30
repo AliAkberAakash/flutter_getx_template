@@ -83,8 +83,9 @@ class _BodyWidgetState extends State<BodyWidget> {
             borderColor: GSColors.green_secondary,
             backgroundColor: Colors.transparent,
             textColor: GSColors.green_secondary,
-            title: "Give Feedback",
+            title: "Go to home",
             onTap: () {
+              Get.back();
               Get.back();
               Get.back();
             },
