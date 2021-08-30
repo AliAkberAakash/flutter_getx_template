@@ -255,7 +255,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
       case 1:
         return AddVehicleScreen();
       case 2:
-        return ProfileScreen();
+        return ServiceProviderUpdateScreen();
       case 3:
         return ServiceProviderUpdateScreen();
       case 4:

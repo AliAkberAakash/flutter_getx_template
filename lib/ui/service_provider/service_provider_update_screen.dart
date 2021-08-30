@@ -23,6 +23,7 @@ class _ServiceProviderUpdateScreenState
     return Scaffold(
       body: SafeArea(
         child: ListView(
+          physics: BouncingScrollPhysics(),
           padding: EdgeInsets.all(dp20),
           children: [
             _getLeading(),
