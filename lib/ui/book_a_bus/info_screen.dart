@@ -22,6 +22,8 @@ class _InfoScreenState extends State<InfoScreen> {
   int seat=1;
   String timeFormat="AM";
   List<Widget> childWidgetList = [];
+  DateTime startDate = DateTime.now();
+  DateTime endDate = DateTime.now();
 
   @override
   void initState() {
@@ -197,7 +199,7 @@ class _InfoScreenState extends State<InfoScreen> {
                     children: [
                       TextFieldHeadline(headline: "Start Date*"),
                       VSpacer20(),
-                      _datePicker(TextEditingController(), "Start date"),
+                      _datePicker(TextEditingController(), "Start date", 1),
                     ],
                   ),
                 ),
@@ -208,7 +210,7 @@ class _InfoScreenState extends State<InfoScreen> {
                     children: [
                       TextFieldHeadline(headline: "End Date*"),
                       VSpacer20(),
-                      _datePicker(TextEditingController(), "End Date"),
+                      _datePicker(TextEditingController(), "End Date", 2),
                     ],
                   ),
                 ),
@@ -290,7 +292,7 @@ class _InfoScreenState extends State<InfoScreen> {
 
   DateTime selectedDate = DateTime.now();
 
-  Future<void> _selectDate(BuildContext context) async {
+  Future<void> _selectDate(BuildContext context, int type) async {
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
@@ -310,11 +312,14 @@ class _InfoScreenState extends State<InfoScreen> {
     );
     if (picked != null && picked != selectedDate)
       setState(() {
+        if(type==1)
+          startDate = picked;
+        else endDate = picked;
         selectedDate = picked;
       });
   }
 
-  _datePicker(TextEditingController controller, String hint){
+  _datePicker(TextEditingController controller, String hint, int type){
     return TextField(
       readOnly: true,
       controller: controller,
@@ -327,7 +332,7 @@ class _InfoScreenState extends State<InfoScreen> {
       decoration: InputDecoration(
         suffixIcon: IconButton(
           onPressed: (){
-            _selectDate(context);
+            _selectDate(context, type);
           },
           icon: Icon(
             Icons.date_range,
