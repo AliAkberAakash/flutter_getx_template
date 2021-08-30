@@ -9,6 +9,7 @@ import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class InfoScreen extends StatefulWidget {
   const InfoScreen({Key? key}) : super(key: key);
@@ -24,6 +25,8 @@ class _InfoScreenState extends State<InfoScreen> {
   List<Widget> childWidgetList = [];
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
+  TextEditingController startTimeController = TextEditingController();
+  TextEditingController endTimeController = TextEditingController();
 
   @override
   void initState() {
@@ -199,7 +202,7 @@ class _InfoScreenState extends State<InfoScreen> {
                     children: [
                       TextFieldHeadline(headline: "Start Date*"),
                       VSpacer20(),
-                      _datePicker(TextEditingController(), "Start date", 1),
+                      _datePicker(startTimeController, "Start date", 1),
                     ],
                   ),
                 ),
@@ -210,7 +213,7 @@ class _InfoScreenState extends State<InfoScreen> {
                     children: [
                       TextFieldHeadline(headline: "End Date*"),
                       VSpacer20(),
-                      _datePicker(TextEditingController(), "End Date", 2),
+                      _datePicker(endTimeController, "End Date", 2),
                     ],
                   ),
                 ),
@@ -312,11 +315,18 @@ class _InfoScreenState extends State<InfoScreen> {
     );
     if (picked != null && picked != selectedDate)
       setState(() {
-        if(type==1)
-          startDate = picked;
-        else endDate = picked;
+        if(type==1) {
+          startTimeController.text=formatDate(selectedDate);
+        } else {
+          endTimeController.text=formatDate(selectedDate);
+        }
         selectedDate = picked;
       });
+  }
+
+  String formatDate(DateTime date){
+    var outputFormat = DateFormat('MM.dd.yyyy');
+    return outputFormat.format(date);
   }
 
   _datePicker(TextEditingController controller, String hint, int type){
