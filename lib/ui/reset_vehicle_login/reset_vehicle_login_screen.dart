@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
+import 'package:go_share/ui/service_provider/widgets/common_password_field.dart';
 import 'package:go_share/ui/service_provider/widgets/common_text_field.dart';
 import 'package:go_share/ui/service_provider/widgets/positive_button.dart';
 import 'package:go_share/utils/dimens.dart';
@@ -25,7 +26,7 @@ class _ResetVehicleLoginScreenState extends State<ResetVehicleLoginScreen> {
             child: ListView(
               children: [
                 LargeHeadlineWidget(
-                  headline: "Vehicle free/busy list",
+                  headline: "Reset Vehicle Login",
                 ),
                 VSpacer10(),
                 SizedBox(
@@ -36,17 +37,17 @@ class _ResetVehicleLoginScreenState extends State<ResetVehicleLoginScreen> {
                   ),
                 ),
                 VSpacer40(),
-                CommonTextField(
+                CommonPasswordField(
                   controller: TextEditingController(),
                   hint: "Service Partner password",
                 ),
                 VSpacer20(),
-                CommonTextField(
+                CommonPasswordField(
                   controller: TextEditingController(),
                   hint: "New password",
                 ),
                 VSpacer20(),
-                CommonTextField(
+                CommonPasswordField(
                   controller: TextEditingController(),
                   hint: "Confirm new password",
                 ),

@@ -10,6 +10,7 @@ import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
 import 'package:go_share/ui/container/widget_container/widget_container.dart';
 import 'package:go_share/ui/driver_container/driver_container.dart';
 import 'package:go_share/ui/navigation_container/navigation_container.dart';
+import 'package:go_share/ui/reset_vehicle_login/reset_vehicle_login_screen.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
@@ -134,6 +135,11 @@ class _DriverLoginScreenState extends State<DriverLoginScreen> {
                           height: GSSizeConstants.padding7,
                         ),
                         GSTextButton(
+                          onClick: (){
+                            Get.to(
+                              ResetVehicleLoginScreen()
+                            );
+                          },
                           text: GSStrings.forget_password_reset_here,
                         ),
                       ],

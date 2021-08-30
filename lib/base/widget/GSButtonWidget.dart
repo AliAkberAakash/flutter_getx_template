@@ -90,8 +90,9 @@ class GSButtonOutlineStock extends StatelessWidget {
 
 class GSTextButton extends StatelessWidget {
   String text;
+  final Function? onClick;
 
-  GSTextButton({required this.text});
+  GSTextButton({required this.text, this.onClick});
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +106,8 @@ class GSTextButton extends StatelessWidget {
             fontSize: GSFontSizes.font16),
       ),
       onPressed: () {
-        print('Pressed');
+        if(onClick!=null)
+          onClick!();
       },
     );
 
