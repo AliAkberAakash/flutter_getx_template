@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:go_share/base/widget/custom_filled_button.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/Fonts.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
+import 'package:go_share/ui/container/refund_request_details/refund_request_details.dart';
+import 'package:go_share/utils/spacers.dart';
 
 class RefundRequestListView extends StatefulWidget {
   const RefundRequestListView({Key? key}) : super(key: key);
@@ -169,12 +172,12 @@ class BookingListWidget extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       scrollDirection: Axis.vertical,
       itemBuilder: (BuildContext context, int index) {
-        return BookingItemWidget();
+        return index == 10 ? VSpacer20() : BookingItemWidget();
       },
       separatorBuilder: (BuildContext context, int index) {
         return SizedBox(height: 30.0);
       },
-      itemCount: 10,
+      itemCount: 11,
     );
   }
 }
@@ -270,7 +273,9 @@ class BookingItemBodyWidget extends StatelessWidget {
           backgroundColor: Colors.transparent,
           textColor: GSColors.green_secondary,
           title: "Refund Details",
-          onTap: () {},
+          onTap: () {
+            Get.to(RefundRequestDetailsView());
+          },
         ),
       ],
     );

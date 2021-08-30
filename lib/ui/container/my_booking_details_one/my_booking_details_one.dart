@@ -7,6 +7,7 @@ import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/refund_request/refund_request.dart';
 import 'package:go_share/ui/container/UIConstants/Fonts.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
+import 'package:go_share/utils/spacers.dart';
 
 class MyBookingDetailsOneView extends StatefulWidget {
   const MyBookingDetailsOneView({Key? key}) : super(key: key);
@@ -49,6 +50,8 @@ class BodyWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        VSpacer20(),
+        TitleWidget(),
         BookingItemWidget(),
         LocationInfoWidget(),
         VehicleInfoWidget(),
@@ -68,7 +71,43 @@ class BodyWidget extends StatelessWidget {
             Get.to(RefundRequestView());
           },
         ),
+        VSpacer40(),
       ],
+    );
+  }
+}
+
+class TitleWidget extends StatelessWidget {
+  const TitleWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.maxFinite,
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 32.0,
+            vertical: 24.0,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Booking Details",
+                textAlign: TextAlign.start,
+                style: GSTextStyles.make28xw700Style(
+                  color: GSColors.gray_primary,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

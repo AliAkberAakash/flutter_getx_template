@@ -1,10 +1,12 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:go_share/base/widget/custom_filled_button.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/Fonts.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
+import 'package:go_share/utils/spacers.dart';
 
 class RefundRequestDetailsView extends StatefulWidget {
   const RefundRequestDetailsView({Key? key}) : super(key: key);
@@ -47,6 +49,8 @@ class BodyWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        VSpacer20(),
+        TitleWidget(),
         BookingItemWidget(),
         CancellationReasonWidget(),
         AdminResponseWidget(),
@@ -64,9 +68,47 @@ class BodyWidget extends StatelessWidget {
           backgroundColor: Colors.transparent,
           textColor: GSColors.gray_secondary,
           title: "Back to Profile",
-          onTap: () {},
+          onTap: () {
+            Get.back();
+          },
         ),
+        VSpacer40(),
       ],
+    );
+  }
+}
+
+class TitleWidget extends StatelessWidget {
+  const TitleWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.maxFinite,
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 32.0,
+            vertical: 24.0,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Request a Refund",
+                textAlign: TextAlign.start,
+                style: GSTextStyles.make28xw700Style(
+                  color: GSColors.gray_primary,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

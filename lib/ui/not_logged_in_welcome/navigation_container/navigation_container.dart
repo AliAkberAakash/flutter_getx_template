@@ -11,6 +11,7 @@ import 'package:go_share/ui/container/privacy_and_concern/privacy_and_concern.da
 import 'package:go_share/ui/container/refund_request_details/refund_request_details.dart';
 import 'package:go_share/ui/container/my_bookings/my_bookings.dart';
 import 'package:go_share/ui/container/our_service/our_service.dart';
+import 'package:go_share/ui/container/refund_request_list/refund_request_list.dart';
 import 'package:go_share/ui/container/terms_and_conditions/terms_and_conditions.dart';
 import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
@@ -304,7 +305,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
       case 4:
         return MyBookingsView();
       case 5:
-        return RefundRequestDetailsView();
+        return RefundRequestListView();
       case 6:
         return NotificationScreen();
       case 7:

@@ -10,6 +10,7 @@ import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/my_booking_details_one/my_booking_details_one.dart';
 import 'package:go_share/ui/container/my_booking_details_two/my_booking_details_two.dart';
 import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/spacers.dart';
 
 class MyBookingsView extends StatefulWidget {
   const MyBookingsView({Key? key}) : super(key: key);
@@ -176,12 +177,12 @@ class BookingListWidget extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       scrollDirection: Axis.vertical,
       itemBuilder: (BuildContext context, int index) {
-        return BookingItemWidget(type: 0,);
+        return index == 10? VSpacer20() : BookingItemWidget(type: 0,);
       },
       separatorBuilder: (BuildContext context, int index) {
         return SizedBox(height: 30.0);
       },
-      itemCount: 10,
+      itemCount: 11,
     );
   }
 }
@@ -198,12 +199,12 @@ class BookingListWidget2 extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       scrollDirection: Axis.vertical,
       itemBuilder: (BuildContext context, int index) {
-        return BookingItemWidget(type: 1,);
+        return index == 10? VSpacer20() : BookingItemWidget(type: 1,);
       },
       separatorBuilder: (BuildContext context, int index) {
         return SizedBox(height: 30.0);
       },
-      itemCount: 10,
+      itemCount: 11,
     );
   }
 }
