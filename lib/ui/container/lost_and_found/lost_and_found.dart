@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:go_share/base/widget/custom_filled_button.dart';
 import 'package:go_share/base/widget/custom_text_form_field.dart';
+import 'package:go_share/ui/book_a_bus/invoice_screen.dart';
+import 'package:go_share/ui/common_widgets/outlined_material_button.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
+import 'package:go_share/ui/service_provider/widgets/positive_button.dart';
+import 'package:go_share/utils/constants.dart';
+import 'package:go_share/utils/dimens.dart';
+import 'package:go_share/utils/spacers.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LostAndFoundView extends StatefulWidget {
   const LostAndFoundView({Key? key}) : super(key: key);
@@ -33,19 +42,6 @@ class _LostAndFoundViewState extends State<LostAndFoundView> {
             TitleWidget(),
             Expanded(
               child: FormListWidget(),
-            ),
-            CustomFilledButton(
-              margin: const EdgeInsets.only(
-                left: 30.0,
-                right: 30.0,
-                top: 32.0,
-                bottom: 16.0,
-              ),
-              borderRadius: 8.0,
-              backgroundColor: GSColors.green_secondary,
-              textColor: Colors.white,
-              title: GSStrings.submit,
-              onTap: () {},
             ),
           ],
         ),
@@ -168,9 +164,98 @@ class _FormListWidgetState extends State<FormListWidget> {
               isFieldExpanded: true,
               isRequiredField: false,
             ),
+            CustomFilledButton(
+              margin: const EdgeInsets.only(
+                left: 30.0,
+                right: 30.0,
+                top: 32.0,
+                bottom: 16.0,
+              ),
+              borderRadius: 8.0,
+              backgroundColor: GSColors.green_secondary,
+              textColor: Colors.white,
+              title: GSStrings.submit,
+              onTap: () {
+                showSuccessSheet(context);
+              },
+            ),
+            VSpacer40(),
           ],
         ),
       ),
     );
   }
+
+  void showSuccessSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (builder) {
+          return new Container(
+            height: 450.0,
+            color: Color(0xFF737373), //could change this to Color(0xFF737373),
+            //so you don't have to change MaterialApp canvasColor
+            child: new Container(
+                padding: EdgeInsets.symmetric(vertical: 20),
+                decoration: new BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: new BorderRadius.only(
+                        topLeft: const Radius.circular(20.0),
+                        topRight: const Radius.circular(20.0))),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SvgPicture.asset(
+                      AssetConstants.successfulIcon,
+                    ),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            "Thank you",
+                            style: GoogleFonts.manrope(
+                              color: GSColors.green_secondary,
+                              fontSize: dp25,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            "Your charity program has been successfully "
+                                "created.\n Now you can check and maintain "
+                                "\in your\n'activity' menu.",
+                            style: GoogleFonts.manrope(
+                              color: GSColors.text_secondary,
+                              fontSize: dp14,
+                              fontWeight: FontWeight.normal,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: dp30),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: PositiveButton(
+                              text: "Ok",
+                              onClicked: (){
+                                Get.back();
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                )),
+          );
+        });
+  }
+
 }

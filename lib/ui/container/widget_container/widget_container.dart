@@ -316,11 +316,12 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                           },
                         ),
                         MenuItem(
-                          isSelected: 9 == selectedBottomBarIndex,
-                          index: 9,
+                          isSelected: 10 == selectedBottomBarIndex,
+                          index: 10,
                           title: "Driver Login",
                           icon: AssetConstants.ic_profile_svg,
                           onClick: (index) {
+                            Get.back();
                             Get.to(
                                 DriverLoginScreen(),
                             );
