@@ -27,6 +27,7 @@ class _InfoScreenState extends State<InfoScreen> {
   DateTime endDate = DateTime.now();
   TextEditingController startTimeController = TextEditingController();
   TextEditingController endTimeController = TextEditingController();
+  TextEditingController selectedTimeController = TextEditingController();
 
   @override
   void initState() {
@@ -229,10 +230,7 @@ class _InfoScreenState extends State<InfoScreen> {
                     children: [
                       TextFieldHeadline(headline: "Pickup Time*"),
                       VSpacer20(),
-                      CommonTextField(
-                        controller: TextEditingController(),
-                        hint: "Pickup time",
-                      ),
+                      _timePicker(selectedTimeController),
                     ],
                   ),
                 ),
@@ -294,6 +292,7 @@ class _InfoScreenState extends State<InfoScreen> {
   }
 
   DateTime selectedDate = DateTime.now();
+  TimeOfDay? selectedTime = TimeOfDay.now();
 
   Future<void> _selectDate(BuildContext context, int type) async {
     final DateTime? picked = await showDatePicker(
@@ -366,6 +365,67 @@ class _InfoScreenState extends State<InfoScreen> {
       ),
       cursorColor: accent,
     );
+  }
+
+  _timePicker(TextEditingController controller){
+
+    return TextField(
+      readOnly: true,
+      controller: controller,
+      style: TextStyle(
+        color: darkText,
+        fontSize: dp18,
+        fontWeight: FontWeight.bold,
+      ),
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        suffixIcon: IconButton(
+          onPressed: (){
+            _selectTime();
+          },
+          icon: Icon(
+            Icons.access_time_outlined,
+            color: accent,
+          ),
+        ),
+        contentPadding: EdgeInsets.only(left: 10),
+        hintText: "Select time",
+        hintStyle: GoogleFonts.manrope(
+            color: light_grey,
+            fontSize: 14
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(dp10),
+          borderSide: BorderSide(color: grey),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(dp10),
+          borderSide: BorderSide(color: accent),
+        ),
+      ),
+      cursorColor: accent,
+    );
+
+
+  }
+
+  _selectTime() async{
+    selectedTime = await showTimePicker(
+      builder: (ctx, child){
+      return Theme(
+        data: ThemeData.light().copyWith(
+          colorScheme: ColorScheme.light(primary: accent),
+          // buttonTheme: ButtonThemeData(
+          //     textTheme: acce
+          // ),
+        ),
+        child: child!,
+      );
+      },
+      initialTime: TimeOfDay.now(),
+      context: context,
+    );
+    selectedTimeController.text =  "${selectedTime?.hour}:${selectedTime?.minute}";
   }
 
 }
