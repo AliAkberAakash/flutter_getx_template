@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
 import 'package:go_share/constants.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
+import 'package:go_share/ui/navigation_container/navigation_container.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
@@ -62,7 +64,9 @@ void modalBottomSheetMenuSuccess(BuildContext context) {
                     child: GSButton(
                       text: "Go To Home",
                       onClick: () {
-                        //Get.to(WidgetContainerView());
+                        Get.back();
+                        Get.back();
+                        Get.to(NavigationContainer());
                       },
                     ),
                   ),

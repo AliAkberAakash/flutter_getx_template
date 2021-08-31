@@ -67,7 +67,7 @@ class BodyWidget extends StatelessWidget {
           borderColor: GSColors.gray_secondary.withOpacity(0.8),
           backgroundColor: Colors.transparent,
           textColor: GSColors.gray_secondary,
-          title: "Back to Profile",
+          title: "My Refund Request",
           onTap: () {
             Get.back();
           },
@@ -99,7 +99,7 @@ class TitleWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Request a Refund",
+                "Refund Request Details",
                 textAlign: TextAlign.start,
                 style: GSTextStyles.make28xw700Style(
                   color: GSColors.gray_primary,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/custom_filled_button.dart';
+import 'package:go_share/ui/book_a_bus/invoice_screen.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/Fonts.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
@@ -410,39 +411,46 @@ class BookingItemBodyWidget extends StatelessWidget {
             ),
           ],
         ),
-        Container(
-          decoration: const BoxDecoration(
-            borderRadius: const BorderRadius.all(
-              const Radius.circular(8.0),
-            ),
-            border: const Border.fromBorderSide(
-              const BorderSide(
-                color: GSColors.green_secondary,
+        InkWell(
+          onTap: (){
+            Get.to(
+                InvoiceScreen()
+            );
+          },
+          child: Container(
+            decoration: const BoxDecoration(
+              borderRadius: const BorderRadius.all(
+                const Radius.circular(8.0),
               ),
-            ),
-          ),
-          padding: const EdgeInsets.symmetric(
-            vertical: 12.0,
-            horizontal: 20.0,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Price",
-                style: GSTextStyles.make18xw600Style(
-                  color: GSColors.gray_secondary,
+              border: const Border.fromBorderSide(
+                const BorderSide(
+                  color: GSColors.green_secondary,
                 ),
-                textAlign: TextAlign.start,
               ),
-              Text(
-                "\$299.00",
-                style: GSTextStyles.make18xw700Style(
-                  color: GSColors.gray_primary,
+            ),
+            padding: const EdgeInsets.symmetric(
+              vertical: 12.0,
+              horizontal: 20.0,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Price",
+                  style: GSTextStyles.make18xw600Style(
+                    color: GSColors.gray_secondary,
+                  ),
+                  textAlign: TextAlign.start,
                 ),
-                textAlign: TextAlign.start,
-              ),
-            ],
+                Text(
+                  "\$299.00",
+                  style: GSTextStyles.make18xw700Style(
+                    color: GSColors.gray_primary,
+                  ),
+                  textAlign: TextAlign.start,
+                ),
+              ],
+            ),
           ),
         ),
       ],

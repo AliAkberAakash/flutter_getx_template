@@ -21,7 +21,7 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
       body: ListView(
         padding: EdgeInsets.all(dp20),
         children: [
-          VSpacer20(),
+          VSpacer40(),
           LargeHeadlineWidget(headline: "Invoice"),
           VSpacer40(),
           TextFieldHeadline(headline: "Order ID"),
