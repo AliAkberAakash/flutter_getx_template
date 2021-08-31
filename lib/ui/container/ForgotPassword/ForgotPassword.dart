@@ -8,6 +8,7 @@ import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
+import 'package:go_share/ui/not_logged_in_welcome/navigation_container/navigation_container.dart';
 import 'package:go_share/ui/service_provider/widgets/positive_button.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
@@ -137,9 +138,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         children: [
                           Expanded(
                             child: PositiveButton(
-                              text: "Ok",
+                              text: "Go To Home",
                               onClicked: (){
                                 Get.back();
+                                Get.back();
+                                Get.to(NavigationContainer());
                               },
                             ),
                           ),

@@ -10,6 +10,7 @@ import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
@@ -21,6 +22,8 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   var mainWidth;
   var maxLines = 3;
+
+  TextEditingController dateController = TextEditingController();
 
   File? _image;
 
@@ -70,7 +73,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             VSpacer40(),
             TextFieldHeadline(headline: 'Date of Birth'),
             VSpacer10(),
-            _datePicker(TextEditingController(), ""),
+            _datePicker(dateController, "Start date", 1),
             VSpacer40(),
             TextFieldHeadline(headline: 'Care Taker Image'),
             VSpacer10(),
@@ -94,7 +97,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  _datePicker(TextEditingController controller, String hint){
+  _datePicker(TextEditingController controller, String hint, int type){
     return TextField(
       readOnly: true,
       controller: controller,
@@ -156,7 +159,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     if (picked != null && picked != selectedDate)
       setState(() {
         selectedDate = picked;
+        dateController.text = formatDate(selectedDate);
       });
+  }
+
+  String formatDate(DateTime date){
+    var outputFormat = DateFormat('MM.dd.yyyy');
+    return outputFormat.format(date);
   }
 
   _captureImage() => Row(

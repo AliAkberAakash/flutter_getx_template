@@ -4,8 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/custom_filled_button.dart';
 import 'package:go_share/base/widget/custom_text_form_field.dart';
-import 'package:go_share/ui/book_a_bus/invoice_screen.dart';
-import 'package:go_share/ui/common_widgets/outlined_material_button.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
@@ -143,19 +141,19 @@ class _FormListWidgetState extends State<FormListWidget> {
               formController: bookingIdController,
               inputType: TextInputType.numberWithOptions(),
               hint: GSStrings.lost_and_found_booking_id,
-              isRequiredField: false,
+              isRequiredField: true,
             ),
             CustomTextFormField(
               formController: vehicleNumberController,
               inputType: TextInputType.numberWithOptions(),
               hint: GSStrings.lost_and_found_vehicle_number,
-              isRequiredField: false,
+              isRequiredField: true,
             ),
             CustomTextFormField(
               formController: timeAndDateController,
               inputType: TextInputType.datetime,
               hint: GSStrings.lost_and_found_time_and_date,
-              isRequiredField: false,
+              isRequiredField: true,
             ),
             CustomTextFormField(
               formController: descriptionController,

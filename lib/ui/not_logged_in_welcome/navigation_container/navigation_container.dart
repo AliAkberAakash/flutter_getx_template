@@ -33,7 +33,7 @@ class NavigationContainer extends StatefulWidget {
 
 class _NavigationContainerState extends State<NavigationContainer> {
 
-  int _selectedItem = 0;
+  int _selectedItem = 3;
 
   @override
   Widget build(BuildContext context) {
@@ -266,6 +266,16 @@ class _NavigationContainerState extends State<NavigationContainer> {
                             changePage(index);
                           },
                         ),
+                        MenuItem(
+                          isSelected: 14 == _selectedItem,
+                          index: 14,
+                          title: "Sign Out",
+                          icon: AssetConstants.ic_sign_out_svg,
+                          onClick: (index) {
+                            Get.back();
+                            Get.back();
+                          },
+                        ),
                         VSpacer40(),
                       ],
                     ),
@@ -289,6 +299,8 @@ class _NavigationContainerState extends State<NavigationContainer> {
       setState(() {
         _selectedItem = index;
       });
+    }else{
+      Get.back();
     }
   }
 
