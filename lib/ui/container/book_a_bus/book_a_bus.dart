@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:go_share/base/widget/custom_filled_button.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
+import 'package:go_share/ui/container/contact_us/contact_us.dart';
 
 class BookABusView extends StatefulWidget {
   const BookABusView({Key? key}) : super(key: key);
@@ -46,7 +48,11 @@ class _BookABusViewState extends State<BookABusView> {
               backgroundColor: Colors.transparent,
               textColor: GSColors.green_secondary,
               title: GSStrings.book_a_bus_contact_with_us,
-              onTap: () {},
+              onTap: () {
+                Get.to(
+                  ContactUsView()
+                );
+              },
             ),
           ],
         ),
