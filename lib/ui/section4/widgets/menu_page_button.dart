@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
+import 'package:go_share/ui/section4/welcome/welcome_screen.dart';
 import 'package:go_share/utils/colors.dart';
 
 class MenuButtonOutlineStock extends StatelessWidget {
@@ -26,7 +28,8 @@ class MenuButtonOutlineStock extends StatelessWidget {
           minimumSize: GSSizes.size316x56,
         ),
         onPressed: () {
-          print('Pressed');
+          Get.back();
+          Get.to(WelcomeScreen());
         },
       ),
     );
