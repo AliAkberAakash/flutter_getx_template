@@ -134,14 +134,6 @@ class _DriverLoginScreenState extends State<DriverLoginScreen> {
                         SizedBox(
                           height: GSSizeConstants.padding7,
                         ),
-                        GSTextButton(
-                          onClick: (){
-                            Get.to(
-                              ResetVehicleLoginScreen()
-                            );
-                          },
-                          text: GSStrings.forget_password_reset_here,
-                        ),
                       ],
                     ),
                   ),
