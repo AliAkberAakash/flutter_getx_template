@@ -2,10 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:go_share/data/local/service/local_service.dart';
 import 'package:go_share/data/local/service/theme_service.dart';
-import 'package:go_share/data/remote/service/remote_service.dart';
 import 'package:go_share/essential/translations.dart';
 import 'package:go_share/ui/container/widget_container/widget_container.dart';
 
@@ -20,9 +17,6 @@ void main() async {
 Future<void> initializeAppEssentials() async {
   Get.log('Starting services ...');
 
-  await GetStorage.init();
-  Get.lazyPut(() => RemoteService());
-  Get.lazyPut(() => LocalService());
   Get.put(ThemeService());
 
   Get.log('All services started...');
