@@ -28,14 +28,17 @@ class AssetConstants {
 
 class NetworkConstants {
   //urls
-  static const BASE_URL =
-      "https://raw.githubusercontent.com/AliAkberAakash/hello_world/main/response.json";
+  static const BASE_URL = "http://api.goshare.sg/";
 
   //header parameters
   static const ACCEPT = "Accept";
   static const ACCEPT_TYPE = "application/json";
   static const AUTHORIZATION = "Authorization";
   static const CONTENT_TYPE = "content-Type";
+
+  //End urls
+  static const SERVICE_PARTNER_SIGNUP = "servicepartner/create";
+
 }
 
 class PreferenceKey {

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:go_share/base/widget/custom_text_form_field.dart';
-import 'package:go_share/constants.dart';
+import 'package:go_share/ui/common_widgets/common_text_field.dart';
 import 'package:go_share/ui/common_widgets/grey_button.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
+import 'package:go_share/ui/common_widgets/positive_button.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
-import 'package:go_share/ui/service_provider/widgets/common_text_field.dart';
-import 'package:go_share/ui/service_provider/widgets/positive_button.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';

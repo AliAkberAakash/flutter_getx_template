@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_share/ui/common_widgets/update_button.dart';
 import 'package:go_share/ui/reset_vehicle_login/reset_vehicle_login_screen.dart';
-import 'package:go_share/ui/service_provider/widgets/update_button.dart';
 import 'package:go_share/utils/colors.dart';
-import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 

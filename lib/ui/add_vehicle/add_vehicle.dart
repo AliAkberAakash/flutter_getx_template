@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:go_share/ui/common_widgets/common_text_field.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
+import 'package:go_share/ui/common_widgets/positive_button.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
 import 'package:go_share/ui/section4/pending_bottom_sheet/pending_bottom_sheet.dart';
-import 'package:go_share/ui/service_provider/widgets/common_text_field.dart';
-import 'package:go_share/ui/service_provider/widgets/positive_button.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
