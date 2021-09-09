@@ -8,7 +8,7 @@ import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
 import 'package:go_share/ui/registration_request/registration_request_screen.dart';
 import 'package:go_share/ui/reset_vehicle_login/reset_vehicle_list.dart';
-import 'package:go_share/ui/section1/service_provider/service_provider_update_screen.dart';
+import 'package:go_share/ui/section1/service_provider_update/service_provider_update_screen.dart';
 import 'package:go_share/ui/section4/notification/notification_screen.dart';
 import 'package:go_share/ui/vehicle_free_busy_list/vehicle_free_busy_screen.dart';
 import 'package:go_share/utils/colors.dart';
