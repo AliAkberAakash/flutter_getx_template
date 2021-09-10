@@ -92,7 +92,7 @@ class ApiBaseHelper{
   }
 
   Future<void> setToken() async{
-    var token = await SharedPrefUtil.getString(KeyConstants.TOKEN_KEY);
+    var token = await SharedPrefUtil.getString(NetworkConstants.AUTHORIZATION);
     dioFactory.getDio().options = BaseOptions(
         headers: {
           NetworkConstants.ACCEPT : NetworkConstants.ACCEPT_TYPE,

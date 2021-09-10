@@ -17,6 +17,7 @@ class ServiceProviderLoginController extends GetxController{
   }
 
   Future storeToken(String token) async {
+    token = "Bearer "+token;
     await SharedPrefUtil.writeString(NetworkConstants.AUTHORIZATION, token);
   }
 

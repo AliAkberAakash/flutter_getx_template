@@ -18,6 +18,7 @@ import 'package:go_share/util/lib/toast.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
+import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'service_provider_login_controller.dart';
@@ -139,6 +140,7 @@ class _ServiceProviderLoginState extends State<ServiceProviderLoginScreen> {
               //     ],
               //   ),
               // ),
+              VSpacer20(),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 20),
                 child: GSButton(
