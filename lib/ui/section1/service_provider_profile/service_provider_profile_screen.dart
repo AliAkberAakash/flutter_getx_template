@@ -11,6 +11,7 @@ import 'package:go_share/ui/edit_profile/edit_profile_screen.dart';
 import 'package:go_share/ui/common_widgets/update_button.dart';
 import 'package:go_share/ui/section1/service_provider_profile/service_provider_profile_controller.dart';
 import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 
@@ -97,7 +98,7 @@ class _ServiceProviderProfileScreenState
   _getLeading(Data? data){
     return Row(
       children: [
-        ProfilePictureWidget(imgUrl: data?.image ?? ""),
+        ProfilePictureWidget(imgUrl: NetworkConstants.BASE_URL+"/"+(data?.image ?? "")),
         SizedBox(width: dp15),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
