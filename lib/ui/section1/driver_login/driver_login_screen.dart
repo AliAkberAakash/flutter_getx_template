@@ -1,92 +1,91 @@
-import 'package:custom_check_box/custom_check_box.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
 import 'package:go_share/base/widget/GSTextField.dart';
-import 'package:go_share/ui/container/UIConstants/Colors.dart';
+import 'package:go_share/data/models/driver/driver_login_request.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
 import 'package:go_share/ui/section1/driver_container/driver_container.dart';
-import 'package:go_share/utils/colors.dart';
-import 'package:go_share/utils/dimens.dart';
+import 'package:go_share/ui/section1/driver_login/driver_login_controller.dart';
 import 'package:go_share/utils/spacers.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-// UI
 class DriverLoginScreen extends StatefulWidget {
   @override
   _DriverLoginScreenState createState() => _DriverLoginScreenState();
-} //: UI
+}
 
-// State
 class _DriverLoginScreenState extends State<DriverLoginScreen> {
-
   bool value = false;
+  final vehicleNumberController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  final _controller = DriverLoginController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: GSColors.green_primary,
-        body: SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  height: GSSizes.size278h,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        "images/signup_bg.png",
-                      ),
-                      fit: BoxFit.cover,
-                    ),
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              height: GSSizes.size278h,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    "images/signup_bg.png",
                   ),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: GSSizeConstants.padding120,
-                      ),
-
-                      //Get start text
-                      Text(
-                        "Driver Login",
-                        textAlign: TextAlign.start,
-                        style: GSTextStyles.make28xw600Style(),
-                      ),
-
-                      SizedBox(
-                        height: GSSizeConstants.padding7,
-                      ),
-
-                      // Description test
-                      Container(
-                          width: 256,
-                          child: Center(
-                              child: Text(
-                                "It’s time to rock n role! Let’s get started now.",
-                                style: GSTextStyles.make18xw400Style(),
-                                textAlign: TextAlign.center,
-                              ))),
-                    ],
-                  ),
+                  fit: BoxFit.cover,
                 ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: GSSizeConstants.padding55,
-                        ),
-                        GSTextField(
-                          hints: "Vehicle Number"
-                        ),
-                        SizedBox(
-                          height: GSSizeConstants.padding17,
-                        ),
-                        GSPasswordTextField(),
-                        Container(
+              ),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: GSSizeConstants.padding120,
+                  ),
+
+                  //Get start text
+                  Text(
+                    "Driver Login",
+                    textAlign: TextAlign.start,
+                    style: GSTextStyles.make28xw600Style(),
+                  ),
+
+                  SizedBox(
+                    height: GSSizeConstants.padding7,
+                  ),
+
+                  // Description test
+                  Container(
+                      width: 256,
+                      child: Center(
+                          child: Text(
+                        "It’s time to rock n role! Let’s get started now.",
+                        style: GSTextStyles.make18xw400Style(),
+                        textAlign: TextAlign.center,
+                      ))),
+                ],
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: GSSizeConstants.padding55,
+                    ),
+                    GSTextField(
+                        controller: vehicleNumberController,
+                        hints: "Vehicle Number"),
+                    SizedBox(
+                      height: GSSizeConstants.padding17,
+                    ),
+                    GSPasswordTextField(
+                      controller: passwordController,
+                    ),
+                    /*Container(
                           padding: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
                           child: Row(
                             children: [
@@ -117,25 +116,42 @@ class _DriverLoginScreenState extends State<DriverLoginScreen> {
                               )
                             ],
                           ),
-                        ),
-                        VSpacer20(),
-                        GSButton(
-                          text: GSStrings.sign_in,
-                          onClick: (){
-                            Get.to(DriverContainer());
-                          },
-                        ),
-                        SizedBox(
-                          height: GSSizeConstants.padding7,
-                        ),
-                        SizedBox(
-                          height: GSSizeConstants.padding7,
-                        ),
-                      ],
+                        ),*/
+                    VSpacer40(),
+                    GSButton(
+                      text: GSStrings.sign_in,
+                      onClick: () {
+                        var request = DriverLoginRequest(
+                          vehicleNumber: vehicleNumberController.text,
+                          password: passwordController.text,
+                        );
+                        login(request);
+                      },
                     ),
-                  ),
+                    SizedBox(
+                      height: GSSizeConstants.padding7,
+                    ),
+                    SizedBox(
+                      height: GSSizeConstants.padding7,
+                    ),
+                  ],
                 ),
-              ],
-            )));
-  } //: Widget
-} //: State
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  login(DriverLoginRequest request) async{
+    var response = await _controller.loginDriver(request);
+
+    if(response.data != null){
+      Get.off(DriverContainer());
+
+    }
+
+  }
+
+}

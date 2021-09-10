@@ -207,6 +207,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           title: "Driver Login",
                           icon: AssetConstants.ic_profile_svg,
                           onClick: (index) {
+                            Get.back();
                             Get.to(
                               DriverLoginScreen(),
                             );

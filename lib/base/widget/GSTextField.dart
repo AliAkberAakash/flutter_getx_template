@@ -7,7 +7,8 @@ import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
 class GSTextField extends StatelessWidget {
   String hints;
 
-  GSTextField({required this.hints});
+  final TextEditingController controller;
+  GSTextField({required this.hints, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,7 @@ class GSTextField extends StatelessWidget {
         border: Border.all(color: GSColors.gray_normal),
       ),
       child: TextField(
+        controller: controller,
         decoration: InputDecoration(
             border: InputBorder.none,
             focusedBorder: InputBorder.none,
@@ -37,6 +39,11 @@ class GSTextField extends StatelessWidget {
 }
 
 class GSPasswordTextField extends StatelessWidget {
+
+  final TextEditingController controller;
+
+  const GSPasswordTextField({Key? key, required this.controller}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,6 +54,7 @@ class GSPasswordTextField extends StatelessWidget {
         border: Border.all(color: GSColors.gray_normal),
       ),
       child: TextField(
+        controller: controller,
         obscureText: true,
         decoration: InputDecoration(
             border: InputBorder.none,

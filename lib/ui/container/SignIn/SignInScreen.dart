@@ -63,12 +63,15 @@ class _SignInScreenState extends State<SignInScreen> {
           height: GSSizeConstants.padding55,
         ),
         GSTextField(
+          controller: TextEditingController(),
           hints: GSStrings.email_field_hints,
         ),
         SizedBox(
           height: GSSizeConstants.padding17,
         ),
-        GSPasswordTextField(),
+        GSPasswordTextField(
+          controller: TextEditingController(),
+        ),
         SizedBox(
           height: GSSizeConstants.padding87,
         ),

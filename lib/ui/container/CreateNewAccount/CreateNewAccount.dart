@@ -44,24 +44,28 @@ class _CreateNewAccountState extends State<CreateNewAccount> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     GSTextField(
+                      controller: TextEditingController(),
                       hints: GSStrings.full_name,
                     ),
                     SizedBox(
                       height: GSSizeConstants.padding12,
                     ),
                     GSTextField(
+                      controller: TextEditingController(),
                       hints: GSStrings.phone_number,
                     ),
                     SizedBox(
                       height: GSSizeConstants.padding12,
                     ),
                     GSTextField(
+                      controller: TextEditingController(),
                       hints: GSStrings.email_address,
                     ),
                     SizedBox(
                       height: GSSizeConstants.padding12,
                     ),
                     GSTextField(
+                      controller: TextEditingController(),
                       hints: GSStrings.address,
                     ),
                     SizedBox(

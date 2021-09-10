@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:go_share/core/network/api_base_helper.dart';
 import 'package:go_share/core/network/dio_factory.dart';
+import 'package:go_share/data/models/driver/driver_login_request.dart';
+import 'package:go_share/data/models/driver/driver_login_response.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_request.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_response.dart';
 import 'package:go_share/data/models/service_partner/auth/signup/service_partner_signup_request.dart';
@@ -102,6 +104,24 @@ class Repository{
     }catch(e){
       return VehicleListResponse(
         msg: "Error from server",
+      );
+    }
+  }
+
+  Future<DriverLoginResponse> loginDriver(DriverLoginRequest request) async{
+    try{
+      var response = await helper.post(NetworkConstants.DRIVER_LOGIN, request.toJson());
+      if(response.statusCode==200){
+        return DriverLoginResponse.fromJson(response.data);
+      }else{
+        return DriverLoginResponse(
+          message: "Error from server",
+        );
+      }
+    }catch(e){
+      logger.d(e);
+      return DriverLoginResponse(
+        message: "Driver login data parsing error",
       );
     }
   }

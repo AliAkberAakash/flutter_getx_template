@@ -64,6 +64,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           height: GSSizeConstants.padding38,
         ),
         GSTextField(
+          controller: TextEditingController(),
           hints: GSStrings.email_field_hints,
         ),
         SizedBox(
