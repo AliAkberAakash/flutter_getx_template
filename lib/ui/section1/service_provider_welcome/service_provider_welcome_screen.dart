@@ -5,22 +5,36 @@ import 'package:go_share/base/widget/GSButtonWidget.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
+import 'package:go_share/ui/navigation_container/navigation_container.dart';
 import 'package:go_share/ui/section1/service_provider_login/service_provider_login_screen.dart';
 import 'package:go_share/ui/section1/service_provider_signup/service_provider_signup_screen.dart';
+import 'package:go_share/ui/section1/service_provider_welcome/service_provider_welcome_controller.dart';
 import 'package:go_share/ui/section4/widgets/create_account_button.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-// UI
 class ServiceProviderWelcomeScreen extends StatefulWidget {
   @override
-  _Sec4WelcomeScreenState createState() => _Sec4WelcomeScreenState();
-} //: UI
+  _ServiceProviderWelcomeScreenState createState() => _ServiceProviderWelcomeScreenState();
+} 
 
-// State
-class _Sec4WelcomeScreenState extends State<ServiceProviderWelcomeScreen> {
+class _ServiceProviderWelcomeScreenState extends State<ServiceProviderWelcomeScreen> {
+
+  final _controller = ServiceProviderWelcomeController();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.isLoggedIn().then((value){
+      if(value){
+        Get.off(NavigationContainer());
+      }
+    });
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,10 +50,11 @@ class _Sec4WelcomeScreenState extends State<ServiceProviderWelcomeScreen> {
             SafeArea(
                 child: Padding(
                     padding: EdgeInsets.fromLTRB(
-                        GSSizeConstants.padding30,
-                        GSSizeConstants.zero,
-                        GSSizeConstants.padding30,
-                        GSSizeConstants.zero),
+                      GSSizeConstants.padding30,
+                      GSSizeConstants.zero,
+                      GSSizeConstants.padding30,
+                      GSSizeConstants.zero,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       //mainAxisSize: MainAxisSize.max,

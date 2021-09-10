@@ -10,7 +10,7 @@ import 'package:go_share/ui/container/UIConstants/Fonts.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/our_service/our_service.dart';
-import 'package:go_share/ui/section1/service_provider_welcome_screen/service_provider_welcome_screen.dart';
+import 'package:go_share/ui/section1/service_provider_welcome/service_provider_welcome_screen.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);

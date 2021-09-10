@@ -7,6 +7,7 @@ import 'package:go_share/data/models/service_partner/auth/login/service_partner_
 import 'package:go_share/data/models/service_partner/auth/signup/service_partner_signup_request.dart';
 import 'package:go_share/data/models/service_partner/auth/signup/service_partner_signup_response.dart';
 import 'package:go_share/utils/constants.dart';
+import 'package:go_share/utils/shared_pref_utils.dart';
 import 'package:logger/logger.dart';
 
 class Repository{
@@ -68,4 +69,10 @@ class Repository{
     }
 
   }
+
+  Future<bool> isLoggedIn() async{
+    var token = await SharedPrefUtil.getString(NetworkConstants.AUTHORIZATION);
+    return token.isNotEmpty;
+  }
+
 }

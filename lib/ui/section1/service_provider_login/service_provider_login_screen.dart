@@ -107,38 +107,38 @@ class _ServiceProviderLoginState extends State<ServiceProviderLoginScreen> {
               Sec4PasswordTextField(
                 controller: passwordController,
               ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 30, horizontal: 5),
-                child: Row(
-                  children: [
-                    CustomCheckBox(
-                      value: value,
-                      shouldShowBorder: true,
-                      borderColor: Colors.white,
-                      uncheckedFillColor: Colors.white60,
-                      checkedFillColor: GSColors.green_normal,
-                      borderRadius: 2,
-                      borderWidth: 1,
-                      checkBoxSize: 15,
-                      uncheckedIconColor: Colors.transparent,
-                      onChanged: (val) {
-                        //do your stuff here
-                        setState(() {
-                          value = val;
-                        });
-                      },
-                    ),
-                    Text(
-                      "Keep me signed in",
-                      style: GoogleFonts.manrope(
-                        color: white,
-                        fontSize: dp18,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    )
-                  ],
-                ),
-              ),
+              // Container(
+              //   padding: EdgeInsets.symmetric(vertical: 30, horizontal: 5),
+              //   child: Row(
+              //     children: [
+              //       CustomCheckBox(
+              //         value: value,
+              //         shouldShowBorder: true,
+              //         borderColor: Colors.white,
+              //         uncheckedFillColor: Colors.white60,
+              //         checkedFillColor: GSColors.green_normal,
+              //         borderRadius: 2,
+              //         borderWidth: 1,
+              //         checkBoxSize: 15,
+              //         uncheckedIconColor: Colors.transparent,
+              //         onChanged: (val) {
+              //           //do your stuff here
+              //           setState(() {
+              //             value = val;
+              //           });
+              //         },
+              //       ),
+              //       Text(
+              //         "Keep me signed in",
+              //         style: GoogleFonts.manrope(
+              //           color: white,
+              //           fontSize: dp18,
+              //           fontWeight: FontWeight.normal,
+              //         ),
+              //       )
+              //     ],
+              //   ),
+              // ),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 20),
                 child: GSButton(
@@ -189,16 +189,10 @@ class _ServiceProviderLoginState extends State<ServiceProviderLoginScreen> {
   void login(ServicePartnerLoginRequest request) async{
     var response = await _controller.loginServiceProvider(request);
     if(response.data != null){
-      _controller.storeToken(response.data!.token, value).then((_){
-        if(value) {
+      _controller.storeToken(response.data!.token).then((_){
           Get.back();
           Get.back();
           Get.off(() => NavigationContainer());
-        }else{
-          Get.back();
-          Get.back();
-          Get.to(() => NavigationContainer());
-        }
       });
     }else{
       Get.back();

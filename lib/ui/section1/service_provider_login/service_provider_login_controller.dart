@@ -16,10 +16,8 @@ class ServiceProviderLoginController extends GetxController{
     return response;
   }
 
-  Future storeToken(String token, bool value) async {
-    if(value){
-      await SharedPrefUtil.writeString(NetworkConstants.AUTHORIZATION, token);
-    }else return;
+  Future storeToken(String token) async {
+    await SharedPrefUtil.writeString(NetworkConstants.AUTHORIZATION, token);
   }
 
 }
