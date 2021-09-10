@@ -61,4 +61,5 @@ class KeyConstants {
   static const CURRENCY_KEY = "currency";
   static const LANGUAGE_KEY = "language";
   static const MESSAGE_KEY = "message";
+  static const SERVICE_PROVIDER_IMAGE_KEY = "image";
 }

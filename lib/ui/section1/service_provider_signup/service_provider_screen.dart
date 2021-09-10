@@ -1,11 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:go_share/data/models/service_partner/auth/service_partner_signup_request.dart';
+import 'package:go_share/ui/common_widgets/common_password_field.dart';
 import 'package:go_share/ui/common_widgets/common_text_field.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
+import 'package:go_share/ui/section1/service_provider_signup/service_provider_signup_controller.dart';
 import 'package:go_share/ui/section4/successful_bottom_sheet/successful_bottom_sheet.dart';
+import 'package:go_share/util/lib/toast.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
@@ -23,7 +27,20 @@ class _ServiceProviderScreenState extends State<ServiceProviderScreen> {
   var maxLines = 3;
   File? _image;
 
+  final _controller = ServiceProviderSignupController();
+
   final picker = ImagePicker();
+  final TextEditingController companyNameController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController companyAddressController = TextEditingController();
+  final TextEditingController contactPersonNameController = TextEditingController();
+  final TextEditingController contactPersonPositionController = TextEditingController();
+  final TextEditingController contactPersonPhoneController = TextEditingController();
+  final TextEditingController contactPersonNRICController = TextEditingController();
+  final TextEditingController businessIdNumController = TextEditingController();
 
   void _getImage() async {
     XFile? imageFile = await picker.pickImage(source: ImageSource.gallery);
@@ -52,15 +69,23 @@ class _ServiceProviderScreenState extends State<ServiceProviderScreen> {
             VSpacer40(),
             TextFieldHeadline(headline: 'Company Name'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: companyNameController),
             VSpacer40(),
             TextFieldHeadline(headline: 'Phone Number'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: phoneNumberController),
             VSpacer40(),
             TextFieldHeadline(headline: 'Email Address'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: emailController),
+            VSpacer40(),
+            TextFieldHeadline(headline: 'Password'),
+            VSpacer10(),
+            CommonPasswordField(controller: passwordController),
+            VSpacer40(),
+            TextFieldHeadline(headline: 'Confirm Password'),
+            VSpacer10(),
+            CommonPasswordField(controller: confirmPasswordController),
             VSpacer40(),
             TextFieldHeadline(headline: 'Company Address'),
             VSpacer10(),
@@ -68,32 +93,58 @@ class _ServiceProviderScreenState extends State<ServiceProviderScreen> {
             VSpacer40(),
             TextFieldHeadline(headline: 'Contact Person name'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: contactPersonNameController),
             VSpacer40(),
             TextFieldHeadline(headline: 'Contact Person Position'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: contactPersonPositionController),
             VSpacer40(),
             TextFieldHeadline(headline: 'Contact Person Phone'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: contactPersonPhoneController),
             VSpacer40(),
             TextFieldHeadline(headline: 'Contact Person NRIC'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: contactPersonNRICController),
             VSpacer40(),
             TextFieldHeadline(headline: 'Business Identification Number'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: businessIdNumController),
             VSpacer40(),
-            PositiveButton(text: "Submit", onClicked: () {
-              modalBottomSheetMenuSuccess(context);
-            }),
+            PositiveButton(
+              text: "Submit",
+              onClicked: () {
+                if(validate())
+                {
+                  var request = ServicePartnerSignupRequest(
+                    name: companyNameController.text.trim(),
+                    email: emailController.text.trim(),
+                    phone: phoneNumberController.text.trim(),
+                    password: passwordController.text,
+                    address: companyAddressController.text.trim(),
+                    businessIdentificationNumber: businessIdNumController.text.trim(),
+                    contactPersonName: contactPersonNameController.text.trim(),
+                    contactPersonPosition: contactPersonPositionController.text.trim(),
+                    contactPersonPhone: contactPersonPhoneController.text.trim(),
+                    contactPersonNric: contactPersonNRICController.text.trim(),
+                  );
+                  _controller.serviceProviderSignup(request, _image!);
+                }else{
+                  ToastUtil.show("Please fill all fields");
+                }
+                //modalBottomSheetMenuSuccess(context);
+              },
+            ),
             VSpacer40(),
           ],
         ),
       ),
     );
+  }
+
+  bool validate(){
+    return passwordController.text == confirmPasswordController.text &&
+    _image!=null;
   }
 
   _captureImage() => Row(
@@ -131,7 +182,13 @@ class _ServiceProviderScreenState extends State<ServiceProviderScreen> {
       );
 
   _getAddress() => TextFormField(
+        controller: companyAddressController,
         maxLines: maxLines,
+        style: TextStyle(
+          color: darkText,
+          fontSize: dp18,
+          fontWeight: FontWeight.bold,
+        ),
         decoration: InputDecoration(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(dp10),

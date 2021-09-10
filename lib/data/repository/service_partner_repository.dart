@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:go_share/core/network/api_base_helper.dart';
 import 'package:go_share/core/network/dio_factory.dart';
 import 'package:go_share/data/models/service_partner/auth/service_partner_signup_request.dart';
@@ -11,10 +13,15 @@ class Repository{
 
   Logger logger = Logger();
 
-  Future<ServicePartnerSignupResponse> signupServicePartner(ServicePartnerSignupRequest request) async{
+  Future<ServicePartnerSignupResponse> signupServicePartner(
+      ServicePartnerSignupRequest request,
+      File image,
+      ) async{
     try{
-      var responseJson = await helper.post(
+      var responseJson = await helper.postMultiPart(
         NetworkConstants.SERVICE_PARTNER_SIGNUP,
+        KeyConstants.SERVICE_PROVIDER_IMAGE_KEY,
+        image,
         request.toJson(),
       );
       if(responseJson.statusCode == 200){

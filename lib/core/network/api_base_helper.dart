@@ -70,13 +70,13 @@ class ApiBaseHelper{
     }
   }
 
-  Future<Response> postMultiPart(String endUrl,String key, File file) async {
+  Future<Response> postMultiPart(String endUrl,String key, File file, Map<String, dynamic> body) async {
     await setToken();
 
     String fileName = file.path.split('/').last;
-    FormData formData = FormData.fromMap({
-      key : await MultipartFile.fromFile(file.path, filename:fileName),
-    });
+    FormData formData = FormData.fromMap(body);
+    formData.files.add(MapEntry(key, await MultipartFile.fromFile(file.path, filename:fileName)));
+
 
     try {
       // make the network call
