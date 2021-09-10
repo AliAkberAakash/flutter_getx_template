@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_share/data/models/vehicles/vehicle_list_response.dart';
 import 'package:go_share/ui/common_widgets/outlined_material_button.dart';
 import 'package:go_share/ui/section1/service_provider_vehicle_list/widgets/status_chip.dart';
 import 'package:go_share/ui/section1/service_provider_vehicle_list/widgets/vehicle_info_widget.dart';
 import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/date_time_utils.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,13 +13,14 @@ import 'package:google_fonts/google_fonts.dart';
 import '../vehicle_free_busy_details.dart';
 
 class VehicleFreeBusyItem extends StatelessWidget {
-  final ChipStatus status;
+
+  final Vehicle vehicle;
   final bool showButton;
 
   const VehicleFreeBusyItem({
     Key? key,
-    required this.status,
     this.showButton = true,
+    required this.vehicle,
   }) : super(key: key);
 
   @override
@@ -53,7 +56,7 @@ class VehicleFreeBusyItem extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "VA 112414",
+                      "VA ${vehicle.vehicleNumber}",
                       style: GoogleFonts.manrope(
                         color: darkText,
                         fontSize: dp20,
@@ -62,7 +65,7 @@ class VehicleFreeBusyItem extends StatelessWidget {
                     ),
                   ],
                 ),
-                StatusChip(chipStatus: status)
+                StatusChip(chipStatus: getStatus(vehicle.availableStatus))
               ],
             ),
           ),
@@ -85,12 +88,12 @@ class VehicleFreeBusyItem extends StatelessWidget {
                         children: [
                           VehicleInfoWidget(
                             title: "Driver name",
-                            value: "Jhon Walter",
+                            value: vehicle.driverName,
                           ),
                           VSpacer20(),
                           VehicleInfoWidget(
                             title: "Attendant name",
-                            value: "Jhon Doe",
+                            value: vehicle.attendantName,
                           ),
                         ],
                       ),
@@ -107,12 +110,12 @@ class VehicleFreeBusyItem extends StatelessWidget {
                         children: [
                           VehicleInfoWidget(
                             title: "Registration date",
-                            value: "19 May, 2021",
+                            value: speakDate(vehicle.createdAt),
                           ),
                           VSpacer20(),
                           VehicleInfoWidget(
                             title: "Booked Seat",
-                            value: "0/12",
+                            value: vehicle.capacity,
                           ),
                         ],
                       ),
@@ -127,7 +130,7 @@ class VehicleFreeBusyItem extends StatelessWidget {
                   padding: const EdgeInsets.all(dp20),
                   child: OutlinedMaterialButton(
                     onClick: () {
-                      Get.to(VehicleFreeBusyDetails());
+                      Get.to(VehicleFreeBusyDetails(vehicle: vehicle,));
                     },
                     text: "Vehicle Details",
                   ),
@@ -139,4 +142,9 @@ class VehicleFreeBusyItem extends StatelessWidget {
       ),
     );
   }
+
+  getStatus(String status){
+    return status=="Free" ? ChipStatus.FREE : ChipStatus.BUSY;
+  }
+  
 }

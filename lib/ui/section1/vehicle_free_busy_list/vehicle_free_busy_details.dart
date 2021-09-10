@@ -1,21 +1,33 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_share/data/models/vehicles/vehicle_list_response.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
 import 'package:go_share/ui/common_widgets/text_field_value_widget.dart';
 import 'package:go_share/ui/section1/service_provider_vehicle_list/widgets/status_chip.dart';
 import 'package:go_share/ui/section1/vehicle_free_busy_list/widgets/vehicle_free_busy_item.dart';
 import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/date_time_utils.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
+import 'package:go_share/utils/string_utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class VehicleFreeBusyDetails extends StatefulWidget {
-  const VehicleFreeBusyDetails({Key? key}) : super(key: key);
+
+  final Vehicle vehicle;
+
+  const VehicleFreeBusyDetails({Key? key, required this.vehicle}) : super(key: key);
 
   @override
-  _VehicleFreeBusyDetailsState createState() => _VehicleFreeBusyDetailsState();
+  _VehicleFreeBusyDetailsState createState() => _VehicleFreeBusyDetailsState(vehicle);
 }
 
 class _VehicleFreeBusyDetailsState extends State<VehicleFreeBusyDetails> {
+
+  final Vehicle vehicle;
+
+  _VehicleFreeBusyDetailsState(this.vehicle);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +37,7 @@ class _VehicleFreeBusyDetailsState extends State<VehicleFreeBusyDetails> {
         child: ListView(
           children: [
             VehicleFreeBusyItem(
-              status: ChipStatus.BUSY,
+              vehicle: vehicle,
               showButton: false,
             ),
             VSpacer10(),
@@ -55,8 +67,8 @@ class _VehicleFreeBusyDetailsState extends State<VehicleFreeBusyDetails> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.network(
-                      "https://images.unsplash.com/photo-1494976388531-d1058494cdd8",
+                    CachedNetworkImage(
+                      imageUrl: getImagePath(vehicle.image),
                       height: 150,
                       width: double.infinity,
                       fit: BoxFit.cover,
@@ -64,35 +76,35 @@ class _VehicleFreeBusyDetailsState extends State<VehicleFreeBusyDetails> {
                     VSpacer20(),
                     TextFieldHeadline(headline: "Vehicle capacity"),
                     VSpacer10(),
-                    TextFieldValueWidget(headline: "12 Person"),
+                    TextFieldValueWidget(headline: "${vehicle.capacity} Person"),
                     VSpacer20(),
                     TextFieldHeadline(headline: "Driver name"),
                     VSpacer10(),
-                    TextFieldValueWidget(headline: "Violet Norman"),
+                    TextFieldValueWidget(headline: vehicle.driverName),
                     VSpacer20(),
                     TextFieldHeadline(headline: "Driver phone"),
                     VSpacer10(),
-                    TextFieldValueWidget(headline: "+0123 456 789"),
+                    TextFieldValueWidget(headline: vehicle.driverPhone),
                     VSpacer20(),
                     TextFieldHeadline(headline: "Request date"),
                     VSpacer10(),
-                    TextFieldValueWidget(headline: "19 June, 2021"),
+                    TextFieldValueWidget(headline: speakDate(vehicle.createdAt)),
                     VSpacer20(),
                     TextFieldHeadline(headline: "Request pending duration"),
                     VSpacer10(),
-                    TextFieldValueWidget(headline: "N/A"),
+                    TextFieldValueWidget(headline: daysBetween(vehicle.createdAt)),
                     VSpacer20(),
                     TextFieldHeadline(headline: "Driver license number"),
                     VSpacer10(),
-                    TextFieldValueWidget(headline: "896842424"),
+                    TextFieldValueWidget(headline: vehicle.driverLicenseNumber),
                     VSpacer20(),
                     TextFieldHeadline(headline: "Attendant name"),
                     VSpacer10(),
-                    TextFieldValueWidget(headline: "Jhon Doe"),
+                    TextFieldValueWidget(headline: vehicle.attendantName),
                     VSpacer20(),
                     TextFieldHeadline(headline: "Attendant phone"),
                     VSpacer10(),
-                    TextFieldValueWidget(headline: "+9869878921312"),
+                    TextFieldValueWidget(headline: vehicle.attendantPhone),
                     VSpacer20(),
                   ],
                 ),
