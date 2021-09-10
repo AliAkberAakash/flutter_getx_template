@@ -16,7 +16,7 @@ class Messages extends Translations {
           "old_password": "Old password",
           "new_password": "New password",
           "confirm_new_password": "Confirm new password",
-          "sign_in": "Sign in",
+          "service_provider_login": "Sign in",
           "sign_up": "Sign up",
           "terms_and_conditions": "Terms & Conditions",
           "forgot_password": "Forgot password?",

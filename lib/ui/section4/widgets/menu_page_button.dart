@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
-import 'package:go_share/ui/section4/welcome/welcome_screen.dart';
+import 'package:go_share/ui/container/Welcome/WelcomeScreen.dart';
 import 'package:go_share/utils/colors.dart';
 
 class MenuButtonOutlineStock extends StatelessWidget {

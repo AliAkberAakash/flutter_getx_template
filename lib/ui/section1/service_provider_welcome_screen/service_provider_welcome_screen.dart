@@ -5,8 +5,8 @@ import 'package:go_share/base/widget/GSButtonWidget.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
+import 'package:go_share/ui/section1/service_provider_login/service_provider_login_screen.dart';
 import 'package:go_share/ui/section1/service_provider_signup/service_provider_signup_screen.dart';
-import 'package:go_share/ui/section4/sign_in/sign_in_screen.dart';
 import 'package:go_share/ui/section4/widgets/create_account_button.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
@@ -14,13 +14,13 @@ import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // UI
-class WelcomeScreen extends StatefulWidget {
+class ServiceProviderWelcomeScreen extends StatefulWidget {
   @override
   _Sec4WelcomeScreenState createState() => _Sec4WelcomeScreenState();
 } //: UI
 
 // State
-class _Sec4WelcomeScreenState extends State<WelcomeScreen> {
+class _Sec4WelcomeScreenState extends State<ServiceProviderWelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,7 +90,7 @@ class _Sec4WelcomeScreenState extends State<WelcomeScreen> {
                         GSButton(
                           text: GSStrings.sign_in,
                           onClick: (){
-                            Get.to(SignInScreen());
+                            Get.to(ServiceProviderLoginScreen());
                           },
                         ),
                         SizedBox(

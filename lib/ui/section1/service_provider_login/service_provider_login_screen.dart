@@ -18,13 +18,13 @@ import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // UI
-class SignInScreen extends StatefulWidget {
+class ServiceProviderLoginScreen extends StatefulWidget {
   @override
-  _Sec4SignInScreenState createState() => _Sec4SignInScreenState();
+  _ServiceProviderLoginState createState() => _ServiceProviderLoginState();
 } //: UI
 
 // State
-class _Sec4SignInScreenState extends State<SignInScreen> {
+class _ServiceProviderLoginState extends State<ServiceProviderLoginScreen> {
   bool value = false;
   @override
   Widget build(BuildContext context) {

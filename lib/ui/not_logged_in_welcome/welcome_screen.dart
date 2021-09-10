@@ -6,7 +6,6 @@ import 'package:go_share/ui/container/CreateNewAccount/CreateNewAccount.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
-import 'package:go_share/ui/section4/sign_in/sign_in_screen.dart';
 import 'package:go_share/ui/section4/widgets/create_account_button.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';

@@ -9,10 +9,8 @@ import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/Fonts.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
-import 'package:go_share/ui/container/contact_us/contact_us.dart';
 import 'package:go_share/ui/container/our_service/our_service.dart';
-import 'package:go_share/ui/section4/sign_in/sign_in_screen.dart';
-import 'package:go_share/ui/section4/welcome/welcome_screen.dart';
+import 'package:go_share/ui/section1/service_provider_welcome_screen/service_provider_welcome_screen.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -364,7 +362,7 @@ class TitleWidget extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => WelcomeScreen(),
+                      builder: (context) => ServiceProviderWelcomeScreen(),
                     ),
                   );
                 },
