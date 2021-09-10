@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_share/ui/common_widgets/update_button.dart';
-import 'package:go_share/ui/reset_vehicle_login/reset_vehicle_login_screen.dart';
+import 'package:go_share/ui/section1/service_providerreset_vehicle_login/service_provider_reset_vehicle_login_screen.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';

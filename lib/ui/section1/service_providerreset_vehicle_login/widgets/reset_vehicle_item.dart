@@ -8,7 +8,7 @@ import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../reset_vehicle_login_screen.dart';
+import '../service_provider_reset_vehicle_login_screen.dart';
 
 class ResetVehicleItem extends StatelessWidget {
   final ChipStatus status;
