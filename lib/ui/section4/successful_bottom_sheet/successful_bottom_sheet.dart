@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 void modalBottomSheetMenuSuccess(BuildContext context) {
   showModalBottomSheet(
+      isDismissible: false,
       context: context,
       isScrollControlled: true,
       builder: (builder) {

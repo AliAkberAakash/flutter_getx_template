@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:go_share/data/models/service_partner/auth/service_partner_signup_request.dart';
+import 'package:go_share/ui/common_widgets/common_loading_dialog.dart';
 import 'package:go_share/ui/common_widgets/common_password_field.dart';
 import 'package:go_share/ui/common_widgets/common_text_field.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
@@ -114,6 +116,7 @@ class _ServiceProviderScreenState extends State<ServiceProviderScreen> {
             PositiveButton(
               text: "Submit",
               onClicked: () {
+                showLoader();
                 if(validate())
                 {
                   var request = ServicePartnerSignupRequest(
@@ -128,11 +131,11 @@ class _ServiceProviderScreenState extends State<ServiceProviderScreen> {
                     contactPersonPhone: contactPersonPhoneController.text.trim(),
                     contactPersonNric: contactPersonNRICController.text.trim(),
                   );
-                  _controller.serviceProviderSignup(request, _image!);
+                  signup(request);
                 }else{
+                  Get.back();
                   ToastUtil.show("Please fill all fields");
                 }
-                //modalBottomSheetMenuSuccess(context);
               },
             ),
             VSpacer40(),
@@ -145,6 +148,17 @@ class _ServiceProviderScreenState extends State<ServiceProviderScreen> {
   bool validate(){
     return passwordController.text == confirmPasswordController.text &&
     _image!=null;
+  }
+
+  void signup(ServicePartnerSignupRequest request) async {
+    var response = await _controller.serviceProviderSignup(request, _image!);
+    if (response.success) {
+      Get.back();
+      modalBottomSheetMenuSuccess(context);
+    } else {
+      ToastUtil.show(response.msg);
+      Get.back();
+    }
   }
 
   _captureImage() => Row(

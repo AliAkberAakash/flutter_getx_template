@@ -9,13 +9,12 @@ class ServiceProviderSignupController extends GetxController{
   final Repository repository = Repository();
   Rx<ServicePartnerSignupResponse?> servicePartnerSignupResponse = Rx<ServicePartnerSignupResponse?>(null);
 
-  void serviceProviderSignup(
+  Future<ServicePartnerSignupResponse> serviceProviderSignup(
       ServicePartnerSignupRequest request,
       File image,
   ) async{
-    if(validate(request)){
-      servicePartnerSignupResponse.value = await repository.signupServicePartner(request, image);
-    }
+      var response = await repository.signupServicePartner(request, image);
+      return response;
   }
 
   bool validate(ServicePartnerSignupRequest request){
