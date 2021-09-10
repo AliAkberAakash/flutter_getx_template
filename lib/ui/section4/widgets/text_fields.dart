@@ -6,9 +6,10 @@ import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
 import 'dart:math' as math;
 
 class Sec4TextField extends StatelessWidget {
-  String hints;
+  final String hints;
+  final TextEditingController controller;
 
-  Sec4TextField({required this.hints});
+  Sec4TextField({required this.hints, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,7 @@ class Sec4TextField extends StatelessWidget {
         border: Border.all(color: GSColors.gray_normal),
       ),
       child: TextField(
+        controller: controller,
         decoration: InputDecoration(
             border: InputBorder.none,
             focusedBorder: InputBorder.none,
@@ -31,8 +33,11 @@ class Sec4TextField extends StatelessWidget {
             contentPadding: EdgeInsets.all(
               GSSizeConstants.padding16,
             ),
-            hintText: hints),
-        style: GSTextStyles.make18xw400Style(color: GSColors.gray_primary),
+            hintText: hints,
+        ),
+        style: GSTextStyles.make18xw400Style(
+          color: GSColors.gray_primary,
+        ),
       ),
     );
   }
@@ -41,8 +46,9 @@ class Sec4TextField extends StatelessWidget {
 class Sec4PasswordTextField extends StatelessWidget {
 
   final String hint;
+  final TextEditingController controller;
 
-  const Sec4PasswordTextField({this.hint = "Password"});
+  const Sec4PasswordTextField({this.hint = "Password", required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +62,7 @@ class Sec4PasswordTextField extends StatelessWidget {
         border: Border.all(color: GSColors.gray_normal),
       ),
       child: TextField(
+        controller: controller,
         obscureText: true,
         obscuringCharacter: '*',
         decoration: InputDecoration(

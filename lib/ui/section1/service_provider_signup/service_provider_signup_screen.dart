@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:go_share/data/models/service_partner/auth/service_partner_signup_request.dart';
+import 'package:go_share/data/models/service_partner/auth/signup/service_partner_signup_request.dart';
 import 'package:go_share/ui/common_widgets/common_loading_dialog.dart';
 import 'package:go_share/ui/common_widgets/common_password_field.dart';
 import 'package:go_share/ui/common_widgets/common_text_field.dart';

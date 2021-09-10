@@ -3,13 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
-import 'package:go_share/base/widget/GSTextField.dart';
 import 'package:go_share/ui/container/ForgotPassword/ForgotPassword.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
-import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
-import 'package:go_share/ui/container/widget_container/widget_container.dart';
 import 'package:go_share/ui/section4/widgets/text_fields.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
@@ -93,12 +90,15 @@ class _Sec4SignInScreenState extends State<NSignInScreen> {
                 height: GSSizeConstants.padding55,
               ),
               Sec4TextField(
+                controller: TextEditingController(),
                 hints: GSStrings.email_field_hints,
               ),
               SizedBox(
                 height: GSSizeConstants.padding17,
               ),
-              Sec4PasswordTextField(),
+              Sec4PasswordTextField(
+                controller: TextEditingController(),
+              ),
               Container(
                 padding: EdgeInsets.symmetric(vertical: 30, horizontal: 5),
                 child: Row(

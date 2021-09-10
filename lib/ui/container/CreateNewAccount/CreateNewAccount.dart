@@ -69,7 +69,9 @@ class _CreateNewAccountState extends State<CreateNewAccount> {
                     ),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: dp23),
-                      child: Sec4PasswordTextField(),
+                      child: Sec4PasswordTextField(
+                        controller: TextEditingController(),
+                      ),
                     ),
                     SizedBox(
                       height: GSSizeConstants.padding12,
@@ -77,6 +79,7 @@ class _CreateNewAccountState extends State<CreateNewAccount> {
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: dp23),
                       child: Sec4PasswordTextField(
+                        controller: TextEditingController(),
                         hint: GSStrings.reType_password,
                       ),
                     ),

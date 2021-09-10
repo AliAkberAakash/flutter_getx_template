@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:go_share/core/network/api_base_helper.dart';
 import 'package:go_share/core/network/dio_factory.dart';
-import 'package:go_share/data/models/service_partner/auth/service_partner_signup_request.dart';
-import 'package:go_share/data/models/service_partner/auth/service_partner_signup_response.dart';
+import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_request.dart';
+import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_response.dart';
+import 'package:go_share/data/models/service_partner/auth/signup/service_partner_signup_request.dart';
+import 'package:go_share/data/models/service_partner/auth/signup/service_partner_signup_response.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:logger/logger.dart';
 
@@ -39,5 +41,31 @@ class Repository{
           msg: "Data Parsing Error"
       );
     }
+  }
+
+  Future<ServicePartnerLoginResponse> loginServicePartner(
+      ServicePartnerLoginRequest request
+      ) async {
+
+    try{
+      var responseJson = await helper.post(
+        NetworkConstants.SERVICE_PARTNER_LOGIN,
+        request.toJson(),
+      );
+
+      if(responseJson.statusCode == 200){
+        return ServicePartnerLoginResponse.fromJson(responseJson.data);
+      }else{
+        return ServicePartnerLoginResponse(
+          message: "Error from server",
+        );
+      }
+    }catch(e){
+      logger.d(e);
+      return ServicePartnerLoginResponse(
+        message: "Data Parsing Error",
+      );
+    }
+
   }
 }

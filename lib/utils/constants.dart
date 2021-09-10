@@ -38,6 +38,7 @@ class NetworkConstants {
 
   //End urls
   static const SERVICE_PARTNER_SIGNUP = "servicepartner/create";
+  static const SERVICE_PARTNER_LOGIN = "servicepartners/login";
 
 }
 

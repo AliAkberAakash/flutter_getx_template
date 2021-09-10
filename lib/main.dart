@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:go_share/data/local/service/theme_service.dart';
+import 'package:go_share/data/repository/service_partner_repository.dart';
 import 'package:go_share/essential/translations.dart';
 import 'package:go_share/ui/container/widget_container/widget_container.dart';
 
@@ -18,6 +19,7 @@ Future<void> initializeAppEssentials() async {
   Get.log('Starting services ...');
 
   Get.put(ThemeService());
+  Get.put(Repository());
 
   Get.log('All services started...');
 }
