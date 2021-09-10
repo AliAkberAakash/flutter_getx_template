@@ -106,6 +106,31 @@ class _VehicleFreeBusyDetailsState extends State<VehicleFreeBusyDetails> {
                     VSpacer10(),
                     TextFieldValueWidget(headline: vehicle.attendantPhone),
                     VSpacer20(),
+                    TextFieldHeadline(headline: "Attendant NRIC"),
+                    VSpacer10(),
+                    TextFieldValueWidget(headline: vehicle.attendantNric),
+                    VSpacer20(),
+                    TextFieldHeadline(headline: "Attendant DOB"),
+                    VSpacer10(),
+                    TextFieldValueWidget(headline: speakDate(vehicle.attendantDob)),
+                    vehicle.availableStatus=="Busy" ? Column(
+                      children: [
+                        VSpacer20(),
+                        TextFieldHeadline(headline: "Ride Start Sate"),
+                        VSpacer10(),
+                        TextFieldValueWidget(headline: speakDate(vehicle.createdAt)),
+                        VSpacer20(),
+                        TextFieldHeadline(headline: "Pickup Location"),
+                        VSpacer10(),
+                        TextFieldValueWidget(headline: "--"), //todo
+                        VSpacer20(),
+                        TextFieldHeadline(headline: "Drop-Off Location"),
+                        VSpacer10(),
+                        TextFieldValueWidget(headline: "--"), //todo
+                      ],
+                    ) : Container(),
+                    VSpacer40()
+
                   ],
                 ),
               ),
