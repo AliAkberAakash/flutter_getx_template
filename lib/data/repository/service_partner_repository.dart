@@ -97,6 +97,11 @@ class Repository{
     return token.isNotEmpty;
   }
 
+  Future<bool> isDriverLoggedIn() async{
+    var token = await SharedPrefUtil.getString(NetworkConstants.DRIVER_TOKEN);
+    return token.isNotEmpty;
+  }
+
   Future<VehicleListResponse> getVehicleList() async{
     try{
       var response = await helper.get(NetworkConstants.VEHICLE_LIST);

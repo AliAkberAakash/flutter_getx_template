@@ -23,6 +23,16 @@ class _DriverLoginScreenState extends State<DriverLoginScreen> {
   final _controller = DriverLoginController();
 
   @override
+  void initState() {
+    super.initState();
+
+    _controller.isLoggedIn().then((value){
+      if(value) Get.off(DriverContainer());
+    });
+
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -148,8 +158,8 @@ class _DriverLoginScreenState extends State<DriverLoginScreen> {
     var response = await _controller.loginDriver(request);
 
     if(response.data != null){
+      await _controller.storeToken(response.data!.token);
       Get.off(DriverContainer());
-
     }
 
   }

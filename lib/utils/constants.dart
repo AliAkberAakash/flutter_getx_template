@@ -34,6 +34,7 @@ class NetworkConstants {
   static const ACCEPT = "Accept";
   static const ACCEPT_TYPE = "application/json";
   static const AUTHORIZATION = "Authorization";
+  static const DRIVER_TOKEN = "Driver-Token";
   static const CONTENT_TYPE = "content-Type";
 
   //End urls
