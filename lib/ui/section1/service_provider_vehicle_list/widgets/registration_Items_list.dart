@@ -1,25 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:go_share/data/models/vehicles/vehicle_list_response.dart';
 import 'package:go_share/ui/section1/service_provider_vehicle_list/widgets/status_chip.dart';
 import 'package:go_share/ui/section1/service_provider_vehicle_list/widgets/vehicle_request_item.dart';
 
 class RegistrationItemsList extends StatefulWidget {
 
-  final ChipStatus status;
+  final List<Vehicle> vehicleList;
 
-  const RegistrationItemsList({required this.status});
+  const RegistrationItemsList({required this.vehicleList});
 
   @override
-  _RegistrationItemsListState createState() => _RegistrationItemsListState();
+  _RegistrationItemsListState createState() => _RegistrationItemsListState(vehicleList);
 }
 
 class _RegistrationItemsListState extends State<RegistrationItemsList> {
+
+  final List<Vehicle> vehicleList;
+
+  _RegistrationItemsListState(this.vehicleList);
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 10,
+      itemCount: vehicleList.length,
       itemBuilder: (ctx, idx){
-        return VehicleRequestItem(status: widget.status);
+        return VehicleRequestItem(
+          vehicle: vehicleList[idx],
+          status: getStatus(vehicleList[idx].status),
+        );
       },
     );
   }
+
+  getStatus(int status){
+    return status==0 ? ChipStatus.PENDING : ChipStatus.APPROVED;
+  }
+
 }

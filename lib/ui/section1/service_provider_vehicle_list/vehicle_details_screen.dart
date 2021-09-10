@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_share/data/models/vehicles/vehicle_list_response.dart';
 import 'package:go_share/ui/common_widgets/outlined_material_button.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
 import 'package:go_share/ui/common_widgets/text_field_value_widget.dart';
@@ -28,6 +29,26 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
         child: ListView(
           children: [
             VehicleRequestItem(
+              vehicle: Vehicle(
+                driverName: "",
+                driverLicenseNumber: '',
+                attendantNric: '',
+                attendantName: '',
+                capacity: '',
+                vehicleNumber: '',
+                status: 0,
+                attendantPhone: '',
+                image: '',
+                servicePartnerId: 0,
+                availableStatus: '',
+                id: 1,
+                password: '',
+                createdAt: DateTime.now(),
+                isVerified: 0,
+                driverPhone: '',
+                attendantDob: DateTime.now(),
+                driverLicenseValidity: DateTime.now(),
+              ),
               status: ChipStatus.PENDING,
               showButton: false,
             ),
