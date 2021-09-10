@@ -17,14 +17,14 @@ import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ServiceProviderLoginScreen extends StatefulWidget {
-  const ServiceProviderLoginScreen({Key? key}) : super(key: key);
+class ServiceProviderSignupScreen extends StatefulWidget {
+  const ServiceProviderSignupScreen({Key? key}) : super(key: key);
 
   @override
-  _ServiceProviderLoginScreenState createState() => _ServiceProviderLoginScreenState();
+  _ServiceProviderSignupScreenState createState() => _ServiceProviderSignupScreenState();
 }
 
-class _ServiceProviderLoginScreenState extends State<ServiceProviderLoginScreen> {
+class _ServiceProviderSignupScreenState extends State<ServiceProviderSignupScreen> {
   var mainWidth;
   var maxLines = 3;
   File? _image;
