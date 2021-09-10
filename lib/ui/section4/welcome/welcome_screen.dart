@@ -5,7 +5,7 @@ import 'package:go_share/base/widget/GSButtonWidget.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
-import 'package:go_share/ui/section1/service_provider_signup/service_provider_screen.dart';
+import 'package:go_share/ui/section1/service_provider_signup/service_provider_login_screen.dart';
 import 'package:go_share/ui/section4/sign_in/sign_in_screen.dart';
 import 'package:go_share/ui/section4/widgets/create_account_button.dart';
 import 'package:go_share/utils/colors.dart';
@@ -98,7 +98,7 @@ class _Sec4WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                         CreateAccountButtonOutlineStock(
                           onClick: (){
-                            Get.to(ServiceProviderScreen());
+                            Get.to(ServiceProviderLoginScreen());
                           },
                         ),
                         SizedBox(
