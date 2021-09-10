@@ -7,6 +7,7 @@ import 'package:go_share/data/models/service_partner/auth/login/service_partner_
 import 'package:go_share/data/models/service_partner/auth/signup/service_partner_signup_request.dart';
 import 'package:go_share/data/models/service_partner/auth/signup/service_partner_signup_response.dart';
 import 'package:go_share/data/models/service_partner/profile/service_partner_profile_response.dart';
+import 'package:go_share/data/models/vehicles/vehicle_list_response.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/shared_pref_utils.dart';
 import 'package:logger/logger.dart';
@@ -92,6 +93,17 @@ class Repository{
   Future<bool> isLoggedIn() async{
     var token = await SharedPrefUtil.getString(NetworkConstants.AUTHORIZATION);
     return token.isNotEmpty;
+  }
+
+  Future<VehicleListResponse> getVehicleList() async{
+    try{
+      var response = await helper.get(NetworkConstants.VEHICLE_LIST);
+      return VehicleListResponse.fromJson(response.data);
+    }catch(e){
+      return VehicleListResponse(
+        msg: "Error from server",
+      );
+    }
   }
 
 }

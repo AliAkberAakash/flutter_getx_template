@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
-import 'package:go_share/ui/registration_request/widgets/status_chip.dart';
-import 'package:go_share/ui/vehicle_free_busy_list/widgets/vehicle_free_busy_item.dart';
+import 'package:go_share/ui/section1/service_provider_vehicle_list/widgets/registration_Items_list.dart';
+import 'package:go_share/ui/section1/service_provider_vehicle_list/widgets/status_chip.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 
-
-class VehicleFreeBusyList extends StatefulWidget {
-  const VehicleFreeBusyList();
+class ServiceProviderVehicleList extends StatefulWidget {
+  const ServiceProviderVehicleList();
 
   @override
-  _VehicleFreeBusyListState createState() => _VehicleFreeBusyListState();
+  _ServiceProviderVehicleListState createState() =>
+      _ServiceProviderVehicleListState();
 }
 
-class _VehicleFreeBusyListState extends State<VehicleFreeBusyList> {
+class _ServiceProviderVehicleListState extends State<ServiceProviderVehicleList> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -30,7 +30,7 @@ class _VehicleFreeBusyListState extends State<VehicleFreeBusyList> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     LargeHeadlineWidget(
-                      headline: "Vehicle free/busy list",
+                      headline: "My vehicles list",
                     ),
                     VSpacer10(),
                     SizedBox(
@@ -51,10 +51,10 @@ class _VehicleFreeBusyListState extends State<VehicleFreeBusyList> {
                             text: "All",
                           ),
                           Tab(
-                            text: "Free",
+                            text: "Pending",
                           ),
                           Tab(
-                            text: "Busy",
+                            text: "Approved",
                           ),
                         ],
                       ),
@@ -67,26 +67,14 @@ class _VehicleFreeBusyListState extends State<VehicleFreeBusyList> {
                     Expanded(
                       child: TabBarView(
                         children: [
-                          ListView.builder(
-                            itemCount: 10,
-                            itemBuilder: (ctx, idx) {
-                              return VehicleFreeBusyItem(
-                                  status: ChipStatus.FREE);
-                            },
+                          RegistrationItemsList(
+                            status: ChipStatus.APPROVED,
                           ),
-                          ListView.builder(
-                            itemCount: 10,
-                            itemBuilder: (ctx, idx) {
-                              return VehicleFreeBusyItem(
-                                  status: ChipStatus.FREE);
-                            },
+                          RegistrationItemsList(
+                            status: ChipStatus.PENDING,
                           ),
-                          ListView.builder(
-                            itemCount: 10,
-                            itemBuilder: (ctx, idx) {
-                              return VehicleFreeBusyItem(
-                                  status: ChipStatus.BUSY);
-                            },
+                          RegistrationItemsList(
+                            status: ChipStatus.APPROVED,
                           ),
                         ],
                       ),

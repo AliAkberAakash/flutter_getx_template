@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
 import 'package:go_share/ui/common_widgets/text_field_value_widget.dart';
-import 'package:go_share/ui/registration_request/widgets/status_chip.dart';
-import 'package:go_share/ui/vehicle_free_busy_list/widgets/vehicle_free_busy_item.dart';
+import 'package:go_share/ui/section1/service_provider_vehicle_list/widgets/status_chip.dart';
+import 'package:go_share/ui/section1/vehicle_free_busy_list/widgets/vehicle_free_busy_item.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';

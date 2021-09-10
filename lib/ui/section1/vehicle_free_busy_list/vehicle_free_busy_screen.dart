@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
-import 'package:go_share/ui/registration_request/widgets/registration_Items_list.dart';
-import 'package:go_share/ui/registration_request/widgets/status_chip.dart';
+import 'package:go_share/ui/section1/service_provider_vehicle_list/widgets/status_chip.dart';
+import 'package:go_share/ui/section1/vehicle_free_busy_list/widgets/vehicle_free_busy_item.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 
-class RegistrationRequestScreen extends StatefulWidget {
-  const RegistrationRequestScreen();
+
+class ServiceProviderVehicleFreeBusyList extends StatefulWidget {
+  const ServiceProviderVehicleFreeBusyList();
 
   @override
-  _RegistrationRequestScreenState createState() =>
-      _RegistrationRequestScreenState();
+  _ServiceProviderVehicleFreeBusyListState createState() => _ServiceProviderVehicleFreeBusyListState();
 }
 
-class _RegistrationRequestScreenState extends State<RegistrationRequestScreen> {
+class _ServiceProviderVehicleFreeBusyListState extends State<ServiceProviderVehicleFreeBusyList> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -30,7 +30,7 @@ class _RegistrationRequestScreenState extends State<RegistrationRequestScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     LargeHeadlineWidget(
-                      headline: "My vehicles list",
+                      headline: "Vehicle free/busy list",
                     ),
                     VSpacer10(),
                     SizedBox(
@@ -51,10 +51,10 @@ class _RegistrationRequestScreenState extends State<RegistrationRequestScreen> {
                             text: "All",
                           ),
                           Tab(
-                            text: "Pending",
+                            text: "Free",
                           ),
                           Tab(
-                            text: "Approved",
+                            text: "Busy",
                           ),
                         ],
                       ),
@@ -67,14 +67,28 @@ class _RegistrationRequestScreenState extends State<RegistrationRequestScreen> {
                     Expanded(
                       child: TabBarView(
                         children: [
-                          RegistrationItemsList(
-                            status: ChipStatus.APPROVED,
+                          ListView.builder(
+                            itemCount: 10,
+                            itemBuilder: (ctx, idx) {
+                              return VehicleFreeBusyItem(
+                                  status: ChipStatus.FREE,
+                              );
+                            },
                           ),
-                          RegistrationItemsList(
-                            status: ChipStatus.PENDING,
+                          ListView.builder(
+                            itemCount: 10,
+                            itemBuilder: (ctx, idx) {
+                              return VehicleFreeBusyItem(
+                                  status: ChipStatus.FREE,
+                              );
+                            },
                           ),
-                          RegistrationItemsList(
-                            status: ChipStatus.APPROVED,
+                          ListView.builder(
+                            itemCount: 10,
+                            itemBuilder: (ctx, idx) {
+                              return VehicleFreeBusyItem(
+                                  status: ChipStatus.BUSY);
+                            },
                           ),
                         ],
                       ),

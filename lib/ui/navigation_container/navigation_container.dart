@@ -6,11 +6,11 @@ import 'package:go_share/ui/container/home/home.dart';
 import 'package:go_share/ui/driver_login/driver_login_screen.dart';
 import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
-import 'package:go_share/ui/registration_request/registration_request_screen.dart';
 import 'package:go_share/ui/reset_vehicle_login/reset_vehicle_list.dart';
 import 'package:go_share/ui/section1/service_provider_profile/service_provider_profile_screen.dart';
+import 'package:go_share/ui/section1/service_provider_vehicle_list/service_provider_vehicle_list.dart';
+import 'package:go_share/ui/section1/vehicle_free_busy_list/vehicle_free_busy_screen.dart';
 import 'package:go_share/ui/section4/notification/notification_screen.dart';
-import 'package:go_share/ui/vehicle_free_busy_list/vehicle_free_busy_screen.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
@@ -262,9 +262,9 @@ class _NavigationContainerState extends State<NavigationContainer> {
       case 3:
         return ServiceProviderProfileScreen();
       case 4:
-        return RegistrationRequestScreen();
+        return ServiceProviderVehicleList();
       case 5:
-        return VehicleFreeBusyList();
+        return ServiceProviderVehicleFreeBusyList();
       case 6:
         return NotificationScreen();
       case 7:
