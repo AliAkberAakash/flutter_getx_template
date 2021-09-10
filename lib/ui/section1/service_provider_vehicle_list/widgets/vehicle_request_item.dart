@@ -144,7 +144,7 @@ class _VehicleRequestItemState extends State<VehicleRequestItem> {
             padding: const EdgeInsets.all(dp20),
             child: OutlinedMaterialButton(
               onClick: () {
-                Get.to(VehicleDetailsScreen());
+                Get.to(VehicleDetailsScreen(vehicle: vehicle,));
               },
               text: "Vehicle Details",
             ),
