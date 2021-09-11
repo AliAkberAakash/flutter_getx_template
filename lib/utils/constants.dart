@@ -43,6 +43,7 @@ class NetworkConstants {
   static const SERVICE_PARTNER_PROFILE = "servicepartner/profile";
   static const VEHICLE_LIST = "servicepartner/vehicles";
   static const DRIVER_LOGIN = "vehicles/login";
+  static const ADD_VEHICLE = "servicepartner/vehicle/create";
 
 }
 

@@ -52,7 +52,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
               ),
             ),
             onPressed: () {
-              changePage(1);
+              Get.to(ServiceProviderAddVehicleScreen());
             },
             backgroundColor: accent,
           ),
@@ -77,9 +77,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                     title: "Add a Bus",
                     index: 1,
                     onTap: (int position){
-                      setState(() {
-                        _selectedItem = 1;
-                      });
+
                     },
                   ),
                   BottomBarItem(

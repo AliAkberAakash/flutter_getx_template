@@ -1,11 +1,16 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:go_share/data/models/vehicles/add_vehicle_request.dart';
+import 'package:go_share/ui/common_widgets/common_loading_dialog.dart';
 import 'package:go_share/ui/common_widgets/common_text_field.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
+import 'package:go_share/ui/section1/service_provideradd_vehicle/service_provider_add_vehicle_controller.dart';
 import 'package:go_share/ui/section4/pending_bottom_sheet/pending_bottom_sheet.dart';
+import 'package:go_share/util/lib/toast.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
@@ -25,7 +30,11 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
   var maxLines = 3;
   bool isChecked = false;
 
+  final _controller = ServiceProviderAddVehicleController();
+
   var vehicleNumberController = TextEditingController();
+  var serviceProviderIdController = TextEditingController();
+  var passwordController = TextEditingController();
   var vehicleCapacityController = TextEditingController();
   var driverNameController = TextEditingController();
   var driverLicenseNumberController = TextEditingController();
@@ -68,19 +77,27 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
             VSpacer40(),
             TextFieldHeadline(headline: 'Vehicle Number'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: vehicleNumberController),
+            VSpacer40(),
+            TextFieldHeadline(headline: 'Service Provider ID'),
+            VSpacer10(),
+            CommonTextField(controller: serviceProviderIdController),
+            VSpacer40(),
+            TextFieldHeadline(headline: 'Password'),
+            VSpacer10(),
+            CommonTextField(controller: passwordController),
             VSpacer40(),
             TextFieldHeadline(headline: 'Vehicle capacity'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: vehicleCapacityController),
             VSpacer40(),
             TextFieldHeadline(headline: 'Driver Name'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: driverNameController),
             VSpacer40(),
             TextFieldHeadline(headline: 'Driver License Number'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: driverLicenseNumberController),
             VSpacer40(),
             TextFieldHeadline(headline: 'Driver License Validity'),
             VSpacer10(),
@@ -88,23 +105,23 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
             VSpacer40(),
             TextFieldHeadline(headline: 'Driver Phone Number'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: driverPhoneController),
             VSpacer40(),
             TextFieldHeadline(headline: 'Contact Person Position'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: contactPersonPositionController),
             VSpacer40(),
             TextFieldHeadline(headline: 'Attendant Name'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: attendantNamePositionController),
             VSpacer40(),
             TextFieldHeadline(headline: 'Attendant phone'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: attendantPhonePositionController),
             VSpacer40(),
             TextFieldHeadline(headline: 'Attendant NRIC'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: attendantNRICPositionController),
             VSpacer40(),
             TextFieldHeadline(headline: 'Attendant DOB'),
             VSpacer10(),
@@ -113,7 +130,22 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
             _agreeToTerms(),
             VSpacer20(),
             PositiveButton(text: "Submit", onClicked: () {
-              modalBottomSheetMenuPending(context);
+              showLoader();
+              var request = AddVehicleRequest(
+                vehicleNumber: vehicleNumberController.text,
+                servicePartnerId: int.parse(serviceProviderIdController.text),
+                capacity: int.parse(vehicleCapacityController.text),
+                password: passwordController.text,
+                driverName: driverNameController.text,
+                driverLicenseNumber: driverLicenseNumberController.text,
+                driverPhone: driverPhoneController.text,
+                attendantName: attendantNamePositionController.text,
+                attendantPhone: attendantPhonePositionController.text,
+                driverLicenseValidity: driverLicenseValidityController.text,
+                attendantNric: attendantNRICPositionController.text,
+                attendantDob: attendantDOBController.text,
+              );
+              addVehicle(request);
             }),
             VSpacer40(),
           ],
@@ -191,6 +223,22 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
       ),
       cursorColor: accent,
     );
+  }
+
+  addVehicle(AddVehicleRequest request) async{
+    if(_image!=null){
+      var response = await _controller.addVehicle(request, _image!);
+      Get.back();
+      if(response.data!=null){
+        modalBottomSheetMenuPending(context);
+      }else{
+        ToastUtil.show("Failed to add vehicle");
+      }
+    }else{
+      Get.back();
+      ToastUtil.show("Please Select Image");
+    }
+
   }
 
   _captureImage() => Row(

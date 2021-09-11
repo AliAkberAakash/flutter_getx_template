@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
 import 'package:go_share/constants.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
@@ -63,7 +64,8 @@ void modalBottomSheetMenuPending(BuildContext context) {
                     child: PendingButton(
                       text: "Contact Support Team",
                       onClick: () {
-                        //Get.to(WidgetContainerView());
+                        Get.back();
+                        Get.back();
                       },
                     ),
                   ),

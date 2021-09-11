@@ -9,6 +9,8 @@ import 'package:go_share/data/models/service_partner/auth/login/service_partner_
 import 'package:go_share/data/models/service_partner/auth/signup/service_partner_signup_request.dart';
 import 'package:go_share/data/models/service_partner/auth/signup/service_partner_signup_response.dart';
 import 'package:go_share/data/models/service_partner/profile/service_partner_profile_response.dart';
+import 'package:go_share/data/models/vehicles/add_vehicle_request.dart';
+import 'package:go_share/data/models/vehicles/ass_vehicle_response.dart';
 import 'package:go_share/data/models/vehicles/vehicle_list_response.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/shared_pref_utils.dart';
@@ -127,6 +129,29 @@ class Repository{
       logger.d(e);
       return DriverLoginResponse(
         message: "Driver login data parsing error",
+      );
+    }
+  }
+
+  Future<AddVehicleResponse> addVehicle(AddVehicleRequest request, File image) async {
+    try{
+      var response = await helper.postMultiPart(
+          NetworkConstants.ADD_VEHICLE,
+          "image",
+          image,
+          request.toJson(),
+      );
+      if(response.statusCode==200){
+        return AddVehicleResponse.fromJson(response.data);
+      }else{
+        return AddVehicleResponse(
+          success: false,
+        );
+      }
+    }catch(e){
+      logger.d(e);
+      return AddVehicleResponse(
+        success: false,
       );
     }
   }

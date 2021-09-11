@@ -29,9 +29,9 @@ class AddVehicleRequest {
   String driverPhone;
   String attendantName;
   String attendantPhone;
-  DateTime driverLicenseValidity;
+  String driverLicenseValidity;
   String attendantNric;
-  DateTime attendantDob;
+  String attendantDob;
 
   factory AddVehicleRequest.fromJson(Map<String, dynamic> json) => AddVehicleRequest(
     vehicleNumber: json["vehicle_number"],
@@ -43,9 +43,9 @@ class AddVehicleRequest {
     driverPhone: json["driver_phone"],
     attendantName: json["attendant_name"],
     attendantPhone: json["attendant_phone"],
-    driverLicenseValidity: DateTime.parse(json["driver_license_validity"]),
+    driverLicenseValidity: json["driver_license_validity"],
     attendantNric: json["attendant_nric"],
-    attendantDob: DateTime.parse(json["attendant_dob"]),
+    attendantDob: json["attendant_dob"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -58,8 +58,8 @@ class AddVehicleRequest {
     "driver_phone": driverPhone,
     "attendant_name": attendantName,
     "attendant_phone": attendantPhone,
-    "driver_license_validity": "${driverLicenseValidity.year.toString().padLeft(4, '0')}-${driverLicenseValidity.month.toString().padLeft(2, '0')}-${driverLicenseValidity.day.toString().padLeft(2, '0')}",
+    "driver_license_validity": driverLicenseValidity,
     "attendant_nric": attendantNric,
-    "attendant_dob": "${attendantDob.year.toString().padLeft(4, '0')}-${attendantDob.month.toString().padLeft(2, '0')}-${attendantDob.day.toString().padLeft(2, '0')}",
+    "attendant_dob": attendantDob,
   };
 }
