@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:go_share/ui/notification/notification_screen.dart';
 import 'package:go_share/ui/profile/profile_screen_page.dart';
+import 'package:go_share/ui/section1/driver_login/driver_login_controller.dart';
 import 'package:go_share/utils/constants.dart';
 
 class DriverContainer extends StatefulWidget {
@@ -15,6 +16,8 @@ class DriverContainer extends StatefulWidget {
 class _DriverContainerState extends State<DriverContainer> {
 
   int _selectedItem = 0;
+
+  final _controller = DriverLoginController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +49,9 @@ class _DriverContainerState extends State<DriverContainer> {
             title: "Sign Out",
             index: 2,
             onTap: (int position) {
-              Get.back();
+              _controller.signOut().then((value){
+                Get.back();
+              });
             },
           ),
         ],

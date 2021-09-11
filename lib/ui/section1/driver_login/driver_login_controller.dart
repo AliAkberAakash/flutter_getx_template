@@ -25,7 +25,11 @@ class DriverLoginController extends GetxController{
   }
   
   Future<bool> isLoggedIn() async{
-    return await repository.isLoggedIn();
+    return await repository.isDriverLoggedIn();
+  }
+
+  signOut() async{
+    await SharedPrefUtil.delete(NetworkConstants.DRIVER_TOKEN);
   }
 
 }
