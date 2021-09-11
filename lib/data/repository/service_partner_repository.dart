@@ -4,6 +4,7 @@ import 'package:go_share/core/network/api_base_helper.dart';
 import 'package:go_share/core/network/dio_factory.dart';
 import 'package:go_share/data/models/driver/driver_login_request.dart';
 import 'package:go_share/data/models/driver/driver_login_response.dart';
+import 'package:go_share/data/models/driver/driver_profile_response.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_request.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_response.dart';
 import 'package:go_share/data/models/service_partner/auth/signup/service_partner_signup_request.dart';
@@ -153,6 +154,18 @@ class Repository{
       return AddVehicleResponse(
         success: false,
       );
+    }
+  }
+
+  Future<DriverProfileResponse> getDriverProfile() async{
+    try{
+      var response = await helper.getDriver(NetworkConstants.DRIVER_PROFILE);
+      if(response.statusCode==200)
+        return DriverProfileResponse.fromJson(response.data);
+      else return DriverProfileResponse();
+    }catch(e){
+      logger.d(e);
+      return DriverProfileResponse();
     }
   }
 

@@ -24,6 +24,18 @@ class ApiBaseHelper{
     }
   }
 
+  Future<Response> getDriver(String endUrl) async {
+    await setDriverToken();
+    try {
+      // make the network call
+      final response = await dioFactory.getDio().get(NetworkConstants.BASE_URL+endUrl);
+      //return the response
+      return _returnResponse(response);
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    }
+  }
+
   Future<Response> getWithParams(String endUrl, Map<String, dynamic> params) async {
     await setToken();
     try {
@@ -93,6 +105,16 @@ class ApiBaseHelper{
 
   Future<void> setToken() async{
     var token = await SharedPrefUtil.getString(NetworkConstants.AUTHORIZATION);
+    dioFactory.getDio().options = BaseOptions(
+        headers: {
+          NetworkConstants.ACCEPT : NetworkConstants.ACCEPT_TYPE,
+          NetworkConstants.AUTHORIZATION : token,
+        }
+    );
+  }
+
+  Future<void> setDriverToken() async{
+    var token = await SharedPrefUtil.getString(NetworkConstants.DRIVER_TOKEN);
     dioFactory.getDio().options = BaseOptions(
         headers: {
           NetworkConstants.ACCEPT : NetworkConstants.ACCEPT_TYPE,
