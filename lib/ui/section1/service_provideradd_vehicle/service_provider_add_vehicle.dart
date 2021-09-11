@@ -9,7 +9,9 @@ import 'package:go_share/ui/section4/pending_bottom_sheet/pending_bottom_sheet.d
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 class ServiceProviderAddVehicleScreen extends StatefulWidget {
   const ServiceProviderAddVehicleScreen({Key? key}) : super(key: key);
@@ -22,6 +24,18 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
   var mainWidth;
   var maxLines = 3;
   bool isChecked = false;
+
+  var vehicleNumberController = TextEditingController();
+  var vehicleCapacityController = TextEditingController();
+  var driverNameController = TextEditingController();
+  var driverLicenseNumberController = TextEditingController();
+  var driverLicenseValidityController = TextEditingController();
+  var driverPhoneController = TextEditingController();
+  var contactPersonPositionController = TextEditingController();
+  var attendantNamePositionController = TextEditingController();
+  var attendantPhonePositionController = TextEditingController();
+  var attendantNRICPositionController = TextEditingController();
+  var attendantDOBController = TextEditingController();
 
   File? _image;
 
@@ -43,6 +57,7 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
     return Scaffold(
       body: SafeArea(
         child: ListView(
+          physics: BouncingScrollPhysics(),
           padding: EdgeInsets.all(dp20),
           children: [
             LargeHeadlineWidget(headline: 'Add your vehicle'),
@@ -67,6 +82,10 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
             VSpacer10(),
             CommonTextField(controller: TextEditingController()),
             VSpacer40(),
+            TextFieldHeadline(headline: 'Driver License Validity'),
+            VSpacer10(),
+            _datePicker(driverLicenseValidityController, "Driver License Validity"),
+            VSpacer40(),
             TextFieldHeadline(headline: 'Driver Phone Number'),
             VSpacer10(),
             CommonTextField(controller: TextEditingController()),
@@ -83,14 +102,94 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
             VSpacer10(),
             CommonTextField(controller: TextEditingController()),
             VSpacer40(),
+            TextFieldHeadline(headline: 'Attendant NRIC'),
+            VSpacer10(),
+            CommonTextField(controller: TextEditingController()),
+            VSpacer40(),
+            TextFieldHeadline(headline: 'Attendant DOB'),
+            VSpacer10(),
+            _datePicker(attendantDOBController, "Attendant DOB"),
+            VSpacer40(),
             _agreeToTerms(),
+            VSpacer20(),
             PositiveButton(text: "Submit", onClicked: () {
               modalBottomSheetMenuPending(context);
             }),
-            VSpacer20(),
+            VSpacer40(),
           ],
         ),
       ),
+    );
+  }
+
+  DateTime selectedDate = DateTime.now();
+
+  Future<void> _selectDate(BuildContext context, TextEditingController controller) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        builder: (ctx, child){
+          return Theme(
+            data: ThemeData.light().copyWith(
+              colorScheme: ColorScheme.light(primary: accent),
+              // buttonTheme: ButtonThemeData(
+              //     textTheme: acce
+              // ),
+            ),
+            child: child!,
+          );
+        },
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101)
+    );
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        controller.text=formatDate(selectedDate);
+        selectedDate = picked;
+      });
+  }
+
+  String formatDate(DateTime date){
+    var outputFormat = DateFormat('yyyy-MM-dd');
+    return outputFormat.format(date);
+  }
+
+  _datePicker(TextEditingController controller, String hint){
+    return TextField(
+      readOnly: true,
+      controller: controller,
+      style: TextStyle(
+        color: darkText,
+        fontSize: dp18,
+        fontWeight: FontWeight.bold,
+      ),
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        suffixIcon: IconButton(
+          onPressed: (){
+            _selectDate(context, controller);
+          },
+          icon: Icon(
+            Icons.date_range,
+            color: accent,
+          ),
+        ),
+        contentPadding: EdgeInsets.only(left: 10),
+        hintText: hint,
+        hintStyle: GoogleFonts.manrope(
+            color: light_grey,
+            fontSize: 14
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(dp10),
+          borderSide: BorderSide(color: grey),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(dp10),
+          borderSide: BorderSide(color: accent),
+        ),
+      ),
+      cursorColor: accent,
     );
   }
 
