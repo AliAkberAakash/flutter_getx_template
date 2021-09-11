@@ -11,14 +11,14 @@ import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 import 'package:image_picker/image_picker.dart';
 
-class AddVehicleScreen extends StatefulWidget {
-  const AddVehicleScreen({Key? key}) : super(key: key);
+class ServiceProviderAddVehicleScreen extends StatefulWidget {
+  const ServiceProviderAddVehicleScreen({Key? key}) : super(key: key);
 
   @override
-  _AddVehicleScreenState createState() => _AddVehicleScreenState();
+  _ServiceProviderAddVehicleScreenState createState() => _ServiceProviderAddVehicleScreenState();
 }
 
-class _AddVehicleScreenState extends State<AddVehicleScreen> {
+class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehicleScreen> {
   var mainWidth;
   var maxLines = 3;
   bool isChecked = false;

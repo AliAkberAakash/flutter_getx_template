@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:go_share/ui/add_vehicle/add_vehicle.dart';
+import 'package:go_share/ui/section1/service_provideradd_vehicle/service_provider_add_vehicle.dart';
 import 'package:go_share/ui/container/home/home.dart';
 import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
@@ -257,7 +257,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
       case 0:
         return HomeView();
       case 1:
-        return AddVehicleScreen();
+        return ServiceProviderAddVehicleScreen();
       case 2:
         return ServiceProviderProfileScreen();
       case 3:
