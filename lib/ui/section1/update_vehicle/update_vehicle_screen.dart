@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -93,7 +94,7 @@ class _UpdateVehicleScreenState extends State<UpdateVehicleScreen> {
             VSpacer40(),
             TextFieldHeadline(headline: 'Vehicle image'),
             VSpacer20(),
-            _capTureImage(),
+            _capTureImage(vehicle.image),
             VSpacer40(),
             /*TextFieldHeadline(headline: 'Vehicle number'),
             VSpacer10(),
@@ -320,17 +321,24 @@ class _UpdateVehicleScreenState extends State<UpdateVehicleScreen> {
         });
   }
 
-  _capTureImage() => Row(
+  _capTureImage(String imageUrl) => Row(
         children: [
           _image != null
               ? CircleAvatar(
                   radius: dp35,
                   backgroundImage: Image.file(_image!, fit: BoxFit.cover).image,
                 )
-              : CircleAvatar(
-                  radius: dp35,
-                  backgroundColor: grey,
-                ),
+              : ClipRRect(
+            borderRadius: BorderRadius.all(
+              Radius.circular(dp100),
+            ),
+            child: CachedNetworkImage(
+              height: dp70,
+              width: dp70,
+              imageUrl: imageUrl,
+              fit: BoxFit.cover,
+            ),
+          ),
           HSpacer20(),
           TextButton(
             onPressed: () => _getImage(),

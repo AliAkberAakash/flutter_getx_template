@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_share/data/models/service_partner/profile/service_partner_profile_response.dart';
@@ -83,7 +84,7 @@ class _ServicePartnerProfileUpdateScreenState extends State<ServicePartnerProfil
         child: ListView(
           padding: EdgeInsets.all(dp20),
           children: [
-            _captureImage(),
+            _captureImage(profileResponse.data!.image),
             VSpacer40(),
             TextFieldHeadline(headline: 'Full Name'),
             VSpacer10(),
@@ -170,7 +171,7 @@ class _ServicePartnerProfileUpdateScreenState extends State<ServicePartnerProfil
     ToastUtil.show(response.msg);
   }
 
-  _captureImage() => Row(
+  _captureImage(String imageUrl) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           _image != null
@@ -178,9 +179,16 @@ class _ServicePartnerProfileUpdateScreenState extends State<ServicePartnerProfil
                   radius: dp35,
                   backgroundImage: Image.file(_image!, fit: BoxFit.cover).image,
                 )
-              : CircleAvatar(
-                  radius: dp35,
-                  backgroundColor: grey,
+              : ClipRRect(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(dp100),
+                  ),
+                  child: CachedNetworkImage(
+                    height: dp70,
+                    width: dp70,
+                    imageUrl: imageUrl,
+                    fit: BoxFit.cover,
+                  ),
                 ),
           TextButton(
             onPressed: () => _getImage(),
