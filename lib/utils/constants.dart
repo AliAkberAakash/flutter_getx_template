@@ -28,7 +28,7 @@ class AssetConstants {
 
 class NetworkConstants {
   //urls
-  static const BASE_URL = "http://api.goshare.sg/";
+  static const BASE_URL = "http://api.goshare.sg/new/";
 
   //header parameters
   static const ACCEPT = "Accept";

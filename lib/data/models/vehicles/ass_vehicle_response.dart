@@ -50,7 +50,7 @@ class Data {
   });
 
   String vehicleNumber;
-  String servicePartnerId;
+  int servicePartnerId;
   String capacity;
   String image;
   String password;
