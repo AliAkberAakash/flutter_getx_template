@@ -65,7 +65,6 @@ void modalBottomSheetMenuSuccess(BuildContext context) {
                       onClick: () {
                         Get.back();
                         Get.back();
-                        Get.to(NavigationContainer());
                       },
                     ),
                   ),
