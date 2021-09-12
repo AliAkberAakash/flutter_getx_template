@@ -16,6 +16,7 @@ class ProfilePictureWidget extends StatelessWidget {
         height: dp50,
         width: dp50,
         imageUrl: imgUrl,
+        fit: BoxFit.fill,
       ),
     );
   }
