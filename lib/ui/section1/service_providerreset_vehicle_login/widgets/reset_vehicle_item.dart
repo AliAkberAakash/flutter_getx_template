@@ -128,7 +128,7 @@ class ResetVehicleItem extends StatelessWidget {
                   padding: const EdgeInsets.all(dp20),
                   child: OutlinedMaterialButton(
                     onClick: () {
-                      Get.to(ResetVehicleLoginScreen());
+                      Get.to(ResetVehicleLoginScreen(id: vehicle.id,));
                     },
                     text: "Reset Login",
                   ),

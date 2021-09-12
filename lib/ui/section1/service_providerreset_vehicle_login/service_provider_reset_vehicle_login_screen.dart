@@ -2,18 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
+import 'package:go_share/data/models/service_partner/vehicle/sp_reset_vehicle_login_request.dart';
+import 'package:go_share/ui/common_widgets/common_loading_dialog.dart';
 import 'package:go_share/ui/common_widgets/common_password_field.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
+import 'package:go_share/ui/section1/service_providerreset_vehicle_login/service_provider_reset_vehicle_login_controller.dart';
+import 'package:go_share/util/lib/toast.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ResetVehicleLoginScreen extends StatefulWidget {
-  const ResetVehicleLoginScreen({Key? key}) : super(key: key);
+
+  final int id;
+
+  const ResetVehicleLoginScreen({Key? key, required this.id}) : super(key: key);
 
   @override
   _ResetVehicleLoginScreenState createState() =>
@@ -21,6 +28,13 @@ class ResetVehicleLoginScreen extends StatefulWidget {
 }
 
 class _ResetVehicleLoginScreenState extends State<ResetVehicleLoginScreen> {
+
+  var serviceProviderPasswordController = TextEditingController();
+  var newPasswordController = TextEditingController();
+  var confirmPasswordController = TextEditingController();
+
+  final _controller = ServiceProviderResetVehicleController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,29 +57,72 @@ class _ResetVehicleLoginScreenState extends State<ResetVehicleLoginScreen> {
                 ),
                 VSpacer40(),
                 CommonPasswordField(
-                  controller: TextEditingController(),
+                  controller: serviceProviderPasswordController,
                   hint: "Service Partner password",
                 ),
                 VSpacer20(),
                 CommonPasswordField(
-                  controller: TextEditingController(),
+                  controller: newPasswordController,
                   hint: "New password",
                 ),
                 VSpacer20(),
                 CommonPasswordField(
-                  controller: TextEditingController(),
+                  controller: confirmPasswordController,
                   hint: "Confirm new password",
                 ),
                 VSpacer60(),
-                PositiveButton(text: "Submit", onClicked: () {
-                  modalBottomSheetMenuSuccess(context);
-                })
+                PositiveButton(
+                  text: "Submit",
+                  onClicked: () {
+                    if(validate()){
+                      var request = SpResetVehicleLoginRequest(
+                        servicePartnerPassword: serviceProviderPasswordController.text,
+                        password: newPasswordController.text,
+                        vehicleId: widget.id,
+                      );
+                      resetPassword(request);
+                    }
+                  },
+                )
               ],
             ),
           );
         },
       ),
     );
+  }
+
+  bool validate(){
+    if(
+      serviceProviderPasswordController.text.trim().isEmpty ||
+      newPasswordController.text.trim().isEmpty ||
+      confirmPasswordController.text.trim().isEmpty
+    ) {
+      ToastUtil.show("Please Fill all fields");
+      return false;
+    }
+
+    if(newPasswordController.text != confirmPasswordController.text){
+      ToastUtil.show("Passwords do not match");
+      return false;
+    }
+
+    return true;
+
+  }
+
+  resetPassword(SpResetVehicleLoginRequest request) async{
+
+    showLoader();
+
+    var response = await _controller.resetVehicleLogin(request);
+
+    Get.back();
+    if(response.success){
+      modalBottomSheetMenuSuccess(context);
+    }
+    ToastUtil.show(response.msg);
+
   }
 
   void modalBottomSheetMenuSuccess(BuildContext context) {

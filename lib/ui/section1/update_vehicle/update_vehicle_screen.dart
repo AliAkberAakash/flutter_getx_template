@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:go_share/data/models/vehicles/vehicle_list_response.dart';
 import 'package:go_share/ui/common_widgets/common_text_field.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
@@ -19,7 +20,10 @@ import 'package:image_picker/image_picker.dart';
 import '../../../constants.dart';
 
 class UpdateVehicleScreen extends StatefulWidget {
-  const UpdateVehicleScreen({Key? key}) : super(key: key);
+
+  final Vehicle vehicle;
+
+  const UpdateVehicleScreen({Key? key, required this.vehicle}) : super(key: key);
 
   @override
   _UpdateVehicleScreenState createState() => _UpdateVehicleScreenState();
@@ -30,8 +34,9 @@ class _UpdateVehicleScreenState extends State<UpdateVehicleScreen> {
   var maxLines = 3;
 
   File? _image;
-
   final picker = ImagePicker();
+
+
 
   void _getImage() async {
     XFile? imageFile = await picker.pickImage(source: ImageSource.gallery);

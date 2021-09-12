@@ -121,7 +121,7 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                     OutlinedMaterialButton(
                       color: grey,
                       onClick: () {
-                        Get.to(() => UpdateVehicleScreen());
+                        Get.to(() => UpdateVehicleScreen(vehicle: vehicle,));
                       },
                       text: "Update vehicle details",
                     ),

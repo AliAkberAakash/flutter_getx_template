@@ -12,6 +12,8 @@ import 'package:go_share/data/models/service_partner/auth/signup/service_partner
 import 'package:go_share/data/models/service_partner/profile/service_partner_profile_response.dart';
 import 'package:go_share/data/models/service_partner/profile/service_partner_profile_update_request.dart';
 import 'package:go_share/data/models/service_partner/profile/service_partner_profile_update_response.dart';
+import 'package:go_share/data/models/service_partner/vehicle/sp_reset_vehicle_login_request.dart';
+import 'package:go_share/data/models/service_partner/vehicle/sp_reset_veicle_login_response.dart';
 import 'package:go_share/data/models/vehicles/add_vehicle_request.dart';
 import 'package:go_share/data/models/vehicles/ass_vehicle_response.dart';
 import 'package:go_share/data/models/vehicles/vehicle_list_response.dart';
@@ -200,6 +202,31 @@ class Repository{
       return ServicePartnerProfileUpdateResponse(
           success: false,
           msg: "Data Parsing Error"
+      );
+    }
+  }
+
+  Future<SpResetVehicleLoginResponse> resetSPVehicleLogin(SpResetVehicleLoginRequest request) async{
+    try{
+      var response = await helper.post(
+        NetworkConstants.SP_VEHICLE_RESET_PASSWORD,
+        request.toJson(),
+      );
+
+      if(response.statusCode == 200){
+        return SpResetVehicleLoginResponse.fromJson(response.data);
+      }else{
+        return SpResetVehicleLoginResponse(
+          success: false,
+          msg: "Server error",
+        );
+      }
+
+    }catch(e){
+      logger.d(e);
+      return SpResetVehicleLoginResponse(
+        success: false,
+        msg: "Data Parsing Error",
       );
     }
   }

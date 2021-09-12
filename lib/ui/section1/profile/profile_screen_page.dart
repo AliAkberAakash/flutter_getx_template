@@ -103,7 +103,7 @@ class _ProfileScreenPageState extends State<ProfileScreenPage> {
                     Expanded(child: UpdateButton(
                         text: 'Change Password', onClicked: () {
                       Get.to(
-                          ResetVehicleLoginScreen()
+                          ResetVehicleLoginScreen(id: response.data!.id,)
                       );
                     })),
                   ],
