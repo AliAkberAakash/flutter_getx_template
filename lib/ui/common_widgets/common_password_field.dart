@@ -4,17 +4,25 @@ import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CommonPasswordField extends StatelessWidget {
+class CommonPasswordField extends StatefulWidget {
   final TextEditingController controller;
   final String hint;
 
   const CommonPasswordField({required this.controller, this.hint = ""});
 
   @override
+  _CommonPasswordFieldState createState() => _CommonPasswordFieldState();
+}
+
+class _CommonPasswordFieldState extends State<CommonPasswordField> {
+
+  bool isVisible = false;
+
+  @override
   Widget build(BuildContext context) {
     return TextField(
-      obscureText: true,
-      controller: controller,
+      obscureText: !isVisible,
+      controller: widget.controller,
       style: TextStyle(
         color: darkText,
         fontSize: dp18,
@@ -23,7 +31,7 @@ class CommonPasswordField extends StatelessWidget {
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.only(left: 10),
-        hintText: hint,
+        hintText: widget.hint,
         hintStyle: GoogleFonts.manrope(
             color: light_grey,
             fontSize: 14
@@ -36,10 +44,14 @@ class CommonPasswordField extends StatelessWidget {
           borderRadius: BorderRadius.circular(dp10),
           borderSide: BorderSide(color: accent),
         ),
-        suffix: Padding(
-          padding: EdgeInsets.only(right: dp10),
-          child: Icon(
-            Icons.visibility_off,
+        suffix: IconButton(
+          onPressed: (){
+            setState(() {
+              isVisible = !isVisible;
+            });
+          },
+          icon: Icon(
+            isVisible ? Icons.visibility_rounded : Icons.visibility_off,
           ),
         ),
       ),
