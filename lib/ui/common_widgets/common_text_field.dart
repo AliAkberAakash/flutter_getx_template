@@ -6,12 +6,14 @@ import 'package:google_fonts/google_fonts.dart';
 class CommonTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hint;
+  final TextInputType type;
 
-  const CommonTextField({required this.controller, this.hint = ""});
+  const CommonTextField({required this.controller, this.hint = "", this.type = TextInputType.text});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      keyboardType: type,
       controller: controller,
       style: TextStyle(
         color: darkText,
