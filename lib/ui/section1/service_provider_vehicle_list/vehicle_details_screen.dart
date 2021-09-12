@@ -41,7 +41,7 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
           children: [
             VehicleRequestItem(
               vehicle: vehicle,
-              status: ChipStatus.PENDING,
+              status: getStatus(vehicle.status),
               showButton: false,
             ),
             VSpacer10(),
@@ -135,4 +135,9 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
       ),
     ));
   }
+
+  getStatus(int status){
+    return status==0 ? ChipStatus.PENDING : ChipStatus.APPROVED;
+  }
+
 }
