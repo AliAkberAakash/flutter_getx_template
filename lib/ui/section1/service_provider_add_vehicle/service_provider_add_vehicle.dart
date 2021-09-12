@@ -8,7 +8,6 @@ import 'package:go_share/ui/common_widgets/common_text_field.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
-import 'package:go_share/ui/section1/service_provideradd_vehicle/service_provider_add_vehicle_controller.dart';
 import 'package:go_share/ui/section4/pending_bottom_sheet/pending_bottom_sheet.dart';
 import 'package:go_share/util/lib/toast.dart';
 import 'package:go_share/utils/colors.dart';
@@ -17,6 +16,8 @@ import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+
+import 'service_provider_add_vehicle_controller.dart';
 
 class ServiceProviderAddVehicleScreen extends StatefulWidget {
   const ServiceProviderAddVehicleScreen({Key? key}) : super(key: key);

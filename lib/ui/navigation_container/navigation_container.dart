@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:go_share/ui/common_widgets/common_loading_dialog.dart';
 import 'package:go_share/ui/navigation_container/navigation_container_controller.dart';
+import 'package:go_share/ui/section1/service_provider_add_vehicle/service_provider_add_vehicle.dart';
 import 'package:go_share/ui/section1/service_provider_profile/service_provider_profile_controller.dart';
 import 'package:go_share/ui/section1/service_provider_welcome/service_provider_welcome_screen.dart';
-import 'package:go_share/ui/section1/service_provideradd_vehicle/service_provider_add_vehicle.dart';
 import 'package:go_share/ui/container/home/home.dart';
 import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
