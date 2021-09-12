@@ -7,9 +7,7 @@ String addVehicleRequestToJson(AddVehicleRequest data) => json.encode(data.toJso
 class AddVehicleRequest {
   AddVehicleRequest({
     required this.vehicleNumber,
-    required this.servicePartnerId,
     required this.capacity,
-    required this.password,
     required this.driverName,
     required this.driverLicenseNumber,
     required this.driverPhone,
@@ -21,9 +19,7 @@ class AddVehicleRequest {
   });
 
   String vehicleNumber;
-  int servicePartnerId;
   int capacity;
-  String password;
   String driverName;
   String driverLicenseNumber;
   String driverPhone;
@@ -35,9 +31,7 @@ class AddVehicleRequest {
 
   factory AddVehicleRequest.fromJson(Map<String, dynamic> json) => AddVehicleRequest(
     vehicleNumber: json["vehicle_number"],
-    servicePartnerId: json["service_partner_id"],
     capacity: json["capacity"],
-    password: json["password"],
     driverName: json["driver_name"],
     driverLicenseNumber: json["driver_license_number"],
     driverPhone: json["driver_phone"],
@@ -50,9 +44,7 @@ class AddVehicleRequest {
 
   Map<String, dynamic> toJson() => {
     "vehicle_number": vehicleNumber,
-    "service_partner_id": servicePartnerId,
     "capacity": capacity,
-    "password": password,
     "driver_name": driverName,
     "driver_license_number": driverLicenseNumber,
     "driver_phone": driverPhone,

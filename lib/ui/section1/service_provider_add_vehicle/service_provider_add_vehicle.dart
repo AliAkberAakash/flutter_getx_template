@@ -34,14 +34,11 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
   final _controller = ServiceProviderAddVehicleController();
 
   var vehicleNumberController = TextEditingController();
-  var serviceProviderIdController = TextEditingController();
-  var passwordController = TextEditingController();
   var vehicleCapacityController = TextEditingController();
   var driverNameController = TextEditingController();
   var driverLicenseNumberController = TextEditingController();
   var driverLicenseValidityController = TextEditingController();
   var driverPhoneController = TextEditingController();
-  var contactPersonPositionController = TextEditingController();
   var attendantNamePositionController = TextEditingController();
   var attendantPhonePositionController = TextEditingController();
   var attendantNRICPositionController = TextEditingController();
@@ -134,9 +131,7 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
               showLoader();
               var request = AddVehicleRequest(
                 vehicleNumber: vehicleNumberController.text,
-                servicePartnerId: int.parse(serviceProviderIdController.text),
                 capacity: int.parse(vehicleCapacityController.text),
-                password: passwordController.text,
                 driverName: driverNameController.text,
                 driverLicenseNumber: driverLicenseNumberController.text,
                 driverPhone: driverPhoneController.text,
