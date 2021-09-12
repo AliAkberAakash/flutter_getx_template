@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:go_share/core/ui/error_screen.dart';
 import 'package:go_share/core/ui/loading_widget.dart';
 import 'package:go_share/ui/common_widgets/update_button.dart';
+import 'package:go_share/ui/section1/driver_reset_password/reset_password_request_screen.dart';
 import 'package:go_share/ui/section1/profile/driver_profile_controller.dart';
 import 'package:go_share/ui/section1/service_providerreset_vehicle_login/service_provider_reset_vehicle_login_screen.dart';
 import 'package:go_share/utils/colors.dart';
@@ -103,7 +104,7 @@ class _ProfileScreenPageState extends State<ProfileScreenPage> {
                     Expanded(child: UpdateButton(
                         text: 'Change Password', onClicked: () {
                       Get.to(
-                          ResetVehicleLoginScreen(id: response.data!.id,)
+                          ResetPasswordRequestScreen()
                       );
                     })),
                   ],

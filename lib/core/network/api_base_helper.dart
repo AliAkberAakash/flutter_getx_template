@@ -82,6 +82,21 @@ class ApiBaseHelper{
     }
   }
 
+  Future<Response> postDriver(String endUrl, Map<String, dynamic> body) async {
+    await setDriverToken();
+    try {
+      // make the network call
+      final response = await dioFactory.getDio().post(
+        NetworkConstants.BASE_URL+endUrl,
+        data: body,
+      );
+      //return the response
+      return _returnResponse(response);
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    }
+  }
+
   Future<Response> postMultiPart(String endUrl,String key, File file, Map<String, dynamic> body) async {
     await setToken();
 
