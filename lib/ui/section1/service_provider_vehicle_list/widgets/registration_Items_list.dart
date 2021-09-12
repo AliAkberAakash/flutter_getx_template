@@ -22,6 +22,7 @@ class _RegistrationItemsListState extends State<RegistrationItemsList> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      physics: BouncingScrollPhysics(),
       itemCount: vehicleList.length,
       itemBuilder: (ctx, idx){
         return VehicleRequestItem(

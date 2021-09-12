@@ -7,7 +7,7 @@ import 'package:go_share/ui/common_widgets/text_field_headline.dart';
 import 'package:go_share/ui/common_widgets/text_field_value_widget.dart';
 import 'package:go_share/ui/section1/service_provider_vehicle_list/widgets/status_chip.dart';
 import 'package:go_share/ui/section1/service_provider_vehicle_list/widgets/vehicle_request_item.dart';
-import 'package:go_share/ui/update_vehicle/update_vehicle_screen.dart';
+import 'package:go_share/ui/section1/update_vehicle/update_vehicle_screen.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/date_time_utils.dart';
 import 'package:go_share/utils/dimens.dart';

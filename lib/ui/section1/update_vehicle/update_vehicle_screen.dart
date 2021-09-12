@@ -16,7 +16,7 @@ import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../constants.dart';
+import '../../../constants.dart';
 
 class UpdateVehicleScreen extends StatefulWidget {
   const UpdateVehicleScreen({Key? key}) : super(key: key);
