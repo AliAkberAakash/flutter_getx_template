@@ -26,7 +26,7 @@ class ServiceProviderProfileScreen extends StatefulWidget {
 class _ServiceProviderProfileScreenState
     extends State<ServiceProviderProfileScreen> {
 
-  final _controller = ServiceProviderProfileController();
+  final ServiceProviderProfileController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {

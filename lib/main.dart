@@ -6,6 +6,7 @@ import 'package:go_share/data/local/service/theme_service.dart';
 import 'package:go_share/data/repository/service_partner_repository.dart';
 import 'package:go_share/essential/translations.dart';
 import 'package:go_share/ui/container/widget_container/widget_container.dart';
+import 'package:go_share/ui/section1/service_provider_profile/service_provider_profile_controller.dart';
 
 
 void main() async {
@@ -20,6 +21,7 @@ Future<void> initializeAppEssentials() async {
 
   Get.put(ThemeService());
   Get.put(Repository());
+  Get.put(ServiceProviderProfileController());
 
   Get.log('All services started...');
 }

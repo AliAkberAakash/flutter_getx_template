@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:go_share/ui/common_widgets/common_loading_dialog.dart';
 import 'package:go_share/ui/navigation_container/navigation_container_controller.dart';
+import 'package:go_share/ui/section1/service_provider_profile/service_provider_profile_controller.dart';
 import 'package:go_share/ui/section1/service_provider_welcome/service_provider_welcome_screen.dart';
 import 'package:go_share/ui/section1/service_provideradd_vehicle/service_provider_add_vehicle.dart';
 import 'package:go_share/ui/container/home/home.dart';
@@ -18,6 +19,7 @@ import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
+import 'package:go_share/utils/string_utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NavigationContainer extends StatefulWidget {
@@ -31,6 +33,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
   int _selectedItem = 3;
 
   final _controller = NavigationContainerController();
+  final ServiceProviderProfileController _profileController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -127,37 +130,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
               height: height - 100,
               child: Column(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.all(dp20),
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          radius: dp30,
-                          backgroundImage: NetworkImage(
-                            "https://images.unsplash.com/photo-1563306406-e66174fa3787",
-                          ),
-                        ),
-                        HSpacer20(),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Violet Norman",
-                              style: GoogleFonts.manrope(
-                                color: darkText,
-                                fontWeight: FontWeight.bold,
-                                fontSize: dp16,
-                              ),
-                            ),
-                            Text(
-                              "bayer_martin@yahoo.com",
-                              style: GoogleFonts.manrope(),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  _userInfo(),
                   Expanded(
                     child: ListView(
                       children: [
@@ -240,6 +213,49 @@ class _NavigationContainerState extends State<NavigationContainer> {
           ],
         );
       },
+    );
+  }
+
+  _userInfo(){
+    return Padding(
+      padding: EdgeInsets.all(dp20),
+      child: Obx((){
+
+        var profileResponse = _profileController.profileResponse.value;
+
+        if(profileResponse== null) return Container();
+        else  {
+          if(profileResponse.data == null) return Container();
+          else return Row(
+            children: [
+              CircleAvatar(
+                radius: dp30,
+                backgroundImage: NetworkImage(
+                  getImagePath(profileResponse.data!.image),
+                ),
+              ),
+              HSpacer20(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    profileResponse.data!.name,
+                    style: GoogleFonts.manrope(
+                      color: darkText,
+                      fontWeight: FontWeight.bold,
+                      fontSize: dp16,
+                    ),
+                  ),
+                  Text(
+                    profileResponse.data!.email,
+                    style: GoogleFonts.manrope(),
+                  ),
+                ],
+              ),
+            ],
+          );
+        }
+      }),
     );
   }
 
