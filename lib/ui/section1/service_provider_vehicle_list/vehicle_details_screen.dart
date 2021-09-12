@@ -15,6 +15,8 @@ import 'package:go_share/utils/spacers.dart';
 import 'package:go_share/utils/string_utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'service_provider_vehicle_list_controller.dart';
+
 class VehicleDetailsScreen extends StatefulWidget {
 
   final Vehicle vehicle;
@@ -28,6 +30,8 @@ class VehicleDetailsScreen extends StatefulWidget {
 class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
 
   final Vehicle vehicle;
+  ServiceProviderVehicleListController _controller = Get.find();
+
 
   _VehicleDetailsScreenState(this.vehicle);
 
@@ -121,7 +125,9 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                     OutlinedMaterialButton(
                       color: grey,
                       onClick: () {
-                        Get.to(() => UpdateVehicleScreen(vehicle: vehicle,));
+                        Get.to(() => UpdateVehicleScreen(vehicle: vehicle,))?.then((value){
+                          _controller.getVehicleList();
+                        });
                       },
                       text: "Update vehicle details",
                     ),

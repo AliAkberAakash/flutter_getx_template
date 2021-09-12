@@ -21,7 +21,7 @@ class ServiceProviderVehicleList extends StatefulWidget {
 
 class _ServiceProviderVehicleListState extends State<ServiceProviderVehicleList> {
 
-  final _controller = ServiceProviderVehicleListController();
+  ServiceProviderVehicleListController _controller = Get.find();
 
 
   @override

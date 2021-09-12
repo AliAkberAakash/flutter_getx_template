@@ -9,6 +9,7 @@ class ServiceProviderVehicleListController extends GetxController{
   var vehicleListResponse = Rx<VehicleListResponse?>(null);
 
   getVehicleList() async{
+    vehicleListResponse.value = null;
     var response = await repository.getVehicleList();
     vehicleListResponse.value = response;
   }

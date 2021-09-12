@@ -19,6 +19,8 @@ import 'package:go_share/data/models/service_partner/vehicle/sp_reset_vehicle_lo
 import 'package:go_share/data/models/service_partner/vehicle/sp_reset_veicle_login_response.dart';
 import 'package:go_share/data/models/vehicles/add_vehicle_request.dart';
 import 'package:go_share/data/models/vehicles/ass_vehicle_response.dart';
+import 'package:go_share/data/models/vehicles/update_vehicle_details_request.dart';
+import 'package:go_share/data/models/vehicles/update_vehicle_details_response.dart';
 import 'package:go_share/data/models/vehicles/vehicle_list_response.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/shared_pref_utils.dart';
@@ -268,6 +270,47 @@ class Repository{
       return DriverPasswordResetResponse(
           success: false,
           msg: "Failed to reset Password"
+      );
+    }
+  }
+
+  Future<UpdateVehicleDetailsResponse> updateVehicleDetails(
+      UpdateVehicleDetailsRequest request,
+      File? file,
+      ) async{
+    try{
+      var response;
+
+      if(file != null) {
+        response = await helper.postMultiPart(
+          NetworkConstants.UPDATE_VEHICLE_DETAILS,
+          "image",
+          file,
+          request.toJson(),
+        );
+      }else{
+        response = await helper.post(
+          NetworkConstants.UPDATE_VEHICLE_DETAILS,
+          request.toJson(),
+        );
+      }
+
+      if(response.statusCode==200){
+        return UpdateVehicleDetailsResponse.fromJson(
+            response.data
+        );
+      }else{
+        return UpdateVehicleDetailsResponse(
+            success: false,
+            msg: "Error from the Server"
+        );
+      }
+
+    }catch(e){
+      logger.d(e);
+      return UpdateVehicleDetailsResponse(
+          success: false,
+          msg: "Data Parsing Error"
       );
     }
   }
