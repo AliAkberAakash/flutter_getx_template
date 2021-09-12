@@ -13,6 +13,7 @@ import 'package:go_share/ui/section1/service_provider_profile/service_provider_p
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
+import 'package:go_share/utils/string_utils.dart';
 
 class ServiceProviderProfileScreen extends StatefulWidget {
   const ServiceProviderProfileScreen({Key? key}) : super(key: key);
@@ -83,7 +84,9 @@ class _ServiceProviderProfileScreenState
                   UpdateButton(text: 'Update My Profile', onClicked: () {
                     Get.to(ServicePartnerProfileUpdateScreen(
                       profileResponse: _controller.profileResponse.value!,
-                    ));
+                    ))?.then((value){
+                      _controller.getProfile();
+                    });
                   }),
                   VSpacer60(),
                 ],
@@ -99,7 +102,7 @@ class _ServiceProviderProfileScreenState
   _getLeading(Data? data){
     return Row(
       children: [
-        ProfilePictureWidget(imgUrl: NetworkConstants.BASE_URL+"/"+(data?.image ?? "")),
+        ProfilePictureWidget(imgUrl: getImagePath(data?.image ?? "")),
         SizedBox(width: dp15),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -147,7 +147,7 @@ class _ServicePartnerProfileUpdateScreenState extends State<ServicePartnerProfil
   }
 
   updateProfile(ServicePartnerProfileUpdateRequest request) async{
-    var response = await _controller.updateProfile(request);
+    var response = await _controller.updateProfile(request, _image);
 
     Get.back();
     if(response.data!=null){

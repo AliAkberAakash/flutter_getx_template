@@ -180,14 +180,26 @@ class Repository{
     await SharedPrefUtil.delete(NetworkConstants.AUTHORIZATION);
   }
   
-  Future<ServicePartnerProfileUpdateResponse> updateServicePartnerProfile(ServicePartnerProfileUpdateRequest request) async{
+  Future<ServicePartnerProfileUpdateResponse> updateServicePartnerProfile(
+      ServicePartnerProfileUpdateRequest request,
+      File? file,
+      ) async{
     try{
-      var response = await helper.postMultiPart(
-        NetworkConstants.SERVICE_PARTNER_PROFILE_UPDATE,
-        "image",
-        File("/acb"),
-        request.toJson(),
-      );
+      var response;
+
+      if(file != null) {
+        response = await helper.postMultiPart(
+          NetworkConstants.SERVICE_PARTNER_PROFILE_UPDATE,
+          "image",
+          file,
+          request.toJson(),
+        );
+      }else{
+        response = await helper.post(
+          NetworkConstants.SERVICE_PARTNER_PROFILE_UPDATE,
+          request.toJson(),
+        );
+      }
 
       if(response.statusCode==200){
         return ServicePartnerProfileUpdateResponse.fromJson(
