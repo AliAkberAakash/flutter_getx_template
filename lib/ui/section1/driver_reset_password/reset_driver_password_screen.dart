@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
+import 'package:go_share/data/models/driver/driver_password_reset_request.dart';
 import 'package:go_share/data/models/service_partner/vehicle/sp_reset_vehicle_login_request.dart';
 import 'package:go_share/ui/common_widgets/common_loading_dialog.dart';
 import 'package:go_share/ui/common_widgets/common_password_field.dart';
@@ -9,6 +10,7 @@ import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
+import 'package:go_share/ui/section1/driver_reset_password/reset_password_request_controller.dart';
 import 'package:go_share/ui/section1/service_providerreset_vehicle_login/service_provider_reset_vehicle_login_controller.dart';
 import 'package:go_share/util/lib/toast.dart';
 import 'package:go_share/utils/constants.dart';
@@ -28,11 +30,11 @@ class ResetDriverPasswordScreen extends StatefulWidget {
 
 class _ResetDriverPasswordScreenState extends State<ResetDriverPasswordScreen> {
 
-  var serviceProviderPasswordController = TextEditingController();
+  var resetCodeController = TextEditingController();
   var newPasswordController = TextEditingController();
   var confirmPasswordController = TextEditingController();
 
-  final _controller = ServiceProviderResetVehicleController();
+  final _controller = ResetPasswordRequestController();
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +58,8 @@ class _ResetDriverPasswordScreenState extends State<ResetDriverPasswordScreen> {
                 ),
                 VSpacer40(),
                 CommonPasswordField(
-                  controller: serviceProviderPasswordController,
-                  hint: "Service Partner password",
+                  controller: resetCodeController,
+                  hint: "One time code",
                 ),
                 VSpacer20(),
                 CommonPasswordField(
@@ -73,9 +75,14 @@ class _ResetDriverPasswordScreenState extends State<ResetDriverPasswordScreen> {
                 PositiveButton(
                   text: "Submit",
                   onClicked: () {
-                    if(validate()){
 
-                      //resetPassword(request);
+                    var request = DriverPasswordResetRequest(
+                        resetCode: resetCodeController.text,
+                        password: newPasswordController.text,
+                    );
+
+                    if(validate()){
+                      resetPassword(request);
                     }
                   },
                 )
@@ -89,7 +96,7 @@ class _ResetDriverPasswordScreenState extends State<ResetDriverPasswordScreen> {
 
   bool validate(){
     if(
-    serviceProviderPasswordController.text.trim().isEmpty ||
+    resetCodeController.text.trim().isEmpty ||
         newPasswordController.text.trim().isEmpty ||
         confirmPasswordController.text.trim().isEmpty
     ) {
@@ -106,17 +113,17 @@ class _ResetDriverPasswordScreenState extends State<ResetDriverPasswordScreen> {
 
   }
 
-  resetPassword(SpResetVehicleLoginRequest request) async{
+  resetPassword(DriverPasswordResetRequest request) async{
 
-    // showLoader();
-    //
-    // var response = await _controller.resetVehicleLogin(request);
-    //
-    // Get.back();
-    // if(response.success){
-    //   modalBottomSheetMenuSuccess(context);
-    // }
-    // ToastUtil.show(response.msg);
+    showLoader();
+
+    var response = await _controller.resetDriverLogin(request);
+
+    Get.back();
+    if(response.success){
+      modalBottomSheetMenuSuccess(context);
+    }
+    ToastUtil.show(response.msg);
 
   }
 
