@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
-import 'package:go_share/ui/container/Welcome/WelcomeScreen.dart';
+import 'package:go_share/ui/section1/service_provider_welcome/service_provider_welcome_screen.dart';
 import 'package:go_share/utils/colors.dart';
 
 class MenuButtonOutlineStock extends StatelessWidget {
@@ -29,7 +29,7 @@ class MenuButtonOutlineStock extends StatelessWidget {
         ),
         onPressed: () {
           Get.back();
-          Get.to(WelcomeScreen());
+          Get.to(ServiceProviderWelcomeScreen());
         },
       ),
     );
