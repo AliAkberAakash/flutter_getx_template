@@ -133,7 +133,7 @@ class Repository{
     }catch(e){
       logger.d(e);
       return DriverLoginResponse(
-        message: "Driver login data parsing error",
+        message: "Wrong Credentials",
       );
     }
   }

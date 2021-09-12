@@ -17,12 +17,12 @@ class DriverLoginResponse {
 
   factory DriverLoginResponse.fromJson(Map<String, dynamic> json) => DriverLoginResponse(
     message: json["message"],
-    data: Data.fromJson(json["data"]),
+    data: json["data"] == null ? null : Data.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {
     "message": message,
-    "data": data?.toJson(),
+    "data": data == null ? null : data?.toJson(),
   };
 }
 
