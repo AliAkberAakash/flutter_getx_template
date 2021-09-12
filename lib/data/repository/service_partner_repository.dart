@@ -169,4 +169,8 @@ class Repository{
     }
   }
 
+  Future logoutServicePartner() async{
+    await SharedPrefUtil.delete(NetworkConstants.AUTHORIZATION);
+  }
+
 }

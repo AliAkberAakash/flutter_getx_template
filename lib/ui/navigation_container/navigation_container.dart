@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:go_share/ui/common_widgets/common_loading_dialog.dart';
+import 'package:go_share/ui/navigation_container/navigation_container_controller.dart';
+import 'package:go_share/ui/section1/service_provider_welcome/service_provider_welcome_screen.dart';
 import 'package:go_share/ui/section1/service_provideradd_vehicle/service_provider_add_vehicle.dart';
 import 'package:go_share/ui/container/home/home.dart';
 import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
@@ -26,6 +29,8 @@ class NavigationContainer extends StatefulWidget {
 
 class _NavigationContainerState extends State<NavigationContainer> {
   int _selectedItem = 3;
+
+  final _controller = NavigationContainerController();
 
   @override
   Widget build(BuildContext context) {
@@ -219,10 +224,11 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           title: "Sign out",
                           icon: AssetConstants.ic_sign_out_svg,
                           onClick: (index) {
-                            Get.back();
-                            Get.back();
-                            Get.back();
-                            Get.back();
+                            _controller.logoutServiceProvider().then((_){
+                              Get.back();
+                              Get.back();
+                              Get.to(ServiceProviderWelcomeScreen());
+                            });
                           },
                         ),
                       ],
