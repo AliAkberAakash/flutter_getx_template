@@ -95,7 +95,10 @@ class _ServicePartnerProfileUpdateScreenState extends State<ServicePartnerProfil
             // VSpacer40(),
             TextFieldHeadline(headline: 'Phone Number'),
             VSpacer10(),
-            CommonTextField(controller: phoneNumberController),
+            CommonTextField(
+              controller: phoneNumberController,
+              type: TextInputType.phone,
+            ),
             VSpacer40(),
             TextFieldHeadline(headline: 'Address'),
             VSpacer10(),
@@ -111,15 +114,26 @@ class _ServicePartnerProfileUpdateScreenState extends State<ServicePartnerProfil
             VSpacer40(),
             TextFieldHeadline(headline: 'Contact Person Phone'),
             VSpacer10(),
-            CommonTextField(controller: contactPersonPhoneController),
+            CommonTextField(
+              controller: contactPersonPhoneController,
+              type: TextInputType.phone,
+            ),
             VSpacer40(),
             TextFieldHeadline(headline: 'NRIC'),
             VSpacer10(),
-            CommonTextField(controller: contactPersonNRICController),
+            CommonTextField(
+              controller: contactPersonNRICController,
+              type: TextInputType.number,
+            ),
             VSpacer40(),
-            TextFieldHeadline(headline: 'Business Identification Number'),
+            TextFieldHeadline(
+              headline: 'Business Identification Number',
+            ),
             VSpacer10(),
-            CommonTextField(controller: businessIdNumController),
+            CommonTextField(
+              controller: businessIdNumController,
+              type: TextInputType.phone,
+            ),
             VSpacer40(),
             PositiveButton(text: "Update Now", onClicked: () {
 

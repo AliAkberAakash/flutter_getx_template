@@ -1,17 +1,12 @@
-import 'package:custom_check_box/custom_check_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
-import 'package:go_share/base/widget/GSTextField.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_request.dart';
 import 'package:go_share/ui/common_widgets/common_loading_dialog.dart';
 import 'package:go_share/ui/container/ForgotPassword/ForgotPassword.dart';
-import 'package:go_share/ui/container/UIConstants/Colors.dart';
-import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
-import 'package:go_share/ui/container/widget_container/widget_container.dart';
 import 'package:go_share/ui/navigation_container/navigation_container.dart';
 import 'package:go_share/ui/section4/widgets/text_fields.dart';
 import 'package:go_share/util/lib/toast.dart';
