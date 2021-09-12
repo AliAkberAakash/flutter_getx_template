@@ -7,10 +7,9 @@ import 'package:go_share/data/models/service_partner/profile/service_partner_pro
 import 'package:go_share/ui/common_widgets/profile_picture_widget.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
 import 'package:go_share/ui/common_widgets/text_field_value_widget.dart';
-import 'package:go_share/ui/edit_profile/edit_profile_screen.dart';
 import 'package:go_share/ui/common_widgets/update_button.dart';
+import 'package:go_share/ui/section1/Service_partner_profile_update/service_partner_profile_update_screen.dart';
 import 'package:go_share/ui/section1/service_provider_profile/service_provider_profile_controller.dart';
-import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
@@ -82,7 +81,9 @@ class _ServiceProviderProfileScreenState
                   TextFieldValueWidget(headline: data?.businessIdentificationNumber ?? ""),
                   VSpacer40(),
                   UpdateButton(text: 'Update My Profile', onClicked: () {
-                    Get.to(EditProfileScreen());
+                    Get.to(ServicePartnerProfileUpdateScreen(
+                      profileResponse: _controller.profileResponse.value!,
+                    ));
                   }),
                   VSpacer60(),
                 ],

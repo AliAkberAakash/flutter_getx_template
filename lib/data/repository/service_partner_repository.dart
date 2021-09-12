@@ -10,6 +10,8 @@ import 'package:go_share/data/models/service_partner/auth/login/service_partner_
 import 'package:go_share/data/models/service_partner/auth/signup/service_partner_signup_request.dart';
 import 'package:go_share/data/models/service_partner/auth/signup/service_partner_signup_response.dart';
 import 'package:go_share/data/models/service_partner/profile/service_partner_profile_response.dart';
+import 'package:go_share/data/models/service_partner/profile/service_partner_profile_update_request.dart';
+import 'package:go_share/data/models/service_partner/profile/service_partner_profile_update_response.dart';
 import 'package:go_share/data/models/vehicles/add_vehicle_request.dart';
 import 'package:go_share/data/models/vehicles/ass_vehicle_response.dart';
 import 'package:go_share/data/models/vehicles/vehicle_list_response.dart';
@@ -171,6 +173,35 @@ class Repository{
 
   Future logoutServicePartner() async{
     await SharedPrefUtil.delete(NetworkConstants.AUTHORIZATION);
+  }
+  
+  Future<ServicePartnerProfileUpdateResponse> updateServicePartnerProfile(ServicePartnerProfileUpdateRequest request) async{
+    try{
+      var response = await helper.postMultiPart(
+        NetworkConstants.SERVICE_PARTNER_PROFILE_UPDATE,
+        "image",
+        File("/acb"),
+        request.toJson(),
+      );
+
+      if(response.statusCode==200){
+        return ServicePartnerProfileUpdateResponse.fromJson(
+          response.data
+        );
+      }else{
+        return ServicePartnerProfileUpdateResponse(
+            success: false,
+            msg: "Error from the Server"
+        );
+      }
+
+    }catch(e){
+      logger.d(e);
+      return ServicePartnerProfileUpdateResponse(
+          success: false,
+          msg: "Data Parsing Error"
+      );
+    }
   }
 
 }
