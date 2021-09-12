@@ -5,6 +5,8 @@ import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
 import 'dart:math' as math;
 
+import 'package:go_share/utils/colors.dart';
+
 class Sec4TextField extends StatelessWidget {
   final String hints;
   final TextEditingController controller;
@@ -43,12 +45,20 @@ class Sec4TextField extends StatelessWidget {
   }
 }
 
-class Sec4PasswordTextField extends StatelessWidget {
+class Sec4PasswordTextField extends StatefulWidget {
 
   final String hint;
   final TextEditingController controller;
 
   const Sec4PasswordTextField({this.hint = "Password", required this.controller});
+
+  @override
+  _Sec4PasswordTextFieldState createState() => _Sec4PasswordTextFieldState();
+}
+
+class _Sec4PasswordTextFieldState extends State<Sec4PasswordTextField> {
+
+  bool isVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -62,8 +72,8 @@ class Sec4PasswordTextField extends StatelessWidget {
         border: Border.all(color: GSColors.gray_normal),
       ),
       child: TextField(
-        controller: controller,
-        obscureText: true,
+        controller: widget.controller,
+        obscureText: !isVisible,
         obscuringCharacter: '*',
         decoration: InputDecoration(
           border: InputBorder.none,
@@ -74,13 +84,20 @@ class Sec4PasswordTextField extends StatelessWidget {
           contentPadding: EdgeInsets.all(
             GSSizeConstants.padding16,
           ),
-          hintText: hint,
+          hintText: widget.hint,
           suffixIcon: Transform(
             alignment: Alignment.center,
             transform: Matrix4.rotationY(math.pi),
-            child: Icon(
-              Icons.visibility_off_rounded,
-              color: Colors.black.withOpacity(.4),
+            child:IconButton(
+              onPressed: (){
+                setState(() {
+                  isVisible = !isVisible;
+                });
+              },
+              icon: Icon(
+                isVisible ? Icons.visibility_rounded : Icons.visibility_off,
+                color: grey,
+              ),
             ),
           ),
           suffix: Padding(

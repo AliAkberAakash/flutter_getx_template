@@ -3,6 +3,7 @@ import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:math' as math;
 
 class CommonPasswordField extends StatefulWidget {
   final TextEditingController controller;
@@ -44,15 +45,26 @@ class _CommonPasswordFieldState extends State<CommonPasswordField> {
           borderRadius: BorderRadius.circular(dp10),
           borderSide: BorderSide(color: accent),
         ),
-        suffix: IconButton(
-          onPressed: (){
-            setState(() {
-              isVisible = !isVisible;
-            });
-          },
-          icon: Icon(
-            isVisible ? Icons.visibility_rounded : Icons.visibility_off,
+        suffixIcon: Transform(
+          alignment: Alignment.center,
+          transform: Matrix4.rotationY(math.pi),
+          child:IconButton(
+            onPressed: (){
+              setState(() {
+                isVisible = !isVisible;
+              });
+            },
+            icon: Icon(
+              isVisible ? Icons.visibility_rounded : Icons.visibility_off,
+              color: grey,
+            ),
           ),
+        ),
+        suffix: Padding(
+          padding: const EdgeInsets.only(
+              top: GSSizeConstants.padding20,
+              right: GSSizeConstants.padding12),
+          // myIcon is a 48px-wide widget.
         ),
       ),
       cursorColor: accent,
