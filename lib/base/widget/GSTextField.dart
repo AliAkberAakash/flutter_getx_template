@@ -3,6 +3,9 @@ import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
+import 'dart:math' as math;
+
+import 'package:go_share/utils/colors.dart';
 
 class GSTextField extends StatelessWidget {
   String hints;
@@ -38,11 +41,19 @@ class GSTextField extends StatelessWidget {
   }
 }
 
-class GSPasswordTextField extends StatelessWidget {
+class GSPasswordTextField extends StatefulWidget {
 
   final TextEditingController controller;
 
   const GSPasswordTextField({Key? key, required this.controller}) : super(key: key);
+
+  @override
+  _GSPasswordTextFieldState createState() => _GSPasswordTextFieldState();
+}
+
+class _GSPasswordTextFieldState extends State<GSPasswordTextField> {
+
+  bool isVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +65,8 @@ class GSPasswordTextField extends StatelessWidget {
         border: Border.all(color: GSColors.gray_normal),
       ),
       child: TextField(
-        controller: controller,
-        obscureText: true,
+        controller: widget.controller,
+        obscureText: !isVisible,
         decoration: InputDecoration(
             border: InputBorder.none,
             focusedBorder: InputBorder.none,
@@ -66,14 +77,28 @@ class GSPasswordTextField extends StatelessWidget {
               GSSizeConstants.padding16,
             ),
             hintText: GSStrings.password,
+            suffixIcon: Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.rotationY(math.pi),
+              child:IconButton(
+                onPressed: (){
+                  setState(() {
+                    isVisible = !isVisible;
+                  });
+                },
+                icon: Icon(
+                  isVisible ? Icons.visibility_rounded : Icons.visibility_off,
+                  color: grey,
+                ),
+              ),
+            ),
             suffix: Padding(
               padding: const EdgeInsets.only(
                   top: GSSizeConstants.padding20,
                   right: GSSizeConstants.padding12),
-              child: Icon(
-                Icons.visibility_off,
-              ), // myIcon is a 48px-wide widget.
-            )),
+              // myIcon is a 48px-wide widget.
+            ),
+        ),
         style: GSTextStyles.make18xw400Style(color: GSColors.gray_primary),
       ),
     );
