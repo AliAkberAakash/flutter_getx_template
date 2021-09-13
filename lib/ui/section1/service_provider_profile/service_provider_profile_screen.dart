@@ -29,6 +29,12 @@ class _ServiceProviderProfileScreenState
   final ServiceProviderProfileController _controller = Get.find();
 
   @override
+  void initState() {
+    _controller.getProfile();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Obx((){
       var response = _controller.profileResponse.value;

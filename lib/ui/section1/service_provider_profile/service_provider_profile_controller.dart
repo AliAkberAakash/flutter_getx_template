@@ -6,13 +6,12 @@ class ServiceProviderProfileController extends GetxController{
 
   final Repository repository = Get.find();
 
-  ServiceProviderProfileController(){
-    getProfile();
-  }
+  ServiceProviderProfileController();
 
   Rx<ServicePartnerProfileResponse?> profileResponse = Rx<ServicePartnerProfileResponse?>(null);
 
   void getProfile() async {
+    profileResponse.value=null;
     var response = await repository.getServicePartnerProfile();
     profileResponse.value = response;
   }
