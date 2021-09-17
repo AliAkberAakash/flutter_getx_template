@@ -63,7 +63,7 @@ class _ServiceProviderSignupScreenState extends State<ServiceProviderSignupScree
           physics: BouncingScrollPhysics(),
           padding: EdgeInsets.all(dp20),
           children: [
-            LargeHeadlineWidget(headline: 'Want to be a\nservice provider'),
+            LargeHeadlineWidget(headline: 'Want to be a\nService Provider'),
             VSpacer40(),
             TextFieldHeadline(headline: 'Company Logo'),
             VSpacer20(),
@@ -99,7 +99,7 @@ class _ServiceProviderSignupScreenState extends State<ServiceProviderSignupScree
             VSpacer10(),
             _getAddress(),
             VSpacer40(),
-            TextFieldHeadline(headline: 'Contact Person name'),
+            TextFieldHeadline(headline: 'Contact Person Name'),
             VSpacer10(),
             CommonTextField(controller: contactPersonNameController),
             VSpacer40(),

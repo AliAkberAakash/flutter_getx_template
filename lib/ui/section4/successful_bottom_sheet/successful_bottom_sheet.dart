@@ -47,7 +47,7 @@ void modalBottomSheetMenuSuccess(BuildContext context) {
                       Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(
-                          "Your charity program has been successfully created.\n Now you can check and maintain in your\n'activity' menu.",
+                          "Your charity program has been successfully created.\n Now you can check and maintain it in your\n'activity' menu.",
                           style: GoogleFonts.manrope(
                             color: GSColors.text_secondary,
                             fontSize: dp14,

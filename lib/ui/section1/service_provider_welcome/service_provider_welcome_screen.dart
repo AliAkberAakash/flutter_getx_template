@@ -65,7 +65,7 @@ class _ServiceProviderWelcomeScreenState extends State<ServiceProviderWelcomeScr
                           padding: const EdgeInsets.symmetric(
                               horizontal: GSSizeConstants.padding20),
                           child: Align(
-                            alignment: Alignment.topLeft,
+                            alignment: Alignment.bottomLeft,
                             child: Text(
                               GSStrings.get_started + "\n",
                               textAlign: TextAlign.start,
@@ -74,12 +74,11 @@ class _ServiceProviderWelcomeScreenState extends State<ServiceProviderWelcomeScr
                                 color: white,
                                 fontSize: dp18,
                                 fontWeight: FontWeight.normal,
+                                height: 0.4
                               ),
                             ),
                           ),
                         ),
-
-                        // Description text
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: GSSizeConstants.padding20),

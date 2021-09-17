@@ -105,7 +105,7 @@ class _ServicePartnerProfileUpdateScreenState extends State<ServicePartnerProfil
             VSpacer10(),
             _getAddress(),
             VSpacer40(),
-            TextFieldHeadline(headline: 'Contact Person name'),
+            TextFieldHeadline(headline: 'Contact Person Name'),
             VSpacer10(),
             CommonTextField(controller: contactPersonNameController),
             VSpacer40(),

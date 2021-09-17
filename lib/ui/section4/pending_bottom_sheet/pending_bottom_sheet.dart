@@ -30,16 +30,16 @@ void modalBottomSheetMenuPending(BuildContext context) {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   SvgPicture.asset(
-                    AssetConstants.pendingIcon,
+                    AssetConstants.successfulIcon,
                   ),
                   Column(
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(
-                          "Pending",
+                          "Thank you",
                           style: GoogleFonts.manrope(
-                            color: colorPending,
+                            color: accent,
                             fontSize: dp25,
                             fontWeight: FontWeight.bold,
                           ),
@@ -48,7 +48,7 @@ void modalBottomSheetMenuPending(BuildContext context) {
                       Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(
-                          "Your charity program has been successfully created.\n Now you can check and maintain in your\n'activity' menu.",
+                          "Your request has been submitted.\n An admin will approve your request soon.",
                           style: GoogleFonts.manrope(
                             color: GSColors.text_secondary,
                             fontSize: dp14,
@@ -61,8 +61,8 @@ void modalBottomSheetMenuPending(BuildContext context) {
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 20),
-                    child: PendingButton(
-                      text: "Contact Support Team",
+                    child: GSButton(
+                      text: "Go to Profile",
                       onClick: () {
                         Get.back();
                         Get.back();
