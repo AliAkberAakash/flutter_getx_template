@@ -55,6 +55,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
         VSpacer20(),
+        Container(
+          height: 1,
+          width: double.maxFinite,
+          color: light_grey,
+        ),
+        VSpacer20(),
         TextFieldHeadline(headline: "Phone Number"),
         VSpacer10(),
         TextFieldValueWidget(headline: '+907079097213'),
@@ -71,7 +77,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         VSpacer10(),
         TextFieldValueWidget(headline: '19 May, 1971'),
         VSpacer20(),
-        TextFieldHeadline(headline: "Care Taker Info"),
+        TextFieldHeadline(headline: "Caretaker Info"),
         VSpacer10(),
         Row(
           children: [
@@ -104,7 +110,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         VSpacer20(),
         OutlinedMaterialButton(onClick: (){
           Get.to(EditProfileScreen());
-        }, text: "Update Profile"),
+        }, text: "Update My Profile"),
       ],
     );
   }

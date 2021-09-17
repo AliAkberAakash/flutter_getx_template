@@ -6,6 +6,7 @@ import 'package:go_share/ui/common_widgets/common_text_field.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
 import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/date_time_utils.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -73,17 +74,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             VSpacer40(),
             TextFieldHeadline(headline: 'Date of Birth'),
             VSpacer10(),
-            _datePicker(dateController, "Start date", 1),
+            _datePicker(dateController, "Date of Birth", 1),
             VSpacer40(),
-            TextFieldHeadline(headline: 'Care Taker Image'),
+            TextFieldHeadline(headline: 'Caretaker Image'),
             VSpacer10(),
             _captureImage(),
             VSpacer40(),
-            TextFieldHeadline(headline: 'Care Taker Full Name'),
+            TextFieldHeadline(headline: 'Caretaker Full Name'),
             VSpacer10(),
             CommonTextField(controller: TextEditingController()),
             VSpacer40(),
-            TextFieldHeadline(headline: 'Care Taker Mobile Number'),
+            TextFieldHeadline(headline: 'Caretaker Mobile Number'),
             VSpacer10(),
             CommonTextField(controller: TextEditingController()),
             VSpacer40(),
@@ -159,7 +160,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     if (picked != null && picked != selectedDate)
       setState(() {
         selectedDate = picked;
-        dateController.text = formatDate(selectedDate);
+        dateController.text = speakDate(selectedDate);
       });
   }
 
