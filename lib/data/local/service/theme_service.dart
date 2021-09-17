@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_share/constants.dart';
 import 'package:go_share/util/lib/preference.dart';
+import 'package:go_share/utils/colors.dart';
 
 class ThemeService extends GetxService {
   late PreferenceUtil _preferenceUtil;
@@ -184,8 +185,8 @@ const _lightTextTheme = const TextTheme(
 final _lightTheme = ThemeData(
   brightness: Brightness.light,
   scaffoldBackgroundColor: Colors.white,
-  primaryColor: colorLightGray1,
-  accentColor: colorLightOrange1,
+  primaryColor: white,
+  accentColor: accent,
   fontFamily: fontFamilyRoboto,
   floatingActionButtonTheme: _lightFloatingActionButtonTheme,
   bottomNavigationBarTheme: _lightBottomNavigationBarTheme,

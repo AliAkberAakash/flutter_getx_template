@@ -4,7 +4,8 @@ abstract class GSStrings {
   static const welcome_description =
       "Millions of people use to turn their ideas";
   static const sign_in = "Sign In";
-  static const create_new_account = "Create a new account";
+  static const sign_up = "Sign Up";
+  static const create_new_account = "Create a New Account";
   static const welcome_back = "Welcome Back";
   static const sign_in_description =
       "It’s time to rock n role! Let’s get started now.";

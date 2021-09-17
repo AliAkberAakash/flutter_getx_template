@@ -100,7 +100,7 @@ class _ServiceProviderLoginState extends State<ServiceProviderLoginScreen> {
               SizedBox(
                 height: GSSizeConstants.padding17,
               ),
-              Sec4PasswordTextField(
+              Sec2PasswordTextField(
                 controller: passwordController,
               ),
               // Container(

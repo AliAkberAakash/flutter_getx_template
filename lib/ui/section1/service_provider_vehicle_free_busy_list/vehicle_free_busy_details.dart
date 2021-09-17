@@ -30,10 +30,15 @@ class _VehicleFreeBusyDetailsState extends State<VehicleFreeBusyDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
+        appBar: AppBar(
+          elevation: 0,
+          leading: BackButton(),
+        ),
+      body: SafeArea(
       child: Container(
-        padding: EdgeInsets.all(dp20),
+        padding: EdgeInsets.only(left: dp20, right: dp20, bottom: dp20),
         child: ListView(
+          physics: BouncingScrollPhysics(),
           children: [
             VehicleFreeBusyItem(
               vehicle: vehicle,
@@ -73,35 +78,27 @@ class _VehicleFreeBusyDetailsState extends State<VehicleFreeBusyDetails> {
                       fit: BoxFit.cover,
                     ),
                     VSpacer20(),
-                    TextFieldHeadline(headline: "Vehicle capacity"),
-                    VSpacer10(),
-                    TextFieldValueWidget(headline: "${vehicle.capacity} Person"),
-                    VSpacer20(),
-                    TextFieldHeadline(headline: "Driver name"),
+                    // TextFieldHeadline(headline: "Vehicle Capacity"),
+                    // VSpacer10(),
+                    // TextFieldValueWidget(headline: "${vehicle.capacity} Person"),
+                    // VSpacer20(),
+                    TextFieldHeadline(headline: "Driver Name"),
                     VSpacer10(),
                     TextFieldValueWidget(headline: vehicle.driverName),
                     VSpacer20(),
-                    TextFieldHeadline(headline: "Driver phone"),
+                    TextFieldHeadline(headline: "Driver Phone"),
                     VSpacer10(),
                     TextFieldValueWidget(headline: vehicle.driverPhone),
                     VSpacer20(),
-                    TextFieldHeadline(headline: "Request date"),
-                    VSpacer10(),
-                    TextFieldValueWidget(headline: speakDate(vehicle.createdAt)),
-                    VSpacer20(),
-                    TextFieldHeadline(headline: "Request pending duration"),
-                    VSpacer10(),
-                    TextFieldValueWidget(headline: daysBetween(vehicle.createdAt)),
-                    VSpacer20(),
-                    TextFieldHeadline(headline: "Driver license number"),
+                    TextFieldHeadline(headline: "Driver License Number"),
                     VSpacer10(),
                     TextFieldValueWidget(headline: vehicle.driverLicenseNumber),
                     VSpacer20(),
-                    TextFieldHeadline(headline: "Attendant name"),
+                    TextFieldHeadline(headline: "Attendant Name"),
                     VSpacer10(),
                     TextFieldValueWidget(headline: vehicle.attendantName),
                     VSpacer20(),
-                    TextFieldHeadline(headline: "Attendant phone"),
+                    TextFieldHeadline(headline: "Attendant Phone"),
                     VSpacer10(),
                     TextFieldValueWidget(headline: vehicle.attendantPhone),
                     VSpacer20(),
@@ -128,6 +125,13 @@ class _VehicleFreeBusyDetailsState extends State<VehicleFreeBusyDetails> {
                         TextFieldValueWidget(headline: "--"), //todo
                       ],
                     ) : Container(),
+                    TextFieldHeadline(headline: "Request Date"),
+                    VSpacer10(),
+                    TextFieldValueWidget(headline: speakDate(vehicle.createdAt)),
+                    VSpacer20(),
+                    TextFieldHeadline(headline: "Request Pending Duration"),
+                    VSpacer10(),
+                    TextFieldValueWidget(headline: daysBetween(vehicle.createdAt)),
                     VSpacer40()
 
                   ],

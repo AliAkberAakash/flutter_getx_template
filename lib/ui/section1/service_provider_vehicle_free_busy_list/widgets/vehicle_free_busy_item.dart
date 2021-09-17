@@ -56,7 +56,7 @@ class VehicleFreeBusyItem extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "VA ${vehicle.vehicleNumber}",
+                      "${vehicle.vehicleNumber}",
                       style: GoogleFonts.manrope(
                         color: darkText,
                         fontSize: dp20,
@@ -114,7 +114,7 @@ class VehicleFreeBusyItem extends StatelessWidget {
                           ),
                           VSpacer20(),
                           VehicleInfoWidget(
-                            title: "Booked Seat",
+                            title: "Booked seat",
                             value: vehicle.capacity,
                           ),
                         ],

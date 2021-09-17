@@ -6,6 +6,7 @@ class AssetConstants {
   static const img_banner_demo = base_path + "img_banner_demo.png";
   static const ic_welcome = "images/ic_welcome.jpg";
   static const ic_background = "images/ic_background_two.png";
+  static const signup_bg_image = "images/signup_bg_image.png";
 
   static const base_icon_path = "images/icons/";
   static const ic_menu_svg = base_icon_path + "ic_menu.svg";

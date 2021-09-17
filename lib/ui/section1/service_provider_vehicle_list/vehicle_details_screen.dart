@@ -38,108 +38,114 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      child: Container(
-        padding: EdgeInsets.all(dp20),
-        child: ListView(
-          children: [
-            VehicleRequestItem(
-              vehicle: vehicle,
-              status: getStatus(vehicle.status),
-              showButton: false,
-            ),
-            VSpacer10(),
-            Text(
-              "Vehicle Info",
-              style: GoogleFonts.manrope(
-                color: darkText,
-                fontWeight: FontWeight.w600,
+      appBar: AppBar(
+        elevation: 0,
+        leading: BackButton(),
+      ),
+      body: SafeArea(
+        child: Container(
+          padding: EdgeInsets.only(left: dp20, right: dp20, bottom: dp20),
+          child: ListView(
+            physics: BouncingScrollPhysics(),
+            children: [
+              VehicleRequestItem(
+                vehicle: vehicle,
+                status: getStatus(vehicle.status),
+                showButton: false,
               ),
-            ),
-            VSpacer10(),
-            Card(
-              elevation: 0,
-              margin: EdgeInsets.only(bottom: dp20),
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                  color: greyBorder,
+              VSpacer10(),
+              Text(
+                "Vehicle Info",
+                style: GoogleFonts.manrope(
+                  color: darkText,
+                  fontWeight: FontWeight.w600,
                 ),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(
-                    dp5,
+              ),
+              VSpacer10(),
+              Card(
+                elevation: 0,
+                margin: EdgeInsets.only(bottom: dp20),
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: greyBorder,
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(
+                      dp5,
+                    ),
                   ),
                 ),
-              ),
-              child: Container(
-                padding: EdgeInsets.all(dp10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CachedNetworkImage(
-                      imageUrl: getImagePath(vehicle.image),
-                      height: 150,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
-                    VSpacer20(),
-                    TextFieldHeadline(headline: "Vehicle Capacity"),
-                    VSpacer10(),
-                    TextFieldValueWidget(headline: vehicle.capacity),
-                    VSpacer20(),
-                    TextFieldHeadline(headline: "Driver Name"),
-                    VSpacer10(),
-                    TextFieldValueWidget(headline: vehicle.driverName),
-                    VSpacer20(),
-                    TextFieldHeadline(headline: "Driver Phone"),
-                    VSpacer10(),
-                    TextFieldValueWidget(headline: vehicle.driverPhone),
-                    VSpacer20(),
-                    TextFieldHeadline(headline: "Request Date"),
-                    VSpacer10(),
-                    TextFieldValueWidget(headline: speakDate(vehicle.createdAt)),
-                    VSpacer20(),
-                    TextFieldHeadline(headline: "Request Pending Duration"),
-                    VSpacer10(),
-                    TextFieldValueWidget(headline: daysBetween(vehicle.createdAt)),
-                    VSpacer20(),
-                    TextFieldHeadline(headline: "Driver License Number"),
-                    VSpacer10(),
-                    TextFieldValueWidget(headline: vehicle.driverLicenseNumber),
-                    VSpacer20(),
-                    TextFieldHeadline(headline: "Attendant Name"),
-                    VSpacer10(),
-                    TextFieldValueWidget(headline: vehicle.attendantName),
-                    VSpacer20(),
-                    TextFieldHeadline(headline: "Attendant Phone"),
-                    VSpacer10(),
-                    TextFieldValueWidget(headline: vehicle.attendantPhone),
-                    VSpacer20(),
-                    TextFieldHeadline(headline: "Attendant NRIC"),
-                    VSpacer10(),
-                    TextFieldValueWidget(headline: vehicle.attendantNric),
-                    VSpacer20(),
-                    TextFieldHeadline(headline: "Attendant DOB"),
-                    VSpacer10(),
-                    TextFieldValueWidget(headline: speakDate(vehicle.attendantDob)),
-                    VSpacer40(),
-                    OutlinedMaterialButton(
-                      color: dark_grey,
-                      onClick: () {
-                        Get.to(() => UpdateVehicleScreen(vehicle: vehicle,))?.then((value){
-                          _controller.getVehicleList();
-                        });
-                      },
-                      text: "Update vehicle details",
-                    ),
-                    VSpacer20(),
-                  ],
+                child: Container(
+                  padding: EdgeInsets.all(dp10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CachedNetworkImage(
+                        imageUrl: getImagePath(vehicle.image),
+                        height: 150,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                      VSpacer20(),
+                      TextFieldHeadline(headline: "Vehicle Capacity"),
+                      VSpacer10(),
+                      TextFieldValueWidget(headline: vehicle.capacity),
+                      VSpacer20(),
+                      TextFieldHeadline(headline: "Driver Name"),
+                      VSpacer10(),
+                      TextFieldValueWidget(headline: vehicle.driverName),
+                      VSpacer20(),
+                      TextFieldHeadline(headline: "Driver Phone"),
+                      VSpacer10(),
+                      TextFieldValueWidget(headline: vehicle.driverPhone),
+                      VSpacer20(),
+                      TextFieldHeadline(headline: "Request Date"),
+                      VSpacer10(),
+                      TextFieldValueWidget(headline: speakDate(vehicle.createdAt)),
+                      VSpacer20(),
+                      TextFieldHeadline(headline: "Request Pending Duration"),
+                      VSpacer10(),
+                      TextFieldValueWidget(headline: daysBetween(vehicle.createdAt)),
+                      VSpacer20(),
+                      TextFieldHeadline(headline: "Driver License Number"),
+                      VSpacer10(),
+                      TextFieldValueWidget(headline: vehicle.driverLicenseNumber),
+                      VSpacer20(),
+                      TextFieldHeadline(headline: "Attendant Name"),
+                      VSpacer10(),
+                      TextFieldValueWidget(headline: vehicle.attendantName),
+                      VSpacer20(),
+                      TextFieldHeadline(headline: "Attendant Phone"),
+                      VSpacer10(),
+                      TextFieldValueWidget(headline: vehicle.attendantPhone),
+                      VSpacer20(),
+                      TextFieldHeadline(headline: "Attendant NRIC"),
+                      VSpacer10(),
+                      TextFieldValueWidget(headline: vehicle.attendantNric),
+                      VSpacer20(),
+                      TextFieldHeadline(headline: "Attendant DOB"),
+                      VSpacer10(),
+                      TextFieldValueWidget(headline: speakDate(vehicle.attendantDob)),
+                      VSpacer40(),
+                      OutlinedMaterialButton(
+                        color: dark_grey,
+                        onClick: () {
+                          Get.to(() => UpdateVehicleScreen(vehicle: vehicle,))?.then((value){
+                            _controller.getVehicleList();
+                          });
+                        },
+                        text: "Update vehicle details",
+                      ),
+                      VSpacer20(),
+                    ],
+                  ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 
   getStatus(int status){
