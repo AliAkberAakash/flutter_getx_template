@@ -21,6 +21,7 @@ const gradientDark = Color(0xff22A848);
 const gradientLight = Color(0xff36A792);
 
 const approvedChipColor = Color(0xff2395D6);
+const finishedChipColor = Color(0xff009E35);
 const pendingChipColor = Color(0xffFEA400);
 const busyChipColor = Color(0xffEB5757);
 const freeChipColor = Color(0xff7000FE);

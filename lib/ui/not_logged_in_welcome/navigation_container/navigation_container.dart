@@ -163,13 +163,19 @@ class _NavigationContainerState extends State<NavigationContainer> {
                       ],
                     ),
                   ),
+                  VSpacer10(),
+                  Container(
+                    height: 1,
+                    width: double.maxFinite,
+                    color: light_grey,
+                  ),
                   Expanded(
                     child: ListView(
                       children: [
                         MenuItem(
                           isSelected: 3 == _selectedItem,
                           index: 3,
-                          title: "My profile",
+                          title: "My Profile",
                           icon: AssetConstants.ic_profile_svg,
                           onClick: (index) {
                             changePage(index);
@@ -178,7 +184,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                         MenuItem(
                           isSelected: 4 == _selectedItem,
                           index: 4,
-                          title: "My booking list",
+                          title: "My Booking List",
                           icon: AssetConstants.ic_vehicle_list_svg,
                           onClick: (index) {
                             changePage(index);
@@ -187,7 +193,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                         MenuItem(
                           isSelected: 5 == _selectedItem,
                           index: 5,
-                          title: "My refund request",
+                          title: "My Refund Request",
                           icon: AssetConstants.lostandFoundIcon,
                           onClick: (index) {
                             changePage(index);
@@ -205,7 +211,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                         MenuItem(
                           isSelected: 7 == _selectedItem,
                           index: 7,
-                          title: "About us",
+                          title: "About Us",
                           icon: AssetConstants.ic_free_busy_list_svg,
                           onClick: (index) {
                             changePage(index);

@@ -130,7 +130,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   ),
                   Spacer(),
                   Text(
-                    "47\$",
+                    "47.00\$",
                     style: GoogleFonts.manrope(
                       color: accent,
                       fontSize: dp20,
@@ -249,7 +249,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 HSpacer10(),
                 Expanded(
                   child: PositiveButton(
-                    text: "Next",
+                    text: "Submit",
                     onClicked: () {
                       showSuccessSheet(context);
                     },
@@ -306,74 +306,89 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   Widget _getDescription(){
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        VSpacer20(),
-        TextFieldHeadline(headline: "Order ID"),
-        VSpacer10(),
-        TextFieldValueWidget(headline: '#9070979234'),
-        VSpacer20(),
-        TextFieldHeadline(headline: "Total Seat"),
-        VSpacer10(),
-        TextFieldValueWidget(headline: '5 Seats'),
-        VSpacer20(),
-        TextFieldHeadline(headline: "Child Name"),
-        VSpacer10(),
-        TextFieldValueWidget(headline: 'John Doe WIlliam'),
-        VSpacer20(),
-        Row(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextFieldHeadline(headline: "Start Date"),
-                VSpacer10(),
-                TextFieldValueWidget(headline: '19th July, 2021'),
-              ],
-            ),
-            HSpacer40(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextFieldHeadline(headline: "Time"),
-                VSpacer10(),
-                TextFieldValueWidget(headline: '10:00 PM'),
-              ],
-            )
-          ],
-        ),
-        VSpacer20(),
-        TextFieldHeadline(headline: "End Date"),
-        VSpacer10(),
-        TextFieldValueWidget(headline: '28 July, 2021'),
-        VSpacer20(),
-        TextFieldHeadline(headline: "Pickup Location"),
-        VSpacer10(),
-        TextFieldValueWidget(headline: 'Block 372 Bukit Batok Street 31 #01-372, 650372 Singapore'),
-        VSpacer20(),
-        TextFieldHeadline(headline: "Postal Code"),
-        VSpacer10(),
-        TextFieldValueWidget(headline: '650372 Singapore'),
-        VSpacer20(),
-        TextFieldHeadline(headline: "Pickup Remark"),
-        VSpacer10(),
-        TextFieldValueWidget(headline: 'Batok Street 31 #01-372, 650372 Singapore'),
-        VSpacer20(),
-        TextFieldHeadline(headline: "Drop-Off Location"),
-        VSpacer10(),
-        TextFieldValueWidget(headline: 'Block 372 Bukit Batok Street 31 #01-372, 650372 Singapore'),
-        VSpacer20(),
-        TextFieldHeadline(headline: "Postal Code"),
-        VSpacer10(),
-        TextFieldValueWidget(headline: '650372 Singapore'),
-        VSpacer20(),
-        TextFieldHeadline(headline: "Drop-Off Remark"),
-        VSpacer10(),
-        TextFieldValueWidget(headline: 'Batok Street 31 #01-372, 650372 Singapore'),
-        VSpacer20(),
+    return Padding(
+      padding: EdgeInsets.only(left: dp10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          VSpacer20(),
+          TextFieldHeadline(headline: "Order ID"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: '#9070979234'),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Total Seat"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: '5 Seats'),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Total Distance"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: '30 Km'),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Cost per Kilometer"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: '\$14/km'),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Total Travel Number"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: '12'),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Child Name"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: 'John Doe WIlliam'),
+          VSpacer20(),
+          Row(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextFieldHeadline(headline: "Start Date"),
+                  VSpacer10(),
+                  TextFieldValueWidget(headline: '19th July, 2021'),
+                ],
+              ),
+              HSpacer40(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextFieldHeadline(headline: "Time"),
+                  VSpacer10(),
+                  TextFieldValueWidget(headline: '10:00 PM'),
+                ],
+              )
+            ],
+          ),
+          VSpacer20(),
+          TextFieldHeadline(headline: "End Date"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: '28 July, 2021'),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Pickup Location"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: 'Block 372 Bukit Batok Street 31 #01-372, 650372 Singapore'),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Postal Code"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: '650372 Singapore'),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Pickup Remark"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: 'Batok Street 31 #01-372, 650372 Singapore'),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Drop-Off Location"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: 'Block 372 Bukit Batok Street 31 #01-372, 650372 Singapore'),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Postal Code"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: '650372 Singapore'),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Drop-Off Remark"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: 'Batok Street 31 #01-372, 650372 Singapore'),
+          VSpacer20(),
 
-      ],
+        ],
+      ),
     );
   }
 
@@ -417,7 +432,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           child: Text(
                             "Your charity program has been successfully "
                                 "created.\n Now you can check and maintain "
-                                "\in your\n'activity' menu.",
+                                "it in your\n'activity' menu.",
                             style: GoogleFonts.manrope(
                               color: GSColors.text_secondary,
                               fontSize: dp14,

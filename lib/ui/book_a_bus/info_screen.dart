@@ -6,6 +6,7 @@ import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
 import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/date_time_utils.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -315,9 +316,9 @@ class _InfoScreenState extends State<InfoScreen> {
     if (picked != null && picked != selectedDate)
       setState(() {
         if(type==1) {
-          startTimeController.text=formatDate(selectedDate);
+          startTimeController.text=speakDate(selectedDate);
         } else {
-          endTimeController.text=formatDate(selectedDate);
+          endTimeController.text=speakDate(selectedDate);
         }
         selectedDate = picked;
       });

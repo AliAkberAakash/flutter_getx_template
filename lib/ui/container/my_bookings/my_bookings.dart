@@ -10,7 +10,9 @@ import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/my_booking_details_one/my_booking_details_one.dart';
 import 'package:go_share/ui/container/my_booking_details_two/my_booking_details_two.dart';
 import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MyBookingsView extends StatefulWidget {
   const MyBookingsView({Key? key}) : super(key: key);
@@ -401,9 +403,9 @@ class BookingItemHeaderWidget extends StatelessWidget {
         ),
         Container(
           decoration: BoxDecoration(
-            color: type == 0 ? GSColors.pending_Color.withOpacity(0.1) : approvedChipColor.withOpacity(0.1),
+            color: type == 0 ? GSColors.pending_Color.withOpacity(0.1) : finishedChipColor.withOpacity(0.1),
             borderRadius: const BorderRadius.all(
-              const Radius.circular(12.0),
+              const Radius.circular(dp20),
             ),
           ),
           padding: const EdgeInsets.symmetric(
@@ -413,7 +415,7 @@ class BookingItemHeaderWidget extends StatelessWidget {
           child: Text(
             type == 0 ?"Pending" : "Finished",
             style: GSTextStyles.make13xw700Style(
-              color: type == 0 ? GSColors.pending_Color : approvedChipColor,
+              color: type == 0 ? GSColors.pending_Color : finishedChipColor,
             ),
             textAlign: TextAlign.start,
           ),
@@ -479,6 +481,9 @@ class TabBarCustomTab extends StatelessWidget {
       child: Text(
         title,
         textAlign: TextAlign.center,
+        style: GoogleFonts.manrope(
+          fontSize: dp14,
+        ),
       ),
     );
   }

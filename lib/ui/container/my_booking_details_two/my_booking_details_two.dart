@@ -384,7 +384,7 @@ class BookingItemBodyWidget extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 3,
               child: TitleSubtitleWidget(
                 title: "Booked Seat",
                 subtitle: "3 Seats",
@@ -403,7 +403,7 @@ class BookingItemBodyWidget extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 3,
               child: TitleSubtitleWidget(
                 title: "End Date",
                 subtitle: "19 May, 2021",

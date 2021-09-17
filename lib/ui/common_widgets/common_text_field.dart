@@ -25,7 +25,7 @@ class CommonTextField extends StatelessWidget {
         contentPadding: EdgeInsets.only(left: 10),
         hintText: hint,
         hintStyle: GoogleFonts.manrope(
-          color: light_grey,
+          color: grey,
           fontSize: 14
         ),
         border: OutlineInputBorder(
