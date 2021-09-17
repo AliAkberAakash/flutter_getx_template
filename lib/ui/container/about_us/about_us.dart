@@ -145,7 +145,6 @@ class _BodyWidgetState extends State<BodyWidget>
                       fit: BoxFit.cover,
                     ),
                   ),
-                  CustomAppPromotionWidget(),
                   WhyChooseUsWidget(),
                 ],
               ),

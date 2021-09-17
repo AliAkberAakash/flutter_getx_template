@@ -4,6 +4,7 @@ const black = Color(0xff000000);
 const black_5 = Color(0xff424242);
 const white = Color(0xffffffff);
 const accent = Color(0xff009E35);
+const darkAccent = Color(0xff002923);
 const primaryDark = Color(0xff002923);
 const darkText = Color(0xff002923);
 const blueText = Color(0xff092C4C);

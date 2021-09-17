@@ -160,7 +160,7 @@ class _BodyWidgetState extends State<BodyWidget> {
                 moneyTwo: "\$15",
                 moneyThree: "\$18",
                 distanceOne: "3 Km (Max)",
-                distanceTwo: "3 km - 8km",
+                distanceTwo: "3 km - 8 km",
                 distanceThree: "8km +",
               ),
             ),
