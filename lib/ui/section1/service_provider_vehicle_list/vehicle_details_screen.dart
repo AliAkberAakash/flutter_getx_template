@@ -90,7 +90,7 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                     VSpacer10(),
                     TextFieldValueWidget(headline: vehicle.driverName),
                     VSpacer20(),
-                    TextFieldHeadline(headline: "Driver phone"),
+                    TextFieldHeadline(headline: "Driver Phone"),
                     VSpacer10(),
                     TextFieldValueWidget(headline: vehicle.driverPhone),
                     VSpacer20(),
@@ -102,7 +102,7 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                     VSpacer10(),
                     TextFieldValueWidget(headline: daysBetween(vehicle.createdAt)),
                     VSpacer20(),
-                    TextFieldHeadline(headline: "Driver License number"),
+                    TextFieldHeadline(headline: "Driver License Number"),
                     VSpacer10(),
                     TextFieldValueWidget(headline: vehicle.driverLicenseNumber),
                     VSpacer20(),
@@ -123,7 +123,7 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                     TextFieldValueWidget(headline: speakDate(vehicle.attendantDob)),
                     VSpacer40(),
                     OutlinedMaterialButton(
-                      color: grey,
+                      color: dark_grey,
                       onClick: () {
                         Get.to(() => UpdateVehicleScreen(vehicle: vehicle,))?.then((value){
                           _controller.getVehicleList();

@@ -12,6 +12,7 @@ const greyBorder = Color(0xffA9ABAB);
 const light_grey = Color(0xffe0e0e0);
 const light_grey_white = Color(0xffF3F3F3);
 const grey = Color(0xff999999);
+const dark_grey = Color(0xff757575);
 const deep_blue = Color(0xff3B5998);
 const red = Color(0xffd32f2f);
 const yellow = Color(0xffffee58);
