@@ -182,7 +182,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           isSelected: 9 == _selectedItem,
                           index: 9,
                           title: "Driver Login",
-                          icon: AssetConstants.ic_profile_svg,
+                          icon: AssetConstants.ic_driver_login_svg,
                           onClick: (index) {
                             Get.back();
                             Get.to(

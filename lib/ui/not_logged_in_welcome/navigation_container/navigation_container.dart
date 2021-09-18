@@ -194,7 +194,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           isSelected: 5 == _selectedItem,
                           index: 5,
                           title: "My Refund Request",
-                          icon: AssetConstants.lostandFoundIcon,
+                          icon: AssetConstants.ic_refund_request_svg,
                           onClick: (index) {
                             changePage(index);
                           },
@@ -212,7 +212,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           isSelected: 7 == _selectedItem,
                           index: 7,
                           title: "About Us",
-                          icon: AssetConstants.ic_free_busy_list_svg,
+                          icon: AssetConstants.ic_about_us_svg,
                           onClick: (index) {
                             changePage(index);
                           },
@@ -230,7 +230,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           isSelected: 9 == _selectedItem,
                           index: 9,
                           title: "FAQ",
-                          icon: AssetConstants.ic_sign_out_svg,
+                          icon: AssetConstants.ic_faq_svg,
                           onClick: (index) {
                             changePage(index);
                           },
@@ -239,7 +239,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           isSelected: 10 == _selectedItem,
                           index: 10,
                           title: "Lost & Found",
-                          icon: AssetConstants.lostandFoundIcon,
+                          icon: AssetConstants.ic_lost_and_found_new_svg,
                           onClick: (index) {
                             changePage(index);
                           },
@@ -248,7 +248,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           isSelected: 11 == _selectedItem,
                           index: 11,
                           title: "Terms & Condition",
-                          icon: AssetConstants.ic_notification_svg,
+                          icon: AssetConstants.ic_terms_and_conditions_svg,
                           onClick: (index) {
                             changePage(index);
                           },
@@ -257,7 +257,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           isSelected: 12 == _selectedItem,
                           index: 12,
                           title: "Privacy & Concern",
-                          icon: AssetConstants.ic_settings_svg,
+                          icon: AssetConstants.ic_privacy_and_concern_svg,
                           onClick: (index) {
                             print("8 is clicked?");
                             changePage(index);
@@ -267,7 +267,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           isSelected: 13 == _selectedItem,
                           index: 13,
                           title: "Contact Us",
-                          icon: AssetConstants.ic_sign_out_svg,
+                          icon: AssetConstants.ic_contact_us_svg,
                           onClick: (index) {
                             changePage(index);
                           },

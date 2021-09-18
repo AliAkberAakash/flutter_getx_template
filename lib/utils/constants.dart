@@ -19,6 +19,14 @@ class AssetConstants {
   static const ic_settings_svg = base_icon_path + "ic_settings.svg";
   static const ic_sign_out_svg = base_icon_path + "ic_sign_out.svg";
   static const ic_vehicle_list_svg = base_icon_path + "ic_vehicle_list.svg";
+  static const ic_about_us_svg = base_icon_path + "ic_about_us.svg";
+  static const ic_contact_us_svg = base_icon_path + "ic_contact_us.svg";
+  static const ic_driver_login_svg = base_icon_path + "ic_driver_login.svg";
+  static const ic_faq_svg = base_icon_path + "ic_faq.svg";
+  static const ic_privacy_and_concern_svg = base_icon_path + "ic_privacy_and_concern.svg";
+  static const ic_lost_and_found_new_svg = base_icon_path + "ic_lost_and_found_new.svg";
+  static const ic_terms_and_conditions_svg = base_icon_path + "ic_terms_and_conditions.svg";
+  static const ic_refund_request_svg = base_icon_path + "ic_refund_request.svg";
 
   static const adminNoticeIcon = base_icon_path + "ic_admin_notice.svg";
   static const billingIcon = base_icon_path + "ic_billing.svg";
