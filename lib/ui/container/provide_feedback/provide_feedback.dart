@@ -97,6 +97,7 @@ class _BodyWidgetState extends State<BodyWidget> {
           ),
         ),
         CustomTextFormField(
+          hintText: "Write Here",
           formController: reasonController,
           inputType: TextInputType.text,
           hint: "Write Review",
@@ -122,7 +123,7 @@ class _BodyWidgetState extends State<BodyWidget> {
           borderColor: Colors.transparent,
           backgroundColor: GSColors.green_secondary,
           textColor: Colors.white,
-          title: "Submit Request",
+          title: "Submit Feedback",
           onTap: () {
             _showMessage(hp);
           },
@@ -184,16 +185,16 @@ class TitleWidget extends StatelessWidget {
                   color: GSColors.gray_primary,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: Text(
-                  "Refund request for payment ID #8907123 has been successfully sent",
-                  textAlign: TextAlign.center,
-                  style: GSTextStyles.make16xw400Style(
-                    color: GSColors.gray_secondary,
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 16.0),
+              //   child: Text(
+              //     "Refund request for payment ID #8907123 has been successfully sent",
+              //     textAlign: TextAlign.center,
+              //     style: GSTextStyles.make16xw400Style(
+              //       color: GSColors.gray_secondary,
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),

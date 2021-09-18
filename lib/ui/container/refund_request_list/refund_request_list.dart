@@ -245,7 +245,7 @@ class BookingItemBodyWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 16.0),
           child: TitleSubtitleWidget(
-            title: "Child Name",
+            title: "Child name",
             subtitle: "Violet Norman",
           ),
         ),
