@@ -130,7 +130,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   ),
                   Spacer(),
                   Text(
-                    "47.00\$",
+                    "S\$47.00",
                     style: GoogleFonts.manrope(
                       color: accent,
                       fontSize: dp20,
@@ -430,9 +430,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         Padding(
                           padding: const EdgeInsets.all(10),
                           child: Text(
-                            "Your charity program has been successfully "
-                                "created.\n Now you can check and maintain "
-                                "it in your\n'activity' menu.",
+                            "You booking has been submitted. An admin will approved it soon",
                             style: GoogleFonts.manrope(
                               color: GSColors.text_secondary,
                               fontSize: dp14,
@@ -449,7 +447,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         children: [
                           Expanded(
                             child: PositiveButton(
-                              text: "Go To Home",
+                              text: "My Booking List",
                               onClicked: (){
                                 Get.back();
                                 Get.back();

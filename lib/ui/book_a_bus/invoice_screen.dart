@@ -18,10 +18,14 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: white,
+        elevation: 0,
+        leading: BackButton(),
+      ),
       body: ListView(
         padding: EdgeInsets.all(dp20),
         children: [
-          VSpacer40(),
           LargeHeadlineWidget(headline: "Invoice"),
           VSpacer40(),
           TextFieldHeadline(headline: "Order ID"),
@@ -122,13 +126,13 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(child: TextFieldHeadline(headline: "Total Amount")),
-              Flexible(child: TextFieldValueWidget(headline: '\$47.00')),
+              Flexible(child: TextFieldValueWidget(headline: 'S\$47.00')),
             ],
           ),
           VSpacer40(),
           OutlinedMaterialButton(
             onClick: (){},
-            text: "Print Invoice",
+            text: "Save Invoice",
           ),
           VSpacer40(),
           VSpacer40(),

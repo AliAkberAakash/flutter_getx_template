@@ -91,13 +91,6 @@ class _AddressScreenState extends State<AddressScreen> {
               ],
             ),
             VSpacer20(),
-            TextFieldHeadline(headline: "Pickup Point*"),
-            VSpacer20(),
-            CommonTextField(
-              controller: TextEditingController(),
-              hint: "Location",
-            ),
-            VSpacer20(),
             Row(
               children: [
                 Flexible(
@@ -110,6 +103,13 @@ class _AddressScreenState extends State<AddressScreen> {
                   width: 200,
                 )
               ],
+            ),
+            VSpacer20(),
+            TextFieldHeadline(headline: "Pickup Point*"),
+            VSpacer20(),
+            CommonTextField(
+              controller: TextEditingController(),
+              hint: "Location",
             ),
             VSpacer20(),
             TextFieldHeadline(headline: "Pickup Remarks"),
