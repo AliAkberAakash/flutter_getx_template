@@ -169,7 +169,7 @@ class _ServiceProviderSignupScreenState extends State<ServiceProviderSignupScree
     var response = await _controller.serviceProviderSignup(request, _image!);
     if (response.success) {
       Get.back();
-      modalBottomSheetMenuSuccess(context);
+      modalBottomSheetMenuSuccess(context, companyNameController.text);
     } else {
       ToastUtil.show(response.msg);
       Get.back();

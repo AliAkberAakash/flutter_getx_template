@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
 import 'package:go_share/base/widget/GSTextField.dart';
-import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
+import 'package:go_share/ui/not_logged_in_welcome/sign_in_screen.dart';
 import 'package:go_share/ui/section4/widgets/text_fields.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
@@ -113,6 +114,12 @@ class _CreateNewAccountState extends State<CreateNewAccount> {
                         height: GSSizeConstants.padding7,
                       ),
                       GSTextButton(
+                        onClick: (){
+                          Get.back();
+                          Get.to(
+                            NSignInScreen(),
+                          );
+                        },
                         text: GSStrings.already_have_an_account_sIgn_in,
                       ),
                     ],

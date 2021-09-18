@@ -100,7 +100,7 @@ class _ServiceProviderLoginState extends State<ServiceProviderLoginScreen> {
               SizedBox(
                 height: GSSizeConstants.padding17,
               ),
-              Sec2PasswordTextField(
+              Sec4PasswordTextField(
                 controller: passwordController,
               ),
               // Container(
@@ -186,11 +186,11 @@ class _ServiceProviderLoginState extends State<ServiceProviderLoginScreen> {
   void login(ServicePartnerLoginRequest request) async{
     var response = await _controller.loginServiceProvider(request);
     if(response.data != null){
-      _controller.storeToken(response.data!.token).then((_){
-          Get.back();
-          Get.back();
-          Get.off(() => NavigationContainer());
-      });
+      await _controller.storeToken(response.data!.token);
+      await _controller.storeUser(response.data!.servicePartner);
+      Get.back();
+      Get.back();
+      Get.off(() => NavigationContainer());
     }else{
       Get.back();
     }

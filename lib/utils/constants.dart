@@ -30,7 +30,7 @@ class AssetConstants {
 
 class NetworkConstants {
   //urls
-  static const BASE_URL = "http://api.goshare.sg/new/";
+  static const BASE_URL = "http://api.goshare.sg/";
 
   //header parameters
   static const ACCEPT = "Accept";
@@ -58,6 +58,7 @@ class NetworkConstants {
 class PreferenceKey {
   static const darkMode = "darkMode";
   static const languageBengali = "languageBengali";
+  static const servicePartner = "servicePartner";
 }
 
 class DefaultValue {

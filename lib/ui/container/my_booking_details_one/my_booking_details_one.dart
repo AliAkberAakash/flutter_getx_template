@@ -8,6 +8,7 @@ import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/refund_request/refund_request.dart';
 import 'package:go_share/ui/container/UIConstants/Fonts.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
+import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 
 class MyBookingDetailsOneView extends StatefulWidget {
@@ -127,60 +128,98 @@ class LocationInfoWidget extends StatelessWidget {
         right: 30.0,
         bottom: 10.0,
       ),
-      child: Row(
+      child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 0.0, right: 24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: GSColors.green_normal.withOpacity(0.2),
-                  ),
-                  child: Icon(
-                    Icons.location_on_outlined,
-                    color: GSColors.green_secondary,
-                  ),
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: GSColors.green_normal.withOpacity(0.2),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 6.0),
-                  child: DottedLine(
-                    dashLength: 8.0,
-                    dashColor: GSColors.green_secondary.withOpacity(0.3),
-                    direction: Axis.vertical,
-                    lineLength: 375,
-                  ),
+                child: Icon(
+                  Icons.location_on_outlined,
+                  color: GSColors.green_secondary,
                 ),
-                Container(
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: GSColors.green_normal.withOpacity(0.2),
-                  ),
-                  child: Icon(
-                    Icons.location_on_outlined,
-                    color: GSColors.green_secondary,
-                  ),
+              ),
+              HSpacer20(),
+              Text(
+                "Pickup Info",
+                style: GSTextStyles.make18xw600Style(
+                  color: GSColors.text_regular,
                 ),
-              ],
-            ),
+                textAlign: TextAlign.start,
+              ),
+            ],
           ),
-          Expanded(
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 6.0, right: dp20, left: dp20),
+                child: DottedLine(
+                  dashLength: 8.0,
+                  dashColor: GSColors.green_secondary.withOpacity(0.3),
+                  direction: Axis.vertical,
+                  lineLength: dp230,
+                ),
+              ),
+              HSpacer20(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TitleSubtitleWidget(
+                    title: "Pickup Point",
+                    subtitle: "Block 372 Bukit Batok Street 31.",
+                    margin: const EdgeInsets.only(
+                      bottom: 24.0,
+                      top: 24.0,
+                    ),
+                  ),
+                  TitleSubtitleWidget(
+                    title: "Postal Code",
+                    subtitle: "650372 Singapore",
+                    margin: const EdgeInsets.only(bottom: 24.0),
+                  ),
+                  TitleSubtitleWidget(
+                    title: "Pickup Remark",
+                    subtitle: "#01-372, 650372 Singapore",
+                    margin: const EdgeInsets.only(bottom: 48.0),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: GSColors.green_normal.withOpacity(0.2),
+                ),
+                child: Icon(
+                  Icons.location_on_outlined,
+                  color: GSColors.green_secondary,
+                ),
+              ),
+              HSpacer20(),
+              Text(
+                "Drop-Off Info",
+                style: GSTextStyles.make18xw600Style(
+                  color: GSColors.text_regular,
+                ),
+                textAlign: TextAlign.start,
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: dp20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Pickup Info",
-                  style: GSTextStyles.make18xw600Style(
-                    color: GSColors.text_regular,
-                  ),
-                  textAlign: TextAlign.start,
-                ),
                 TitleSubtitleWidget(
-                  title: "Pickup point",
+                  title: "Drop-Off Point",
                   subtitle: "Block 372 Bukit Batok Street 31.",
                   margin: const EdgeInsets.only(
                     bottom: 24.0,
@@ -193,32 +232,7 @@ class LocationInfoWidget extends StatelessWidget {
                   margin: const EdgeInsets.only(bottom: 24.0),
                 ),
                 TitleSubtitleWidget(
-                  title: "Pickup Remark",
-                  subtitle: "#01-372, 650372 Singapore",
-                  margin: const EdgeInsets.only(bottom: 48.0),
-                ),
-                Text(
-                  "Drop-Off Info",
-                  style: GSTextStyles.make18xw600Style(
-                    color: GSColors.text_regular,
-                  ),
-                  textAlign: TextAlign.start,
-                ),
-                TitleSubtitleWidget(
-                  title: "Drop-off point",
-                  subtitle: "Block 372 Bukit Batok Street 31.",
-                  margin: const EdgeInsets.only(
-                    bottom: 24.0,
-                    top: 24.0,
-                  ),
-                ),
-                TitleSubtitleWidget(
-                  title: "Postal Code",
-                  subtitle: "650372 Singapore",
-                  margin: const EdgeInsets.only(bottom: 24.0),
-                ),
-                TitleSubtitleWidget(
-                  title: "Pickup Remark",
+                  title: "Drop-Off Remark",
                   subtitle: "#01-372, 650372 Singapore",
                   margin: const EdgeInsets.only(bottom: 0.0),
                 ),

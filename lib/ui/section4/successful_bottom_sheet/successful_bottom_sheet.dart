@@ -8,7 +8,7 @@ import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void modalBottomSheetMenuSuccess(BuildContext context) {
+void modalBottomSheetMenuSuccess(BuildContext context, String companyName) {
   showModalBottomSheet(
       isDismissible: false,
       context: context,
@@ -47,7 +47,7 @@ void modalBottomSheetMenuSuccess(BuildContext context) {
                       Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(
-                          "Your charity program has been successfully created.\n Now you can check and maintain it in your\n'activity' menu.",
+                          "Welcome $companyName. You request has been approved.",
                           style: GoogleFonts.manrope(
                             color: GSColors.text_secondary,
                             fontSize: dp14,
@@ -61,7 +61,7 @@ void modalBottomSheetMenuSuccess(BuildContext context) {
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 20),
                     child: GSButton(
-                      text: "Go To Home",
+                      text: "Login",
                       onClick: () {
                         Get.back();
                         Get.back();

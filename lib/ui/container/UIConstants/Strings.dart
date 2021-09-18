@@ -19,7 +19,7 @@ abstract class GSStrings {
   static const password = "Password";
   static const forget_password_reset_here = "Forgot Password? Reset here";
   static const already_have_an_account_sIgn_in =
-      "Already have an account? SIgn In";
+      "Already have an account? Sign In";
   static const submit = "Submit";
   static const forgot_password = "Forgot Password";
   static const menu = "Menu";

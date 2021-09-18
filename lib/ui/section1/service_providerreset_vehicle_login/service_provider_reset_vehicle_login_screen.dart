@@ -37,60 +37,58 @@ class _ResetVehicleLoginScreenState extends State<ResetVehicleLoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: LayoutBuilder(
-          builder: (ctx, constraints) {
-            return Container(
-              padding: EdgeInsets.symmetric(horizontal: dp50, vertical: dp20),
-              child: ListView(
-                padding: EdgeInsets.all(0),
-                children: [
-                  LargeHeadlineWidget(
-                    headline: "Reset Vehicle Login",
+    return Scaffold(
+      body: LayoutBuilder(
+        builder: (ctx, constraints) {
+          return Container(
+            padding: EdgeInsets.symmetric(horizontal: dp50, vertical: dp20),
+            child: ListView(
+              padding: EdgeInsets.only(top: dp40),
+              children: [
+                LargeHeadlineWidget(
+                  headline: "Reset Vehicle Login",
+                ),
+                VSpacer10(),
+                SizedBox(
+                  width: constraints.maxWidth * 0.6,
+                  child: TextFieldHeadline(
+                    headline: "It’s time to rock n role!"
+                        " Let’s get started now.",
                   ),
-                  VSpacer10(),
-                  SizedBox(
-                    width: constraints.maxWidth * 0.6,
-                    child: TextFieldHeadline(
-                      headline: "It’s time to rock n role!"
-                          " Let’s get started now.",
-                    ),
-                  ),
-                  VSpacer40(),
-                  CommonPasswordField(
-                    controller: serviceProviderPasswordController,
-                    hint: "Service Partner password",
-                  ),
-                  VSpacer20(),
-                  CommonPasswordField(
-                    controller: newPasswordController,
-                    hint: "New password",
-                  ),
-                  VSpacer20(),
-                  CommonPasswordField(
-                    controller: confirmPasswordController,
-                    hint: "Confirm new password",
-                  ),
-                  VSpacer60(),
-                  PositiveButton(
-                    text: "Submit",
-                    onClicked: () {
-                      if(validate()){
-                        var request = SpResetVehicleLoginRequest(
-                          servicePartnerPassword: serviceProviderPasswordController.text,
-                          password: newPasswordController.text,
-                          vehicleId: widget.id,
-                        );
-                        resetPassword(request);
-                      }
-                    },
-                  )
-                ],
-              ),
-            );
-          },
-        ),
+                ),
+                VSpacer40(),
+                CommonPasswordField(
+                  controller: serviceProviderPasswordController,
+                  hint: "Service Partner password",
+                ),
+                VSpacer20(),
+                CommonPasswordField(
+                  controller: newPasswordController,
+                  hint: "New password",
+                ),
+                VSpacer20(),
+                CommonPasswordField(
+                  controller: confirmPasswordController,
+                  hint: "Confirm new password",
+                ),
+                VSpacer60(),
+                PositiveButton(
+                  text: "Submit",
+                  onClicked: () {
+                    if(validate()){
+                      var request = SpResetVehicleLoginRequest(
+                        servicePartnerPassword: serviceProviderPasswordController.text,
+                        password: newPasswordController.text,
+                        vehicleId: widget.id,
+                      );
+                      resetPassword(request);
+                    }
+                  },
+                )
+              ],
+            ),
+          );
+        },
       ),
     );
   }
