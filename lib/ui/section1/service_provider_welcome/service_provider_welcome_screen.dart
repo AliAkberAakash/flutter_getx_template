@@ -47,79 +47,87 @@ class _ServiceProviderWelcomeScreenState extends State<ServiceProviderWelcomeScr
               width: MediaQuery.of(context).size.width,
               fit: BoxFit.cover,
             ),
-            SafeArea(
-                child: Padding(
-                    padding: EdgeInsets.fromLTRB(
-                      GSSizeConstants.padding30,
-                      GSSizeConstants.zero,
-                      GSSizeConstants.padding30,
-                      GSSizeConstants.zero,
+            Padding(
+                padding: EdgeInsets.fromLTRB(
+                  GSSizeConstants.padding30,
+                  GSSizeConstants.zero,
+                  GSSizeConstants.padding30,
+                  GSSizeConstants.zero,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  //mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Expanded(
+                      child: Container(
+                        child: Image.asset(
+                          AssetConstants.logoTransparent,
+                          width: dp350,
+                          height: dp200,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      //mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        //Get start text
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: GSSizeConstants.padding20),
-                          child: Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              GSStrings.get_started + "\n",
-                              textAlign: TextAlign.start,
-                              //style: GSTextStyles.make18xw400Style(),
-                              style: GoogleFonts.manrope(
-                                color: white,
-                                fontSize: dp18,
-                                fontWeight: FontWeight.normal,
-                                height: 0.4
-                              ),
-                            ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: GSSizeConstants.padding20),
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Text(
+                          GSStrings.get_started + "\n",
+                          textAlign: TextAlign.start,
+                          //style: GSTextStyles.make18xw400Style(),
+                          style: GoogleFonts.manrope(
+                            color: white,
+                            fontSize: dp18,
+                            fontWeight: FontWeight.normal,
+                            height: 0.4
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: GSSizeConstants.padding20),
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Millions of\n"
-                              "people use to\n"
-                              "turn their ideas\n",
-                              //style: GSTextStyles.make34xw700Style(),
-                              style: GoogleFonts.manrope(
-                                color: white,
-                                fontSize: dp30,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: GSSizeConstants.padding20),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Millions of\n"
+                          "people use to\n"
+                          "turn their ideas\n",
+                          //style: GSTextStyles.make34xw700Style(),
+                          style: GoogleFonts.manrope(
+                            color: white,
+                            fontSize: dp30,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
+                      ),
+                    ),
 
-                        SizedBox(
-                          height: GSSizeConstants.padding30,
-                        ),
-                        GSButton(
-                          text: GSStrings.sign_in,
-                          onClick: (){
-                            Get.to(ServiceProviderLoginScreen());
-                          },
-                        ),
-                        SizedBox(
-                          height: GSSizeConstants.padding22,
-                        ),
-                        CreateAccountButtonOutlineStock(
-                          onClick: (){
-                            Get.to(ServiceProviderSignupScreen());
-                          },
-                        ),
-                        SizedBox(
-                          height: GSSizeConstants.padding55,
-                        ),
-                      ],
-                    ))),
+                    SizedBox(
+                      height: GSSizeConstants.padding30,
+                    ),
+                    GSButton(
+                      text: GSStrings.sign_in,
+                      onClick: (){
+                        Get.to(ServiceProviderLoginScreen());
+                      },
+                    ),
+                    SizedBox(
+                      height: GSSizeConstants.padding22,
+                    ),
+                    CreateAccountButtonOutlineStock(
+                      onClick: (){
+                        Get.to(ServiceProviderSignupScreen());
+                      },
+                    ),
+                    SizedBox(
+                      height: GSSizeConstants.padding55,
+                    ),
+                  ],
+                )),
           ],
         ));
   } //: Widget
