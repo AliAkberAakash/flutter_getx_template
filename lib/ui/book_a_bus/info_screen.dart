@@ -303,22 +303,19 @@ class _InfoScreenState extends State<InfoScreen> {
           return Theme(
             data: ThemeData.light().copyWith(
               colorScheme: ColorScheme.light(primary: accent),
-              // buttonTheme: ButtonThemeData(
-              //     textTheme: acce
-              // ),
             ),
             child: child!,
           );
         },
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101)
+        firstDate: DateTime(1950),
+        lastDate: DateTime(2201)
     );
     if (picked != null && picked != selectedDate)
       setState(() {
         if(type==1) {
-          startTimeController.text=speakDate(selectedDate);
+          startTimeController.text=speakDate(picked);
         } else {
-          endTimeController.text=speakDate(selectedDate);
+          endTimeController.text=speakDate(picked);
         }
         selectedDate = picked;
       });

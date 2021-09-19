@@ -61,11 +61,13 @@ class _ServiceProviderWelcomeScreenState extends State<ServiceProviderWelcomeScr
                   children: <Widget>[
                     Expanded(
                       child: Container(
-                        child: Image.asset(
-                          AssetConstants.logoTransparent,
-                          width: dp350,
-                          height: dp200,
-                          fit: BoxFit.fill,
+                        child: Center(
+                          child: Image.asset(
+                            AssetConstants.logoTransparent,
+                            width: dp350,
+                            height: dp350,
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
                     ),

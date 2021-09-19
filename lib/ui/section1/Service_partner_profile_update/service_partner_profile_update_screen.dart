@@ -86,7 +86,7 @@ class _ServicePartnerProfileUpdateScreenState extends State<ServicePartnerProfil
           children: [
             _captureImage(profileResponse.data!.image),
             VSpacer40(),
-            TextFieldHeadline(headline: 'Full Name'),
+            TextFieldHeadline(headline: 'Company Name'),
             VSpacer10(),
             CommonTextField(controller: nameController),
             VSpacer40(),

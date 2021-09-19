@@ -106,7 +106,7 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
               type: TextInputType.number,
             ),
             VSpacer40(),
-            TextFieldHeadline(headline: 'Driver License Validity'),
+            TextFieldHeadline(headline: 'Driver License Issue Date'),
             VSpacer10(),
             _datePicker(driverLicenseValidityController, "Driver License Validity"),
             VSpacer40(),
@@ -164,7 +164,7 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
 
   DateTime selectedDate = DateTime.now();
 
-  Future<void> _selectDate(BuildContext context, TextEditingController controller) async {
+  _selectDate(BuildContext context, TextEditingController controller) async {
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
@@ -172,21 +172,17 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
           return Theme(
             data: ThemeData.light().copyWith(
               colorScheme: ColorScheme.light(primary: accent),
-              // buttonTheme: ButtonThemeData(
-              //     textTheme: acce
-              // ),
             ),
             child: child!,
           );
         },
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101)
+        firstDate: DateTime(1950),
+        lastDate: DateTime(2201)
     );
-    if (picked != null && picked != selectedDate)
-      setState(() {
-        controller.text=formatDate(selectedDate);
-        selectedDate = picked;
-      });
+    setState(() {
+      controller.text=formatDate(picked!);
+      selectedDate = picked!;
+    });
   }
 
   String formatDate(DateTime date){
