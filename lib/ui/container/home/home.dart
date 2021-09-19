@@ -128,7 +128,7 @@ class _HomeViewState extends State<HomeView> {
                   fit: BoxFit.cover,
                 ),
               ),
-              CustomAppPromotionWidget(),
+              //CustomAppPromotionWidget(), //TODO:: roni comment out
             ],
           ),
         ),

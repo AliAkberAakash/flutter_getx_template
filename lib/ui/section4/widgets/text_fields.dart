@@ -11,7 +11,7 @@ class Sec4TextField extends StatelessWidget {
   final String hints;
   final TextEditingController controller;
 
-  Sec4TextField({required this.hints, required this.controller});
+  Sec4TextField({ required this.hints,  required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class Sec4PasswordTextField extends StatefulWidget {
   final String hint;
   final TextEditingController controller;
 
-  const Sec4PasswordTextField({this.hint = "Password", required this.controller});
+  const Sec4PasswordTextField({this.hint = "Password",  required this.controller});
 
   @override
   _Sec4PasswordTextFieldState createState() => _Sec4PasswordTextFieldState();

@@ -25,8 +25,8 @@ class TimeUtil {
   }
 
   static Duration getDifferenceBetweenTwoDates({
-    required DateTime from,
-    required DateTime to,
+     required DateTime from,
+     required DateTime to,
   }) {
     return from.difference(to);
   }

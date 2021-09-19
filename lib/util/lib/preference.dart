@@ -10,7 +10,7 @@ class PreferenceUtil {
 
   PreferenceUtil._internal();
 
-  T? read<T>(String key, {T? defaultValue}) {
+  T read<T>(String key, {required T defaultValue}) {
     return _preference.read(key) ?? defaultValue;
   }
 

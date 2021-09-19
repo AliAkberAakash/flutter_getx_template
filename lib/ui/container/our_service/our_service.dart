@@ -167,7 +167,7 @@ class _BodyWidgetState extends State<BodyWidget> {
             CustomBusTimeWidget(
               backgroundImagePath: "images/ic_demo_bus_hour_two.png",
             ),
-            CustomAppPromotionWidget(),
+            //CustomAppPromotionWidget(), //TODO:: roni comment out
           ],
         ),
       ),

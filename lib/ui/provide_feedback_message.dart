@@ -47,7 +47,7 @@ class _ProvideFeedbackMessageViewState extends State<ProvideFeedbackMessageView>
 }
 
 class BodyWidget extends StatefulWidget {
-  const BodyWidget({Key? key}) : super(key: key);
+  const BodyWidget({ Key? key}) : super(key: key);
 
   @override
   _BodyWidgetState createState() => _BodyWidgetState();
@@ -149,9 +149,9 @@ class TitleWidget extends StatelessWidget {
 
 class TitleSubtitleWidget extends StatelessWidget {
   const TitleSubtitleWidget({
-    Key? key,
-    required this.title,
-    required this.subtitle,
+    required Key key,
+     required this.title,
+     required this.subtitle,
     this.margin = const EdgeInsets.only(bottom: 16.0),
   }) : super(key: key);
 

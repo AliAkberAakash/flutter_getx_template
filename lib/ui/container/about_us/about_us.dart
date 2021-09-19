@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:go_share/base/widget/custom_app_promotion_widget.dart';
 import 'package:go_share/base/widget/custom_bus_time_widget.dart';
+import 'package:go_share/data/models/container/AboutUsModel.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/Fonts.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
+import 'package:go_share/ui/container/about_us/AboutUsController.dart';
 
 class AboutUsView extends StatefulWidget {
   const AboutUsView({Key? key}) : super(key: key);
@@ -15,6 +18,14 @@ class AboutUsView extends StatefulWidget {
 }
 
 class _AboutUsViewState extends State<AboutUsView> {
+
+  AboutUsController controller=new AboutUsController();
+
+  @override
+  void initState() {
+
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -27,18 +38,40 @@ class _AboutUsViewState extends State<AboutUsView> {
       ),
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TitleWidget(),
-            Expanded(
-              child: BodyWidget(),
-            ),
-          ],
+        body: FutureBuilder<AboutUsModel>(
+          future: _getaboutUsData(),
+          builder: (context, snapshot) {
+            if(snapshot.hasData){
+              AboutUsModel model=snapshot.data!;
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TitleWidget(),
+                  Expanded(
+                    child: BodyWidget(data: model),
+                  ),
+                ],
+              );
+            }return CircularProgressIndicator();
+          }
         ),
       ),
     );
+  }
+
+  Future<AboutUsModel> _getaboutUsData() async{
+
+    var response = await controller.AboutUsServiceProvider();
+    print("response${response.data}");
+    return response;
+
+      // if(response != null) {
+      //
+      // }
+      // else{
+      //   new AboutUsModel(data:new List());
+      // }
   }
 }
 
@@ -90,7 +123,9 @@ class TitleWidget extends StatelessWidget {
 }
 
 class BodyWidget extends StatefulWidget {
-  const BodyWidget({Key? key}) : super(key: key);
+
+  AboutUsModel data;
+  BodyWidget({required this.data});
 
   @override
   _BodyWidgetState createState() => _BodyWidgetState();
@@ -133,7 +168,7 @@ class _BodyWidgetState extends State<BodyWidget>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  IntroductionWidget(),
+                  IntroductionWidget(data:widget.data),
                   Container(
                     width: double.maxFinite,
                     margin: const EdgeInsets.only(
@@ -145,7 +180,7 @@ class _BodyWidgetState extends State<BodyWidget>
                       fit: BoxFit.cover,
                     ),
                   ),
-                  CustomAppPromotionWidget(),
+                  CustomAppPromotionWidget(data:widget.data),
                   WhyChooseUsWidget(),
                 ],
               ),
@@ -190,8 +225,8 @@ class _BodyWidgetState extends State<BodyWidget>
           physics: BouncingScrollPhysics(),
           controller: _tabController,
           children: [
-            MissionAndVisionListWidget(),
-            MissionAndVisionListWidget(),
+            MissionAndVisionListWidget(data:widget.data),
+            MissionAndVisionListWidget(data:widget.data),
           ],
         ),
       ),
@@ -200,9 +235,8 @@ class _BodyWidgetState extends State<BodyWidget>
 }
 
 class MissionAndVisionListWidget extends StatelessWidget {
-  const MissionAndVisionListWidget({
-    Key? key,
-  }) : super(key: key);
+  AboutUsModel data;
+  MissionAndVisionListWidget({required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -212,7 +246,7 @@ class MissionAndVisionListWidget extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       scrollDirection: Axis.vertical,
       itemBuilder: (BuildContext context, int index) {
-        return MissionAndVisionItemWidget();
+        return MissionAndVisionItemWidget(data:this.data);
       },
       separatorBuilder: (BuildContext context, int index) {
         return SizedBox(height: 46.0);
@@ -223,9 +257,8 @@ class MissionAndVisionListWidget extends StatelessWidget {
 }
 
 class MissionAndVisionItemWidget extends StatelessWidget {
-  const MissionAndVisionItemWidget({
-    Key? key,
-  }) : super(key: key);
+  AboutUsModel data;
+  MissionAndVisionItemWidget({required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -234,32 +267,13 @@ class MissionAndVisionItemWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: double.maxFinite,
-            child: Image.asset(
-              "images/ic_demo_mission_one.png",
-              height: 220.0,
-              fit: BoxFit.cover,
+          Center(
+            child: SingleChildScrollView(
+              child: Html(
+                data: data.data.first.wwvTitle,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              bottom: 20.0,
-              top: 32.0,
-            ),
-            child: Text(
-              "How we believe we can achieve it",
-              style: GSTextStyles.make24xw900Style(),
-              textAlign: TextAlign.start,
-            ),
-          ),
-          Text(
-            "We are an industry-leading company that values honesty, integrity, and efficiency. Building quality products and caring for the users are what made us stand out since the beginning.",
-            style: GSTextStyles.make12xw400Style(
-              color: GSColors.text_light,
-            ),
-            textAlign: TextAlign.justify,
-          ),
+          )
         ],
       ),
     );
@@ -289,9 +303,11 @@ class TabBarCustomTab extends StatelessWidget {
 }
 
 class IntroductionWidget extends StatelessWidget {
-  const IntroductionWidget({
-    Key? key,
-  }) : super(key: key);
+  AboutUsModel data;
+
+
+  IntroductionWidget({required this.data,});
+
 
   @override
   Widget build(BuildContext context) {
@@ -324,13 +340,13 @@ class IntroductionWidget extends StatelessWidget {
               top: 8.0,
             ),
             child: Text(
-              "From essential services to earning opportunities. We're an all-in-one platform.",
+              data.data.first.wwvTitle,
               style: GSTextStyles.make24xw900Style(),
               textAlign: TextAlign.start,
             ),
           ),
           Text(
-            "We are an industry-leading company that values honesty, integrity, and efficiency. Building quality products and caring for the users are what made us stand out since the beginning.",
+            data.data.first.wwvText,
             style: GSTextStyles.make12xw400Style(
               color: GSColors.text_light,
             ),

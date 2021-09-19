@@ -4,10 +4,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/custom_filled_button.dart';
 import 'package:go_share/base/widget/custom_text_form_field.dart';
+import 'package:go_share/data/models/container/lostandfound/LostAndFoundModel.dart';
+import 'package:go_share/data/models/container/lostandfound/LostAndFoundResponse.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
+import 'package:go_share/ui/container/lost_and_found/LostAndFoundController.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
@@ -21,6 +24,8 @@ class LostAndFoundView extends StatefulWidget {
 }
 
 class _LostAndFoundViewState extends State<LostAndFoundView> {
+
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -49,9 +54,13 @@ class _LostAndFoundViewState extends State<LostAndFoundView> {
 }
 
 class TitleWidget extends StatelessWidget {
-  const TitleWidget({
+
+
+   TitleWidget({
     Key? key,
   }) : super(key: key);
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -108,10 +117,12 @@ class _FormListWidgetState extends State<FormListWidget> {
   late TextEditingController timeAndDateController;
   late TextEditingController descriptionController;
 
+  late LostAndFoundController controller;
+
   @override
   void initState() {
     super.initState();
-
+    controller=new LostAndFoundController();
     bookingIdController = TextEditingController();
     vehicleNumberController = TextEditingController();
     timeAndDateController = TextEditingController();
@@ -174,7 +185,8 @@ class _FormListWidgetState extends State<FormListWidget> {
               textColor: Colors.white,
               title: GSStrings.submit,
               onTap: () {
-                showSuccessSheet(context);
+                _submitTask();
+
               },
             ),
             VSpacer40(),
@@ -254,6 +266,14 @@ class _FormListWidgetState extends State<FormListWidget> {
                 )),
           );
         });
+  }
+
+  void _submitTask() {
+    LostAndFoundModel model=new LostAndFoundModel(bookingIdController.text,vehicleNumberController.text,timeAndDateController.text,descriptionController.text,);
+    controller.lostAndFoundServiceProvider(model).then((value) => {
+      if(value is LostAndFoundResponse){
+        showSuccessSheet(context)
+      }});
   }
 
 }

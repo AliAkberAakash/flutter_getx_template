@@ -7,8 +7,8 @@ class WebUtil {
   static void loadHtmlFromAssets(
     WebViewController controller,
     String path, {
-    String? replacingPattern,
-    String? replacingString,
+    required String replacingPattern,
+    required String replacingString,
   }) async {
     String fileText = await rootBundle.loadString(path);
 
@@ -31,8 +31,8 @@ class WebUtil {
   static void loadHtmlFromText(
     WebViewController controller,
     String htmlText, {
-    String? replacingPattern,
-    String? replacingString,
+    required String replacingPattern,
+    required String replacingString,
   }) async {
     if (replacingString != null &&
         replacingPattern != null &&

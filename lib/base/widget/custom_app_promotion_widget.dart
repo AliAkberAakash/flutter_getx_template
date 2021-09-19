@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:go_share/data/models/container/AboutUsModel.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
+import 'package:launch_review/launch_review.dart';
 
 class CustomAppPromotionWidget extends StatelessWidget {
-  final String title;
+  String title="";
+  late AboutUsModel data;
 
-  const CustomAppPromotionWidget({
-    Key? key,
-    this.title = GSStrings.app_promotion_title,
-  }) : super(key: key);
+
+  CustomAppPromotionWidget({required this.data}){
+    this.title = GSStrings.app_promotion_title;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +41,15 @@ class CustomAppPromotionWidget extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Image.asset(
-                    "images/ic_download_ios_app.png",
-                    height: 40.0,
-                    fit: BoxFit.fitHeight,
+                  InkWell(
+                    onTap:(){
+                      LaunchReview.launch(androidAppId:data.data.first.playStoreLink, iOSAppId: data.data.first.appStoreLink);
+                    },
+                    child: Image.asset(
+                      "images/ic_download_ios_app.png",
+                      height: 40.0,
+                      fit: BoxFit.fitHeight,
+                    ),
                   ),
                   Image.asset(
                     "images/ic_download_android_app.png",

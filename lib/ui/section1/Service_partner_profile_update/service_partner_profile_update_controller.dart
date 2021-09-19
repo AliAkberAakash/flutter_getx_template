@@ -10,7 +10,7 @@ class ServicePartnerProfileUpdateController extends GetxController{
   final Repository repository = Get.find();
 
   Future<ServicePartnerProfileUpdateResponse> updateProfile(ServicePartnerProfileUpdateRequest request, File? file) async{
-    var response = await repository.updateServicePartnerProfile(request, file);
+    var response = await repository.updateServicePartnerProfile(request, file!);
     return response;
   }
 

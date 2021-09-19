@@ -4,10 +4,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/custom_filled_button.dart';
 import 'package:go_share/base/widget/custom_text_form_field.dart';
+import 'package:go_share/data/models/container/contactus/ContactUsModel.dart';
+import 'package:go_share/data/models/container/contactus/ContactUsResponse.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
+import 'package:go_share/ui/container/contact_us/ContactUsController.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
@@ -21,6 +24,8 @@ class ContactUsView extends StatefulWidget {
 }
 
 class _ContactUsViewState extends State<ContactUsView> {
+
+  ContactUsController controller=new ContactUsController();
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -109,11 +114,12 @@ class _FormListWidgetState extends State<FormListWidget> {
   late TextEditingController addressController;
   late TextEditingController websiteUrlController;
   late TextEditingController feedbackController;
+  late ContactUsController _contactUsController;
 
   @override
   void initState() {
     super.initState();
-
+    _contactUsController=new ContactUsController();
     fullNameController = TextEditingController();
     phoneNumberController = TextEditingController();
     emailController = TextEditingController();
@@ -203,7 +209,7 @@ class _FormListWidgetState extends State<FormListWidget> {
               textColor: Colors.white,
               title: GSStrings.submit,
               onTap: () {
-                showSuccessSheet(context);
+                submitData();
               },
             ),
             VSpacer40(),
@@ -284,5 +290,16 @@ class _FormListWidgetState extends State<FormListWidget> {
           );
         });
   }
+
+  void submitData() {
+    ContactUsModel contactUsModel=new ContactUsModel(fullNameController.text,phoneNumberController.text,emailController.text,addressController.text,websiteUrlController.text,feedbackController.text);
+    _contactUsController.ContactUsServiceProvider(contactUsModel).then((value) {
+      if(value is ContactUsResponse) {
+        showSuccessSheet(context);
+      }
+    });
+  }
+
+
 
 }

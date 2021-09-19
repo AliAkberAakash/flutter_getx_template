@@ -184,7 +184,7 @@ class Repository{
   
   Future<ServicePartnerProfileUpdateResponse> updateServicePartnerProfile(
       ServicePartnerProfileUpdateRequest request,
-      File? file,
+      File file,
       ) async{
     try{
       var response;

@@ -28,7 +28,7 @@ class AssetConstants {
 
 class NetworkConstants {
   //urls
-  static const BASE_URL = "http://api.goshare.sg/new/";
+  static const BASE_URL = "http://api.goshare.sg/";
 
   //header parameters
   static const ACCEPT = "Accept";
@@ -50,6 +50,12 @@ class NetworkConstants {
   static const SEND_DRIVER_PASSWORD_RESET_CODE = "vehicle/resetpassword/code/sent";
   static const RESET_DRIVER_PASSWORD = "vehicle/resetpassword";
   static const UPDATE_VEHICLE_DETAILS = "servicepartner/vehicle/update";
+
+  //Roni's Code
+  static const ABOUT_US = "/aboutus";
+  static const CONTACT_US = "/contactus";
+  static const LOSTANDFOUND = "/lostandfounds";
+
 
 }
 

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>353429720392-r9brubtgovu89kljmj2eqa7rn6gdm06i.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.353429720392-r9brubtgovu89kljmj2eqa7rn6gdm06i</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA1-M5AQtb5H0sQWuVRX93UU7gs0WCotgI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>353429720392</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>sg.goshare.app</string>
+	<key>PROJECT_ID</key>
+	<string>goshare-27d50</string>
+	<key>STORAGE_BUCKET</key>
+	<string>goshare-27d50.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:353429720392:ios:3f3dc4811e0c11ee1b377d</string>
+</dict>
+</plist>
