@@ -79,10 +79,10 @@ class _BodyWidgetState extends State<BodyWidget> {
         TitleWidget(),
         BookingItemWidget(),
         CustomTextFormField(
-          hintText: "Why you cancel the ride",
+          hintText: "Why are you cancelling the ride",
           formController: reasonController,
           inputType: TextInputType.text,
-          hint: "Write Review",
+          hint: "Write a Review",
           isFieldExpanded: true,
           isRequiredField: false,
           margin: const EdgeInsets.only(

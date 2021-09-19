@@ -97,10 +97,10 @@ class _BodyWidgetState extends State<BodyWidget> {
           ),
         ),
         CustomTextFormField(
-          hintText: "Write Here",
+          hintText: "Write Review",
           formController: reasonController,
           inputType: TextInputType.text,
-          hint: "Write Review",
+          hint: "Your experience with us",
           isFieldExpanded: true,
           isRequiredField: false,
           margin: const EdgeInsets.only(
