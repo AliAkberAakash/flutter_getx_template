@@ -91,6 +91,8 @@ class _AddressScreenState extends State<AddressScreen> {
               ],
             ),
             VSpacer20(),
+            TextFieldHeadline(headline: "Pickup Location*"),
+            VSpacer20(),
             Row(
               children: [
                 Flexible(
@@ -104,8 +106,6 @@ class _AddressScreenState extends State<AddressScreen> {
                 )
               ],
             ),
-            VSpacer20(),
-            TextFieldHeadline(headline: "Pickup Point*"),
             VSpacer20(),
             CommonTextField(
               controller: TextEditingController(),
@@ -120,11 +120,6 @@ class _AddressScreenState extends State<AddressScreen> {
             VSpacer40(),
             TextFieldHeadline(headline: "Drop Off Location*"),
             VSpacer20(),
-            CommonTextField(
-              controller: TextEditingController(),
-              hint: "Location",
-            ),
-            VSpacer20(),
             Row(
               children: [
                 Flexible(
@@ -137,6 +132,17 @@ class _AddressScreenState extends State<AddressScreen> {
                   width: 200,
                 )
               ],
+            ),
+            VSpacer20(),
+            CommonTextField(
+              controller: TextEditingController(),
+              hint: "Location",
+            ),
+            VSpacer20(),
+            TextFieldHeadline(headline: "Drop Off Remarks"),
+            VSpacer20(),
+            CommonTextField(
+              controller: TextEditingController(),
             ),
             VSpacer20(),
             TextFieldHeadline(headline: "Write your comments"),
