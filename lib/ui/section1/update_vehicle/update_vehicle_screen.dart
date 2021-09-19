@@ -117,7 +117,7 @@ class _UpdateVehicleScreenState extends State<UpdateVehicleScreen> {
             VSpacer40(),
             TextFieldHeadline(headline: 'Driver License Validity'),
             VSpacer10(),
-            _datePicker(driverLicenseValidityController, "Driver License Validity"),
+            _datePicker(driverLicenseValidityController, "Driver License Issue Date"),
             VSpacer40(),
             TextFieldHeadline(headline: 'Driver Phone Number'),
             VSpacer10(),
@@ -194,19 +194,16 @@ class _UpdateVehicleScreenState extends State<UpdateVehicleScreen> {
           return Theme(
             data: ThemeData.light().copyWith(
               colorScheme: ColorScheme.light(primary: accent),
-              // buttonTheme: ButtonThemeData(
-              //     textTheme: acce
-              // ),
             ),
             child: child!,
           );
         },
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101)
+        firstDate: DateTime(1950),
+        lastDate: DateTime(2201)
     );
     if (picked != null && picked != selectedDate)
       setState(() {
-        controller.text=formatDate(selectedDate);
+        controller.text=formatDate(picked);
         selectedDate = picked;
       });
   }

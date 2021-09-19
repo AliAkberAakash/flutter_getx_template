@@ -54,7 +54,7 @@ class ResetVehicleItem extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "VA ${vehicle.vehicleNumber}",
+                      "${vehicle.vehicleNumber}",
                       style: GoogleFonts.manrope(
                         color: darkText,
                         fontSize: dp20,

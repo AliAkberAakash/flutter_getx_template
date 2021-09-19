@@ -34,7 +34,7 @@ class _CommonPasswordFieldState extends State<CommonPasswordField> {
         contentPadding: EdgeInsets.only(left: 10),
         hintText: widget.hint,
         hintStyle: GoogleFonts.manrope(
-            color: light_grey,
+            color: grey,
             fontSize: 14
         ),
         border: OutlineInputBorder(
