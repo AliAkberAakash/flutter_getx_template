@@ -3,10 +3,11 @@ import 'dart:io';
 import 'package:go_share/core/network/api_base_helper.dart';
 import 'package:go_share/core/network/dio_factory.dart';
 import 'package:go_share/data/models/container/AboutUsModel.dart';
+import 'package:go_share/data/models/container/FaqModel.dart';
 import 'package:go_share/data/models/container/contactus/ContactUsModel.dart';
 import 'package:go_share/data/models/container/contactus/ContactUsResponse.dart';
-import 'package:go_share/data/models/container/contactus/FaqModel.dart';
-import 'package:go_share/data/models/container/contactus/SettingsModel.dart';
+
+import 'package:go_share/data/models/container/SettingsModel.dart';
 import 'package:go_share/data/models/container/lostandfound/LostAndFoundModel.dart';
 import 'package:go_share/data/models/container/lostandfound/LostAndFoundResponse.dart';
 import 'package:go_share/data/models/driver/driver_login_request.dart';

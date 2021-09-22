@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:go_share/data/models/container/AboutUsModel.dart';
-import 'package:go_share/data/models/container/contactus/FaqModel.dart';
+import 'package:go_share/data/models/container/FaqModel.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_request.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_response.dart';
 import 'package:go_share/data/repository/container_repository/ContainerRepository.dart';
