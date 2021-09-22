@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_share/data/models/container/contactus/FaqModel.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/book_a_bus/book_a_bus.dart';
+import 'package:go_share/ui/container/faq/FaqController.dart';
 import 'package:go_share/ui/container/lost_and_found/lost_and_found.dart';
 import 'package:go_share/ui/container/our_service/our_service.dart';
 import 'package:go_share/ui/container/privacy_and_concern/privacy_and_concern.dart';
@@ -17,6 +19,9 @@ class FaqView extends StatefulWidget {
 }
 
 class _FaqViewState extends State<FaqView> {
+
+  FaqController controller=new FaqController();
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -33,14 +38,43 @@ class _FaqViewState extends State<FaqView> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TitleWidget(),
             Expanded(
-              child: FaqListWidget(),
+              flex: 0,
+                child: TitleWidget()),
+            Expanded(
+              flex: 1,
+              child: FutureBuilder<FaqModel>(
+                future: getFaqData(),
+                builder: (context, snapshot){
+                  if(snapshot.hasData){
+                    return FaqListWidget(data:snapshot.data);
+
+                  }
+                  return Container(
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width,
+                      child: Center(child: CircularProgressIndicator()));
+
+                }
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+  Future<FaqModel> getFaqData() async{
+
+    var response = await controller.FaqServiceProvider();
+    print("response${response.data}");
+    return response;
+
+    // if(response != null) {
+    //
+    // }
+    // else{
+    //   new AboutUsModel(data:new List());
+    // }
   }
 }
 
@@ -92,13 +126,29 @@ class TitleWidget extends StatelessWidget {
 }
 
 class FaqListWidget extends StatelessWidget {
-  const FaqListWidget({
-    Key? key,
-  }) : super(key: key);
+  FaqModel? data;
+  FaqListWidget({required this.data});
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
+
+    return ListView.builder(
+        itemCount: data!.data.length,
+        itemBuilder: (context,i){
+
+          Widget nextPage = BookABusView(data: data,categoryId:data!.data[i].category.id,name :data!.data[i].category.name);
+           return Padding(
+             padding: const EdgeInsets.all(8.0),
+             child: FaqItemWidget(
+              title: data!.data[i].category.name,
+              nextPage: nextPage,
+          ),
+           );
+
+    }
+    );
+    /*return ListView.separated(
+
       padding: const EdgeInsets.symmetric(vertical: 30.0),
       physics: BouncingScrollPhysics(),
       scrollDirection: Axis.vertical,
@@ -142,7 +192,7 @@ class FaqListWidget extends StatelessWidget {
         return SizedBox(height: 20.0);
       },
       itemCount: 5,
-    );
+    );*/
   }
 }
 
@@ -214,4 +264,6 @@ class FaqItemWidget extends StatelessWidget {
       ),
     );
   }
+
+
 }

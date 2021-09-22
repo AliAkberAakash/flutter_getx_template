@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/custom_filled_button.dart';
+import 'package:go_share/data/models/container/contactus/FaqModel.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/contact_us/contact_us.dart';
 
 class BookABusView extends StatefulWidget {
-  const BookABusView({Key? key}) : super(key: key);
+  FaqModel? data;
+  int categoryId;
+  String name;
+  BookABusView({required this.data,  required this.categoryId,required this.name});
 
   @override
   _BookABusViewState createState() => _BookABusViewState();
@@ -32,9 +36,9 @@ class _BookABusViewState extends State<BookABusView> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TitleWidget(),
+            TitleWidget(data:widget.data,index:widget.categoryId,name:widget.name),
             Expanded(
-              child: FaqListWidget(),
+              child: FaqListWidget(data:widget.data,index:widget.categoryId),
             ),
             CustomFilledButton(
               margin: const EdgeInsets.only(
@@ -62,9 +66,10 @@ class _BookABusViewState extends State<BookABusView> {
 }
 
 class TitleWidget extends StatelessWidget {
-  const TitleWidget({
-    Key? key,
-  }) : super(key: key);
+  FaqModel? data;
+  int index;
+  String name;
+  TitleWidget({required this.data,  required this.index,required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +134,7 @@ class TitleWidget extends StatelessWidget {
                   top: 8.0,
                 ),
                 child: Text(
-                  GSStrings.book_a_bus_title,
+                  name,
                   textAlign: TextAlign.start,
                   style: GSTextStyles.make40xw900Style(),
                 ),
@@ -147,32 +152,71 @@ class TitleWidget extends StatelessWidget {
   }
 }
 
-class FaqListWidget extends StatelessWidget {
-  const FaqListWidget({
-    Key? key,
-  }) : super(key: key);
 
+class FaqListWidget extends StatefulWidget {
+  FaqModel? data;
+  int index;
+  FaqListWidget({required this.data,  required this.index});
+
+  @override
+  _FaqListWidgetState createState() => _FaqListWidgetState();
+}
+
+class _FaqListWidgetState extends State<FaqListWidget> {
+  List<QAModel> list = List<QAModel>.empty(growable: true);
+  @override
+  void initState() {
+
+   getQuistenItemCount(widget.data,widget.index);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
       physics: BouncingScrollPhysics(),
       scrollDirection: Axis.vertical,
+      itemCount: list.length,
       itemBuilder: (BuildContext context, int index) {
-        return FaqItemWidget(index: index);
+        return FaqItemWidget(list:list[0],index:index);
       },
       separatorBuilder: (BuildContext context, int index) {
         return SizedBox(height: 40.0);
       },
-      itemCount: 20,
+
     );
   }
-}
+
+  void getQuistenItemCount(FaqModel? data, int? index) {
+    for (int i=0;i<data!.data.length;i++){
+       if (data.data[i].categoryId==index){
+         list.add(new QAModel(data.data[i].question,data.data[i].answer));
+       }
+
+    }
+  }
+  }
+
+
+
+
+
+  class QAModel{
+  late String qus;
+  late String ans;
+
+  QAModel(this.qus, this.ans);
+
+  }
+
+
 
 class FaqItemWidget extends StatelessWidget {
+  final QAModel list;
   final int index;
 
   const FaqItemWidget({
     Key? key,
+    required this.list,
     required this.index,
   }) : super(key: key);
 
@@ -190,7 +234,7 @@ class FaqItemWidget extends StatelessWidget {
                 width: 28.0,
                 margin: const EdgeInsets.only(right: 4.0),
                 child: Text(
-                  "${index + 1}.",
+                  "${index+1}.",
                   style: GSTextStyles.make18xw600Style(
                     color: GSColors.text_bold,
                   ),
@@ -204,7 +248,7 @@ class FaqItemWidget extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: Text(
-                        "What does FAQs mean in English?",
+                        list.qus,
                         style: GSTextStyles.make18xw600Style(
                           color: GSColors.text_bold,
                         ),
@@ -212,7 +256,7 @@ class FaqItemWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Your charity program has been successfully created. Now you can check and maintain it in your ‘activity’ menu",
+                      list.ans,
                       style: GSTextStyles.make12xw400Style(
                         color: GSColors.text_secondary,
                       ),

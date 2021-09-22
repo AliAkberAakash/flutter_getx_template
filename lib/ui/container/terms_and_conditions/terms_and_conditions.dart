@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:go_share/data/models/container/contactus/SettingsModel.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
+import 'package:go_share/ui/container/privacy_and_concern/SettingController.dart';
 
 class TermsAndConditionsView extends StatefulWidget {
   const TermsAndConditionsView({Key? key}) : super(key: key);
@@ -12,6 +15,7 @@ class TermsAndConditionsView extends StatefulWidget {
 }
 
 class _TermsAndConditionsViewState extends State<TermsAndConditionsView> {
+  SettingController controller=new SettingController();
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -29,13 +33,39 @@ class _TermsAndConditionsViewState extends State<TermsAndConditionsView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TitleWidget(),
-            Expanded(
-              child: TermsWidget(),
+            FutureBuilder<SettingsModel>(
+              future: getTC(),
+              builder: (context, snapshot) {
+                if(snapshot.hasData){
+                  return Expanded(
+                    child: TermsWidget(snapshot.data!),
+                  );
+                }
+                return Container(
+                    height: 300,
+                    width: MediaQuery.of(context).size.width,
+                    child: Center(child: CircularProgressIndicator()));
+
+              }
             ),
           ],
         ),
       ),
     );
+  }
+
+  Future<SettingsModel> getTC() async{
+
+    var response = await controller.SettingServiceProvider();
+    print("response${response.data}");
+    return response;
+
+    // if(response != null) {
+    //
+    // }
+    // else{
+    //   new AboutUsModel(data:new List());
+    // }
   }
 }
 
@@ -87,7 +117,8 @@ class TitleWidget extends StatelessWidget {
 }
 
 class TermsWidget extends StatefulWidget {
-  const TermsWidget({Key? key}) : super(key: key);
+  SettingsModel getData;
+  TermsWidget(this.getData, {Key? key}) : super(key: key);
 
   @override
   _TermsWidgetState createState() => _TermsWidgetState();
@@ -114,71 +145,10 @@ class _TermsWidgetState extends State<TermsWidget> {
           vertical: 28.0,
         ),
         width: double.maxFinite,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Country version: Singapore",
-              style: GSTextStyles.make14xw600Style(
-                color: GSColors.green_secondary,
-              ),
-              textAlign: TextAlign.start,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 4.0,
-                bottom: 18.0,
-              ),
-              child: Text(
-                "We know it’s tempting to skip these Terms of Service, but it’s important.",
-                style: GSTextStyles.make24xw900Style(),
-                textAlign: TextAlign.start,
-              ),
-            ),
-            Text(
-              "Your charity program has been successfully created. Now you can check and maintain it in your ‘activity’ menu",
-              style: GSTextStyles.make12xw400Style(
-                color: GSColors.text_light.withOpacity(0.7),
-              ),
-              textAlign: TextAlign.justify,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 20.0,
-                bottom: 12.0,
-              ),
-              child: Text(
-                "Service provider",
-                style: GSTextStyles.make16xw600Style(),
-                textAlign: TextAlign.start,
-              ),
-            ),
-            Text(
-              "If you’re under the age required to manage your own Google Account, you must have your parent or legal guardian’s permission to use a Google Account. Please have your parent or legal guardian read these terms with you. \n\nIf you’re a parent or legal guardian, and you allow your child to use the services, then these terms apply to you and you’re responsible for your child’s activity on the services. \n\nSome Google services have additional age requirements as described in their service-specific additional terms and policies.",
-              style: GSTextStyles.make12xw400Style(
-                color: GSColors.text_light.withOpacity(0.7),
-              ),
-              textAlign: TextAlign.justify,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 20.0,
-                bottom: 12.0,
-              ),
-              child: Text(
-                "Age requirements",
-                style: GSTextStyles.make16xw600Style(),
-                textAlign: TextAlign.start,
-              ),
-            ),
-            Text(
-              "If you’re under the age required to manage your own Google Account, you must have your parent or legal guardian’s permission to use a Google Account. Please have your parent or legal guardian read these terms with you. \n\nIf you’re a parent or legal guardian, and you allow your child to use the services, then these terms apply to you and you’re responsible for your child’s activity on the services. \n\nSome Google services have additional age requirements as described in their service-specific additional terms and policies.",
-              style: GSTextStyles.make12xw400Style(
-                color: GSColors.text_light.withOpacity(0.7),
-              ),
-              textAlign: TextAlign.justify,
-            ),
-          ],
+        child: Center(
+          child: Html(
+            data: widget.getData.data.first.termsConditions,
+          ),
         ),
       ),
     );

@@ -5,6 +5,8 @@ import 'package:go_share/core/network/dio_factory.dart';
 import 'package:go_share/data/models/container/AboutUsModel.dart';
 import 'package:go_share/data/models/container/contactus/ContactUsModel.dart';
 import 'package:go_share/data/models/container/contactus/ContactUsResponse.dart';
+import 'package:go_share/data/models/container/contactus/FaqModel.dart';
+import 'package:go_share/data/models/container/contactus/SettingsModel.dart';
 import 'package:go_share/data/models/container/lostandfound/LostAndFoundModel.dart';
 import 'package:go_share/data/models/container/lostandfound/LostAndFoundResponse.dart';
 import 'package:go_share/data/models/driver/driver_login_request.dart';
@@ -52,6 +54,20 @@ class ContainerRepository{
     };
   }
 
+  Future<SettingsModel> getTCPP() async{
+    try{
+      var responseJson = await helper.get(NetworkConstants.SETTINGS);
+      if(responseJson.data !=null){
+        return SettingsModel.fromJson(responseJson.data);
+      }
+    }catch(e){
+      logger.d(e);
+
+    }throw{
+
+    };
+  }
+
 
 
 
@@ -87,6 +103,23 @@ class ContainerRepository{
     }
 
   }
+
+
+
+  Future<FaqModel> getFaq() async{
+    try{
+      var responseJson = await helper.get(NetworkConstants.FAQ);
+      if(responseJson.data !=null){
+        return FaqModel.fromJson(responseJson.data);
+      }
+    }catch(e){
+      logger.d(e);
+
+    }throw{
+
+    };
+  }
+
 
 
 }

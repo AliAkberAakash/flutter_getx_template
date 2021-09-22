@@ -55,6 +55,8 @@ class NetworkConstants {
   static const ABOUT_US = "/aboutus";
   static const CONTACT_US = "/contactus";
   static const LOSTANDFOUND = "/lostandfounds";
+  static const FAQ = "/faqs";
+  static const SETTINGS = "/settings";
 
 
 }

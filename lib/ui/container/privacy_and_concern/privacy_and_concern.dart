@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:go_share/data/models/container/contactus/SettingsModel.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
+
+import 'SettingController.dart';
 
 class PrivacyAndConcernView extends StatefulWidget {
   const PrivacyAndConcernView({Key? key}) : super(key: key);
@@ -12,6 +16,8 @@ class PrivacyAndConcernView extends StatefulWidget {
 }
 
 class _PrivacyAndConcernViewState extends State<PrivacyAndConcernView> {
+
+  SettingController controller=new SettingController();
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -29,13 +35,39 @@ class _PrivacyAndConcernViewState extends State<PrivacyAndConcernView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TitleWidget(),
-            Expanded(
-              child: PrivacyWidget(),
+            FutureBuilder<SettingsModel>(
+                future: getTC(),
+                builder: (context, snapshot) {
+                  if(snapshot.hasData){
+                    return Expanded(
+                      child: PrivacyWidget(snapshot.data!),
+                    );
+                  }
+                  return Container(
+                      height: 300,
+                      width: MediaQuery.of(context).size.width,
+                      child: Center(child: CircularProgressIndicator()));
+
+                }
             ),
+
           ],
         ),
       ),
     );
+  }
+  Future<SettingsModel> getTC() async{
+
+    var response = await controller.SettingServiceProvider();
+    print("response${response.data}");
+    return response;
+
+    // if(response != null) {
+    //
+    // }
+    // else{
+    //   new AboutUsModel(data:new List());
+    // }
   }
 }
 
@@ -87,7 +119,8 @@ class TitleWidget extends StatelessWidget {
 }
 
 class PrivacyWidget extends StatefulWidget {
-  const PrivacyWidget({Key? key}) : super(key: key);
+  SettingsModel model;
+  PrivacyWidget(this.model, {Key? key}) : super(key: key);
 
   @override
   _PrivacyWidgetState createState() => _PrivacyWidgetState();
@@ -114,65 +147,10 @@ class _PrivacyWidgetState extends State<PrivacyWidget> {
           vertical: 28.0,
         ),
         width: double.maxFinite,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                bottom: 28.0,
-              ),
-              child: Text(
-                "When you use our services, you’re trusting us with your information.",
-                style: GSTextStyles.make24xw900Style(),
-                textAlign: TextAlign.start,
-              ),
-            ),
-            Text(
-              "If you’re under the age required to manage your own Google Account, you must have your parent or legal guardian’s permission to use a Google Account. Please have your parent or legal guardian read these terms with you. \n\nIf you’re a parent or legal guardian, and you allow your child to use the services, then these terms apply to you and you’re responsible for your child’s activity on the services. \n\nSome Google services have additional age requirements as described in their service-specific additional terms and policies.",
-              style: GSTextStyles.make12xw400Style(
-                color: GSColors.text_light.withOpacity(0.7),
-              ),
-              textAlign: TextAlign.justify,
-            ),
-            Container(
-              width: double.maxFinite,
-              padding: const EdgeInsets.only(
-                top: 40.0,
-                bottom: 22.0,
-              ),
-              child: Image.asset(
-                "images/ic_demo_privacy_one.png",
-                height: 220.0,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Text(
-              "If you’re under the age required to manage your own Google Account, you must have your parent or legal guardian’s permission to use a Google Account. Please have your parent or legal guardian read these terms with you. \n\nIf you’re a parent or legal guardian, and you allow your child to use the services, then these terms apply to you and you’re responsible for your child’s activity on the services. \n\nSome Google services have additional age requirements as described in their service-specific additional terms and policies.",
-              style: GSTextStyles.make12xw400Style(
-                color: GSColors.text_light.withOpacity(0.7),
-              ),
-              textAlign: TextAlign.justify,
-            ),
-            Container(
-              width: double.maxFinite,
-              padding: const EdgeInsets.only(
-                top: 40.0,
-                bottom: 22.0,
-              ),
-              child: Image.asset(
-                "images/ic_demo_privacy_two.png",
-                height: 220.0,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Text(
-              "If you’re under the age required to manage your own Google Account, you must have your parent or legal guardian’s permission to use a Google Account. Please have your parent or legal guardian read these terms with you. \n\nIf you’re a parent or legal guardian, and you allow your child to use the services, then these terms apply to you and you’re responsible for your child’s activity on the services. \n\nSome Google services have additional age requirements as described in their service-specific additional terms and policies.",
-              style: GSTextStyles.make12xw400Style(
-                color: GSColors.text_light.withOpacity(0.7),
-              ),
-              textAlign: TextAlign.justify,
-            ),
-          ],
+        child: Center(
+          child: Html(
+            data: widget.model.data.first.privacyConcerns,
+          ),
         ),
       ),
     );
