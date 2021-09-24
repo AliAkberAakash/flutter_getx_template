@@ -6,10 +6,10 @@ import 'package:get/get.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_request.dart';
 import 'package:go_share/ui/common_widgets/common_loading_dialog.dart';
-import 'package:go_share/ui/container/ForgotPassword/ForgotPassword.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
 import 'package:go_share/ui/navigation_container/navigation_container.dart';
+import 'package:go_share/ui/section1/Service_provider_reset_password/service_provider_reset_password.dart';
 import 'package:go_share/ui/section4/widgets/text_fields.dart';
 import 'package:go_share/util/lib/toast.dart';
 import 'package:go_share/utils/colors.dart';
@@ -180,7 +180,7 @@ class _ServiceProviderLoginState extends State<ServiceProviderLoginScreen> {
                       ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = (){
-                          Get.to(ForgotPassword());
+                          Get.to(ServiceProviderResetPassword());
                       }
                     ),
                   ],
