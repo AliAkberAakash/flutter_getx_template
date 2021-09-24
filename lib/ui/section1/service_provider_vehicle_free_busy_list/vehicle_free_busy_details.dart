@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:go_share/data/models/vehicles/vehicle_list_response.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
 import 'package:go_share/ui/common_widgets/text_field_value_widget.dart';
@@ -110,21 +111,23 @@ class _VehicleFreeBusyDetailsState extends State<VehicleFreeBusyDetails> {
                     VSpacer10(),
                     TextFieldValueWidget(headline: speakDate(vehicle.attendantDob)),
                     vehicle.availableStatus=="Busy" ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         VSpacer20(),
                         TextFieldHeadline(headline: "Ride Start Sate"),
                         VSpacer10(),
-                        TextFieldValueWidget(headline: speakDate(vehicle.createdAt)),
+                        TextFieldValueWidget(headline:vehicle.firstRunningRideInfo?.startDate != null ? speakDate(vehicle.firstRunningRideInfo!.startDate) : "--"),
                         VSpacer20(),
                         TextFieldHeadline(headline: "Pickup Location"),
                         VSpacer10(),
-                        TextFieldValueWidget(headline: "--"), //todo
+                        TextFieldValueWidget(headline: "${vehicle.firstRunningRideInfo?.source}"),
                         VSpacer20(),
                         TextFieldHeadline(headline: "Drop-Off Location"),
                         VSpacer10(),
-                        TextFieldValueWidget(headline: "--"), //todo
+                        TextFieldValueWidget(headline: "${vehicle.firstRunningRideInfo?.destination}"),
                       ],
                     ) : Container(),
+                    VSpacer20(),
                     TextFieldHeadline(headline: "Request Date"),
                     VSpacer10(),
                     TextFieldValueWidget(headline: speakDate(vehicle.createdAt)),
