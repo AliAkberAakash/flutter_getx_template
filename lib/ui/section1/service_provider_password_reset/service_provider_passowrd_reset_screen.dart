@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
+import 'package:go_share/data/models/service_partner/auth/password_reset_request.dart';
+import 'package:go_share/ui/common_widgets/common_loading_dialog.dart';
 import 'package:go_share/ui/common_widgets/common_password_field.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
+import 'package:go_share/ui/section1/Service_provider_reset_password/service_provider_reset_password_controller.dart';
 import 'package:go_share/util/lib/toast.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
@@ -25,7 +28,9 @@ class _ServiceProviderPasswordResetScreenState extends State<ServiceProviderPass
   var secretCodeController = TextEditingController();
   var newPasswordController = TextEditingController();
   var confirmPasswordController = TextEditingController();
-  
+
+  final _controller = ServiceProviderResetPasswordController(Get.find());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +72,12 @@ class _ServiceProviderPasswordResetScreenState extends State<ServiceProviderPass
                   text: "Submit",
                   onClicked: () {
                     if(validate()){
-                      modalBottomSheetMenuSuccess(context);
+                      showLoader();
+                      var request = PasswordResetRequest(
+                          code: secretCodeController.text,
+                          password: newPasswordController.text,
+                      );
+                      resetPassword(request);
                     }
                   },
                 )
@@ -98,9 +108,15 @@ class _ServiceProviderPasswordResetScreenState extends State<ServiceProviderPass
 
   }
 
-  resetPassword() async{
-    
-
+  resetPassword(PasswordResetRequest request) async{
+    var response = await _controller.resetPassword(request);
+    if(response.success){
+      Get.back();
+      modalBottomSheetMenuSuccess(context);
+    }else{
+      Get.back();
+      ToastUtil.show(response.msg);
+    }
   }
 
   void modalBottomSheetMenuSuccess(BuildContext context) {

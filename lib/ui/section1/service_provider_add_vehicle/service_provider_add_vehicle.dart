@@ -181,7 +181,7 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
     );
     setState(() {
       controller.text=formatDate(picked!);
-      selectedDate = picked!;
+      selectedDate = picked;
     });
   }
 

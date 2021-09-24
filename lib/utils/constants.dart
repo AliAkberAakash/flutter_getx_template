@@ -61,6 +61,7 @@ class NetworkConstants {
   static const RESET_DRIVER_PASSWORD = "vehicle/resetpassword";
   static const UPDATE_VEHICLE_DETAILS = "servicepartner/vehicle/update";
   static const SEND_RESET_PASSWORD_CODE = "servicepartner/resetpassword/code/sent";
+  static const RESET_SP_PASSWORD = "servicepartner/resetpassword";
 
 }
 

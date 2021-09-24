@@ -11,6 +11,7 @@ import 'package:go_share/data/models/driver/driver_profile_response.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_request.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_response.dart';
 import 'package:go_share/data/models/service_partner/auth/password_reset_code_request.dart';
+import 'package:go_share/data/models/service_partner/auth/password_reset_request.dart';
 import 'package:go_share/data/models/service_partner/auth/signup/service_partner_signup_request.dart';
 import 'package:go_share/data/models/service_partner/auth/signup/service_partner_signup_response.dart';
 import 'package:go_share/data/models/service_partner/profile/service_partner_profile_response.dart';
@@ -331,6 +332,23 @@ class Repository{
             msg: "Failed to send code"
         );
       }
+
+  }
+
+  Future<DriverPasswordResetResponse> requestSPPasswordReset(
+      PasswordResetRequest request) async{
+    try{
+      var response = await helper.post(
+        NetworkConstants.RESET_SP_PASSWORD,
+        request.toJson(),
+      );
+      return DriverPasswordResetResponse.fromJson(response.data);
+    }catch(e){
+      return DriverPasswordResetResponse(
+          success: false,
+          msg: "Failed to send code"
+      );
+    }
 
   }
 
