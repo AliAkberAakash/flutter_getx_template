@@ -77,7 +77,6 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
             VSpacer10(),
             CommonTextField(
               controller: vehicleNumberController,
-              type: TextInputType.number,
             ),
             VSpacer40(),
            /* TextFieldHeadline(headline: 'Service Provider ID'),
@@ -103,7 +102,6 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
             VSpacer10(),
             CommonTextField(
               controller: driverLicenseNumberController,
-              type: TextInputType.number,
             ),
             VSpacer40(),
             TextFieldHeadline(headline: 'Driver License Issue Date'),
@@ -127,7 +125,10 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
             VSpacer40(),
             TextFieldHeadline(headline: 'Attendant Phone'),
             VSpacer10(),
-            CommonTextField(controller: attendantPhonePositionController),
+            CommonTextField(
+              controller: attendantPhonePositionController,
+              type: TextInputType.phone,
+            ),
             VSpacer40(),
             TextFieldHeadline(headline: 'Attendant NRIC'),
             VSpacer10(),
