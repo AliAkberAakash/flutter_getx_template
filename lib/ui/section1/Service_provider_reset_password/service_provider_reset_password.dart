@@ -4,13 +4,17 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
 import 'package:go_share/base/widget/GSTextField.dart';
+import 'package:go_share/data/models/service_partner/auth/password_reset_code_request.dart';
+import 'package:go_share/ui/common_widgets/common_loading_dialog.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
 import 'package:go_share/ui/not_logged_in_welcome/navigation_container/navigation_container.dart';
+import 'package:go_share/ui/section1/Service_provider_reset_password/service_provider_reset_password_controller.dart';
 import 'package:go_share/ui/section1/service_provider_password_reset/service_provider_passowrd_reset_screen.dart';
+import 'package:go_share/util/lib/toast.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
@@ -24,6 +28,10 @@ class ServiceProviderResetPassword extends StatefulWidget {
 
 // State
 class _ServiceProviderResetPasswordState extends State<ServiceProviderResetPassword> {
+
+  TextEditingController emailController = TextEditingController();
+  var _controller = ServiceProviderResetPasswordController(Get.find());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +72,7 @@ class _ServiceProviderResetPasswordState extends State<ServiceProviderResetPassw
           height: GSSizeConstants.padding38,
         ),
         GSTextField(
-          controller: TextEditingController(),
+          controller: emailController,
           hints: "Email Address",
         ),
         SizedBox(
@@ -72,7 +80,12 @@ class _ServiceProviderResetPasswordState extends State<ServiceProviderResetPassw
         ),
         GSButton(
           onClick: (){
-            showSuccessSheet(context);
+            if(emailController.text.isNotEmpty){
+              var request = PasswordResetCodeRequest(email: emailController.text);
+              resetPassword(request);
+            }else{
+              ToastUtil.show("Please enter an email");
+            }
           },
           text: GSStrings.submit,
         ),
@@ -81,6 +94,18 @@ class _ServiceProviderResetPasswordState extends State<ServiceProviderResetPassw
         ),
       ],
     )));
+  }
+
+  void resetPassword(PasswordResetCodeRequest request) async{
+    showLoader();
+    var response = await _controller.sendPasswordResetCode(request);
+    if(response.success){
+      Get.back();
+      showSuccessSheet(context);
+    }else{
+      Get.back();
+      ToastUtil.show(response.msg);
+    }
   }
 
   void showSuccessSheet(BuildContext context) {
