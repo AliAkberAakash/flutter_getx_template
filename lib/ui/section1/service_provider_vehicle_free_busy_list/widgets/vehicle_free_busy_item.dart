@@ -115,7 +115,7 @@ class VehicleFreeBusyItem extends StatelessWidget {
                           VSpacer20(),
                           VehicleInfoWidget(
                             title: "Booked seat",
-                            value: vehicle.capacity,
+                            value: "${vehicle.firstRunningRideInfo?.bookedSeat ?? 0}/${vehicle.capacity}",
                           ),
                         ],
                       ),

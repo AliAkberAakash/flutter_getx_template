@@ -7,20 +7,16 @@ String vehicleListResponseToJson(VehicleListResponse data) => json.encode(data.t
 class VehicleListResponse {
   VehicleListResponse({
     this.data,
-    this.msg
   });
 
   Data? data;
-  String? msg;
 
   factory VehicleListResponse.fromJson(Map<String, dynamic> json) => VehicleListResponse(
-    data: Data.fromJson(json["data"]),
-    msg: json["msg"],
+    data: json["data"] == null ? null : Data.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {
     "data": data?.toJson(),
-    "msg" : msg,
   };
 }
 
@@ -77,9 +73,9 @@ class Data {
     contactPersonPhone: json["contact_person_phone"],
     contactPersonNric: json["contact_person_NRIC"],
     status: json["status"],
-    approvedDate: json["approved_date"] == null ? null : DateTime.parse(json["approved_date"]),
+    approvedDate: json["approved_date"]==null ? null : DateTime.parse(json["approved_date"]),
     createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
+    updatedAt: json["updated_at"]==null ? null : DateTime.parse(json["updated_at"]),
     vehicles: List<Vehicle>.from(json["vehicles"].map((x) => Vehicle.fromJson(x))),
   );
 
@@ -126,6 +122,7 @@ class Vehicle {
     required this.createdAt,
     this.updatedAt,
     required this.availableStatus,
+    this.firstRunningRideInfo,
   });
 
   int id;
@@ -148,6 +145,7 @@ class Vehicle {
   DateTime createdAt;
   DateTime? updatedAt;
   String availableStatus;
+  FirstRunningRideInfo? firstRunningRideInfo;
 
   factory Vehicle.fromJson(Map<String, dynamic> json) => Vehicle(
     id: json["id"],
@@ -168,8 +166,9 @@ class Vehicle {
     isVerified: json["is_verified"],
     approvedDate: json["approved_date"] == null ? null : DateTime.parse(json["approved_date"]),
     createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
+    updatedAt: json["updated_at"]==null ? null : DateTime.parse(json["updated_at"]),
     availableStatus: json["available_status"],
+    firstRunningRideInfo: json["first_running_ride_info"] == null ? null : FirstRunningRideInfo.fromJson(json["first_running_ride_info"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -193,5 +192,66 @@ class Vehicle {
     "created_at": createdAt.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),
     "available_status": availableStatus,
+    "first_running_ride_info": firstRunningRideInfo?.toJson(),
+  };
+}
+
+class FirstRunningRideInfo {
+  FirstRunningRideInfo({
+    required this.id,
+    required this.vehicleId,
+    required this.startDate,
+    required this.endDate,
+    required this.startTime,
+    required this.endTime,
+    required this.source,
+    required this.destination,
+    required this.bookedSeat,
+    required this.status,
+    required this.createdAt,
+    this.updatedAt,
+  });
+
+  int id;
+  int vehicleId;
+  DateTime startDate;
+  DateTime endDate;
+  String startTime;
+  String endTime;
+  String source;
+  String destination;
+  int bookedSeat;
+  int status;
+  DateTime createdAt;
+  DateTime? updatedAt;
+
+  factory FirstRunningRideInfo.fromJson(Map<String, dynamic> json) => FirstRunningRideInfo(
+    id: json["id"],
+    vehicleId: json["vehicle_id"],
+    startDate: DateTime.parse(json["start_date"]),
+    endDate: DateTime.parse(json["end_date"]),
+    startTime: json["start_time"],
+    endTime: json["end_time"],
+    source: json["source"],
+    destination: json["destination"],
+    bookedSeat: json["booked_seat"],
+    status: json["status"],
+    createdAt: DateTime.parse(json["created_at"]),
+    updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "vehicle_id": vehicleId,
+    "start_date": "${startDate.year.toString().padLeft(4, '0')}-${startDate.month.toString().padLeft(2, '0')}-${startDate.day.toString().padLeft(2, '0')}",
+    "end_date": "${endDate.year.toString().padLeft(4, '0')}-${endDate.month.toString().padLeft(2, '0')}-${endDate.day.toString().padLeft(2, '0')}",
+    "start_time": startTime,
+    "end_time": endTime,
+    "source": source,
+    "destination": destination,
+    "booked_seat": bookedSeat,
+    "status": status,
+    "created_at": createdAt.toIso8601String(),
+    "updated_at": updatedAt?.toIso8601String(),
   };
 }

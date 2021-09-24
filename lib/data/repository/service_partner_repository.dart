@@ -122,7 +122,7 @@ class Repository{
       return VehicleListResponse.fromJson(response.data);
     }catch(e){
       return VehicleListResponse(
-        msg: "Error from server",
+        data: null,
       );
     }
   }

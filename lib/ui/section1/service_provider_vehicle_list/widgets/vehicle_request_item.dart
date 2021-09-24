@@ -99,7 +99,7 @@ class _VehicleRequestItemState extends State<VehicleRequestItem> {
                         children: [
                           VehicleInfoWidget(
                             title: "Vehicle number",
-                            value: "VA ${vehicle.vehicleNumber}",
+                            value: "${vehicle.vehicleNumber}",
                           ),
                           VSpacer20(),
                           VehicleInfoWidget(

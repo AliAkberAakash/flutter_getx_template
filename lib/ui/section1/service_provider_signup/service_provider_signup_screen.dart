@@ -73,7 +73,7 @@ class _ServiceProviderSignupScreenState extends State<ServiceProviderSignupScree
             VSpacer10(),
             CommonTextField(controller: companyNameController),
             VSpacer40(),
-            TextFieldHeadline(headline: 'Phone Number'),
+            TextFieldHeadline(headline: 'Office Number'),
             VSpacer10(),
             CommonTextField(
               controller: phoneNumberController,
@@ -118,14 +118,12 @@ class _ServiceProviderSignupScreenState extends State<ServiceProviderSignupScree
             VSpacer10(),
             CommonTextField(
               controller: contactPersonNRICController,
-              type: TextInputType.number,
             ),
             VSpacer40(),
             TextFieldHeadline(headline: 'Business Identification Number'),
             VSpacer10(),
             CommonTextField(
               controller: businessIdNumController,
-              type: TextInputType.number,
             ),
             VSpacer40(),
             PositiveButton(
