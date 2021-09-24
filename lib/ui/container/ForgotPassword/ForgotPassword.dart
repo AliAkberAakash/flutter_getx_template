@@ -10,6 +10,7 @@ import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
 import 'package:go_share/ui/not_logged_in_welcome/navigation_container/navigation_container.dart';
+import 'package:go_share/ui/section1/service_provider_password_reset/service_provider_passowrd_reset_screen.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
@@ -142,7 +143,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                               onClicked: (){
                                 Get.back();
                                 Get.back();
-                                Get.to(NavigationContainer());
+                                Get.to(ServiceProviderPasswordResetScreen());
                               },
                             ),
                           ),
