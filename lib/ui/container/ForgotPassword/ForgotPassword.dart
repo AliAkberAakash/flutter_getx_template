@@ -12,6 +12,7 @@ import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
 import 'package:go_share/ui/not_logged_in_welcome/navigation_container/navigation_container.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
+import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // UI
@@ -37,15 +38,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             children: [
               //Get start text
               Text(
-                "Reset Password",
+                "Request Password Reset",
                 textAlign: TextAlign.start,
                 style:
                     GSTextStyles.make28xw700Style(color: GSColors.gray_primary),
               ),
 
-              SizedBox(
-                height: GSSizeConstants.padding7,
-              ),
+              VSpacer40(),
 
               // Description test
               Container(
@@ -139,7 +138,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         children: [
                           Expanded(
                             child: PositiveButton(
-                              text: "Go To Home",
+                              text: "Reset Password",
                               onClicked: (){
                                 Get.back();
                                 Get.back();

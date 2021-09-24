@@ -97,7 +97,7 @@ class _ServiceProviderLoginState extends State<ServiceProviderLoginScreen> {
               ),
               Sec4TextField(
                 controller: emailController,
-                hints: GSStrings.email_field_hints,
+                hints: "Email Address",
               ),
               SizedBox(
                 height: GSSizeConstants.padding17,
