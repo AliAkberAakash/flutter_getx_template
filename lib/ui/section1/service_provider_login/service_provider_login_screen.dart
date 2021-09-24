@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_request.dart';
@@ -155,18 +157,34 @@ class _ServiceProviderLoginState extends State<ServiceProviderLoginScreen> {
                   },
                 ),
               ),
-              SizedBox(
-                height: GSSizeConstants.padding7,
-              ),
-              SizedBox(
-                height: GSSizeConstants.padding7,
-              ),
-              Sec4TextButton(
-                text1: "Forgot Password?",
-                text2: "Reset here",
-                onClicked: (){
-                  Get.to(ForgotPassword());
-                },
+              VSpacer40(),
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  text: "Forgot Password? ",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      fontStyle: FontStyle.normal,
+                      fontSize: GSFontSizes.font18,
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: "Reset here",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                        fontSize: GSFontSizes.font18,
+                        decoration: TextDecoration.underline,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = (){
+                          Get.to(ForgotPassword());
+                      }
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: GSSizeConstants.padding25,

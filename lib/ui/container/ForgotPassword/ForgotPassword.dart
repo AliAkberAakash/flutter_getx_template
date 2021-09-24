@@ -37,7 +37,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             children: [
               //Get start text
               Text(
-                GSStrings.forgot_password,
+                "Reset Password",
                 textAlign: TextAlign.start,
                 style:
                     GSTextStyles.make28xw700Style(color: GSColors.gray_primary),
@@ -52,7 +52,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   width: 256,
                   child: Center(
                       child: Text(
-                    GSStrings.sign_in_description,
+                    "Please enter your email address to get the code",
                     style: GSTextStyles.make18xw400Style(
                         color: GSColors.gray_secondary),
                     textAlign: TextAlign.center,
@@ -65,7 +65,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         ),
         GSTextField(
           controller: TextEditingController(),
-          hints: GSStrings.email_field_hints,
+          hints: "Email Address",
         ),
         SizedBox(
           height: GSSizeConstants.padding30,
