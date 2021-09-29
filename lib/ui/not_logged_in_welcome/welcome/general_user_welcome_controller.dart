@@ -1,12 +1,10 @@
 import 'package:get/get.dart';
 import 'package:go_share/data/repository/service_partner_repository.dart';
 
-class NavigationContainerController extends GetxController{
-
+class GeneralUserWelcomeController extends GetxController{
   final Repository repository = Get.find();
 
-  Future logoutServiceProvider() async{
-    await repository.logoutGeneralUser();
+  Future<bool> isLoggedIn() async{
+    return await repository.isGeneralUserLoggedIn();
   }
-
 }

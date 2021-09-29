@@ -45,6 +45,7 @@ class NetworkConstants {
   static const ACCEPT_TYPE = "application/json";
   static const AUTHORIZATION = "Authorization";
   static const DRIVER_TOKEN = "Driver-Token";
+  static const GENERAL_USER_TOKEN = "GeneralUserToken";
   static const CONTENT_TYPE = "content-Type";
 
   //End urls
@@ -75,6 +76,7 @@ class PreferenceKey {
   static const darkMode = "darkMode";
   static const languageBengali = "languageBengali";
   static const servicePartner = "servicePartner";
+  static const generalUser = "generalUser";
 }
 
 class DefaultValue {

@@ -189,7 +189,10 @@ class _Sec4SignInScreenState extends State<NSignInScreen> {
     ToastUtil.show(response.msg);
     Get.back();
     if(response.data != null){
-      Get.to(NavigationContainer());
+      await _controller.storeToken(response.data!.token);
+      await _controller.storeUser(response.data!.user);
+      Get.back();
+      Get.off(NavigationContainer());
     }
 
   }

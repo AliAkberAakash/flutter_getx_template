@@ -13,8 +13,10 @@ import 'package:go_share/ui/container/my_bookings/my_bookings.dart';
 import 'package:go_share/ui/container/our_service/our_service.dart';
 import 'package:go_share/ui/container/refund_request_list/refund_request_list.dart';
 import 'package:go_share/ui/container/terms_and_conditions/terms_and_conditions.dart';
+import 'package:go_share/ui/navigation_container/navigation_container_controller.dart';
 import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
+import 'package:go_share/ui/not_logged_in_welcome/welcome/welcome_screen.dart';
 import 'package:go_share/ui/section4/notification/notification_screen.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
@@ -34,6 +36,8 @@ class NavigationContainer extends StatefulWidget {
 class _NavigationContainerState extends State<NavigationContainer> {
 
   int _selectedItem = 3;
+
+  final _controller = NavigationContainerController();
 
   @override
   Widget build(BuildContext context) {
@@ -278,8 +282,11 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           title: "Sign Out",
                           icon: AssetConstants.ic_sign_out_svg,
                           onClick: (index) {
-                            Get.back();
-                            Get.back();
+                            _controller.logoutServiceProvider().then((_){
+                              Get.back();
+                              Get.back();
+                              Get.to(NotLoggedInWelcome());
+                            });
                           },
                         ),
                         VSpacer40(),

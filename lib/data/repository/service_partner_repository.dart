@@ -114,6 +114,11 @@ class Repository{
     return token.isNotEmpty;
   }
 
+  Future<bool> isGeneralUserLoggedIn() async{
+    var token = await SharedPrefUtil.getString(NetworkConstants.GENERAL_USER_TOKEN);
+    return token.isNotEmpty;
+  }
+
   Future<bool> isDriverLoggedIn() async{
     var token = await SharedPrefUtil.getString(NetworkConstants.DRIVER_TOKEN);
     return token.isNotEmpty;
@@ -186,6 +191,10 @@ class Repository{
   Future logoutServicePartner() async{
     await SharedPrefUtil.delete(NetworkConstants.AUTHORIZATION);
   }
+  Future logoutGeneralUser() async{
+    await SharedPrefUtil.delete(NetworkConstants.GENERAL_USER_TOKEN);
+  }
+
   
   Future<ServicePartnerProfileUpdateResponse> updateServicePartnerProfile(
       ServicePartnerProfileUpdateRequest request,

@@ -16,7 +16,7 @@ import 'package:go_share/ui/container/privacy_and_concern/privacy_and_concern.da
 import 'package:go_share/ui/container/terms_and_conditions/terms_and_conditions.dart';
 import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
-import 'package:go_share/ui/not_logged_in_welcome/welcome_screen.dart';
+import 'package:go_share/ui/not_logged_in_welcome/welcome/welcome_screen.dart';
 import 'package:go_share/ui/section1/driver_login/driver_login_screen.dart';
 import 'package:go_share/ui/section4/widgets/menu_page_button.dart';
 import 'package:go_share/utils/colors.dart';
