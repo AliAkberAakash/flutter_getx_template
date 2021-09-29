@@ -357,8 +357,7 @@ class Repository{
 
     try{
       var params = {
-        "address":"$postalCode",
-        "components":"country:SG", //postal_code:$postalCode|
+        "components":"postal_code:$postalCode|country:SG", //
         "key":"AIzaSyBXu9gZE7h8rsOysVadX-XJ5WbvBwOKEqc",
       };
       var response = await helper.getRawWithParams(
@@ -367,6 +366,29 @@ class Repository{
       );
       return GeoCodingResponse.fromJson(response.data);
     }catch(e){
+      logger.d(e);
+      return GeoCodingResponse(
+        status: "No Result",
+        results: [],
+      );
+    }
+
+  }
+
+  Future<GeoCodingResponse> getPostCodeFromAddress(String address) async{
+
+    try{
+      var params = {
+        "address":"$address", //
+        "key":"AIzaSyBXu9gZE7h8rsOysVadX-XJ5WbvBwOKEqc",
+      };
+      var response = await helper.getRawWithParams(
+        NetworkConstants.GET_ADDRESS_FROM_PO_CODE,
+        params,
+      );
+      return GeoCodingResponse.fromJson(response.data);
+    }catch(e){
+      logger.d(e);
       return GeoCodingResponse(
         status: "No Result",
         results: [],

@@ -1,7 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
+import 'package:go_share/data/models/google_map/geocoding_response.dart';
 import 'package:go_share/ui/common_widgets/post_code_field.dart';
 import 'package:go_share/ui/common_widgets/text_field_value_widget.dart';
+import 'package:go_share/util/lib/toast.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:get/get.dart';
 import 'package:go_share/ui/book_a_bus/booking_controller.dart';
@@ -43,6 +47,9 @@ class _AddressScreenState extends State<AddressScreen> {
   final dropOffAddressController = TextEditingController();
   String? dropOffPostCodeErrorText;
 
+  String pickupPostCode = "";
+  String dropOffPostCode = "";
+
   @override
   void initState() {
 
@@ -53,6 +60,7 @@ class _AddressScreenState extends State<AddressScreen> {
         setState(() {
           if(postCode>=600000 && postCode<=689999){
             pickupPostCodeErrorText=null;
+            _controller.getPickupAddressFromPO(postCode.toString());
           }else{
             pickupPostCodeErrorText = "Invalid Post Code";
           }
@@ -68,6 +76,7 @@ class _AddressScreenState extends State<AddressScreen> {
         setState(() {
           if(postCode>=600000 && postCode<=689999){
             dropOffPostCodeErrorText=null;
+            _controller.getDropOffAddressFromPO(postCode.toString());
           }else{
             dropOffPostCodeErrorText = "Invalid Post Code";
           }
@@ -170,12 +179,14 @@ class _AddressScreenState extends State<AddressScreen> {
                   ),
                 ),
                 HSpacer20(),
-                Container(
-                  width: 180,
-                  child: TextFieldValueWidget(
-                    headline: "Road Name",
-                  ),
-                )
+                Obx((){
+                  return Container(
+                    width: 180,
+                    child: TextFieldValueWidget(
+                      headline: _controller.pickupAddress.value,
+                    ),
+                  );
+                })
               ],
             ),
             VSpacer20(),
@@ -206,12 +217,14 @@ class _AddressScreenState extends State<AddressScreen> {
                   ),
                 ),
                 HSpacer20(),
-                Container(
-                  width: 180,
-                  child: TextFieldValueWidget(
-                    headline: "Road Name",
-                  ),
-                )
+                Obx((){
+                  return Container(
+                    width: 180,
+                    child: TextFieldValueWidget(
+                      headline: _controller.dropOffAddress.value,
+                    ),
+                  );
+                }),
               ],
             ),
             VSpacer20(),
@@ -261,8 +274,9 @@ class _AddressScreenState extends State<AddressScreen> {
                   child: PositiveButton(
                     text: "Next",
                     onClicked: () {
-                      getPickupAddress();
-                      //Get.to(PaymentScreen());
+                      if(validate()){
+                        Get.to(PaymentScreen());
+                      }
                     },
                   ),
                 ),
@@ -276,25 +290,57 @@ class _AddressScreenState extends State<AddressScreen> {
     );
   }
 
+  bool validate(){
+    if(pickupPostCode != pickupPostCodeController.text) {
+      ToastUtil.show("Post code does not match with pickup address");
+      return false;
+    }
+
+    if(dropOffPostCode != dropOffPostCodeController.text){
+      ToastUtil.show("Post code does not match with drop off address");
+      return false;
+    }
+
+    return true;
+  }
 
   getPickupLocation() async{
     Prediction? p = await PlacesAutocomplete.show(
-        context: context,
-        offset: 0,
-        radius: 10000,
-        types: [],
-        strictbounds: false,
-        apiKey: kGoogleApiKey,
-        mode: Mode.fullscreen, // Mode.overlay
-        language: "sg",
-        components: [Component(Component.country, "sg")]);
-    if(p!.matchedSubstrings.isNotEmpty){
-      MatchedSubstring s = p.matchedSubstrings[0];
-      setState(() {
-        pickupAddressController.text=p.structuredFormatting!.mainText ;
-      });
+      startText: pickupAddressController.text,
+      context: context,
+      offset: 0,
+      radius: 10000,
+      types: [],
+      strictbounds: false,
+      apiKey: kGoogleApiKey,
+      mode: Mode.fullscreen, // Mode.overlay
+      language: "sg",
+      components: [Component(Component.country, "sg")],
+    );
+
+    logger.d("${p?.toJson()}");
+    logger.d("${p?.structuredFormatting?.toJson()}");
+    logger.d("${p?.types}");
+    logger.d("${p?.terms}");
+
+    GeoCodingResponse response = await _controller.getPostCodeFromAddress(p?.description ?? "");
+    if(response.results.isNotEmpty){
+      logger.d(response.results.length);
+      logger.d(response.results);
+      logger.d(response.results[0].formattedAddress);
+
+      var address = response.results[0].formattedAddress;
+
+      var postCode = response.results[0].formattedAddress.substring(response.results[0].formattedAddress.length-6);
+      logger.d("the post code is $postCode");
+      pickupPostCode = postCode;
     }
-    logger.d(p.structuredFormatting);
+
+    if(p != null)
+      setState(() {
+        pickupAddressController.text=p.description ?? "" ;
+      });
+
   }
 
   getDropOffLocation() async{
@@ -311,13 +357,26 @@ class _AddressScreenState extends State<AddressScreen> {
         components: [
           Component(Component.country, "sg"),
         ]);
-    if(p!.matchedSubstrings.isNotEmpty){
-      MatchedSubstring s = p.matchedSubstrings[0];
+
+    GeoCodingResponse response = await _controller.getPostCodeFromAddress(p?.description ?? "");
+    if(response.results.isNotEmpty){
+      logger.d(response.results.length);
+      logger.d(response.results);
+      logger.d(response.results[0].formattedAddress);
+
+      var address = response.results[0].formattedAddress;
+
+      var postCode = response.results[0].formattedAddress.substring(response.results[0].formattedAddress.length-6);
+      logger.d("the post code is $postCode");
+      dropOffPostCode = postCode;
+    }
+
+
+    if(p!=null){
       setState(() {
-        dropOffAddressController.text=p.structuredFormatting!.mainText ;
+        dropOffAddressController.text=p.description ?? "";
       });
     }
-    logger.d(p.structuredFormatting);
   }
 
   void onError(PlacesAutocompleteResponse response) {
@@ -325,7 +384,7 @@ class _AddressScreenState extends State<AddressScreen> {
   }
 
   getPickupAddress() async{
-    var response = await _controller.getAddressFromPO(pickupPostCodeController.text.trim());
+    var response = await _controller.getPickupAddressFromPO(pickupPostCodeController.text.trim());
 
     //if(response.status=="OK"){
       setState(() {
