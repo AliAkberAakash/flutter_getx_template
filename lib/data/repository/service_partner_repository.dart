@@ -8,6 +8,8 @@ import 'package:go_share/data/models/driver/driver_password_reset_code_response.
 import 'package:go_share/data/models/driver/driver_password_reset_request.dart';
 import 'package:go_share/data/models/driver/driver_password_reset_response.dart';
 import 'package:go_share/data/models/driver/driver_profile_response.dart';
+import 'package:go_share/data/models/general_user/general_user_login_request.dart';
+import 'package:go_share/data/models/general_user/general_user_login_response.dart';
 import 'package:go_share/data/models/google_map/geocoding_response.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_request.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_response.dart';
@@ -376,7 +378,6 @@ class Repository{
   }
 
   Future<GeoCodingResponse> getPostCodeFromAddress(String address) async{
-
     try{
       var params = {
         "address":"$address", //
@@ -396,5 +397,20 @@ class Repository{
     }
 
   }
+
+  Future<GeneralUserLoginResponse> loginGeneralUser(GeneralUserLoginRequest request) async{
+    try{
+      var response = await helper.post(
+        NetworkConstants.GENERAL_USER_LOGIN,
+        request.toJson(),
+      );
+      return GeneralUserLoginResponse.fromJson(response.data);
+    }catch(e){
+      return GeneralUserLoginResponse(
+          msg: "Failed to send code"
+      );
+    }
+  }
+
 
 }

@@ -12,7 +12,7 @@ import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'sign_in_screen.dart';
+import 'sign_in/sign_in_screen.dart';
 
 // UI
 class NotLoggedInWelcome extends StatefulWidget {

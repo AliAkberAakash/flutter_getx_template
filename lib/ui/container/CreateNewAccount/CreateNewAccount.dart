@@ -6,7 +6,7 @@ import 'package:go_share/base/widget/GSTextField.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
-import 'package:go_share/ui/not_logged_in_welcome/sign_in_screen.dart';
+import 'package:go_share/ui/not_logged_in_welcome/sign_in/sign_in_screen.dart';
 import 'package:go_share/ui/section4/widgets/text_fields.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
