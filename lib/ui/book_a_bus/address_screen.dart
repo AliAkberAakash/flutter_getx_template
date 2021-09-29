@@ -1,7 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
+import 'package:go_share/data/models/booking/address_request.dart';
+import 'package:go_share/data/models/booking/info_request.dart';
 import 'package:go_share/data/models/google_map/geocoding_response.dart';
 import 'package:go_share/ui/common_widgets/post_code_field.dart';
 import 'package:go_share/ui/common_widgets/text_field_value_widget.dart';
@@ -23,15 +23,20 @@ import 'package:logger/logger.dart';
 import 'payment_screen.dart';
 
 class AddressScreen extends StatefulWidget {
-  const AddressScreen({Key? key}) : super(key: key);
+
+  final InfoRequest infoRequest;
+
+  const AddressScreen({Key? key, required this.infoRequest}) : super(key: key);
 
   @override
-  _AddressScreenState createState() => _AddressScreenState();
+  _AddressScreenState createState() => _AddressScreenState(infoRequest);
 }
 
 const kGoogleApiKey = "AIzaSyBXu9gZE7h8rsOysVadX-XJ5WbvBwOKEqc";
 
 class _AddressScreenState extends State<AddressScreen> {
+
+  final InfoRequest infoRequest;
 
   final homeScaffoldKey = GlobalKey<ScaffoldState>();
   final searchScaffoldKey = GlobalKey<ScaffoldState>();
@@ -39,16 +44,22 @@ class _AddressScreenState extends State<AddressScreen> {
   final _controller = BookingController(Get.find());
   final logger = Logger();
 
+  final pickupRemarksController = TextEditingController();
   final pickupPostCodeController = TextEditingController();
   final pickupAddressController = TextEditingController();
   String? pickupPostCodeErrorText;
 
+  final dropOffRemarksController = TextEditingController();
   final dropOffPostCodeController = TextEditingController();
   final dropOffAddressController = TextEditingController();
   String? dropOffPostCodeErrorText;
 
+  final commentsController  = TextEditingController();
+
   String pickupPostCode = "";
   String dropOffPostCode = "";
+
+  _AddressScreenState(this.infoRequest);
 
   @override
   void initState() {
@@ -201,7 +212,7 @@ class _AddressScreenState extends State<AddressScreen> {
             TextFieldHeadline(headline: "Pickup Remarks"),
             VSpacer20(),
             CommonTextField(
-              controller: TextEditingController(),
+              controller: pickupRemarksController,
             ),
             VSpacer40(),
             TextFieldHeadline(headline: "Drop Off Location*"),
@@ -239,12 +250,13 @@ class _AddressScreenState extends State<AddressScreen> {
             TextFieldHeadline(headline: "Drop Off Remarks"),
             VSpacer20(),
             CommonTextField(
-              controller: TextEditingController(),
+              controller: dropOffRemarksController,
             ),
             VSpacer20(),
             TextFieldHeadline(headline: "Write your comments"),
             VSpacer20(),
             TextFormField(
+              controller: commentsController,
               maxLines: 3,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -275,7 +287,18 @@ class _AddressScreenState extends State<AddressScreen> {
                     text: "Next",
                     onClicked: () {
                       if(validate()){
-                        Get.to(PaymentScreen());
+
+                        var addressRequest = AddressRequest(
+                          pickupPostalCode: pickupPostCodeController.text,
+                          pickupLocation: pickupAddressController.text,
+                          pickupRemarks: pickupRemarksController.text,
+                          dropOffPostalCode: dropOffPostCodeController.text,
+                          dropOffLocation: dropOffAddressController.text,
+                          dropOffRemarks: dropOffRemarksController.text,
+                          comments: commentsController.text
+                        );
+
+                        Get.to(PaymentScreen(addressRequest: addressRequest, infoRequest: infoRequest,));
                       }
                     },
                   ),
@@ -330,8 +353,7 @@ class _AddressScreenState extends State<AddressScreen> {
       logger.d(response.results[0].formattedAddress);
 
       var address = response.results[0].formattedAddress;
-
-      var postCode = response.results[0].formattedAddress.substring(response.results[0].formattedAddress.length-6);
+      var postCode = address.substring(response.results[0].formattedAddress.length-6);
       logger.d("the post code is $postCode");
       pickupPostCode = postCode;
     }
@@ -365,8 +387,7 @@ class _AddressScreenState extends State<AddressScreen> {
       logger.d(response.results[0].formattedAddress);
 
       var address = response.results[0].formattedAddress;
-
-      var postCode = response.results[0].formattedAddress.substring(response.results[0].formattedAddress.length-6);
+      var postCode = address.substring(response.results[0].formattedAddress.length-6);
       logger.d("the post code is $postCode");
       dropOffPostCode = postCode;
     }

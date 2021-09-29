@@ -1,7 +1,10 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:go_share/data/models/booking/address_request.dart';
+import 'package:go_share/data/models/booking/info_request.dart';
 import 'package:go_share/ui/book_a_bus/invoice_screen.dart';
 import 'package:go_share/ui/common_widgets/grey_button.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
@@ -12,24 +15,38 @@ import 'package:go_share/ui/common_widgets/text_field_value_widget.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
+import 'package:go_share/utils/date_time_utils.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:logger/logger.dart';
 
 class PaymentScreen extends StatefulWidget {
 
+  final AddressRequest addressRequest;
+  final InfoRequest infoRequest;
 
-  PaymentScreen({Key? key}) : super(key: key);
+  PaymentScreen({
+    Key? key,
+    required this.addressRequest,
+    required this.infoRequest,
+  }) : super(key: key);
 
   @override
-  _PaymentScreenState createState() => _PaymentScreenState();
+  _PaymentScreenState createState() => _PaymentScreenState(addressRequest, infoRequest);
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
+
+  final AddressRequest addressRequest;
+  final InfoRequest infoRequest;
+
   var selectedPayment = "p";
   late ExpandableController expandableController;
 
   var isExpanded = false;
+
+  _PaymentScreenState(this.addressRequest, this.infoRequest);
 
   @override
   void initState() {
@@ -332,10 +349,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           VSpacer10(),
           TextFieldValueWidget(headline: '12'),
           VSpacer20(),
-          TextFieldHeadline(headline: "Child Name"),
-          VSpacer10(),
-          TextFieldValueWidget(headline: 'John Doe WIlliam'),
-          VSpacer20(),
+          _getChildPart(),
           Row(
             children: [
               Column(
@@ -343,7 +357,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 children: [
                   TextFieldHeadline(headline: "Start Date"),
                   VSpacer10(),
-                  TextFieldValueWidget(headline: '19th July, 2021'),
+                  TextFieldValueWidget(headline: infoRequest.startDate),
                 ],
               ),
               HSpacer40(),
@@ -352,7 +366,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 children: [
                   TextFieldHeadline(headline: "Time"),
                   VSpacer10(),
-                  TextFieldValueWidget(headline: '10:00 PM'),
+                  TextFieldValueWidget(headline: infoRequest.pickupTime),
                 ],
               )
             ],
@@ -360,35 +374,61 @@ class _PaymentScreenState extends State<PaymentScreen> {
           VSpacer20(),
           TextFieldHeadline(headline: "End Date"),
           VSpacer10(),
-          TextFieldValueWidget(headline: '28 July, 2021'),
+          TextFieldValueWidget(headline: infoRequest.endDate),
           VSpacer20(),
           TextFieldHeadline(headline: "Pickup Location"),
           VSpacer10(),
-          TextFieldValueWidget(headline: 'Block 372 Bukit Batok Street 31 #01-372, 650372 Singapore'),
+          TextFieldValueWidget(headline: addressRequest.pickupLocation),
           VSpacer20(),
           TextFieldHeadline(headline: "Postal Code"),
           VSpacer10(),
-          TextFieldValueWidget(headline: '650372 Singapore'),
+          TextFieldValueWidget(headline: addressRequest.pickupPostalCode),
           VSpacer20(),
           TextFieldHeadline(headline: "Pickup Remark"),
           VSpacer10(),
-          TextFieldValueWidget(headline: 'Batok Street 31 #01-372, 650372 Singapore'),
+          TextFieldValueWidget(headline: addressRequest.pickupRemarks),
           VSpacer20(),
           TextFieldHeadline(headline: "Drop-Off Location"),
           VSpacer10(),
-          TextFieldValueWidget(headline: 'Block 372 Bukit Batok Street 31 #01-372, 650372 Singapore'),
+          TextFieldValueWidget(headline: addressRequest.dropOffLocation),
           VSpacer20(),
           TextFieldHeadline(headline: "Postal Code"),
           VSpacer10(),
-          TextFieldValueWidget(headline: '650372 Singapore'),
+          TextFieldValueWidget(headline: addressRequest.dropOffPostalCode),
           VSpacer20(),
           TextFieldHeadline(headline: "Drop-Off Remark"),
           VSpacer10(),
-          TextFieldValueWidget(headline: 'Batok Street 31 #01-372, 650372 Singapore'),
+          TextFieldValueWidget(headline: addressRequest.dropOffRemarks),
           VSpacer20(),
 
         ],
       ),
+    );
+  }
+
+  Widget _getChildPart(){
+
+    var childList = infoRequest.childNames;
+
+    Logger().d(childList.length);
+
+    return Column(
+      children: [
+        for(var child in childList)
+          _getChildWidget(child)
+      ],
+    );
+  }
+
+  Widget _getChildWidget(String name){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextFieldHeadline(headline: "Child Name"),
+        VSpacer10(),
+        TextFieldValueWidget(headline: name),
+        VSpacer20(),
+      ],
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_share/data/models/booking/info_request.dart';
 import 'package:go_share/ui/book_a_bus/address_screen.dart';
 import 'package:go_share/ui/common_widgets/common_text_field.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
@@ -24,6 +25,7 @@ class _InfoScreenState extends State<InfoScreen> {
   int seat=1;
   String timeFormat="AM";
   List<Widget> childWidgetList = [];
+  List<TextEditingController> childControllerList = [];
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
   TextEditingController startTimeController = TextEditingController();
@@ -32,13 +34,15 @@ class _InfoScreenState extends State<InfoScreen> {
 
   @override
   void initState() {
+    var controller = new TextEditingController();
+    childControllerList.add(controller);
     childWidgetList.add(
-      _childWidget()
+      _childWidget(childControllerList[0])
     );
     super.initState();
   }
 
-  _childWidget(){
+  _childWidget(TextEditingController controller){
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -46,7 +50,7 @@ class _InfoScreenState extends State<InfoScreen> {
         TextFieldHeadline(headline: "Child Name*"),
         VSpacer20(),
         CommonTextField(
-          controller: TextEditingController(),
+          controller: controller,
           hint: "Child Name",
         ),
       ],
@@ -149,8 +153,10 @@ class _InfoScreenState extends State<InfoScreen> {
                           setState(() {
                             if(seat>1)
                               seat--;
-                            if(childWidgetList.length>1)
+                            if(childWidgetList.length>1) {
                               childWidgetList.removeLast();
+                              childControllerList.removeLast();
+                            }
                           });
                         },
                         icon: Icon(
@@ -178,7 +184,9 @@ class _InfoScreenState extends State<InfoScreen> {
                         onPressed: (){
                           setState(() {
                             seat++;
-                            childWidgetList.add(_childWidget());
+                            var controller = TextEditingController();
+                            childControllerList.add(controller);
+                            childWidgetList.add(_childWidget(childControllerList.last));
                           });
                         },
                         icon: Icon(
@@ -281,8 +289,21 @@ class _InfoScreenState extends State<InfoScreen> {
             PositiveButton(
               text: "Next",
               onClicked: () {
+
+                List<String> childNames = [];
+
+                for(var controller in childControllerList)
+                  childNames.add(controller.text);
+
+                var infoRequest = InfoRequest(
+                  childNames: childNames,
+                  startDate: startTimeController.text,
+                  endDate: endTimeController.text,
+                  pickupTime: selectedTimeController.text,
+                );
+
                 Get.to(
-                  AddressScreen(),
+                  AddressScreen(infoRequest: infoRequest,),
                 );
               },
             ),
