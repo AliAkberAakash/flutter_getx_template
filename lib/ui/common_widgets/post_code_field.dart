@@ -3,22 +3,25 @@ import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CommonTextField extends StatelessWidget {
+class PostCodeField extends StatelessWidget {
   final TextEditingController controller;
   final String hint;
   final TextInputType type;
   final Function? onTap;
+  final String? errorText;
 
-  const CommonTextField({
+  const PostCodeField({
     required this.controller,
     this.hint = "",
     this.type = TextInputType.text,
-    this.onTap
+    this.onTap,
+    this.errorText
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      maxLength: 6,
       onTap: (){
         if(onTap!=null)
           onTap!();
@@ -32,11 +35,13 @@ class CommonTextField extends StatelessWidget {
       ),
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
+        errorText: errorText,
         contentPadding: EdgeInsets.only(left: 10),
         hintText: hint,
+        counterText: "",
         hintStyle: GoogleFonts.manrope(
-          color: grey,
-          fontSize: 14
+            color: grey,
+            fontSize: 14
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(dp10),

@@ -51,6 +51,20 @@ class ApiBaseHelper{
     }
   }
 
+  Future<Response> getRawWithParams(String url, Map<String, dynamic> params) async {
+    try {
+      // make the network call
+      final response = await dioFactory.getDio().get(
+          url,
+          queryParameters: params
+      );
+      //return the response
+      return _returnResponse(response);
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    }
+  }
+
   Future<Response> postWithParams(String endUrl, Map<String, dynamic> params) async {
     await setToken();
     try {

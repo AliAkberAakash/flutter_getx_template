@@ -8,6 +8,7 @@ import 'package:go_share/data/models/driver/driver_password_reset_code_response.
 import 'package:go_share/data/models/driver/driver_password_reset_request.dart';
 import 'package:go_share/data/models/driver/driver_password_reset_response.dart';
 import 'package:go_share/data/models/driver/driver_profile_response.dart';
+import 'package:go_share/data/models/google_map/geocoding_response.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_request.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_response.dart';
 import 'package:go_share/data/models/service_partner/auth/password_reset_code_request.dart';
@@ -347,6 +348,28 @@ class Repository{
       return DriverPasswordResetResponse(
           success: false,
           msg: "Failed to send code"
+      );
+    }
+
+  }
+
+  Future<GeoCodingResponse> getGeoCodingResponse(String postalCode) async{
+
+    try{
+      var params = {
+        "address":"$postalCode",
+        "components":"country:SG", //postal_code:$postalCode|
+        "key":"AIzaSyBXu9gZE7h8rsOysVadX-XJ5WbvBwOKEqc",
+      };
+      var response = await helper.getRawWithParams(
+          NetworkConstants.GET_ADDRESS_FROM_PO_CODE,
+          params,
+      );
+      return GeoCodingResponse.fromJson(response.data);
+    }catch(e){
+      return GeoCodingResponse(
+        status: "No Result",
+        results: [],
       );
     }
 

@@ -63,6 +63,9 @@ class NetworkConstants {
   static const SEND_RESET_PASSWORD_CODE = "servicepartner/resetpassword/code/sent";
   static const RESET_SP_PASSWORD = "servicepartner/resetpassword";
 
+  // Google api url
+  static const GET_ADDRESS_FROM_PO_CODE= "https://maps.googleapis.com/maps/api/geocode/json";
+
 }
 
 class PreferenceKey {
