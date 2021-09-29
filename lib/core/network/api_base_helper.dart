@@ -123,8 +123,44 @@ class ApiBaseHelper{
     }
   }
 
+  Future<Response> postGeneralUser(String endUrl, Map<String, dynamic> body) async {
+    await setGeneralUserToken();
+    try {
+      // make the network call
+      final response = await dioFactory.getDio().post(
+        NetworkConstants.BASE_URL+endUrl,
+        data: body,
+      );
+      //return the response
+      return _returnResponse(response);
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    }
+  }
+
   Future<Response> postMultiPart(String endUrl,String key, File file, Map<String, dynamic> body) async {
     await setToken();
+
+    String fileName = file.path.split('/').last;
+    FormData formData = FormData.fromMap(body);
+    formData.files.add(MapEntry(key, await MultipartFile.fromFile(file.path, filename:fileName)));
+
+
+    try {
+      // make the network call
+      final response = await dioFactory.getDio().post(
+        NetworkConstants.BASE_URL+endUrl,
+        data: formData,
+      );
+
+      return _returnResponse(response);
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    }
+  }
+
+  Future<Response> postGeneralUserMultiPart(String endUrl,String key, File file, Map<String, dynamic> body) async {
+    await setGeneralUserToken();
 
     String fileName = file.path.split('/').last;
     FormData formData = FormData.fromMap(body);

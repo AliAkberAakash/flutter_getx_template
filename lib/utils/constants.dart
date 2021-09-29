@@ -67,6 +67,8 @@ class NetworkConstants {
   //General User Part
   static const GENERAL_USER_LOGIN = "user/login";
   static const GENERAL_USER_PROFILE = "user/profile";
+  static const GU_REQUEST_CODE = "user/resetpassword/code/sent";
+  static const GU_RESET_PASSWORD = "user/resetpassword";
 
   // Google api url
   static const GET_ADDRESS_FROM_PO_CODE= "https://maps.googleapis.com/maps/api/geocode/json";

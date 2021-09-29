@@ -435,4 +435,39 @@ class Repository{
     }
   }
 
+  Future<DriverPasswordResetCodeResponse> requestGUPasswordResetCode(
+      PasswordResetCodeRequest request) async{
+
+    try{
+      var response = await helper.postGeneralUser(
+        NetworkConstants.GU_REQUEST_CODE,
+        request.toJson(),
+      );
+      return DriverPasswordResetCodeResponse.fromJson(response.data);
+    }catch(e){
+      return DriverPasswordResetCodeResponse(
+          success: false,
+          msg: "Failed to send code"
+      );
+    }
+
+  }
+
+  Future<DriverPasswordResetResponse> requestGUPasswordReset(
+      PasswordResetRequest request) async{
+    try{
+      var response = await helper.postGeneralUser(
+        NetworkConstants.GU_RESET_PASSWORD,
+        request.toJson(),
+      );
+      return DriverPasswordResetResponse.fromJson(response.data);
+    }catch(e){
+      return DriverPasswordResetResponse(
+          success: false,
+          msg: "Failed to send code"
+      );
+    }
+
+  }
+
 }
