@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:go_share/data/models/booking/address_request.dart';
 import 'package:go_share/data/models/booking/info_request.dart';
+import 'package:go_share/data/repository/service_partner_repository.dart';
 import 'package:go_share/ui/book_a_bus/invoice_screen.dart';
 import 'package:go_share/ui/common_widgets/grey_button.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
@@ -13,6 +14,8 @@ import 'package:go_share/ui/common_widgets/positive_button.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
 import 'package:go_share/ui/common_widgets/text_field_value_widget.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
+import 'package:go_share/ui/not_logged_in_welcome/welcome/welcome_screen.dart';
+import 'package:go_share/ui/section4/widgets/pending_button.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/date_time_utils.dart';
@@ -268,7 +271,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   child: PositiveButton(
                     text: "Submit",
                     onClicked: () {
-                      showSuccessSheet(context);
+                      checkLoggedIn();
                     },
                   ),
                 ),
@@ -523,5 +526,104 @@ class _PaymentScreenState extends State<PaymentScreen> {
         });
   }
 
+  void checkLoggedIn() async{
+    var loggedIn = await Repository().isGeneralUserLoggedIn();
+    if(loggedIn){
+      showSuccessSheet(context);
+    }else showErrorSheet(context);
+  }
+
+  void showErrorSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (builder) {
+          return new Container(
+            height: 450.0,
+            color: Color(0xFF737373), //could change this to Color(0xFF737373),
+            //so you don't have to change MaterialApp canvasColor
+            child: new Container(
+                padding: EdgeInsets.symmetric(vertical: 20),
+                decoration: new BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: new BorderRadius.only(
+                        topLeft: const Radius.circular(20.0),
+                        topRight: const Radius.circular(20.0))),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SvgPicture.asset(
+                      AssetConstants.pendingIcon,
+                    ),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            "Login Required",
+                            style: GoogleFonts.manrope(
+                              color: GSColors.pending_Color,
+                              fontSize: dp25,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            "Please Login to book a bus",
+                            style: GoogleFonts.manrope(
+                              color: GSColors.text_secondary,
+                              fontSize: dp14,
+                              fontWeight: FontWeight.normal,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: dp30),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: PendingButton(
+                              text: "Login",
+                              onClick: (){
+                                Get.back();
+                                Get.back();
+                                Get.back();
+                                Get.back();
+                                Get.to(NotLoggedInWelcome());
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Padding(
+                    //   padding: EdgeInsets.symmetric(horizontal: dp30),
+                    //   child: Row(
+                    //     children: [
+                    //       Expanded(
+                    //         child: OutlinedMaterialButton(
+                    //           color:GSColors.pending_Color,
+                    //           onClick: (){
+                    //             Get.back();
+                    //             Get.to(
+                    //               InvoiceScreen(),
+                    //             );
+                    //           },
+                    //           text: "View Invoice",
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // )
+                  ],
+                )),
+          );
+        });
+  }
 
 }
