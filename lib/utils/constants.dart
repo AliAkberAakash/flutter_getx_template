@@ -65,6 +65,7 @@ class NetworkConstants {
   static const RESET_SP_PASSWORD = "servicepartner/resetpassword";
 
   //General User Part
+  static const GENERAL_USER_SIGNUP = "user/signup";
   static const GENERAL_USER_LOGIN = "user/login";
   static const GENERAL_USER_PROFILE = "user/profile";
   static const GU_REQUEST_CODE = "user/resetpassword/code/sent";

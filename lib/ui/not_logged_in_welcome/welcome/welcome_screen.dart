@@ -7,6 +7,7 @@ import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
 import 'package:go_share/ui/not_logged_in_welcome/navigation_container/navigation_container.dart';
+import 'package:go_share/ui/not_logged_in_welcome/sign_up/general_user_signup_screen.dart';
 import 'package:go_share/ui/not_logged_in_welcome/welcome/general_user_welcome_controller.dart';
 import 'package:go_share/ui/section4/widgets/create_account_button.dart';
 import 'package:go_share/utils/colors.dart';
@@ -113,7 +114,7 @@ class _NotLoggedInWelcomeState extends State<NotLoggedInWelcome> {
                         ),
                         CreateAccountButtonOutlineStock(
                           onClick: (){
-                            Get.to(CreateNewAccount());
+                            Get.to(GeneralUserSignupScreen());
                           },
                         ),
                         SizedBox(

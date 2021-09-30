@@ -10,6 +10,8 @@ import 'package:go_share/data/models/driver/driver_password_reset_response.dart'
 import 'package:go_share/data/models/driver/driver_profile_response.dart';
 import 'package:go_share/data/models/general_user/general_user_login_request.dart';
 import 'package:go_share/data/models/general_user/general_user_login_response.dart';
+import 'package:go_share/data/models/general_user/general_user_signup_request.dart';
+import 'package:go_share/data/models/general_user/general_user_signup_response.dart';
 import 'package:go_share/data/models/general_user/profile/general_user_profile_response.dart';
 import 'package:go_share/data/models/google_map/geocoding_response.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_request.dart';
@@ -468,6 +470,22 @@ class Repository{
       );
     }
 
+  }
+
+  Future<GeneralUserSignupResponse> signupGeneralUser(
+      GeneralUserSignupRequest request) async {
+    try {
+      var responseJson = await helper.post(
+          NetworkConstants.GENERAL_USER_SIGNUP, request.toJson());
+      if (responseJson.statusCode == 200) {
+        return GeneralUserSignupResponse.fromJson(responseJson.data);
+      } else {
+        return GeneralUserSignupResponse(success: false, msg: 'Error from server');
+      }
+    } catch (e) {
+      logger.d(e);
+      return GeneralUserSignupResponse(success: false, msg: 'Data Parsing Error');
+    }
   }
 
 }
