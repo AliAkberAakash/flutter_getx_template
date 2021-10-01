@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_share/base/widget/custom_app_promotion_widget.dart';
 import 'package:go_share/base/widget/custom_bus_time_widget.dart';
+import 'package:go_share/data/models/container/AboutUsModel.dart';
+import 'package:go_share/data/models/service/ServiceModel.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/Fonts.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
+import 'package:go_share/utils/app_theme.dart';
+
+import 'OurServiceController.dart';
 
 class OurServiceView extends StatefulWidget {
   const OurServiceView({Key? key}) : super(key: key);
@@ -15,6 +20,8 @@ class OurServiceView extends StatefulWidget {
 }
 
 class _OurServiceViewState extends State<OurServiceView> {
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +48,8 @@ class _OurServiceViewState extends State<OurServiceView> {
       ),
     );
   }
+
+
 }
 
 class TitleWidget extends StatelessWidget {
@@ -100,9 +109,15 @@ class BodyWidget extends StatefulWidget {
 class _BodyWidgetState extends State<BodyWidget> {
 
   int status = 0;
+  OurServiceController controller =new OurServiceController();
+  CoreTheme coreTheme=new CoreTheme();
+  List<ServiceData> morningData = List<ServiceData>.empty(growable: true);
+  List<ServiceData> eveningData = List<ServiceData>.empty(growable: true);
+
 
   @override
   void initState() {
+
     super.initState();
   }
 
@@ -115,63 +130,168 @@ class _BodyWidgetState extends State<BodyWidget> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
-      child: Container(
-        width: double.maxFinite,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Row(
+      child: FutureBuilder<ServiceModel>(
+        future: getService(),
+        builder: (context, snapshot) {
+
+          if(snapshot.hasData){
+            filterData(snapshot);
+            return Container(
+              width: double.maxFinite,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SessionWidget(
-                    index: 0,
-                    imagePath: "images/ic_morning.png",
-                    title: GSStrings.morning,
-                    isSelected: status == 0,
-                    onClick: (index){
-                      setState(() {
-                        status = index;
-                      });
-                    },
-                  ),
-                  SizedBox(width: 16.0),
-                  SessionWidget(
-                    index: 1,
-                    imagePath: "images/ic_evening.png",
-                    title: GSStrings.evening,
-                    isSelected: status == 1,
-                    onClick: (index){
-                      setState(() {
-                        status = index;
-                      });
-                    },
-                  ),
+                  Padding(
+                      padding: const EdgeInsets.all(30.0),
+                      child: Row(
+                        children: [
+                          SessionWidget(
+                            index: 0,
+                            imagePath: "images/ic_morning.png",
+                            title: GSStrings.morning,
+                            isSelected: status == 0,
+                            onClick: (index){
+                              setState(() {
+                                status = index;
+                              });
+                            },
+                          ),
+                          SizedBox(width: 16.0),
+                          SessionWidget(
+                            index: 1,
+                            imagePath: "images/ic_evening.png",
+                            title: GSStrings.evening,
+                            isSelected: status == 1,
+                            onClick: (index){
+                              setState(() {
+                                status = index;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                   Container(
+                      height:  MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width,
+
+                      child: status==0?getFilterMorningServiceList(snapshot,status):getFilterEveningServiceList(snapshot,status)
+                    ),
+
+                  /*CustomBusTimeWidget(
+                    backgroundImagePath: "images/ic_demo_bus_hour_two.png",
+                  ),*/
+                  //CustomAppPromotionWidget(data: new AboutUsModel(data: data),), //TODO:: roni comment out
                 ],
               ),
-            ),
-            Padding(
+            );
+          }
+
+          return coreTheme.appProgressIndicator(context);
+
+
+        }
+      ),
+    );
+  }
+
+  Future<ServiceModel> getService() async{
+
+    var response = await controller.FaqServiceProvider();
+    print("response${response.data}");
+    return response;
+
+    // if(response != null) {
+    //
+    // }
+    // else{
+    //   new AboutUsModel(data:new List());
+    // }
+  }
+
+  Widget getFilterMorningServiceList(AsyncSnapshot<ServiceModel> snapshot, int status) {
+    if(morningData.isEmpty){
+      return Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                  height: 500,
+                  width: 200,
+                  child: Center(child: Text("No Evening Service Today"))),
+            ],
+          ));
+    } else{
+      return  ListView.builder(
+          itemCount:status==0?morningData.length:eveningData.length,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context,i) {
+            return Padding(
               padding: const EdgeInsets.only(bottom: 24.0),
               child: CustomBusTimeWidget(
                 backgroundImagePath: "images/ic_demo_bus_hour_one.png",
-                title: "Off Peak Hour",
-                subtitle: "Before 6.45 AM - After 8.15 AM",
-                moneyOne: "\$12",
-                moneyTwo: "\$15",
-                moneyThree: "\$18",
-                distanceOne: "3 Km (Max)",
-                distanceTwo: "3 km - 8km",
-                distanceThree: "8km +",
+                title: status==0?morningData[i].title:eveningData[i].title,
+                subtitle: status==0?morningData[i].subTitle:eveningData[i].subTitle,
+                moneyOne: status==0?morningData[i].pricingOne.value.toString():eveningData[i].pricingOne.value.toString(),
+                moneyTwo:status==0?morningData[i].pricingTwo.value.toString():eveningData[i].pricingTwo.value.toString(),
+                moneyThree: status==0?morningData[i].pricingThree.value.toString():eveningData[i].pricingThree.value.toString(),
+                distanceOne: status==0?morningData[i].pricingOneDistance:eveningData[i].pricingOneDistance,
+                distanceTwo: status==0?morningData[i].pricingTwoDistance:eveningData[i].pricingTwoDistance,
+                distanceThree: status==0?morningData[i].pricingThreeDistance:eveningData[i].pricingThreeDistance,
               ),
-            ),
-            CustomBusTimeWidget(
-              backgroundImagePath: "images/ic_demo_bus_hour_two.png",
-            ),
-            //CustomAppPromotionWidget(), //TODO:: roni comment out
-          ],
-        ),
-      ),
-    );
+            );
+          }
+      );
+    }
+
+  }
+  Widget getFilterEveningServiceList(AsyncSnapshot<ServiceModel> snapshot, int status) {
+
+    if(eveningData.isEmpty){
+      return Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                height: 500,
+                  width: 200,
+                  child: Center(child: Text("No Evening Service Today"))),
+            ],
+          ));
+    }
+    else{
+      return  ListView.builder(
+          itemCount:status==0?morningData.length:eveningData.length,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context,i) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 24.0),
+              child: CustomBusTimeWidget(
+                backgroundImagePath: "images/ic_demo_bus_hour_one.png",
+                title: status==0?morningData[i].title:eveningData[i].title,
+                subtitle: status==0?morningData[i].subTitle:eveningData[i].subTitle,
+                moneyOne: status==0?morningData[i].pricingOne.value.toString():eveningData[i].pricingOne.value.toString(),
+                moneyTwo:status==0?morningData[i].pricingTwo.value.toString():eveningData[i].pricingTwo.value.toString(),
+                moneyThree: status==0?morningData[i].pricingThree.value.toString():eveningData[i].pricingThree.value.toString(),
+                distanceOne: status==0?morningData[i].pricingOneDistance:eveningData[i].pricingOneDistance,
+                distanceTwo: status==0?morningData[i].pricingTwoDistance:eveningData[i].pricingTwoDistance,
+                distanceThree: status==0?morningData[i].pricingThreeDistance:eveningData[i].pricingThreeDistance,
+              ),
+            );
+          }
+      );
+    }
+
+  }
+
+  void filterData(AsyncSnapshot<ServiceModel> snapshot) {
+    for (int i=0;i<snapshot.data!.data.length;i++){
+      if (snapshot.data!.data[i].serviceType=="Morning"){
+        morningData.add(snapshot.data!.data[i]);
+      }else{
+        eveningData.add(snapshot.data!.data[i]);
+      }
+    }
   }
 }
 

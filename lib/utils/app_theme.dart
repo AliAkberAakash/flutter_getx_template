@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:path/path.dart';
 
 import 'colors.dart';
 import 'dimens.dart';
@@ -84,4 +85,19 @@ class TextThemes {
     button: GoogleFonts.lato(
         color: white, fontSize: dp20, fontWeight: FontWeight.bold),
   );
+
+
+
+
+}
+
+class CoreTheme{
+
+ Widget appProgressIndicator(BuildContext context){
+    return Container(
+        height: MediaQuery.of(context).size.height/2,
+        width: MediaQuery.of(context).size.width,
+        child: Center(child: CircularProgressIndicator(color: Colors.green,)));
+  }
+
 }

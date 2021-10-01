@@ -348,13 +348,15 @@ class IntroductionWidget extends StatelessWidget {
               textAlign: TextAlign.start,
             ),
           ),
-          Text(
+          Html(
+            data: data.data.first.wwvText,),
+         /* Text(
             data.data.first.wwvText,
             style: GSTextStyles.make12xw400Style(
               color: GSColors.text_light,
             ),
             textAlign: TextAlign.justify,
-          ),
+          ),*/
           Padding(
             padding: const EdgeInsets.only(top: 32.0),
             child: Row(
