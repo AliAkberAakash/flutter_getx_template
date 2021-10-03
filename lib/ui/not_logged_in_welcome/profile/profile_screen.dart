@@ -13,7 +13,7 @@ import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../edit_profile_screen.dart';
+import '../edit_profile/edit_profile_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -135,7 +135,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 VSpacer20(),
                 OutlinedMaterialButton(onClick: (){
-                  Get.to(EditProfileScreen());
+                  Get.to(EditProfileScreen(user: user,));
                 }, text: "Update My Profile"),
               ],
             );

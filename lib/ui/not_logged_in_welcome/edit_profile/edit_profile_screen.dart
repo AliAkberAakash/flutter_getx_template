@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_share/data/models/general_user/profile/general_user_profile_response.dart';
 import 'package:go_share/ui/common_widgets/common_text_field.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
+import 'package:go_share/ui/not_logged_in_welcome/edit_profile/edit_profile_controller.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/date_time_utils.dart';
 import 'package:go_share/utils/dimens.dart';
@@ -14,21 +16,46 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({Key? key}) : super(key: key);
+
+  final Data user;
+
+  const EditProfileScreen({required this.user});
 
   @override
-  _EditProfileScreenState createState() => _EditProfileScreenState();
+  _EditProfileScreenState createState() => _EditProfileScreenState(user);
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
+
+  final _controller = EditProfileController();
+  final Data user;
   var mainWidth;
   var maxLines = 3;
-
   TextEditingController dateController = TextEditingController();
-
   File? _image;
-
   final picker = ImagePicker();
+
+  var fullNameController = TextEditingController();
+  var emailController = TextEditingController();
+  var phoneNumberController = TextEditingController();
+  var addressController = TextEditingController();
+  var nricController = TextEditingController();
+  // var nricController = TextEditingController();
+  // var nricController = TextEditingController();
+
+  _EditProfileScreenState(this.user);
+
+  @override
+  void initState() {
+
+    fullNameController.text=user.name;
+    emailController.text=user.email;
+    phoneNumberController.text=user.phone;
+    addressController.text=user.address;
+    nricController.text=user.nric ?? "";
+
+    super.initState();
+  }
 
   void _getImage() async {
     XFile? imageFile = await picker.pickImage(source: ImageSource.gallery);
@@ -54,15 +81,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             VSpacer40(),
             TextFieldHeadline(headline: 'Full Name'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: fullNameController),
             VSpacer40(),
             TextFieldHeadline(headline: 'Email Address'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: emailController),
             VSpacer40(),
             TextFieldHeadline(headline: 'Phone Number'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: phoneNumberController),
             VSpacer40(),
             TextFieldHeadline(headline: 'Address'),
             VSpacer10(),
@@ -70,7 +97,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             VSpacer40(),
             TextFieldHeadline(headline: 'NRIC'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: nricController),
             VSpacer40(),
             TextFieldHeadline(headline: 'Date of Birth'),
             VSpacer10(),
@@ -223,6 +250,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   );
 
   _getAddress() => TextFormField(
+    controller: addressController,
     style: TextStyle(
       color: black,
       fontSize: dp18,

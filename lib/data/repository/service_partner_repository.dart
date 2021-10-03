@@ -13,6 +13,8 @@ import 'package:go_share/data/models/general_user/general_user_login_response.da
 import 'package:go_share/data/models/general_user/general_user_signup_request.dart';
 import 'package:go_share/data/models/general_user/general_user_signup_response.dart';
 import 'package:go_share/data/models/general_user/profile/general_user_profile_response.dart';
+import 'package:go_share/data/models/general_user/profile/profile_update_request.dart';
+import 'package:go_share/data/models/general_user/profile/profile_update_response.dart';
 import 'package:go_share/data/models/google_map/geocoding_response.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_request.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_response.dart';
@@ -487,5 +489,21 @@ class Repository{
       return GeneralUserSignupResponse(success: false, msg: 'Data Parsing Error');
     }
   }
+  Future<UpdateProfileResponse> updateGeneralUserProfile(
+      UpdateProfileRequest request) async {
+    try {
+      var responseJson = await helper.post(
+          NetworkConstants.GU_UPDATE_PROFILE, request.toJson());
+      if (responseJson.statusCode == 200) {
+        return UpdateProfileResponse.fromJson(responseJson.data);
+      } else {
+        return UpdateProfileResponse(success:false, msg: 'Error from server');
+      }
+    } catch (e) {
+      logger.d(e);
+      return UpdateProfileResponse(success:false, msg: 'Data Parsing Error');
+    }
+  }
+
 
 }
