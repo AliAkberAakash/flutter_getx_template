@@ -40,8 +40,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   var phoneNumberController = TextEditingController();
   var addressController = TextEditingController();
   var nricController = TextEditingController();
-  // var nricController = TextEditingController();
-  // var nricController = TextEditingController();
+  var careTakerNameController = TextEditingController();
+  var careTakerNumberController = TextEditingController();
 
   _EditProfileScreenState(this.user);
 
@@ -53,6 +53,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     phoneNumberController.text=user.phone;
     addressController.text=user.address;
     nricController.text=user.nric ?? "";
+    careTakerNameController.text = user.caretakerName ?? "";
+    careTakerNumberController.text=user.caretakerPhone ?? "";
 
     super.initState();
   }
@@ -109,11 +111,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             VSpacer40(),
             TextFieldHeadline(headline: 'Caretaker Full Name'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: careTakerNameController),
             VSpacer40(),
             TextFieldHeadline(headline: 'Caretaker Mobile Number'),
             VSpacer10(),
-            CommonTextField(controller: TextEditingController()),
+            CommonTextField(controller: careTakerNumberController),
             VSpacer40(),
             PositiveButton(text: "Update Now", onClicked: () {
               Get.back();

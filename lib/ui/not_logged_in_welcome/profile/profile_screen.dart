@@ -126,7 +126,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                         Text(
-                          "+907079097213", //todo fix
+                          user.caretakerPhone ?? "N/A",
                           style: GoogleFonts.manrope(),
                         ),
                       ],

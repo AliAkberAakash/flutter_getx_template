@@ -44,6 +44,7 @@ class Data {
     this.caretakerName,
     this.caretakerAddress,
     this.caretakerImage,
+    this.caretakerPhone,
   });
 
   int id;
@@ -60,6 +61,7 @@ class Data {
   String? caretakerName;
   String? caretakerAddress;
   String? caretakerImage;
+  String? caretakerPhone;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     id: json["id"],
@@ -76,6 +78,7 @@ class Data {
     caretakerName: json["caretaker_name"],
     caretakerAddress: json["caretaker_address"],
     caretakerImage: json["caretaker_image"],
+    caretakerPhone : json["caretaker_phone"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -93,5 +96,6 @@ class Data {
     "caretaker_name": caretakerName,
     "caretaker_address": caretakerAddress,
     "caretaker_image": caretakerImage,
+    "caretaker_phone": caretakerPhone,
   };
 }
