@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:go_share/core/network/api_base_helper.dart';
 import 'package:go_share/core/network/dio_factory.dart';
+import 'package:go_share/data/models/booking/my_booking_list_response.dart';
 import 'package:go_share/data/models/driver/driver_login_request.dart';
 import 'package:go_share/data/models/driver/driver_login_response.dart';
 import 'package:go_share/data/models/driver/driver_password_reset_code_response.dart';
@@ -518,5 +519,17 @@ class Repository{
     }
   }
 
+  Future<MyBookingListResponse> getMyBookingList() async{
+    try{
+      var response = await helper.getGeneralUser(
+        NetworkConstants.MY_BOOKING_LIST,
+      );
+      return MyBookingListResponse.fromJson(response.data);
+    }catch(e){
+      return MyBookingListResponse(
+          success: false
+      );
+    }
+  }
 
 }

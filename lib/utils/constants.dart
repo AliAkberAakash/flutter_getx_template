@@ -71,6 +71,7 @@ class NetworkConstants {
   static const GU_REQUEST_CODE = "user/resetpassword/code/sent";
   static const GU_RESET_PASSWORD = "user/resetpassword";
   static const GU_UPDATE_PROFILE = "user/profile/update";
+  static const MY_BOOKING_LIST = "user/bookings";
 
   // Google api url
   static const GET_ADDRESS_FROM_PO_CODE= "https://maps.googleapis.com/maps/api/geocode/json";
