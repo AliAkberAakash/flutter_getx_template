@@ -13,6 +13,7 @@ import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/my_booking_details_one/my_booking_details_one.dart';
 import 'package:go_share/ui/container/my_booking_details_two/my_booking_details_two.dart';
 import 'package:go_share/ui/container/my_bookings/my_bookings_controller.dart';
+import 'package:go_share/utils/booking_utils.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/date_time_utils.dart';
 import 'package:go_share/utils/dimens.dart';
@@ -393,7 +394,7 @@ class BookingItemBodyWidget extends StatelessWidget {
           title: "Booking Details",
           onTap: () {
             if(type==0)
-              Get.to(MyBookingDetailsOneView());
+              Get.to(MyBookingDetailsOneView(booking: booking,));
             else Get.to(MyBookingDetailsTwoView());
           },
         ),
@@ -463,26 +464,6 @@ class BookingItemHeaderWidget extends StatelessWidget {
         ),
       ],
     );
-  }
-}
-
-String getType(Booking booking){
-  if(booking.isApproved==0)
-    return "Pending";
-  else{
-    if(booking.isFinished==0)
-      return "On Going";
-    else return "Finished";
-  }
-}
-
-Color getColor(Booking booking){
-  if(booking.isApproved==0)
-    return GSColors.pending_Color;
-  else{
-    if(booking.isFinished==0)
-      return GSColors.ongoing_Color;
-    else return finishedChipColor;
   }
 }
 
