@@ -6,6 +6,7 @@ import 'package:go_share/base/widget/custom_filled_button.dart';
 import 'package:go_share/data/models/booking/my_booking_list_response.dart';
 import 'package:go_share/ui/book_a_bus/invoice_screen.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
+import 'package:go_share/ui/container/provide_feedback/provide_feedback.dart';
 import 'package:go_share/ui/container/refund_request/refund_request.dart';
 import 'package:go_share/ui/container/UIConstants/Fonts.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
@@ -71,7 +72,22 @@ class BodyWidget extends StatelessWidget {
         BookingItemWidget(booking: booking,),
         LocationInfoWidget(booking : booking),
         VehicleInfoWidget(),
-        CustomFilledButton(
+        getType(booking)=="Finished?" ? CustomFilledButton(
+          margin: const EdgeInsets.only(
+            left: 30.0,
+            right: 30.0,
+          ),
+          fontSize: 18.0,
+          padding: const EdgeInsets.all(16.0),
+          borderRadius: 8.0,
+          borderColor: GSColors.green_secondary.withOpacity(0.8),
+          backgroundColor: Colors.transparent,
+          textColor: GSColors.green_secondary,
+          title: "Give Feedback",
+          onTap: () {
+            Get.to(ProvideFeedbackView());
+          },
+        ): CustomFilledButton(
           margin: const EdgeInsets.only(
             left: 30.0,
             right: 30.0,

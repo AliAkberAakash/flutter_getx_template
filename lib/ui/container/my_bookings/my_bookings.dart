@@ -393,9 +393,7 @@ class BookingItemBodyWidget extends StatelessWidget {
           textColor: GSColors.green_secondary,
           title: "Booking Details",
           onTap: () {
-            if(type==0)
               Get.to(MyBookingDetailsOneView(booking: booking,));
-            else Get.to(MyBookingDetailsTwoView());
           },
         ),
       ],
