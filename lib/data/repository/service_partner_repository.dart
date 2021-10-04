@@ -5,6 +5,8 @@ import 'package:go_share/core/network/dio_factory.dart';
 import 'package:go_share/data/models/booking/booking_request.dart';
 import 'package:go_share/data/models/booking/booking_response.dart';
 import 'package:go_share/data/models/booking/my_booking_list_response.dart';
+import 'package:go_share/data/models/booking/rating_request.dart';
+import 'package:go_share/data/models/booking/rating_response.dart';
 import 'package:go_share/data/models/driver/driver_login_request.dart';
 import 'package:go_share/data/models/driver/driver_login_response.dart';
 import 'package:go_share/data/models/driver/driver_password_reset_code_response.dart';
@@ -546,6 +548,21 @@ class Repository{
     } catch (e) {
       logger.d(e);
       return BookingResponse(success: false, msg: 'Data Parsing Error');
+    }
+  }
+
+  Future<RatingResponse> rateBooking(RatingRequest request) async{
+    try {
+      var responseJson = await helper.postGeneralUser(
+          NetworkConstants.RATE_BOOKING, request.toJson());
+      if (responseJson.statusCode == 200) {
+        return RatingResponse.fromJson(responseJson.data);
+      } else {
+        return RatingResponse(success: false, msg: 'Error from server');
+      }
+    } catch (e) {
+      logger.d(e);
+      return RatingResponse(success: false, msg: 'Data Parsing Error');
     }
   }
 

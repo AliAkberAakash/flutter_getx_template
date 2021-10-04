@@ -69,7 +69,7 @@ class BodyWidget extends StatelessWidget {
           textColor: GSColors.green_secondary,
           title: "Give Feedback",
           onTap: () {
-            Get.to(ProvideFeedbackView());
+            // Get.to(ProvideFeedbackView(booking: ,));
           },
         ),
         VSpacer40(),

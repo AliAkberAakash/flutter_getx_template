@@ -85,7 +85,7 @@ class BodyWidget extends StatelessWidget {
           textColor: GSColors.green_secondary,
           title: "Give Feedback",
           onTap: () {
-            Get.to(ProvideFeedbackView());
+            Get.to(ProvideFeedbackView(booking: booking,));
           },
         ): CustomFilledButton(
           margin: const EdgeInsets.only(
