@@ -1,6 +1,6 @@
 class FaqModel {
   //late List<Data> data;
-  List<Data> data = List<Data>.empty(growable: true);
+  List<FaqData> data = List<FaqData>.empty(growable: true);
   late Links links;
   late Meta meta;
 
@@ -9,7 +9,7 @@ class FaqModel {
   FaqModel.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       json['data'].forEach((v) {
-        data.add(new Data.fromJson(v));
+        data.add(new FaqData.fromJson(v));
       });
     }
     links = (json['links'] != null ? new Links.fromJson(json['links']) : null)!;
@@ -31,16 +31,16 @@ class FaqModel {
   }
 }
 
-class Data {
+class FaqData {
   late int id;
   late String question;
   late String answer;
   late int categoryId;
   late Category category;
 
-  Data({required this.id, required this.question, required this.answer, required this.categoryId, required this.category});
+  FaqData({required this.id, required this.question, required this.answer, required this.categoryId, required this.category});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  FaqData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     question = json['question'];
     answer = json['answer'];

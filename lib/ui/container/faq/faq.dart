@@ -128,14 +128,16 @@ class TitleWidget extends StatelessWidget {
 class FaqListWidget extends StatelessWidget {
   FaqModel? data;
   FaqListWidget({required this.data});
+  FaqModel? newdata;
+  List<FaqData> newLIst = List<FaqData>.empty(growable: true);
 
   @override
   Widget build(BuildContext context) {
 
+    filterCategoryName(data);
     return ListView.builder(
-        itemCount: data!.data.length,
+        itemCount: newLIst.length,
         itemBuilder: (context,i){
-
           Widget nextPage = BookABusView(data: data,categoryId:data!.data[i].category.id,name :data!.data[i].category.name);
            return Padding(
              padding: const EdgeInsets.all(8.0),
@@ -147,54 +149,29 @@ class FaqListWidget extends StatelessWidget {
 
     }
     );
-    /*return ListView.separated(
 
-      padding: const EdgeInsets.symmetric(vertical: 30.0),
-      physics: BouncingScrollPhysics(),
-      scrollDirection: Axis.vertical,
-      itemBuilder: (BuildContext context, int index) {
-        String title = "Billing";
-        Widget nextPage = BookABusView();
+  }
 
-        switch (index) {
-          case 0:
-            title = "Billing";
-            nextPage = BookABusView();
-            break;
+  void filterCategoryName(FaqModel? data) {
+    newLIst.addAll(data!.data);
+    newLIst=uniqifyList(newLIst);
 
-          case 1:
-            title = "Billing";
-            nextPage = BookABusView();
-            break;
 
-          case 2:
-            title = "Billing";
-            nextPage = BookABusView();
-            break;
 
-          case 3:
-            title = "Billing";
-            nextPage = BookABusView();
-            break;
-
-          case 4:
-            title = "Billing";
-            nextPage = BookABusView();
-            break;
-        }
-
-        return FaqItemWidget(
-          title: title,
-          nextPage: nextPage,
-        );
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        return SizedBox(height: 20.0);
-      },
-      itemCount: 5,
-    );*/
   }
 }
+
+List<FaqData> uniqifyList(List<FaqData> list) {
+  final ids = Set();
+  list.retainWhere((x) => ids.add(x.categoryId));
+  return list;
+
+  }
+
+
+
+
+
 
 class FaqItemWidget extends StatelessWidget {
   final String title;

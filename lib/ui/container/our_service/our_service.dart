@@ -111,6 +111,7 @@ class _BodyWidgetState extends State<BodyWidget> {
   int status = 0;
   OurServiceController controller =new OurServiceController();
   CoreTheme coreTheme=new CoreTheme();
+  bool flag=true;
   List<ServiceData> morningData = List<ServiceData>.empty(growable: true);
   List<ServiceData> eveningData = List<ServiceData>.empty(growable: true);
 
@@ -133,50 +134,52 @@ class _BodyWidgetState extends State<BodyWidget> {
       child: FutureBuilder<ServiceModel>(
         future: getService(),
         builder: (context, snapshot) {
-
           if(snapshot.hasData){
-            filterData(snapshot);
+            if(flag){
+              filterData(snapshot);
+            }
+
             return Container(
               width: double.maxFinite,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                      padding: const EdgeInsets.all(30.0),
-                      child: Row(
-                        children: [
-                          SessionWidget(
-                            index: 0,
-                            imagePath: "images/ic_morning.png",
-                            title: GSStrings.morning,
-                            isSelected: status == 0,
-                            onClick: (index){
-                              setState(() {
-                                status = index;
-                              });
-                            },
-                          ),
-                          SizedBox(width: 16.0),
-                          SessionWidget(
-                            index: 1,
-                            imagePath: "images/ic_evening.png",
-                            title: GSStrings.evening,
-                            isSelected: status == 1,
-                            onClick: (index){
-                              setState(() {
-                                status = index;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
+                    padding: const EdgeInsets.all(30.0),
+                    child: Row(
+                      children: [
+                        SessionWidget(
+                          index: 0,
+                          imagePath: "images/ic_morning.png",
+                          title: GSStrings.morning,
+                          isSelected: status == 0,
+                          onClick: (index){
+                            setState(() {
+                              status = index;
+                            });
+                          },
+                        ),
+                        SizedBox(width: 16.0),
+                        SessionWidget(
+                          index: 1,
+                          imagePath: "images/ic_evening.png",
+                          title: GSStrings.evening,
+                          isSelected: status == 1,
+                          onClick: (index){
+                            setState(() {
+                              status = index;
+                            });
+                          },
+                        ),
+                      ],
                     ),
-                   Container(
+                  ),
+                  Container(
                       height:  MediaQuery.of(context).size.height,
                       width: MediaQuery.of(context).size.width,
 
                       child: status==0?getFilterMorningServiceList(snapshot,status):getFilterEveningServiceList(snapshot,status)
-                    ),
+                  ),
 
                   /*CustomBusTimeWidget(
                     backgroundImagePath: "images/ic_demo_bus_hour_two.png",
@@ -186,7 +189,6 @@ class _BodyWidgetState extends State<BodyWidget> {
               ),
             );
           }
-
           return coreTheme.appProgressIndicator(context);
 
 
@@ -223,21 +225,21 @@ class _BodyWidgetState extends State<BodyWidget> {
           ));
     } else{
       return  ListView.builder(
-          itemCount:status==0?morningData.length:eveningData.length,
+          itemCount:morningData.length,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context,i) {
             return Padding(
               padding: const EdgeInsets.only(bottom: 24.0),
               child: CustomBusTimeWidget(
                 backgroundImagePath: "images/ic_demo_bus_hour_one.png",
-                title: status==0?morningData[i].title:eveningData[i].title,
-                subtitle: status==0?morningData[i].subTitle:eveningData[i].subTitle,
-                moneyOne: status==0?morningData[i].pricingOne.value.toString():eveningData[i].pricingOne.value.toString(),
-                moneyTwo:status==0?morningData[i].pricingTwo.value.toString():eveningData[i].pricingTwo.value.toString(),
-                moneyThree: status==0?morningData[i].pricingThree.value.toString():eveningData[i].pricingThree.value.toString(),
-                distanceOne: status==0?morningData[i].pricingOneDistance:eveningData[i].pricingOneDistance,
-                distanceTwo: status==0?morningData[i].pricingTwoDistance:eveningData[i].pricingTwoDistance,
-                distanceThree: status==0?morningData[i].pricingThreeDistance:eveningData[i].pricingThreeDistance,
+                title: morningData[i].title,
+                subtitle: morningData[i].subTitle,
+                moneyOne: morningData[i].pricingOne.value.toString(),
+                moneyTwo:morningData[i].pricingTwo.value.toString(),
+                moneyThree: morningData[i].pricingThree.value.toString(),
+                distanceOne: morningData[i].pricingOneDistance,
+                distanceTwo: morningData[i].pricingTwoDistance,
+                distanceThree: morningData[i].pricingThreeDistance,
               ),
             );
           }
@@ -261,21 +263,21 @@ class _BodyWidgetState extends State<BodyWidget> {
     }
     else{
       return  ListView.builder(
-          itemCount:status==0?morningData.length:eveningData.length,
+          itemCount:eveningData.length,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context,i) {
             return Padding(
               padding: const EdgeInsets.only(bottom: 24.0),
               child: CustomBusTimeWidget(
                 backgroundImagePath: "images/ic_demo_bus_hour_one.png",
-                title: status==0?morningData[i].title:eveningData[i].title,
-                subtitle: status==0?morningData[i].subTitle:eveningData[i].subTitle,
-                moneyOne: status==0?morningData[i].pricingOne.value.toString():eveningData[i].pricingOne.value.toString(),
-                moneyTwo:status==0?morningData[i].pricingTwo.value.toString():eveningData[i].pricingTwo.value.toString(),
-                moneyThree: status==0?morningData[i].pricingThree.value.toString():eveningData[i].pricingThree.value.toString(),
-                distanceOne: status==0?morningData[i].pricingOneDistance:eveningData[i].pricingOneDistance,
-                distanceTwo: status==0?morningData[i].pricingTwoDistance:eveningData[i].pricingTwoDistance,
-                distanceThree: status==0?morningData[i].pricingThreeDistance:eveningData[i].pricingThreeDistance,
+                title: eveningData[i].title,
+                subtitle: eveningData[i].subTitle,
+                moneyOne: eveningData[i].pricingOne.value.toString(),
+                moneyTwo:eveningData[i].pricingTwo.value.toString(),
+                moneyThree: eveningData[i].pricingThree.value.toString(),
+                distanceOne: eveningData[i].pricingOneDistance,
+                distanceTwo: eveningData[i].pricingTwoDistance,
+                distanceThree: eveningData[i].pricingThreeDistance,
               ),
             );
           }
@@ -284,7 +286,7 @@ class _BodyWidgetState extends State<BodyWidget> {
 
   }
 
-  void filterData(AsyncSnapshot<ServiceModel> snapshot) {
+   filterData(AsyncSnapshot<ServiceModel> snapshot) {
     for (int i=0;i<snapshot.data!.data.length;i++){
       if (snapshot.data!.data[i].serviceType=="Morning"){
         morningData.add(snapshot.data!.data[i]);
@@ -292,6 +294,8 @@ class _BodyWidgetState extends State<BodyWidget> {
         eveningData.add(snapshot.data!.data[i]);
       }
     }
+    flag=false;
+
   }
 }
 

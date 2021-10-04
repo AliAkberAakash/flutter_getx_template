@@ -228,8 +228,8 @@ class _BodyWidgetState extends State<BodyWidget>
           physics: BouncingScrollPhysics(),
           controller: _tabController,
           children: [
-            MissionAndVisionListWidget(data:widget.data),
-            MissionAndVisionListWidget(data:widget.data),
+            MissionAndVisionListWidget(data:widget.data.data.first.missionText),
+            MissionAndVisionListWidget(data:widget.data.data.first.visionText),
           ],
         ),
       ),
@@ -238,7 +238,7 @@ class _BodyWidgetState extends State<BodyWidget>
 }
 
 class MissionAndVisionListWidget extends StatelessWidget {
-  AboutUsModel data;
+  String data;
   MissionAndVisionListWidget({required this.data});
 
   @override
@@ -254,13 +254,13 @@ class MissionAndVisionListWidget extends StatelessWidget {
       separatorBuilder: (BuildContext context, int index) {
         return SizedBox(height: 46.0);
       },
-      itemCount: 2,
+      itemCount: 1,
     );
   }
 }
 
 class MissionAndVisionItemWidget extends StatelessWidget {
-  AboutUsModel data;
+  String data;
   MissionAndVisionItemWidget({required this.data});
 
   @override
@@ -273,7 +273,7 @@ class MissionAndVisionItemWidget extends StatelessWidget {
           Center(
             child: SingleChildScrollView(
               child: Html(
-                data: data.data.first.wwvTitle,
+                data: data,
               ),
             ),
           )
