@@ -4,9 +4,12 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:go_share/data/models/booking/address_request.dart';
+import 'package:go_share/data/models/booking/booking_request.dart';
 import 'package:go_share/data/models/booking/info_request.dart';
 import 'package:go_share/data/repository/service_partner_repository.dart';
+import 'package:go_share/ui/book_a_bus/booking_controller.dart';
 import 'package:go_share/ui/book_a_bus/invoice_screen.dart';
+import 'package:go_share/ui/common_widgets/common_loading_dialog.dart';
 import 'package:go_share/ui/common_widgets/grey_button.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/outlined_material_button.dart';
@@ -16,6 +19,7 @@ import 'package:go_share/ui/common_widgets/text_field_value_widget.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/not_logged_in_welcome/welcome/welcome_screen.dart';
 import 'package:go_share/ui/section4/widgets/pending_button.dart';
+import 'package:go_share/util/lib/toast.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/date_time_utils.dart';
@@ -43,6 +47,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   final AddressRequest addressRequest;
   final InfoRequest infoRequest;
+
+  final controller = BookingController(Get.find());
 
   var selectedPayment = "p";
   late ExpandableController expandableController;
@@ -360,7 +366,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 children: [
                   TextFieldHeadline(headline: "Start Date"),
                   VSpacer10(),
-                  TextFieldValueWidget(headline: infoRequest.startDate),
+                  TextFieldValueWidget(headline: speakDate(infoRequest.startDate)),
                 ],
               ),
               HSpacer40(),
@@ -377,7 +383,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           VSpacer20(),
           TextFieldHeadline(headline: "End Date"),
           VSpacer10(),
-          TextFieldValueWidget(headline: infoRequest.endDate),
+          TextFieldValueWidget(headline: speakDate(infoRequest.endDate)),
           VSpacer20(),
           TextFieldHeadline(headline: "Pickup Location"),
           VSpacer10(),
@@ -529,8 +535,43 @@ class _PaymentScreenState extends State<PaymentScreen> {
   void checkLoggedIn() async{
     var loggedIn = await Repository().isGeneralUserLoggedIn();
     if(loggedIn){
-      showSuccessSheet(context);
+      showLoader();
+
+      var request = BookingRequest(
+        startDate: infoRequest.startDate,
+        endDate: infoRequest.endDate,
+        pickupTime: "11:00:00"/*infoRequest.pickupTime*/,
+        dropoffTime: "12:07:00",
+        newChilds: infoRequest.childNames,
+        existingChilds: [1],
+        numberOfDays: 1,
+        bookedSeat: infoRequest.childNames.length,
+        pickupAddress: addressRequest.pickupLocation,
+        dropoffAddress: addressRequest.dropOffLocation,
+        pickupLongitude: "hhh",
+        pickupLatitude: "hhh",
+        pickupPostalCode: addressRequest.pickupPostalCode,
+        dropoffLongitude: "hhh",
+        dropoffLatitude: "hhh",
+        dropoffPostalCode: addressRequest.dropOffPostalCode,
+        pickupRemarks: addressRequest.pickupRemarks,
+        dropoffRemarks: addressRequest.dropOffRemarks,
+        distance: 10,
+        price: 53,
+        verbatim: "hhh",
+      );
+      placeBooking(request);
     }else showErrorSheet(context);
+  }
+
+  placeBooking(BookingRequest request) async{
+    var response = await controller.placeBooking(request);
+    Get.back();
+    if(response.success){
+      showSuccessSheet(context);
+    }else{
+      ToastUtil.show(response.msg);
+    }
   }
 
   void showErrorSheet(BuildContext context) {

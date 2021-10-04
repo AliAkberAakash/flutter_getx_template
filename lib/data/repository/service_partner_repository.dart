@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:go_share/core/network/api_base_helper.dart';
 import 'package:go_share/core/network/dio_factory.dart';
+import 'package:go_share/data/models/booking/booking_request.dart';
+import 'package:go_share/data/models/booking/booking_response.dart';
 import 'package:go_share/data/models/booking/my_booking_list_response.dart';
 import 'package:go_share/data/models/driver/driver_login_request.dart';
 import 'package:go_share/data/models/driver/driver_login_response.dart';
@@ -529,6 +531,21 @@ class Repository{
       return MyBookingListResponse(
           success: false
       );
+    }
+  }
+
+  Future<BookingResponse> placeBooking(BookingRequest request) async {
+    try {
+      var responseJson = await helper.postGeneralUser(
+          NetworkConstants.PLACE_BOOKING, request.toJson());
+      if (responseJson.statusCode == 200) {
+        return BookingResponse.fromJson(responseJson.data);
+      } else {
+        return BookingResponse(success: false, msg: 'Error from server');
+      }
+    } catch (e) {
+      logger.d(e);
+      return BookingResponse(success: false, msg: 'Data Parsing Error');
     }
   }
 

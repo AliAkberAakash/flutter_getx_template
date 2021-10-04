@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:go_share/data/models/booking/booking_request.dart';
+import 'package:go_share/data/models/booking/booking_response.dart';
 import 'package:go_share/data/models/google_map/geocoding_response.dart';
 import 'package:go_share/data/repository/service_partner_repository.dart';
 import 'package:logger/logger.dart';
@@ -67,6 +69,10 @@ class BookingController extends GetxController{
 
   Future<GeoCodingResponse> getPostCodeFromAddress(String address) async{
     return await repository.getPostCodeFromAddress(address);
+  }
+
+  Future<BookingResponse> placeBooking(BookingRequest request) async{
+    return await repository.placeBooking(request);
   }
 
 }

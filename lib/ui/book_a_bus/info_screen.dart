@@ -297,8 +297,8 @@ class _InfoScreenState extends State<InfoScreen> {
 
                 var infoRequest = InfoRequest(
                   childNames: childNames,
-                  startDate: startTimeController.text,
-                  endDate: endTimeController.text,
+                  startDate: startDate,
+                  endDate: endDate,
                   pickupTime: selectedTimeController.text,
                 );
 

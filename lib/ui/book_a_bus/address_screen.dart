@@ -314,15 +314,15 @@ class _AddressScreenState extends State<AddressScreen> {
   }
 
   bool validate(){
-    if(pickupPostCode != pickupPostCodeController.text) {
-      ToastUtil.show("Post code does not match with pickup address");
-      return false;
-    }
-
-    if(dropOffPostCode != dropOffPostCodeController.text){
-      ToastUtil.show("Post code does not match with drop off address");
-      return false;
-    }
+    // if(pickupPostCode != pickupPostCodeController.text) {
+    //   ToastUtil.show("Post code does not match with pickup address");
+    //   return false;
+    // }
+    //
+    // if(dropOffPostCode != dropOffPostCodeController.text){
+    //   ToastUtil.show("Post code does not match with drop off address");
+    //   return false;
+    // }
 
     return true;
   }
