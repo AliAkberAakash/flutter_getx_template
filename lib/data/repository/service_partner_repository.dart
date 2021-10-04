@@ -489,11 +489,24 @@ class Repository{
       return GeneralUserSignupResponse(success: false, msg: 'Data Parsing Error');
     }
   }
-  Future<UpdateProfileResponse> updateGeneralUserProfile(
+  Future<UpdateProfileResponse> updateGeneralUserProfile(File? file,
       UpdateProfileRequest request) async {
     try {
-      var responseJson = await helper.post(
-          NetworkConstants.GU_UPDATE_PROFILE, request.toJson());
+
+      var responseJson;
+
+      if(file!=null){
+        responseJson = await helper.postGeneralUserMultiPart(
+            NetworkConstants.GU_UPDATE_PROFILE,
+            "image",
+            file,
+            request.toJson());
+      }else{
+        responseJson = await helper.postGeneralUser(
+            NetworkConstants.GU_UPDATE_PROFILE,
+            request.toJson());
+      }
+
       if (responseJson.statusCode == 200) {
         return UpdateProfileResponse.fromJson(responseJson.data);
       } else {
