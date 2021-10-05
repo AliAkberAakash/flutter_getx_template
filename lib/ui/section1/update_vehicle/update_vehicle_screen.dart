@@ -115,7 +115,7 @@ class _UpdateVehicleScreenState extends State<UpdateVehicleScreen> {
               type: TextInputType.number,
             ),
             VSpacer40(),
-            TextFieldHeadline(headline: 'Driver License Validity'),
+            TextFieldHeadline(headline: 'Driver License Issue Date'),
             VSpacer10(),
             _datePicker(driverLicenseValidityController, "Driver License Issue Date"),
             VSpacer40(),
@@ -141,7 +141,7 @@ class _UpdateVehicleScreenState extends State<UpdateVehicleScreen> {
             VSpacer10(),
             CommonTextField(
               controller: attendantNRICPositionController,
-              type: TextInputType.number,
+              type: TextInputType.text,
             ),
             VSpacer40(),
             TextFieldHeadline(headline: 'Attendant DOB'),

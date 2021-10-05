@@ -127,7 +127,7 @@ class _VehicleRequestItemState extends State<VehicleRequestItem> {
                           ),
                           VSpacer20(),
                           VehicleInfoWidget(
-                            title: "Pending duration",
+                            title: "Registered since",
                             value: daysBetween(vehicle.createdAt).toString(), //todo
                           ),
                         ],

@@ -112,7 +112,7 @@ class ResetVehicleItem extends StatelessWidget {
                           ),
                           VSpacer20(),
                           VehicleInfoWidget(
-                            title: "Pending duration",
+                            title: "Registered since",
                             value: daysBetween(vehicle.createdAt),
                           ),
                         ],

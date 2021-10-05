@@ -15,9 +15,9 @@ String daysBetween(DateTime from) {
   int day = (to.difference(from).inHours / 24).round();
   int hr = to.difference(from).inHours;
 
-  if(day<1){
-    return "$hr ${(hr==1) ? "hr" : "hrs"}";
-  }
+  // if(day<1){
+  //   return "$hr ${(hr==1) ? "hr" : "hrs"}";
+  // }
 
   return "$day ${(day==1) ? "day" : "days"}";
 }
