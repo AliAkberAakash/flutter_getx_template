@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:go_share/data/models/booking/booking_request.dart';
 import 'package:go_share/data/models/booking/booking_response.dart';
+import 'package:go_share/data/models/booking/child_list_response.dart';
 import 'package:go_share/data/models/google_map/geocoding_response.dart';
 import 'package:go_share/data/repository/service_partner_repository.dart';
 import 'package:logger/logger.dart';
@@ -11,6 +12,7 @@ class BookingController extends GetxController{
 
   BookingController(this.repository);
 
+  var childListResponse = Rx<ChildrenListResponse?>(null);
   var pickupAddressResponse = Rx<GeoCodingResponse?>(null);
 
   var pickupAddress = "".obs;
@@ -73,6 +75,11 @@ class BookingController extends GetxController{
 
   Future<BookingResponse> placeBooking(BookingRequest request) async{
     return await repository.placeBooking(request);
+  }
+
+  getChildList() async{
+    var response = await repository.getChildList();
+    childListResponse.value = response;
   }
 
 }

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_share/core/ui/error_screen.dart';
+import 'package:go_share/core/ui/loading_widget.dart';
 import 'package:go_share/data/models/booking/info_request.dart';
 import 'package:go_share/ui/book_a_bus/address_screen.dart';
+import 'package:go_share/ui/book_a_bus/booking_controller.dart';
+import 'package:go_share/ui/common_widgets/auto_complete_text.dart';
 import 'package:go_share/ui/common_widgets/common_text_field.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
@@ -22,7 +26,9 @@ class InfoScreen extends StatefulWidget {
 
 class _InfoScreenState extends State<InfoScreen> {
 
-  int seat=1;
+  final bookingController = BookingController(Get.find());
+
+  int seat=0;
   String timeFormat="AM";
   List<Widget> childWidgetList = [];
   List<TextEditingController> childControllerList = [];
@@ -34,24 +40,26 @@ class _InfoScreenState extends State<InfoScreen> {
 
   @override
   void initState() {
+    bookingController.getChildList();
     var controller = new TextEditingController();
     childControllerList.add(controller);
-    childWidgetList.add(
-      _childWidget(childControllerList[0])
-    );
+    // childWidgetList.add(
+    //   _childWidget(childControllerList[0], [""])
+    // );
     super.initState();
   }
 
-  _childWidget(TextEditingController controller){
+  _childWidget(TextEditingController controller, List<String> suggestions){
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         VSpacer20(),
         TextFieldHeadline(headline: "Child Name*"),
         VSpacer20(),
-        CommonTextField(
+        AutoCompleteTextField(
           controller: controller,
           hint: "Child Name",
+          suggestions: suggestions,
         ),
       ],
     );
@@ -60,190 +68,199 @@ class _InfoScreenState extends State<InfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.all(dp20),
-        child: ListView(
-          children: [
-            VSpacer20(),
-            LargeHeadlineWidget(headline: "Book a Bus"),
-            VSpacer40(),
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+      body: Obx((){
+
+        var currentState = bookingController.childListResponse.value;
+
+        if(currentState==null){
+          return LoadingWidget();
+        }else{
+          if(currentState.success) {
+
+            var suggestion = currentState.data!.map((e) => e.name).toList();
+
+            return Container(
+              padding: EdgeInsets.all(dp20),
+              child: ListView(
+                children: [
+                  VSpacer20(),
+                  LargeHeadlineWidget(headline: "Book a Bus"),
+                  VSpacer40(),
+                  Row(
                     children: [
-                      Text(
-                        "01. Info",
-                        style: GoogleFonts.manrope(
-                          color: accent,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "01. Info",
+                              style: GoogleFonts.manrope(
+                                color: accent,
+                              ),
+                            ),
+                            VSpacer10(),
+                            Container(
+                              height: dp5,
+                              color: accent,
+                            ),
+                          ],
                         ),
                       ),
-                      VSpacer10(),
-                      Container(
-                        height: dp5,
-                        color: accent,
+                      HSpacer5(),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "02. Address",
+                              style: GoogleFonts.manrope(
+                                color: grey,
+                              ),
+                            ),
+                            VSpacer10(),
+                            Container(
+                              height: dp5,
+                              color: light_grey,
+                            ),
+                          ],
+                        ),
+                      ),
+                      HSpacer5(),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "03. Payment",
+                              style: GoogleFonts.manrope(
+                                color: grey,
+                              ),
+                            ),
+                            VSpacer10(),
+                            Container(
+                              height: dp5,
+                              color: light_grey,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                ),
-                HSpacer5(),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  VSpacer20(),
+                  Row(
                     children: [
-                      Text(
-                        "02. Address",
-                        style: GoogleFonts.manrope(
-                          color: grey,
-                        ),
-                      ),
-                      VSpacer10(),
-                      Container(
-                        height: dp5,
-                        color: light_grey,
-                      ),
-                    ],
-                  ),
-                ),
-                HSpacer5(),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "03. Payment",
-                        style: GoogleFonts.manrope(
-                          color: grey,
-                        ),
-                      ),
-                      VSpacer10(),
-                      Container(
-                        height: dp5,
-                        color: light_grey,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            VSpacer20(),
-            Row(
-              children: [
-                Expanded(
-                  child: TextFieldHeadline(headline: "Seat"),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(
-                        dp5,
-                      ),
-                    ),
-                    border: Border.all(
-                      color: light_grey
-                    )
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        onPressed: (){
-                          setState(() {
-                            if(seat>1)
-                              seat--;
-                            if(childWidgetList.length>1) {
-                              childWidgetList.removeLast();
-                              childControllerList.removeLast();
-                            }
-                          });
-                        },
-                        icon: Icon(
-                          Icons.remove,
-                          color: accent,
-                        ),
+                      Expanded(
+                        child: TextFieldHeadline(headline: "Seat"),
                       ),
                       Container(
-                        width: 1,
-                        height: 50,
-                        color: light_grey,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: dp20),
-                        child: Text(
-                          seat.toString(),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(
+                                dp5,
+                              ),
+                            ),
+                            border: Border.all(color: light_grey)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  if (seat > 1) seat--;
+                                  if (childWidgetList.length > 1) {
+                                    childWidgetList.removeLast();
+                                    childControllerList.removeLast();
+                                  }
+                                });
+                              },
+                              icon: Icon(
+                                Icons.remove,
+                                color: accent,
+                              ),
+                            ),
+                            Container(
+                              width: 1,
+                              height: 50,
+                              color: light_grey,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: dp20),
+                              child: Text(
+                                seat.toString(),
+                              ),
+                            ),
+                            Container(
+                              width: 1,
+                              height: 50,
+                              color: light_grey,
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  seat++;
+                                  var controller = TextEditingController();
+                                  childControllerList.add(controller);
+                                  childWidgetList.add(_childWidget(
+                                      childControllerList.last, suggestion));
+                                });
+                              },
+                              icon: Icon(
+                                Icons.add,
+                                color: accent,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: childWidgetList,
+                  ),
+                  VSpacer20(),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextFieldHeadline(headline: "Start Date*"),
+                            VSpacer20(),
+                            _datePicker(startTimeController, "Start date", 1),
+                          ],
                         ),
                       ),
-                      Container(
-                        width: 1,
-                        height: 50,
-                        color: light_grey,
-                      ),
-                      IconButton(
-                        onPressed: (){
-                          setState(() {
-                            seat++;
-                            var controller = TextEditingController();
-                            childControllerList.add(controller);
-                            childWidgetList.add(_childWidget(childControllerList.last));
-                          });
-                        },
-                        icon: Icon(
-                          Icons.add,
-                          color: accent,
+                      HSpacer20(),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextFieldHeadline(headline: "End Date*"),
+                            VSpacer20(),
+                            _datePicker(endTimeController, "End Date", 2),
+                          ],
                         ),
                       ),
                     ],
                   ),
-                )
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: childWidgetList,
-            ),
-            VSpacer20(),
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  VSpacer20(),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      TextFieldHeadline(headline: "Start Date*"),
-                      VSpacer20(),
-                      _datePicker(startTimeController, "Start date", 1),
-                    ],
-                  ),
-                ),
-                HSpacer20(),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextFieldHeadline(headline: "End Date*"),
-                      VSpacer20(),
-                      _datePicker(endTimeController, "End Date", 2),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            VSpacer20(),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextFieldHeadline(headline: "Pickup Time*"),
-                      VSpacer20(),
-                      _timePicker(selectedTimeController),
-                    ],
-                  ),
-                ),
-                /*HSpacer20(),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextFieldHeadline(headline: "Pickup Time*"),
+                            VSpacer20(),
+                            _timePicker(selectedTimeController),
+                          ],
+                        ),
+                      ),
+                      /*HSpacer20(),
                 Container(
                   padding: EdgeInsets.only(left: dp10),
                   decoration: BoxDecoration(
@@ -283,33 +300,38 @@ class _InfoScreenState extends State<InfoScreen> {
                     },
                   ),
                 ),*/
-              ],
-            ),
-            VSpacer20(),
-            PositiveButton(
-              text: "Next",
-              onClicked: () {
+                    ],
+                  ),
+                  VSpacer20(),
+                  PositiveButton(
+                    text: "Next",
+                    onClicked: () {
+                      List<String> childNames = [];
 
-                List<String> childNames = [];
+                      for (var controller in childControllerList)
+                        childNames.add(controller.text);
 
-                for(var controller in childControllerList)
-                  childNames.add(controller.text);
+                      var infoRequest = InfoRequest(
+                        childNames: childNames,
+                        startDate: startDate,
+                        endDate: endDate,
+                        pickupTime: selectedTimeController.text,
+                      );
 
-                var infoRequest = InfoRequest(
-                  childNames: childNames,
-                  startDate: startDate,
-                  endDate: endDate,
-                  pickupTime: selectedTimeController.text,
-                );
+                      Get.to(
+                        AddressScreen(
+                          infoRequest: infoRequest,
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            );
+          } else return ErrorScreen();
+        }
 
-                Get.to(
-                  AddressScreen(infoRequest: infoRequest,),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
+      }),
     );
   }
 

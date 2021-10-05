@@ -4,6 +4,7 @@ import 'package:go_share/core/network/api_base_helper.dart';
 import 'package:go_share/core/network/dio_factory.dart';
 import 'package:go_share/data/models/booking/booking_request.dart';
 import 'package:go_share/data/models/booking/booking_response.dart';
+import 'package:go_share/data/models/booking/child_list_response.dart';
 import 'package:go_share/data/models/booking/my_booking_list_response.dart';
 import 'package:go_share/data/models/booking/rating_request.dart';
 import 'package:go_share/data/models/booking/rating_response.dart';
@@ -563,6 +564,21 @@ class Repository{
     } catch (e) {
       logger.d(e);
       return RatingResponse(success: false, msg: 'Data Parsing Error');
+    }
+  }
+
+  Future<ChildrenListResponse> getChildList() async{
+    try {
+      var responseJson = await helper.getGeneralUser(
+          NetworkConstants.CHILD_LIST);
+      if (responseJson.statusCode == 200) {
+        return ChildrenListResponse.fromJson(responseJson.data);
+      } else {
+        return ChildrenListResponse(success: false, msg: 'Error from server');
+      }
+    } catch (e) {
+      logger.d(e);
+      return ChildrenListResponse(success: false, msg: 'Data Parsing Error');
     }
   }
 
