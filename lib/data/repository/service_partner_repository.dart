@@ -88,7 +88,12 @@ class Repository{
 
       if(responseJson.statusCode == 200){
         return ServicePartnerLoginResponse.fromJson(responseJson.data);
-      }else{
+      }else if(responseJson.statusCode == 400){
+        return ServicePartnerLoginResponse(
+          message: "Wrong Credentials",
+        );
+      }
+      else{
         return ServicePartnerLoginResponse(
           message: "Error from server",
         );

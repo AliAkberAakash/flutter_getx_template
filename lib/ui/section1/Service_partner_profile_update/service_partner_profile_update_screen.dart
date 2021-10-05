@@ -124,7 +124,7 @@ class _ServicePartnerProfileUpdateScreenState extends State<ServicePartnerProfil
             VSpacer10(),
             CommonTextField(
               controller: contactPersonNRICController,
-              type: TextInputType.number,
+              type: TextInputType.text,
             ),
             VSpacer40(),
             TextFieldHeadline(
@@ -133,7 +133,7 @@ class _ServicePartnerProfileUpdateScreenState extends State<ServicePartnerProfil
             VSpacer10(),
             CommonTextField(
               controller: businessIdNumController,
-              type: TextInputType.phone,
+              type: TextInputType.text,
             ),
             VSpacer40(),
             PositiveButton(text: "Update Now", onClicked: () {

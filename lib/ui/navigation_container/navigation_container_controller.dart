@@ -6,7 +6,7 @@ class NavigationContainerController extends GetxController{
   final Repository repository = Get.find();
 
   Future logoutServiceProvider() async{
-    await repository.logoutGeneralUser();
+    await repository.logoutServicePartner();
   }
 
 }
