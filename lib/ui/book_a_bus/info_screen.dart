@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_share/core/ui/error_screen.dart';
 import 'package:go_share/core/ui/loading_widget.dart';
+import 'package:go_share/data/models/booking/child_list_response.dart';
 import 'package:go_share/data/models/booking/info_request.dart';
 import 'package:go_share/ui/book_a_bus/address_screen.dart';
 import 'package:go_share/ui/book_a_bus/booking_controller.dart';
@@ -306,13 +307,21 @@ class _InfoScreenState extends State<InfoScreen> {
                   PositiveButton(
                     text: "Next",
                     onClicked: () {
-                      List<String> childNames = [];
+                      List<String> newChild = [];
+                      List<int> existingChild = [];
 
                       for (var controller in childControllerList)
-                        childNames.add(controller.text);
+                      {
+                        Datum? child = currentState.data!.firstWhere((element) => element.name==controller.text, orElse: (){
+                          return Datum(id: -1, userId: -1, name: "null", createdAt: DateTime.now(), updatedAt: DateTime.now());
+                        });
+                        if(child.id==-1){
+                          newChild.add(controller.text);
+                        }else existingChild.add(child.id);
+                      }
 
                       var infoRequest = InfoRequest(
-                        childNames: childNames,
+                        childNames: newChild,
                         startDate: startDate,
                         endDate: endDate,
                         pickupTime: selectedTimeController.text,

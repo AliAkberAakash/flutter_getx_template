@@ -20,36 +20,50 @@ class AutoCompleteTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(
-        textSelectionTheme: TextSelectionThemeData(
-          cursorColor: accent,
-        ),
-        fixTextFieldOutlineLabel: false,
-        accentColor: accent
-      ),
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: dp10),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(dp10),
-            border: Border.all(
-                color: grey
-            )
-        ),
-        child: Autocomplete<String>(
-          optionsBuilder: (TextEditingValue textEditingValue) {
-            if (textEditingValue.text == '') {
-              return const Iterable<String>.empty();
-            }
-            return suggestions.where((String option) {
-              return option.toLowerCase().contains(textEditingValue.text.toLowerCase());
-            });
-          },
-          onSelected: (String selection) {
-            controller.text=selection;
-          },
-        ),
-      ),
+    // return Theme(
+    //   data: ThemeData(
+    //     textSelectionTheme: TextSelectionThemeData(
+    //       cursorColor: accent,
+    //     ),
+    //     fixTextFieldOutlineLabel: false,
+    //     accentColor: accent
+    //   ),
+    //   child: Container(
+    //     padding: EdgeInsets.symmetric(horizontal: dp10),
+    //     decoration: BoxDecoration(
+    //         borderRadius: BorderRadius.circular(dp10),
+    //         border: Border.all(
+    //             color: grey
+    //         )
+    //     ),
+    //     child: Autocomplete<String>(
+    //       optionsBuilder: (TextEditingValue textEditingValue) {
+    //         if (textEditingValue.text == '') {
+    //           return const Iterable<String>.empty();
+    //         }
+    //         return suggestions.where((String option) {
+    //           return option.toLowerCase().contains(textEditingValue.text.toLowerCase());
+    //         });
+    //       },
+    //       onSelected: (String selection) {
+    //         controller.text=selection;
+    //       },
+    //     ),
+    //   ),
+    // );
+
+    return Autocomplete<String>(
+      optionsBuilder: (TextEditingValue textEditingValue) {
+        if (textEditingValue.text == '') {
+          return const Iterable<String>.empty();
+        }
+        return suggestions.where((String option) {
+          return option.toLowerCase().contains(textEditingValue.text.toLowerCase());
+        });
+      },
+      onSelected: (String selection) {
+        controller.text=selection;
+      },
     );
   }
 }
