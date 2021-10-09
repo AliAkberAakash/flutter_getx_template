@@ -54,7 +54,7 @@ class ResetVehicleItem extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "VA ${vehicle.vehicleNumber}",
+                      "${vehicle.vehicleNumber}",
                       style: GoogleFonts.manrope(
                         color: darkText,
                         fontSize: dp20,
@@ -112,7 +112,7 @@ class ResetVehicleItem extends StatelessWidget {
                           ),
                           VSpacer20(),
                           VehicleInfoWidget(
-                            title: "Pending duration",
+                            title: "Registered since",
                             value: daysBetween(vehicle.createdAt),
                           ),
                         ],

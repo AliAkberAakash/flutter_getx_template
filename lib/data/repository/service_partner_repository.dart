@@ -2,14 +2,30 @@ import 'dart:io';
 
 import 'package:go_share/core/network/api_base_helper.dart';
 import 'package:go_share/core/network/dio_factory.dart';
+import 'package:go_share/data/models/booking/booking_request.dart';
+import 'package:go_share/data/models/booking/booking_response.dart';
+import 'package:go_share/data/models/booking/child_list_response.dart';
+import 'package:go_share/data/models/booking/my_booking_list_response.dart';
+import 'package:go_share/data/models/booking/rating_request.dart';
+import 'package:go_share/data/models/booking/rating_response.dart';
 import 'package:go_share/data/models/driver/driver_login_request.dart';
 import 'package:go_share/data/models/driver/driver_login_response.dart';
 import 'package:go_share/data/models/driver/driver_password_reset_code_response.dart';
 import 'package:go_share/data/models/driver/driver_password_reset_request.dart';
 import 'package:go_share/data/models/driver/driver_password_reset_response.dart';
 import 'package:go_share/data/models/driver/driver_profile_response.dart';
+import 'package:go_share/data/models/general_user/general_user_login_request.dart';
+import 'package:go_share/data/models/general_user/general_user_login_response.dart';
+import 'package:go_share/data/models/general_user/general_user_signup_request.dart';
+import 'package:go_share/data/models/general_user/general_user_signup_response.dart';
+import 'package:go_share/data/models/general_user/profile/general_user_profile_response.dart';
+import 'package:go_share/data/models/general_user/profile/profile_update_request.dart';
+import 'package:go_share/data/models/general_user/profile/profile_update_response.dart';
+import 'package:go_share/data/models/google_map/geocoding_response.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_request.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_response.dart';
+import 'package:go_share/data/models/service_partner/auth/password_reset_code_request.dart';
+import 'package:go_share/data/models/service_partner/auth/password_reset_request.dart';
 import 'package:go_share/data/models/service_partner/auth/signup/service_partner_signup_request.dart';
 import 'package:go_share/data/models/service_partner/auth/signup/service_partner_signup_response.dart';
 import 'package:go_share/data/models/service_partner/profile/service_partner_profile_response.dart';
@@ -72,7 +88,12 @@ class Repository{
 
       if(responseJson.statusCode == 200){
         return ServicePartnerLoginResponse.fromJson(responseJson.data);
-      }else{
+      }else if(responseJson.statusCode == 400){
+        return ServicePartnerLoginResponse(
+          message: "Wrong Credentials",
+        );
+      }
+      else{
         return ServicePartnerLoginResponse(
           message: "Error from server",
         );
@@ -109,6 +130,11 @@ class Repository{
     return token.isNotEmpty;
   }
 
+  Future<bool> isGeneralUserLoggedIn() async{
+    var token = await SharedPrefUtil.getString(NetworkConstants.GENERAL_USER_TOKEN);
+    return token.isNotEmpty;
+  }
+
   Future<bool> isDriverLoggedIn() async{
     var token = await SharedPrefUtil.getString(NetworkConstants.DRIVER_TOKEN);
     return token.isNotEmpty;
@@ -120,7 +146,7 @@ class Repository{
       return VehicleListResponse.fromJson(response.data);
     }catch(e){
       return VehicleListResponse(
-        msg: "Error from server",
+        data: null,
       );
     }
   }
@@ -181,6 +207,10 @@ class Repository{
   Future logoutServicePartner() async{
     await SharedPrefUtil.delete(NetworkConstants.AUTHORIZATION);
   }
+  Future logoutGeneralUser() async{
+    await SharedPrefUtil.delete(NetworkConstants.GENERAL_USER_TOKEN);
+  }
+
   
   Future<ServicePartnerProfileUpdateResponse> updateServicePartnerProfile(
       ServicePartnerProfileUpdateRequest request,
@@ -312,6 +342,248 @@ class Repository{
           success: false,
           msg: "Data Parsing Error"
       );
+    }
+  }
+
+  Future<DriverPasswordResetCodeResponse> requestSPPasswordResetCode(
+      PasswordResetCodeRequest request) async{
+
+      try{
+        var response = await helper.post(
+          NetworkConstants.SEND_RESET_PASSWORD_CODE,
+          request.toJson(),
+        );
+        return DriverPasswordResetCodeResponse.fromJson(response.data);
+      }catch(e){
+        return DriverPasswordResetCodeResponse(
+            success: false,
+            msg: "Failed to send code"
+        );
+      }
+
+  }
+
+  Future<DriverPasswordResetResponse> requestSPPasswordReset(
+      PasswordResetRequest request) async{
+    try{
+      var response = await helper.post(
+        NetworkConstants.RESET_SP_PASSWORD,
+        request.toJson(),
+      );
+      return DriverPasswordResetResponse.fromJson(response.data);
+    }catch(e){
+      return DriverPasswordResetResponse(
+          success: false,
+          msg: "Failed to send code"
+      );
+    }
+
+  }
+
+  Future<GeoCodingResponse> getGeoCodingResponse(String postalCode) async{
+
+    try{
+      var params = {
+        "components":"postal_code:$postalCode|country:SG", //
+        "key":"AIzaSyBXu9gZE7h8rsOysVadX-XJ5WbvBwOKEqc",
+      };
+      var response = await helper.getRawWithParams(
+          NetworkConstants.GET_ADDRESS_FROM_PO_CODE,
+          params,
+      );
+      return GeoCodingResponse.fromJson(response.data);
+    }catch(e){
+      logger.d(e);
+      return GeoCodingResponse(
+        status: "No Result",
+        results: [],
+      );
+    }
+
+  }
+
+  Future<GeoCodingResponse> getPostCodeFromAddress(String address) async{
+    try{
+      var params = {
+        "address":"$address", //
+        "key":"AIzaSyBXu9gZE7h8rsOysVadX-XJ5WbvBwOKEqc",
+      };
+      var response = await helper.getRawWithParams(
+        NetworkConstants.GET_ADDRESS_FROM_PO_CODE,
+        params,
+      );
+      return GeoCodingResponse.fromJson(response.data);
+    }catch(e){
+      logger.d(e);
+      return GeoCodingResponse(
+        status: "No Result",
+        results: [],
+      );
+    }
+
+  }
+
+  Future<GeneralUserLoginResponse> loginGeneralUser(GeneralUserLoginRequest request) async{
+    try{
+      var response = await helper.post(
+        NetworkConstants.GENERAL_USER_LOGIN,
+        request.toJson(),
+      );
+      return GeneralUserLoginResponse.fromJson(response.data);
+    }catch(e){
+      return GeneralUserLoginResponse(
+          msg: "Failed to send code"
+      );
+    }
+  }
+
+  Future<GeneralUserProfileResponse> getGeneralUserProfile() async{
+    try{
+      var response = await helper.getGeneralUser(
+        NetworkConstants.GENERAL_USER_PROFILE,
+      );
+      return GeneralUserProfileResponse.fromJson(response.data);
+    }catch(e){
+      return GeneralUserProfileResponse(
+          msg: "Failed to send code"
+      );
+    }
+  }
+
+  Future<DriverPasswordResetCodeResponse> requestGUPasswordResetCode(
+      PasswordResetCodeRequest request) async{
+
+    try{
+      var response = await helper.postGeneralUser(
+        NetworkConstants.GU_REQUEST_CODE,
+        request.toJson(),
+      );
+      return DriverPasswordResetCodeResponse.fromJson(response.data);
+    }catch(e){
+      return DriverPasswordResetCodeResponse(
+          success: false,
+          msg: "Failed to send code"
+      );
+    }
+
+  }
+
+  Future<DriverPasswordResetResponse> requestGUPasswordReset(
+      PasswordResetRequest request) async{
+    try{
+      var response = await helper.postGeneralUser(
+        NetworkConstants.GU_RESET_PASSWORD,
+        request.toJson(),
+      );
+      return DriverPasswordResetResponse.fromJson(response.data);
+    }catch(e){
+      return DriverPasswordResetResponse(
+          success: false,
+          msg: "Failed to send code"
+      );
+    }
+
+  }
+
+  Future<GeneralUserSignupResponse> signupGeneralUser(
+      GeneralUserSignupRequest request) async {
+    try {
+      var responseJson = await helper.post(
+          NetworkConstants.GENERAL_USER_SIGNUP, request.toJson());
+      if (responseJson.statusCode == 200) {
+        return GeneralUserSignupResponse.fromJson(responseJson.data);
+      } else {
+        return GeneralUserSignupResponse(success: false, msg: 'Error from server');
+      }
+    } catch (e) {
+      logger.d(e);
+      return GeneralUserSignupResponse(success: false, msg: 'Data Parsing Error');
+    }
+  }
+  Future<UpdateProfileResponse> updateGeneralUserProfile(File? file,
+      UpdateProfileRequest request) async {
+    try {
+
+      var responseJson;
+
+      if(file!=null){
+        responseJson = await helper.postGeneralUserMultiPart(
+            NetworkConstants.GU_UPDATE_PROFILE,
+            "image",
+            file,
+            request.toJson());
+      }else{
+        responseJson = await helper.postGeneralUser(
+            NetworkConstants.GU_UPDATE_PROFILE,
+            request.toJson());
+      }
+
+      if (responseJson.statusCode == 200) {
+        return UpdateProfileResponse.fromJson(responseJson.data);
+      } else {
+        return UpdateProfileResponse(success:false, msg: 'Error from server');
+      }
+    } catch (e) {
+      logger.d(e);
+      return UpdateProfileResponse(success:false, msg: 'Data Parsing Error');
+    }
+  }
+
+  Future<MyBookingListResponse> getMyBookingList() async{
+    try{
+      var response = await helper.getGeneralUser(
+        NetworkConstants.MY_BOOKING_LIST,
+      );
+      return MyBookingListResponse.fromJson(response.data);
+    }catch(e){
+      return MyBookingListResponse(
+          success: false
+      );
+    }
+  }
+
+  Future<BookingResponse> placeBooking(BookingRequest request) async {
+    try {
+      var responseJson = await helper.postGeneralUser(
+          NetworkConstants.PLACE_BOOKING, request.toJson());
+      if (responseJson.statusCode == 200) {
+        return BookingResponse.fromJson(responseJson.data);
+      } else {
+        return BookingResponse(success: false, msg: 'Error from server');
+      }
+    } catch (e) {
+      logger.d(e);
+      return BookingResponse(success: false, msg: 'Data Parsing Error');
+    }
+  }
+
+  Future<RatingResponse> rateBooking(RatingRequest request) async{
+    try {
+      var responseJson = await helper.postGeneralUser(
+          NetworkConstants.RATE_BOOKING, request.toJson());
+      if (responseJson.statusCode == 200) {
+        return RatingResponse.fromJson(responseJson.data);
+      } else {
+        return RatingResponse(success: false, msg: 'Error from server');
+      }
+    } catch (e) {
+      logger.d(e);
+      return RatingResponse(success: false, msg: 'Data Parsing Error');
+    }
+  }
+
+  Future<ChildrenListResponse> getChildList() async{
+    try {
+      var responseJson = await helper.getGeneralUser(
+          NetworkConstants.CHILD_LIST);
+      if (responseJson.statusCode == 200) {
+        return ChildrenListResponse.fromJson(responseJson.data);
+      } else {
+        return ChildrenListResponse(success: false, msg: 'Error from server');
+      }
+    } catch (e) {
+      logger.d(e);
+      return ChildrenListResponse(success: false, msg: 'Data Parsing Error');
     }
   }
 

@@ -92,7 +92,7 @@ class _UpdateVehicleScreenState extends State<UpdateVehicleScreen> {
           children: [
             LargeHeadlineWidget(headline: 'Update your vehicle'),
             VSpacer40(),
-            TextFieldHeadline(headline: 'Vehicle image'),
+            TextFieldHeadline(headline: 'Vehicle Image'),
             VSpacer20(),
             _capTureImage(vehicle.image),
             VSpacer40(),
@@ -104,33 +104,33 @@ class _UpdateVehicleScreenState extends State<UpdateVehicleScreen> {
             VSpacer10(),
             CommonTextField(controller: TextEditingController()),
             VSpacer40(),*/
-            TextFieldHeadline(headline: 'Driver name'),
+            TextFieldHeadline(headline: 'Driver Name'),
             VSpacer10(),
             CommonTextField(controller: driverNameController),
             VSpacer40(),
-            TextFieldHeadline(headline: 'Driver license number'),
+            TextFieldHeadline(headline: 'Driver License Number'),
             VSpacer10(),
             CommonTextField(
               controller: driverLicenseNumberController,
               type: TextInputType.number,
             ),
             VSpacer40(),
-            TextFieldHeadline(headline: 'Driver License Validity'),
+            TextFieldHeadline(headline: 'Driver License Issue Date'),
             VSpacer10(),
-            _datePicker(driverLicenseValidityController, "Driver License Validity"),
+            _datePicker(driverLicenseValidityController, "Driver License Issue Date"),
             VSpacer40(),
-            TextFieldHeadline(headline: 'Driver phone number'),
+            TextFieldHeadline(headline: 'Driver Phone Number'),
             VSpacer10(),
             CommonTextField(
               controller: driverPhoneController,
               type: TextInputType.phone,
             ),
             VSpacer40(),
-            TextFieldHeadline(headline: 'Attendant name'),
+            TextFieldHeadline(headline: 'Attendant Name'),
             VSpacer10(),
             CommonTextField(controller: attendantNamePositionController),
             VSpacer40(),
-            TextFieldHeadline(headline: 'Attendant phone'),
+            TextFieldHeadline(headline: 'Attendant Phone'),
             VSpacer10(),
             CommonTextField(
               controller: attendantPhonePositionController,
@@ -141,7 +141,7 @@ class _UpdateVehicleScreenState extends State<UpdateVehicleScreen> {
             VSpacer10(),
             CommonTextField(
               controller: attendantNRICPositionController,
-              type: TextInputType.number,
+              type: TextInputType.text,
             ),
             VSpacer40(),
             TextFieldHeadline(headline: 'Attendant DOB'),
@@ -194,19 +194,16 @@ class _UpdateVehicleScreenState extends State<UpdateVehicleScreen> {
           return Theme(
             data: ThemeData.light().copyWith(
               colorScheme: ColorScheme.light(primary: accent),
-              // buttonTheme: ButtonThemeData(
-              //     textTheme: acce
-              // ),
             ),
             child: child!,
           );
         },
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101)
+        firstDate: DateTime(1950),
+        lastDate: DateTime(2201)
     );
     if (picked != null && picked != selectedDate)
       setState(() {
-        controller.text=formatDate(selectedDate);
+        controller.text=formatDate(picked);
         selectedDate = picked;
       });
   }

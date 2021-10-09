@@ -6,22 +6,37 @@ import 'package:go_share/ui/container/CreateNewAccount/CreateNewAccount.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
+import 'package:go_share/ui/not_logged_in_welcome/navigation_container/navigation_container.dart';
+import 'package:go_share/ui/not_logged_in_welcome/sign_up/general_user_signup_screen.dart';
+import 'package:go_share/ui/not_logged_in_welcome/welcome/general_user_welcome_controller.dart';
 import 'package:go_share/ui/section4/widgets/create_account_button.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'sign_in_screen.dart';
+import '../sign_in/sign_in_screen.dart';
 
-// UI
+
 class NotLoggedInWelcome extends StatefulWidget {
   @override
-  _Sec4WelcomeScreenState createState() => _Sec4WelcomeScreenState();
-} //: UI
+  _NotLoggedInWelcomeState createState() => _NotLoggedInWelcomeState();
+}
 
-// State
-class _Sec4WelcomeScreenState extends State<NotLoggedInWelcome> {
+class _NotLoggedInWelcomeState extends State<NotLoggedInWelcome> {
+
+  final _controller = GeneralUserWelcomeController();
+
+  @override
+  void initState() {
+    _controller.isLoggedIn().then((value){
+      if(value){
+        Get.off(NavigationContainer());
+      }
+    });
+    super.initState();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,7 +114,7 @@ class _Sec4WelcomeScreenState extends State<NotLoggedInWelcome> {
                         ),
                         CreateAccountButtonOutlineStock(
                           onClick: (){
-                            Get.to(CreateNewAccount());
+                            Get.to(GeneralUserSignupScreen());
                           },
                         ),
                         SizedBox(

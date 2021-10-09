@@ -63,7 +63,7 @@ class _ServiceProviderSignupScreenState extends State<ServiceProviderSignupScree
           physics: BouncingScrollPhysics(),
           padding: EdgeInsets.all(dp20),
           children: [
-            LargeHeadlineWidget(headline: 'Want to be a\nservice provider'),
+            LargeHeadlineWidget(headline: 'Want to be a\nService Provider'),
             VSpacer40(),
             TextFieldHeadline(headline: 'Company Logo'),
             VSpacer20(),
@@ -73,7 +73,7 @@ class _ServiceProviderSignupScreenState extends State<ServiceProviderSignupScree
             VSpacer10(),
             CommonTextField(controller: companyNameController),
             VSpacer40(),
-            TextFieldHeadline(headline: 'Phone Number'),
+            TextFieldHeadline(headline: 'Office Number'),
             VSpacer10(),
             CommonTextField(
               controller: phoneNumberController,
@@ -99,7 +99,7 @@ class _ServiceProviderSignupScreenState extends State<ServiceProviderSignupScree
             VSpacer10(),
             _getAddress(),
             VSpacer40(),
-            TextFieldHeadline(headline: 'Contact Person name'),
+            TextFieldHeadline(headline: 'Contact Person Name'),
             VSpacer10(),
             CommonTextField(controller: contactPersonNameController),
             VSpacer40(),
@@ -118,14 +118,12 @@ class _ServiceProviderSignupScreenState extends State<ServiceProviderSignupScree
             VSpacer10(),
             CommonTextField(
               controller: contactPersonNRICController,
-              type: TextInputType.number,
             ),
             VSpacer40(),
             TextFieldHeadline(headline: 'Business Identification Number'),
             VSpacer10(),
             CommonTextField(
               controller: businessIdNumController,
-              type: TextInputType.number,
             ),
             VSpacer40(),
             PositiveButton(
@@ -169,7 +167,7 @@ class _ServiceProviderSignupScreenState extends State<ServiceProviderSignupScree
     var response = await _controller.serviceProviderSignup(request, _image!);
     if (response.success) {
       Get.back();
-      modalBottomSheetMenuSuccess(context);
+      modalBottomSheetMenuSuccess(context, companyNameController.text);
     } else {
       ToastUtil.show(response.msg);
       Get.back();

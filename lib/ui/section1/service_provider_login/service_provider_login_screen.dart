@@ -1,13 +1,15 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/GSButtonWidget.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_request.dart';
 import 'package:go_share/ui/common_widgets/common_loading_dialog.dart';
-import 'package:go_share/ui/container/ForgotPassword/ForgotPassword.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
 import 'package:go_share/ui/navigation_container/navigation_container.dart';
+import 'package:go_share/ui/section1/Service_provider_reset_password/service_provider_reset_password.dart';
 import 'package:go_share/ui/section4/widgets/text_fields.dart';
 import 'package:go_share/util/lib/toast.dart';
 import 'package:go_share/utils/colors.dart';
@@ -95,7 +97,7 @@ class _ServiceProviderLoginState extends State<ServiceProviderLoginScreen> {
               ),
               Sec4TextField(
                 controller: emailController,
-                hints: GSStrings.email_field_hints,
+                hints: "Email Address",
               ),
               SizedBox(
                 height: GSSizeConstants.padding17,
@@ -155,18 +157,34 @@ class _ServiceProviderLoginState extends State<ServiceProviderLoginScreen> {
                   },
                 ),
               ),
-              SizedBox(
-                height: GSSizeConstants.padding7,
-              ),
-              SizedBox(
-                height: GSSizeConstants.padding7,
-              ),
-              Sec4TextButton(
-                text1: "Forgot Password?",
-                text2: "Reset here",
-                onClicked: (){
-                  Get.to(ForgotPassword());
-                },
+              VSpacer40(),
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  text: "Forgot Password? ",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      fontStyle: FontStyle.normal,
+                      fontSize: GSFontSizes.font18,
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: "Reset here",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                        fontSize: GSFontSizes.font18,
+                        decoration: TextDecoration.underline,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = (){
+                          Get.to(ServiceProviderResetPassword());
+                      }
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: GSSizeConstants.padding25,
@@ -186,11 +204,11 @@ class _ServiceProviderLoginState extends State<ServiceProviderLoginScreen> {
   void login(ServicePartnerLoginRequest request) async{
     var response = await _controller.loginServiceProvider(request);
     if(response.data != null){
-      _controller.storeToken(response.data!.token).then((_){
-          Get.back();
-          Get.back();
-          Get.off(() => NavigationContainer());
-      });
+      await _controller.storeToken(response.data!.token);
+      await _controller.storeUser(response.data!.servicePartner);
+      Get.back();
+      Get.back();
+      Get.off(() => NavigationContainer());
     }else{
       Get.back();
     }

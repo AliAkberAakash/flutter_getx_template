@@ -77,7 +77,6 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
             VSpacer10(),
             CommonTextField(
               controller: vehicleNumberController,
-              type: TextInputType.number,
             ),
             VSpacer40(),
            /* TextFieldHeadline(headline: 'Service Provider ID'),
@@ -88,7 +87,7 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
             VSpacer10(),
             CommonTextField(controller: passwordController),
             VSpacer40(),*/
-            TextFieldHeadline(headline: 'Vehicle capacity',),
+            TextFieldHeadline(headline: 'Vehicle Capacity',),
             VSpacer10(),
             CommonTextField(
               controller: vehicleCapacityController,
@@ -103,10 +102,9 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
             VSpacer10(),
             CommonTextField(
               controller: driverLicenseNumberController,
-              type: TextInputType.number,
             ),
             VSpacer40(),
-            TextFieldHeadline(headline: 'Driver License Validity'),
+            TextFieldHeadline(headline: 'Driver License Issue Date'),
             VSpacer10(),
             _datePicker(driverLicenseValidityController, "Driver License Validity"),
             VSpacer40(),
@@ -125,9 +123,12 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
             VSpacer10(),
             CommonTextField(controller: attendantNamePositionController),
             VSpacer40(),
-            TextFieldHeadline(headline: 'Attendant phone'),
+            TextFieldHeadline(headline: 'Attendant Phone'),
             VSpacer10(),
-            CommonTextField(controller: attendantPhonePositionController),
+            CommonTextField(
+              controller: attendantPhonePositionController,
+              type: TextInputType.phone,
+            ),
             VSpacer40(),
             TextFieldHeadline(headline: 'Attendant NRIC'),
             VSpacer10(),
@@ -164,7 +165,7 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
 
   DateTime selectedDate = DateTime.now();
 
-  Future<void> _selectDate(BuildContext context, TextEditingController controller) async {
+  _selectDate(BuildContext context, TextEditingController controller) async {
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
@@ -172,21 +173,17 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
           return Theme(
             data: ThemeData.light().copyWith(
               colorScheme: ColorScheme.light(primary: accent),
-              // buttonTheme: ButtonThemeData(
-              //     textTheme: acce
-              // ),
             ),
             child: child!,
           );
         },
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101)
+        firstDate: DateTime(1950),
+        lastDate: DateTime(2201)
     );
-    if (picked != null && picked != selectedDate)
-      setState(() {
-        controller.text=formatDate(selectedDate);
-        selectedDate = picked;
-      });
+    setState(() {
+      controller.text=formatDate(picked!);
+      selectedDate = picked;
+    });
   }
 
   String formatDate(DateTime date){
@@ -235,12 +232,17 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
 
   addVehicle(AddVehicleRequest request) async{
     if(_image!=null){
-      var response = await _controller.addVehicle(request, _image!);
-      Get.back();
-      if(response.data!=null){
-        modalBottomSheetMenuPending(context);
+      if(isChecked){
+        var response = await _controller.addVehicle(request, _image!);
+        Get.back();
+        if(response.data!=null){
+          modalBottomSheetMenuPending(context);
+        }else{
+          ToastUtil.show("Failed to add vehicle");
+        }
       }else{
-        ToastUtil.show("Failed to add vehicle");
+        Get.back();
+        ToastUtil.show("Please accept Terms & Conditions");
       }
     }else{
       Get.back();
@@ -293,9 +295,8 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
                   isChecked = value!;
                 });
               }),
-          HSpacer15(),
           Text(
-            'I agree to terms and conditions',
+            'I agree to terms & conditions',
             style: TextStyle(fontSize: dp15, color: grey),
           ),
         ],

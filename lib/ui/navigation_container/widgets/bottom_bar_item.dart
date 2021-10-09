@@ -37,14 +37,14 @@ class BottomBarItem extends StatelessWidget {
             SizedBox(height: 30,) :
             SvgPicture.asset(
               iconString,
-              color: /*isSelected ? accent :*/ darkText,
+              color: isSelected ? accent : darkText,
               height: 25,
               width: 25,
             ),
             Text(
               title,
               style: GoogleFonts.manrope(
-                color: /*isSelected ? accent :*/ grey,
+                color: isSelected ? accent : grey,
                 fontSize: 12
               ),
             ),

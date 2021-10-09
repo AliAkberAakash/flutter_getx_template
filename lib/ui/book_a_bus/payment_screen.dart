@@ -1,8 +1,15 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:go_share/data/models/booking/address_request.dart';
+import 'package:go_share/data/models/booking/booking_request.dart';
+import 'package:go_share/data/models/booking/info_request.dart';
+import 'package:go_share/data/repository/service_partner_repository.dart';
+import 'package:go_share/ui/book_a_bus/booking_controller.dart';
 import 'package:go_share/ui/book_a_bus/invoice_screen.dart';
+import 'package:go_share/ui/common_widgets/common_loading_dialog.dart';
 import 'package:go_share/ui/common_widgets/grey_button.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/outlined_material_button.dart';
@@ -10,26 +17,45 @@ import 'package:go_share/ui/common_widgets/positive_button.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
 import 'package:go_share/ui/common_widgets/text_field_value_widget.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
+import 'package:go_share/ui/not_logged_in_welcome/welcome/welcome_screen.dart';
+import 'package:go_share/ui/section4/widgets/pending_button.dart';
+import 'package:go_share/util/lib/toast.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
+import 'package:go_share/utils/date_time_utils.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:logger/logger.dart';
 
 class PaymentScreen extends StatefulWidget {
 
+  final AddressRequest addressRequest;
+  final InfoRequest infoRequest;
 
-  PaymentScreen({Key? key}) : super(key: key);
+  PaymentScreen({
+    Key? key,
+    required this.addressRequest,
+    required this.infoRequest,
+  }) : super(key: key);
 
   @override
-  _PaymentScreenState createState() => _PaymentScreenState();
+  _PaymentScreenState createState() => _PaymentScreenState(addressRequest, infoRequest);
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
+
+  final AddressRequest addressRequest;
+  final InfoRequest infoRequest;
+
+  final controller = BookingController(Get.find());
+
   var selectedPayment = "p";
   late ExpandableController expandableController;
 
   var isExpanded = false;
+
+  _PaymentScreenState(this.addressRequest, this.infoRequest);
 
   @override
   void initState() {
@@ -130,7 +156,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   ),
                   Spacer(),
                   Text(
-                    "47\$",
+                    "S\$47.00",
                     style: GoogleFonts.manrope(
                       color: accent,
                       fontSize: dp20,
@@ -249,9 +275,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 HSpacer10(),
                 Expanded(
                   child: PositiveButton(
-                    text: "Next",
+                    text: "Submit",
                     onClicked: () {
-                      showSuccessSheet(context);
+                      checkLoggedIn();
                     },
                   ),
                 ),
@@ -306,73 +332,111 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   Widget _getDescription(){
+    return Padding(
+      padding: EdgeInsets.only(left: dp10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          VSpacer20(),
+          TextFieldHeadline(headline: "Order ID"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: '#9070979234'),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Total Seat"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: '5 Seats'),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Total Distance"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: '30 Km'),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Cost per Kilometer"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: '\$14/km'),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Total Travel Number"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: '12'),
+          VSpacer20(),
+          _getChildPart(),
+          Row(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextFieldHeadline(headline: "Start Date"),
+                  VSpacer10(),
+                  TextFieldValueWidget(headline: speakDate(infoRequest.startDate)),
+                ],
+              ),
+              HSpacer40(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextFieldHeadline(headline: "Time"),
+                  VSpacer10(),
+                  TextFieldValueWidget(headline: infoRequest.pickupTime),
+                ],
+              )
+            ],
+          ),
+          VSpacer20(),
+          TextFieldHeadline(headline: "End Date"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: speakDate(infoRequest.endDate)),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Pickup Location"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: addressRequest.pickupLocation),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Postal Code"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: addressRequest.pickupPostalCode),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Pickup Remark"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: addressRequest.pickupRemarks),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Drop-Off Location"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: addressRequest.dropOffLocation),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Postal Code"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: addressRequest.dropOffPostalCode),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Drop-Off Remark"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: addressRequest.dropOffRemarks),
+          VSpacer20(),
+
+        ],
+      ),
+    );
+  }
+
+  Widget _getChildPart(){
+
+    var childList = infoRequest.childNames;
+
+    Logger().d(childList.length);
+
+    return Column(
+      children: [
+        for(var child in childList)
+          _getChildWidget(child)
+      ],
+    );
+  }
+
+  Widget _getChildWidget(String name){
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        VSpacer20(),
-        TextFieldHeadline(headline: "Order ID"),
-        VSpacer10(),
-        TextFieldValueWidget(headline: '#9070979234'),
-        VSpacer20(),
-        TextFieldHeadline(headline: "Total Seat"),
-        VSpacer10(),
-        TextFieldValueWidget(headline: '5 Seats'),
-        VSpacer20(),
         TextFieldHeadline(headline: "Child Name"),
         VSpacer10(),
-        TextFieldValueWidget(headline: 'John Doe WIlliam'),
+        TextFieldValueWidget(headline: name),
         VSpacer20(),
-        Row(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextFieldHeadline(headline: "Start Date"),
-                VSpacer10(),
-                TextFieldValueWidget(headline: '19th July, 2021'),
-              ],
-            ),
-            HSpacer40(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextFieldHeadline(headline: "Time"),
-                VSpacer10(),
-                TextFieldValueWidget(headline: '10:00 PM'),
-              ],
-            )
-          ],
-        ),
-        VSpacer20(),
-        TextFieldHeadline(headline: "End Date"),
-        VSpacer10(),
-        TextFieldValueWidget(headline: '28 July, 2021'),
-        VSpacer20(),
-        TextFieldHeadline(headline: "Pickup Location"),
-        VSpacer10(),
-        TextFieldValueWidget(headline: 'Block 372 Bukit Batok Street 31 #01-372, 650372 Singapore'),
-        VSpacer20(),
-        TextFieldHeadline(headline: "Postal Code"),
-        VSpacer10(),
-        TextFieldValueWidget(headline: '650372 Singapore'),
-        VSpacer20(),
-        TextFieldHeadline(headline: "Pickup Remark"),
-        VSpacer10(),
-        TextFieldValueWidget(headline: 'Batok Street 31 #01-372, 650372 Singapore'),
-        VSpacer20(),
-        TextFieldHeadline(headline: "Drop-Off Location"),
-        VSpacer10(),
-        TextFieldValueWidget(headline: 'Block 372 Bukit Batok Street 31 #01-372, 650372 Singapore'),
-        VSpacer20(),
-        TextFieldHeadline(headline: "Postal Code"),
-        VSpacer10(),
-        TextFieldValueWidget(headline: '650372 Singapore'),
-        VSpacer20(),
-        TextFieldHeadline(headline: "Drop-Off Remark"),
-        VSpacer10(),
-        TextFieldValueWidget(headline: 'Batok Street 31 #01-372, 650372 Singapore'),
-        VSpacer20(),
-
       ],
     );
   }
@@ -415,9 +479,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         Padding(
                           padding: const EdgeInsets.all(10),
                           child: Text(
-                            "Your charity program has been successfully "
-                                "created.\n Now you can check and maintain "
-                                "\in your\n'activity' menu.",
+                            "You booking has been submitted. An admin will approved it soon",
                             style: GoogleFonts.manrope(
                               color: GSColors.text_secondary,
                               fontSize: dp14,
@@ -434,7 +496,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         children: [
                           Expanded(
                             child: PositiveButton(
-                              text: "Go To Home",
+                              text: "My Booking List",
                               onClicked: (){
                                 Get.back();
                                 Get.back();
@@ -470,5 +532,139 @@ class _PaymentScreenState extends State<PaymentScreen> {
         });
   }
 
+  void checkLoggedIn() async{
+    var loggedIn = await Repository().isGeneralUserLoggedIn();
+    if(loggedIn){
+      showLoader();
+
+      var request = BookingRequest(
+        startDate: infoRequest.startDate,
+        endDate: infoRequest.endDate,
+        pickupTime: "11:00:00"/*infoRequest.pickupTime*/,
+        dropoffTime: "12:07:00",
+        newChilds: infoRequest.childNames,
+        existingChilds: [1],
+        numberOfDays: 1,
+        bookedSeat: infoRequest.childNames.length,
+        pickupAddress: addressRequest.pickupLocation,
+        dropoffAddress: addressRequest.dropOffLocation,
+        pickupLongitude: "hhh",
+        pickupLatitude: "hhh",
+        pickupPostalCode: addressRequest.pickupPostalCode,
+        dropoffLongitude: "hhh",
+        dropoffLatitude: "hhh",
+        dropoffPostalCode: addressRequest.dropOffPostalCode,
+        pickupRemarks: addressRequest.pickupRemarks,
+        dropoffRemarks: addressRequest.dropOffRemarks,
+        distance: 10,
+        price: 53,
+        verbatim: "hhh",
+      );
+      placeBooking(request);
+    }else showErrorSheet(context);
+  }
+
+  placeBooking(BookingRequest request) async{
+    var response = await controller.placeBooking(request);
+    Get.back();
+    if(response.success){
+      showSuccessSheet(context);
+    }else{
+      ToastUtil.show(response.msg);
+    }
+  }
+
+  void showErrorSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (builder) {
+          return new Container(
+            height: 450.0,
+            color: Color(0xFF737373), //could change this to Color(0xFF737373),
+            //so you don't have to change MaterialApp canvasColor
+            child: new Container(
+                padding: EdgeInsets.symmetric(vertical: 20),
+                decoration: new BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: new BorderRadius.only(
+                        topLeft: const Radius.circular(20.0),
+                        topRight: const Radius.circular(20.0))),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SvgPicture.asset(
+                      AssetConstants.pendingIcon,
+                    ),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            "Login Required",
+                            style: GoogleFonts.manrope(
+                              color: GSColors.pending_Color,
+                              fontSize: dp25,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            "Please Login to book a bus",
+                            style: GoogleFonts.manrope(
+                              color: GSColors.text_secondary,
+                              fontSize: dp14,
+                              fontWeight: FontWeight.normal,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: dp30),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: PendingButton(
+                              text: "Login",
+                              onClick: (){
+                                Get.back();
+                                Get.back();
+                                Get.back();
+                                Get.back();
+                                Get.to(NotLoggedInWelcome());
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Padding(
+                    //   padding: EdgeInsets.symmetric(horizontal: dp30),
+                    //   child: Row(
+                    //     children: [
+                    //       Expanded(
+                    //         child: OutlinedMaterialButton(
+                    //           color:GSColors.pending_Color,
+                    //           onClick: (){
+                    //             Get.back();
+                    //             Get.to(
+                    //               InvoiceScreen(),
+                    //             );
+                    //           },
+                    //           text: "View Invoice",
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // )
+                  ],
+                )),
+          );
+        });
+  }
 
 }

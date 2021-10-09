@@ -4,7 +4,8 @@ abstract class GSStrings {
   static const welcome_description =
       "Millions of people use to turn their ideas";
   static const sign_in = "Sign In";
-  static const create_new_account = "Create a new account";
+  static const sign_up = "Sign Up";
+  static const create_new_account = "Create a New Account";
   static const welcome_back = "Welcome Back";
   static const sign_in_description =
       "It’s time to rock n role! Let’s get started now.";
@@ -18,7 +19,7 @@ abstract class GSStrings {
   static const password = "Password";
   static const forget_password_reset_here = "Forgot Password? Reset here";
   static const already_have_an_account_sIgn_in =
-      "Already have an account? SIgn In";
+      "Already have an account? Sign In";
   static const submit = "Submit";
   static const forgot_password = "Forgot Password";
   static const menu = "Menu";

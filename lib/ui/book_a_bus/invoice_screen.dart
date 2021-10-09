@@ -18,10 +18,14 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: white,
+        elevation: 0,
+        leading: BackButton(),
+      ),
       body: ListView(
         padding: EdgeInsets.all(dp20),
         children: [
-          VSpacer40(),
           LargeHeadlineWidget(headline: "Invoice"),
           VSpacer40(),
           TextFieldHeadline(headline: "Order ID"),
@@ -31,6 +35,18 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
           TextFieldHeadline(headline: "Total Seat"),
           VSpacer10(),
           TextFieldValueWidget(headline: '5 Seats'),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Total Distance"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: '30 Km'),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Cost per Kilometer"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: '\$14/km'),
+          VSpacer20(),
+          TextFieldHeadline(headline: "Total Travel Number"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: '12'),
           VSpacer20(),
           TextFieldHeadline(headline: "Child Name"),
           VSpacer10(),
@@ -110,13 +126,13 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(child: TextFieldHeadline(headline: "Total Amount")),
-              Flexible(child: TextFieldValueWidget(headline: '\$47.00')),
+              Flexible(child: TextFieldValueWidget(headline: 'S\$47.00')),
             ],
           ),
           VSpacer40(),
           OutlinedMaterialButton(
             onClick: (){},
-            text: "Print Invoice",
+            text: "Save Invoice",
           ),
           VSpacer40(),
           VSpacer40(),

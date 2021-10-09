@@ -6,6 +6,8 @@ class AssetConstants {
   static const img_banner_demo = base_path + "img_banner_demo.png";
   static const ic_welcome = "images/ic_welcome.jpg";
   static const ic_background = "images/ic_background_two.png";
+  static const signup_bg_image = "images/signup_bg_image.png";
+  static const logoTransparent = "images/ic_logo_transparent.png";
 
   static const base_icon_path = "images/icons/";
   static const ic_menu_svg = base_icon_path + "ic_menu.svg";
@@ -17,6 +19,14 @@ class AssetConstants {
   static const ic_settings_svg = base_icon_path + "ic_settings.svg";
   static const ic_sign_out_svg = base_icon_path + "ic_sign_out.svg";
   static const ic_vehicle_list_svg = base_icon_path + "ic_vehicle_list.svg";
+  static const ic_about_us_svg = base_icon_path + "ic_about_us.svg";
+  static const ic_contact_us_svg = base_icon_path + "ic_contact_us.svg";
+  static const ic_driver_login_svg = base_icon_path + "ic_driver_login.svg";
+  static const ic_faq_svg = base_icon_path + "ic_faq.svg";
+  static const ic_privacy_and_concern_svg = base_icon_path + "ic_privacy_and_concern.svg";
+  static const ic_lost_and_found_new_svg = base_icon_path + "ic_lost_and_found_new.svg";
+  static const ic_terms_and_conditions_svg = base_icon_path + "ic_terms_and_conditions.svg";
+  static const ic_refund_request_svg = base_icon_path + "ic_refund_request.svg";
 
   static const adminNoticeIcon = base_icon_path + "ic_admin_notice.svg";
   static const billingIcon = base_icon_path + "ic_billing.svg";
@@ -35,6 +45,7 @@ class NetworkConstants {
   static const ACCEPT_TYPE = "application/json";
   static const AUTHORIZATION = "Authorization";
   static const DRIVER_TOKEN = "Driver-Token";
+  static const GENERAL_USER_TOKEN = "GeneralUserToken";
   static const CONTENT_TYPE = "content-Type";
 
   //End urls
@@ -50,6 +61,23 @@ class NetworkConstants {
   static const SEND_DRIVER_PASSWORD_RESET_CODE = "vehicle/resetpassword/code/sent";
   static const RESET_DRIVER_PASSWORD = "vehicle/resetpassword";
   static const UPDATE_VEHICLE_DETAILS = "servicepartner/vehicle/update";
+  static const SEND_RESET_PASSWORD_CODE = "servicepartner/resetpassword/code/sent";
+  static const RESET_SP_PASSWORD = "servicepartner/resetpassword";
+
+  //General User Part
+  static const GENERAL_USER_SIGNUP = "user/signup";
+  static const GENERAL_USER_LOGIN = "user/login";
+  static const GENERAL_USER_PROFILE = "user/profile";
+  static const GU_REQUEST_CODE = "user/resetpassword/code/sent";
+  static const GU_RESET_PASSWORD = "user/resetpassword";
+  static const GU_UPDATE_PROFILE = "user/profile/update";
+  static const MY_BOOKING_LIST = "user/bookings";
+  static const PLACE_BOOKING = "user/booking/store";
+  static const RATE_BOOKING = "user/booking/rating";
+  static const CHILD_LIST = "user/children";
+
+  // Google api url
+  static const GET_ADDRESS_FROM_PO_CODE= "https://maps.googleapis.com/maps/api/geocode/json";
 
   //Roni's Code
   static const ABOUT_US = "/aboutus";
@@ -65,6 +93,8 @@ class NetworkConstants {
 class PreferenceKey {
   static const darkMode = "darkMode";
   static const languageBengali = "languageBengali";
+  static const servicePartner = "servicePartner";
+  static const generalUser = "generalUser";
 }
 
 class DefaultValue {

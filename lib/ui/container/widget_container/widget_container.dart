@@ -16,7 +16,7 @@ import 'package:go_share/ui/container/privacy_and_concern/privacy_and_concern.da
 import 'package:go_share/ui/container/terms_and_conditions/terms_and_conditions.dart';
 import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
-import 'package:go_share/ui/not_logged_in_welcome/welcome_screen.dart';
+import 'package:go_share/ui/not_logged_in_welcome/welcome/welcome_screen.dart';
 import 'package:go_share/ui/section1/driver_login/driver_login_screen.dart';
 import 'package:go_share/ui/section4/widgets/menu_page_button.dart';
 import 'package:go_share/utils/colors.dart';
@@ -101,7 +101,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
               BottomBarItem(
                 iconString: "",
                 isSelected: selectedBottomBarIndex == 1,
-                title: "Add a Bus",
+                title: "Book a Bus",
                 index: 1,
                 onTap: (int position){
 
@@ -253,7 +253,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                           isSelected: 3 == selectedBottomBarIndex,
                           index: 3,
                           title: "About Us",
-                          icon: AssetConstants.ic_profile_svg,
+                          icon: AssetConstants.ic_about_us_svg,
                           onClick: (index) {
                             _changeBottomBarIndex(index);
                           },
@@ -262,7 +262,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                           isSelected: 4 == selectedBottomBarIndex,
                           index: 4,
                           title: "Our Services",
-                          icon: AssetConstants.ic_vehicle_list_svg,
+                          icon: AssetConstants.ic_refund_request_svg,
                           onClick: (index) {
                             _changeBottomBarIndex(index);
                           },
@@ -271,7 +271,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                           isSelected: 5 == selectedBottomBarIndex,
                           index: 5,
                           title: "FAQ",
-                          icon: AssetConstants.ic_free_busy_list_svg,
+                          icon: AssetConstants.ic_faq_svg,
                           onClick: (index) {
                             _changeBottomBarIndex(index);
                           },
@@ -280,7 +280,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                           isSelected: 6 == selectedBottomBarIndex,
                           index: 6,
                           title: "Lost & Found",
-                          icon: AssetConstants.lostandFoundIcon,
+                          icon: AssetConstants.ic_lost_and_found_new_svg,
                           onClick: (index) {
                             _changeBottomBarIndex(index);
                           },
@@ -298,7 +298,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                           isSelected: 8 == selectedBottomBarIndex,
                           index: 8,
                           title: "Privacy & Concern",
-                          icon: AssetConstants.ic_settings_svg,
+                          icon: AssetConstants.ic_privacy_and_concern_svg,
                           onClick: (index) {
                             print("8 is clicked?");
                             _changeBottomBarIndex(index);
@@ -308,7 +308,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                           isSelected: 9 == selectedBottomBarIndex,
                           index: 9,
                           title: "Contact Us",
-                          icon: AssetConstants.ic_sign_out_svg,
+                          icon: AssetConstants.ic_contact_us_svg,
                           onClick: (index) {
                             _changeBottomBarIndex(index);
                           },
@@ -317,7 +317,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                           isSelected: 10 == selectedBottomBarIndex,
                           index: 10,
                           title: "Driver Login",
-                          icon: AssetConstants.ic_profile_svg,
+                          icon: AssetConstants.ic_driver_login_svg,
                           onClick: (index) {
                             Get.back();
                             Get.to(

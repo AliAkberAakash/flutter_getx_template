@@ -7,12 +7,22 @@ class CommonTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hint;
   final TextInputType type;
+  final Function? onTap;
 
-  const CommonTextField({required this.controller, this.hint = "", this.type = TextInputType.text});
+  const CommonTextField({
+    required this.controller,
+    this.hint = "",
+    this.type = TextInputType.text,
+    this.onTap
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      onTap: (){
+        if(onTap!=null)
+          onTap!();
+      },
       keyboardType: type,
       controller: controller,
       style: TextStyle(
@@ -25,7 +35,7 @@ class CommonTextField extends StatelessWidget {
         contentPadding: EdgeInsets.only(left: 10),
         hintText: hint,
         hintStyle: GoogleFonts.manrope(
-          color: light_grey,
+          color: grey,
           fontSize: 14
         ),
         border: OutlineInputBorder(

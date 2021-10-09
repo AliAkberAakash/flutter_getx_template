@@ -60,7 +60,7 @@ class _VehicleRequestItemState extends State<VehicleRequestItem> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Request Id",
+                      "Request ID",
                       style: GoogleFonts.manrope(
                         color: darkText,
                       ),
@@ -99,7 +99,7 @@ class _VehicleRequestItemState extends State<VehicleRequestItem> {
                         children: [
                           VehicleInfoWidget(
                             title: "Vehicle number",
-                            value: "VA ${vehicle.vehicleNumber}",
+                            value: "${vehicle.vehicleNumber}",
                           ),
                           VSpacer20(),
                           VehicleInfoWidget(
@@ -127,7 +127,7 @@ class _VehicleRequestItemState extends State<VehicleRequestItem> {
                           ),
                           VSpacer20(),
                           VehicleInfoWidget(
-                            title: "Pending duration",
+                            title: "Registered since",
                             value: daysBetween(vehicle.createdAt).toString(), //todo
                           ),
                         ],

@@ -113,6 +113,73 @@ class _Sec4PasswordTextFieldState extends State<Sec4PasswordTextField> {
   }
 }
 
+class Sec2PasswordTextField extends StatefulWidget {
+
+  final String hint;
+  final TextEditingController controller;
+
+  const Sec2PasswordTextField({this.hint = "Password", required this.controller});
+
+  @override
+  _Sec2PasswordTextFieldState createState() => _Sec2PasswordTextFieldState();
+}
+
+class _Sec2PasswordTextFieldState extends State<Sec2PasswordTextField> {
+
+  bool isVisible = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      //width: GSSizes.size316x56.width,
+      height: GSSizes.size316x56.height,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(GSBorderRadius.radius8),
+        border: Border.all(color: GSColors.gray_normal),
+      ),
+      child: TextField(
+        controller: widget.controller,
+        obscureText: !isVisible,
+        obscuringCharacter: '*',
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          enabledBorder: InputBorder.none,
+          errorBorder: InputBorder.none,
+          disabledBorder: InputBorder.none,
+          contentPadding: EdgeInsets.all(
+            GSSizeConstants.padding16,
+          ),
+          hintText: widget.hint,
+          suffixIcon: Transform(
+            alignment: Alignment.center,
+            transform: Matrix4.rotationY(math.pi),
+            child:IconButton(
+              onPressed: (){
+                setState(() {
+                  isVisible = !isVisible;
+                });
+              },
+              icon: Icon(
+                isVisible ? Icons.visibility_rounded : Icons.visibility_off,
+                color: grey,
+              ),
+            ),
+          ),
+          suffix: Padding(
+            padding: const EdgeInsets.only(
+                top: GSSizeConstants.padding20,
+                right: GSSizeConstants.padding12),
+            // myIcon is a 48px-wide widget.
+          ),
+        ),
+        style: GSTextStyles.make18xw400Style(color: GSColors.gray_primary),
+      ),
+    );
+  }
+}
+
 class Sec4TextButton extends StatelessWidget {
   String text1;
   String text2;

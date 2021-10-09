@@ -35,6 +35,18 @@ class ApiBaseHelper{
       throw FetchDataException('No Internet connection');
     }
   }
+  Future<Response> getGeneralUser(String endUrl) async {
+    await setGeneralUserToken();
+    try {
+      // make the network call
+      final response = await dioFactory.getDio().get(NetworkConstants.BASE_URL+endUrl);
+      //return the response
+      return _returnResponse(response);
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    }
+  }
+
 
   Future<Response> getWithParams(String endUrl, Map<String, dynamic> params) async {
     await setToken();
@@ -43,6 +55,20 @@ class ApiBaseHelper{
       final response = await dioFactory.getDio().get(
         NetworkConstants.BASE_URL+endUrl,
         queryParameters: params
+      );
+      //return the response
+      return _returnResponse(response);
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    }
+  }
+
+  Future<Response> getRawWithParams(String url, Map<String, dynamic> params) async {
+    try {
+      // make the network call
+      final response = await dioFactory.getDio().get(
+          url,
+          queryParameters: params
       );
       //return the response
       return _returnResponse(response);
@@ -97,6 +123,21 @@ class ApiBaseHelper{
     }
   }
 
+  Future<Response> postGeneralUser(String endUrl, Map<String, dynamic> body) async {
+    await setGeneralUserToken();
+    try {
+      // make the network call
+      final response = await dioFactory.getDio().post(
+        NetworkConstants.BASE_URL+endUrl,
+        data: body,
+      );
+      //return the response
+      return _returnResponse(response);
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    }
+  }
+
   Future<Response> postMultiPart(String endUrl,String key, File file, Map<String, dynamic> body) async {
     await setToken();
 
@@ -118,8 +159,39 @@ class ApiBaseHelper{
     }
   }
 
+  Future<Response> postGeneralUserMultiPart(String endUrl,String key, File file, Map<String, dynamic> body) async {
+    await setGeneralUserToken();
+
+    String fileName = file.path.split('/').last;
+    FormData formData = FormData.fromMap(body);
+    formData.files.add(MapEntry(key, await MultipartFile.fromFile(file.path, filename:fileName)));
+
+
+    try {
+      // make the network call
+      final response = await dioFactory.getDio().post(
+        NetworkConstants.BASE_URL+endUrl,
+        data: formData,
+      );
+
+      return _returnResponse(response);
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    }
+  }
+
   Future<void> setToken() async{
     var token = await SharedPrefUtil.getString(NetworkConstants.AUTHORIZATION);
+    dioFactory.getDio().options = BaseOptions(
+        headers: {
+          NetworkConstants.ACCEPT : NetworkConstants.ACCEPT_TYPE,
+          NetworkConstants.AUTHORIZATION : token,
+        }
+    );
+  }
+
+  Future<void> setGeneralUserToken() async{
+    var token = await SharedPrefUtil.getString(NetworkConstants.GENERAL_USER_TOKEN);
     dioFactory.getDio().options = BaseOptions(
         headers: {
           NetworkConstants.ACCEPT : NetworkConstants.ACCEPT_TYPE,

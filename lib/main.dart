@@ -8,6 +8,7 @@ import 'package:go_share/essential/translations.dart';
 import 'package:go_share/ui/container/widget_container/widget_container.dart';
 import 'package:go_share/ui/section1/service_provider_profile/service_provider_profile_controller.dart';
 import 'package:go_share/ui/section1/service_provider_vehicle_list/service_provider_vehicle_list_controller.dart';
+import 'package:go_share/utils/colors.dart';
 
 
 void main() async {
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
 
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
+        statusBarColor: white,
       ),
     );
 

@@ -15,6 +15,8 @@ import 'package:go_share/ui/container/refund_request_list/refund_request_list.da
 import 'package:go_share/ui/container/terms_and_conditions/terms_and_conditions.dart';
 import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
+import 'package:go_share/ui/not_logged_in_welcome/navigation_container/navigation_container_controller.dart';
+import 'package:go_share/ui/not_logged_in_welcome/welcome/welcome_screen.dart';
 import 'package:go_share/ui/section4/notification/notification_screen.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
@@ -22,7 +24,7 @@ import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../profile_screen.dart';
+import '../profile/profile_screen.dart';
 
 class NavigationContainer extends StatefulWidget {
   const NavigationContainer({Key? key}) : super(key: key);
@@ -34,6 +36,8 @@ class NavigationContainer extends StatefulWidget {
 class _NavigationContainerState extends State<NavigationContainer> {
 
   int _selectedItem = 3;
+
+  final _controller = NavigationContainerController();
 
   @override
   Widget build(BuildContext context) {
@@ -163,13 +167,19 @@ class _NavigationContainerState extends State<NavigationContainer> {
                       ],
                     ),
                   ),
+                  VSpacer10(),
+                  Container(
+                    height: 1,
+                    width: double.maxFinite,
+                    color: light_grey,
+                  ),
                   Expanded(
                     child: ListView(
                       children: [
                         MenuItem(
                           isSelected: 3 == _selectedItem,
                           index: 3,
-                          title: "My profile",
+                          title: "My Profile",
                           icon: AssetConstants.ic_profile_svg,
                           onClick: (index) {
                             changePage(index);
@@ -178,7 +188,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                         MenuItem(
                           isSelected: 4 == _selectedItem,
                           index: 4,
-                          title: "My booking list",
+                          title: "My Booking List",
                           icon: AssetConstants.ic_vehicle_list_svg,
                           onClick: (index) {
                             changePage(index);
@@ -187,8 +197,8 @@ class _NavigationContainerState extends State<NavigationContainer> {
                         MenuItem(
                           isSelected: 5 == _selectedItem,
                           index: 5,
-                          title: "My refund request",
-                          icon: AssetConstants.lostandFoundIcon,
+                          title: "My Refund Request",
+                          icon: AssetConstants.ic_refund_request_svg,
                           onClick: (index) {
                             changePage(index);
                           },
@@ -205,8 +215,8 @@ class _NavigationContainerState extends State<NavigationContainer> {
                         MenuItem(
                           isSelected: 7 == _selectedItem,
                           index: 7,
-                          title: "About us",
-                          icon: AssetConstants.ic_free_busy_list_svg,
+                          title: "About Us",
+                          icon: AssetConstants.ic_about_us_svg,
                           onClick: (index) {
                             changePage(index);
                           },
@@ -224,7 +234,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           isSelected: 9 == _selectedItem,
                           index: 9,
                           title: "FAQ",
-                          icon: AssetConstants.ic_sign_out_svg,
+                          icon: AssetConstants.ic_faq_svg,
                           onClick: (index) {
                             changePage(index);
                           },
@@ -233,7 +243,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           isSelected: 10 == _selectedItem,
                           index: 10,
                           title: "Lost & Found",
-                          icon: AssetConstants.lostandFoundIcon,
+                          icon: AssetConstants.ic_lost_and_found_new_svg,
                           onClick: (index) {
                             changePage(index);
                           },
@@ -242,7 +252,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           isSelected: 11 == _selectedItem,
                           index: 11,
                           title: "Terms & Condition",
-                          icon: AssetConstants.ic_notification_svg,
+                          icon: AssetConstants.ic_terms_and_conditions_svg,
                           onClick: (index) {
                             changePage(index);
                           },
@@ -251,7 +261,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           isSelected: 12 == _selectedItem,
                           index: 12,
                           title: "Privacy & Concern",
-                          icon: AssetConstants.ic_settings_svg,
+                          icon: AssetConstants.ic_privacy_and_concern_svg,
                           onClick: (index) {
                             print("8 is clicked?");
                             changePage(index);
@@ -261,7 +271,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           isSelected: 13 == _selectedItem,
                           index: 13,
                           title: "Contact Us",
-                          icon: AssetConstants.ic_sign_out_svg,
+                          icon: AssetConstants.ic_contact_us_svg,
                           onClick: (index) {
                             changePage(index);
                           },
@@ -272,8 +282,11 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           title: "Sign Out",
                           icon: AssetConstants.ic_sign_out_svg,
                           onClick: (index) {
-                            Get.back();
-                            Get.back();
+                            _controller.logoutServiceProvider().then((_){
+                              Get.back();
+                              Get.back();
+                              Get.to(NotLoggedInWelcome());
+                            });
                           },
                         ),
                         VSpacer40(),

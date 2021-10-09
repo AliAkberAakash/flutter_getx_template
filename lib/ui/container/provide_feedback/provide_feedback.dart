@@ -1,23 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 
 import 'package:go_share/base/widget/custom_filled_button.dart';
 import 'package:go_share/base/widget/custom_text_form_field.dart';
+import 'package:go_share/data/models/booking/my_booking_list_response.dart';
+import 'package:go_share/data/models/booking/rating_request.dart';
+import 'package:go_share/ui/common_widgets/common_loading_dialog.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
+import 'package:go_share/ui/container/provide_feedback/feedback_controller.dart';
 import 'package:go_share/ui/provide_feedback_message.dart';
+import 'package:go_share/util/lib/toast.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/dimens.dart';
 
 class ProvideFeedbackView extends StatefulWidget {
-  const ProvideFeedbackView({Key? key}) : super(key: key);
+
+  final Booking booking;
+
+  const ProvideFeedbackView({Key? key, required this.booking}) : super(key: key);
 
   @override
-  _ProvideFeedbackViewState createState() => _ProvideFeedbackViewState();
+  _ProvideFeedbackViewState createState() => _ProvideFeedbackViewState(booking);
 }
 
 class _ProvideFeedbackViewState extends State<ProvideFeedbackView> {
+
+  final Booking booking;
+
+  _ProvideFeedbackViewState(this.booking);
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -33,7 +47,7 @@ class _ProvideFeedbackViewState extends State<ProvideFeedbackView> {
         body: SafeArea(
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
-            child: BodyWidget(),
+            child: BodyWidget(booking: booking,),
           ),
         ),
       ),
@@ -42,16 +56,25 @@ class _ProvideFeedbackViewState extends State<ProvideFeedbackView> {
 }
 
 class BodyWidget extends StatefulWidget {
-  const BodyWidget({Key? key}) : super(key: key);
+
+  final Booking booking;
+
+  const BodyWidget({Key? key, required this.booking}) : super(key: key);
 
   @override
-  _BodyWidgetState createState() => _BodyWidgetState();
+  _BodyWidgetState createState() => _BodyWidgetState(booking);
 }
 
 class _BodyWidgetState extends State<BodyWidget> {
   late TextEditingController reasonController;
 
+  final _controller = FeedbackController();
+  final Booking booking;
+
+  double _rating = 0.0;
   var hp;
+
+  _BodyWidgetState(this.booking);
 
   @override
   void initState() {
@@ -90,16 +113,18 @@ class _BodyWidgetState extends State<BodyWidget> {
                 color: GSColors.green_normal,
               ),
               unratedColor: GSColors.gray_normal,
-              onRatingUpdate: (rating) {
+              onRatingUpdate: (double rating) {
+                _rating = rating;
                 print(rating);
               },
             ),
           ),
         ),
         CustomTextFormField(
+          hintText: "Write Review",
           formController: reasonController,
           inputType: TextInputType.text,
-          hint: "Write Review",
+          hint: "Your experience with us",
           isFieldExpanded: true,
           isRequiredField: false,
           margin: const EdgeInsets.only(
@@ -122,13 +147,29 @@ class _BodyWidgetState extends State<BodyWidget> {
           borderColor: Colors.transparent,
           backgroundColor: GSColors.green_secondary,
           textColor: Colors.white,
-          title: "Submit Request",
+          title: "Submit Feedback",
           onTap: () {
-            _showMessage(hp);
+            showLoader();
+            var request = RatingRequest(
+                id: booking.id,
+                rating: _rating,
+                verbatim: "rating",
+            );
+            rateBooking(request, hp);
           },
         ),
       ],
     );
+  }
+
+  rateBooking(RatingRequest request, height) async{
+    var response = await _controller.rateBooking(request);
+    Get.back();
+    if(response.success){
+      _showMessage(height);
+    }else{
+      ToastUtil.show(response.msg);
+    }
   }
 
   _showMessage(double height) {
@@ -184,16 +225,16 @@ class TitleWidget extends StatelessWidget {
                   color: GSColors.gray_primary,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: Text(
-                  "Refund request for payment ID #8907123 has been successfully sent",
-                  textAlign: TextAlign.center,
-                  style: GSTextStyles.make16xw400Style(
-                    color: GSColors.gray_secondary,
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 16.0),
+              //   child: Text(
+              //     "Refund request for payment ID #8907123 has been successfully sent",
+              //     textAlign: TextAlign.center,
+              //     style: GSTextStyles.make16xw400Style(
+              //       color: GSColors.gray_secondary,
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),

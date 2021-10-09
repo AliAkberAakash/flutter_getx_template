@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_request.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_response.dart';
@@ -14,6 +16,11 @@ class ServiceProviderLoginController extends GetxController{
       ) async{
     var response = await repository.loginServicePartner(request);
     return response;
+  }
+
+  Future storeUser(ServicePartner servicePartner) async{
+    String jsonString = json.encode(servicePartner.toJson());
+    await SharedPrefUtil.writeString(PreferenceKey.servicePartner, jsonString);
   }
 
   Future storeToken(String token) async {

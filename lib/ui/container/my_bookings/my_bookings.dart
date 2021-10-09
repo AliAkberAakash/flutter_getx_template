@@ -3,14 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/custom_filled_button.dart';
+import 'package:go_share/core/ui/error_screen.dart';
+import 'package:go_share/core/ui/loading_widget.dart';
+import 'package:go_share/data/models/booking/my_booking_list_response.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/Fonts.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/my_booking_details_one/my_booking_details_one.dart';
 import 'package:go_share/ui/container/my_booking_details_two/my_booking_details_two.dart';
+import 'package:go_share/ui/container/my_bookings/my_bookings_controller.dart';
+import 'package:go_share/utils/booking_utils.dart';
 import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/date_time_utils.dart';
+import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MyBookingsView extends StatefulWidget {
   const MyBookingsView({Key? key}) : super(key: key);
@@ -104,15 +112,17 @@ class _BodyWidgetState extends State<BodyWidget>
   late TabController _tabController;
   late ScrollController _scrollController;
 
+  final _controller = MyBookingsController();
+
   @override
   void initState() {
     super.initState();
-
     _scrollController = ScrollController();
     _tabController = TabController(
       length: 4,
       vsync: this,
     );
+    _controller.getMyBookingList();
   }
 
   @override
@@ -125,49 +135,73 @@ class _BodyWidgetState extends State<BodyWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TabBar(
-          physics: BouncingScrollPhysics(),
-          isScrollable: false,
-          labelColor: GSColors.green_secondary,
-          unselectedLabelColor: GSColors.gray_secondary,
-          indicatorPadding: const EdgeInsets.symmetric(horizontal: 16.0),
-          indicatorColor: GSColors.green_secondary,
-          controller: _tabController,
-          labelStyle: GSTextStyles.make16xw600Style(
-            color: GSColors.green_secondary,
-          ),
-          unselectedLabelStyle: GSTextStyles.make16xw600Style(
-            color: GSColors.gray_secondary,
-          ),
-          tabs: [
-            TabBarCustomTab(title: "All"),
-            TabBarCustomTab(title: "Pending"),
-            TabBarCustomTab(title: "On Going"),
-            TabBarCustomTab(title: "Finished"),
-          ],
-        ),
-        Expanded(
-          child: TabBarView(
-            physics: BouncingScrollPhysics(),
-            controller: _tabController,
+    return Obx((){
+
+      var response = _controller.bookingListResponse.value;
+
+      if(response==null){
+        return LoadingWidget();
+      }else {
+        if (response.data == null) {
+          return ErrorScreen();
+        }
+        else {
+
+          List<Booking> allList = response.data?.bookings ?? [];
+          List<Booking> pendingList = response.data?.bookings.where((element) => element.isApproved==0).toList() ?? [];
+          List<Booking> ongoingList = response.data?.bookings.where((element) => element.isApproved==1 && element.isFinished==0).toList() ?? [];
+          List<Booking> approvedList = response.data?.bookings.where((element) => element.isApproved==1 && element.isFinished==1).toList() ?? [];
+
+          return Column(
             children: [
-              BookingListWidget(),
-              BookingListWidget(),
-              BookingListWidget(),
-              BookingListWidget2(),
+              TabBar(
+                physics: BouncingScrollPhysics(),
+                isScrollable: false,
+                labelColor: GSColors.green_secondary,
+                unselectedLabelColor: GSColors.gray_secondary,
+                indicatorPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+                indicatorColor: GSColors.green_secondary,
+                controller: _tabController,
+                labelStyle: GSTextStyles.make16xw600Style(
+                  color: GSColors.green_secondary,
+                ),
+                unselectedLabelStyle: GSTextStyles.make16xw600Style(
+                  color: GSColors.gray_secondary,
+                ),
+                tabs: [
+                  TabBarCustomTab(title: "All"),
+                  TabBarCustomTab(title: "Pending"),
+                  TabBarCustomTab(title: "On Going"),
+                  TabBarCustomTab(title: "Finished"),
+                ],
+              ),
+              Expanded(
+                child: TabBarView(
+                  physics: BouncingScrollPhysics(),
+                  controller: _tabController,
+                  children: [
+                    BookingListWidget(bookingList: allList,),
+                    BookingListWidget(bookingList: pendingList,),
+                    BookingListWidget(bookingList: ongoingList,),
+                    BookingListWidget2(bookingList: approvedList,),
+                  ],
+                ),
+              ),
             ],
-          ),
-        ),
-      ],
-    );
+          );
+        }
+      }
+    });
   }
 }
 
 class BookingListWidget extends StatelessWidget {
+
+  final List<Booking> bookingList;
+
   const BookingListWidget({
     Key? key,
+    required this.bookingList,
   }) : super(key: key);
 
   @override
@@ -177,19 +211,23 @@ class BookingListWidget extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       scrollDirection: Axis.vertical,
       itemBuilder: (BuildContext context, int index) {
-        return index == 10? VSpacer20() : BookingItemWidget(type: 0,);
+        return BookingItemWidget(type: 0, booking: bookingList[index],);
       },
       separatorBuilder: (BuildContext context, int index) {
         return SizedBox(height: 30.0);
       },
-      itemCount: 11,
+      itemCount: bookingList.length,
     );
   }
 }
 
 class BookingListWidget2 extends StatelessWidget {
+
+  final List<Booking> bookingList;
+
   const BookingListWidget2({
     Key? key,
+    required this.bookingList,
   }) : super(key: key);
 
   @override
@@ -199,12 +237,12 @@ class BookingListWidget2 extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       scrollDirection: Axis.vertical,
       itemBuilder: (BuildContext context, int index) {
-        return index == 10? VSpacer20() : BookingItemWidget(type: 1,);
+        return BookingItemWidget(type: 1,booking: bookingList[index]);
       },
       separatorBuilder: (BuildContext context, int index) {
         return SizedBox(height: 30.0);
       },
-      itemCount: 11,
+      itemCount: bookingList.length,
     );
   }
 }
@@ -212,10 +250,12 @@ class BookingListWidget2 extends StatelessWidget {
 class BookingItemWidget extends StatelessWidget {
 
   final int type;
+  final Booking booking;
 
   const BookingItemWidget({
     Key? key,
     required this.type,
+    required this.booking,
   }) : super(key: key);
 
   @override
@@ -240,7 +280,7 @@ class BookingItemWidget extends StatelessWidget {
               left: 20.0,
               right: 20.0,
             ),
-            child: BookingItemHeaderWidget(type: type,),
+            child: BookingItemHeaderWidget(type: type, booking: booking,),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -255,7 +295,7 @@ class BookingItemWidget extends StatelessWidget {
               left: 20.0,
               right: 20.0,
             ),
-            child: BookingItemBodyWidget(type: type,),
+            child: BookingItemBodyWidget(type: type, booking: booking,),
           ),
         ],
       ),
@@ -266,10 +306,12 @@ class BookingItemWidget extends StatelessWidget {
 class BookingItemBodyWidget extends StatelessWidget {
 
   final int type;
+  final Booking booking;
 
   const BookingItemBodyWidget({
     Key? key,
     required this.type,
+    required this.booking,
   }) : super(key: key);
 
   @override
@@ -311,13 +353,13 @@ class BookingItemBodyWidget extends StatelessWidget {
                   children: [
                     TitleSubtitleWidget(
                       title: "Pickup point",
-                      subtitle: "Block 372 Bukit Batok Street 31.",
+                      subtitle: "${booking.pickupAddress}",
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 24.0),
                       child: TitleSubtitleWidget(
                         title: "Drop-off point",
-                        subtitle: "Block 372 Bukit Batok Street 31.",
+                        subtitle: "${booking.dropoffAddress}",
                       ),
                     ),
                   ],
@@ -331,11 +373,11 @@ class BookingItemBodyWidget extends StatelessWidget {
           children: [
             TitleSubtitleWidget(
               title: "Start Date",
-              subtitle: "19 May, 2021",
+              subtitle: speakDate(booking.startDate),
             ),
             TitleSubtitleWidget(
               title: "End Date",
-              subtitle: "19 May, 2021",
+              subtitle: speakDate(booking.endDate),
             ),
           ],
         ),
@@ -351,9 +393,7 @@ class BookingItemBodyWidget extends StatelessWidget {
           textColor: GSColors.green_secondary,
           title: "Booking Details",
           onTap: () {
-            if(type==0)
-              Get.to(MyBookingDetailsOneView());
-            else Get.to(MyBookingDetailsTwoView());
+              Get.to(MyBookingDetailsOneView(booking: booking,));
           },
         ),
       ],
@@ -364,10 +404,12 @@ class BookingItemBodyWidget extends StatelessWidget {
 class BookingItemHeaderWidget extends StatelessWidget {
 
   final int type;
+  final Booking booking;
 
   const BookingItemHeaderWidget({
     Key? key,
     required this.type,
+    required this.booking,
   }) : super(key: key);
 
   @override
@@ -390,7 +432,7 @@ class BookingItemHeaderWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: Text(
-                "#907097",
+                "#${booking.id}",
                 style: GSTextStyles.make20xw700Style(
                   color: GSColors.gray_primary,
                 ),
@@ -401,9 +443,9 @@ class BookingItemHeaderWidget extends StatelessWidget {
         ),
         Container(
           decoration: BoxDecoration(
-            color: type == 0 ? GSColors.pending_Color.withOpacity(0.1) : approvedChipColor.withOpacity(0.1),
+            color: getColor(booking).withOpacity(0.1),
             borderRadius: const BorderRadius.all(
-              const Radius.circular(12.0),
+              const Radius.circular(dp20),
             ),
           ),
           padding: const EdgeInsets.symmetric(
@@ -411,9 +453,9 @@ class BookingItemHeaderWidget extends StatelessWidget {
             vertical: 8.0,
           ),
           child: Text(
-            type == 0 ?"Pending" : "Finished",
+            getType(booking),
             style: GSTextStyles.make13xw700Style(
-              color: type == 0 ? GSColors.pending_Color : approvedChipColor,
+              color: getColor(booking),
             ),
             textAlign: TextAlign.start,
           ),
@@ -479,6 +521,9 @@ class TabBarCustomTab extends StatelessWidget {
       child: Text(
         title,
         textAlign: TextAlign.center,
+        style: GoogleFonts.manrope(
+          fontSize: dp14,
+        ),
       ),
     );
   }

@@ -29,6 +29,12 @@ class _ServiceProviderProfileScreenState
   final ServiceProviderProfileController _controller = Get.find();
 
   @override
+  void initState() {
+    _controller.getProfile();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Obx((){
       var response = _controller.profileResponse.value;
@@ -61,7 +67,7 @@ class _ServiceProviderProfileScreenState
                   VSpacer5(),
                   TextFieldValueWidget(headline: data?.address ?? "",),
                   VSpacer20(),
-                  TextFieldHeadline(headline: 'Contact Person name'),
+                  TextFieldHeadline(headline: 'Contact Person Name'),
                   VSpacer5(),
                   TextFieldValueWidget(headline: data?.contactPersonName ?? ""),
                   VSpacer20(),
@@ -77,7 +83,7 @@ class _ServiceProviderProfileScreenState
                   VSpacer5(),
                   TextFieldValueWidget(headline: data?.contactPersonNric ?? ""),
                   VSpacer20(),
-                  TextFieldHeadline(headline: 'Business identification number'),
+                  TextFieldHeadline(headline: 'Business Identification Number'),
                   VSpacer5(),
                   TextFieldValueWidget(headline: data?.businessIdentificationNumber ?? ""),
                   VSpacer40(),

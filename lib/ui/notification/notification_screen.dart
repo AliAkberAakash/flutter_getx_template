@@ -80,7 +80,7 @@ class _NotificationScreenPageState extends State<NotificationScreenPage> {
                             ),
                             CircleAvatar(
                               radius: dp20,
-                              backgroundColor: isClicked[index] ? accent : greyBorder,
+                              backgroundColor: isClicked[index] ? primaryDark : greyBorder,
                               child: Icon(
                                 Icons.check,
                                 color: isClicked[index] ? white : black,

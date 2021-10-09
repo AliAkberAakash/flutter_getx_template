@@ -136,7 +136,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                         MenuItem(
                           isSelected: 3 == _selectedItem,
                           index: 3,
-                          title: "My profile",
+                          title: "My Profile",
                           icon: AssetConstants.ic_profile_svg,
                           onClick: (index) {
                             changePage(index);
@@ -145,7 +145,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                         MenuItem(
                           isSelected: 4 == _selectedItem,
                           index: 4,
-                          title: "My vehicle list",
+                          title: "My Vehicle List",
                           icon: AssetConstants.ic_vehicle_list_svg,
                           onClick: (index) {
                             changePage(index);
@@ -154,7 +154,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                         MenuItem(
                           isSelected: 5 == _selectedItem,
                           index: 5,
-                          title: "Vehicle free busy list",
+                          title: "Vehicle Free Busy List",
                           icon: AssetConstants.ic_free_busy_list_svg,
                           onClick: (index) {
                             changePage(index);
@@ -163,7 +163,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                         MenuItem(
                           isSelected: 6 == _selectedItem,
                           index: 6,
-                          title: "Notification",
+                          title: "Notifications",
                           icon: AssetConstants.ic_notification_svg,
                           onClick: (index) {
                             changePage(index);
@@ -172,7 +172,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                         MenuItem(
                           isSelected: 7 == _selectedItem,
                           index: 7,
-                          title: "Reset vehicle login",
+                          title: "Reset Vehicle Login",
                           icon: AssetConstants.ic_settings_svg,
                           onClick: (index) {
                             changePage(index);
@@ -182,7 +182,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                           isSelected: 9 == _selectedItem,
                           index: 9,
                           title: "Driver Login",
-                          icon: AssetConstants.ic_profile_svg,
+                          icon: AssetConstants.ic_driver_login_svg,
                           onClick: (index) {
                             Get.back();
                             Get.to(
@@ -193,7 +193,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                         MenuItem(
                           isSelected: 8 == _selectedItem,
                           index: 8,
-                          title: "Sign out",
+                          title: "Sign Out",
                           icon: AssetConstants.ic_sign_out_svg,
                           onClick: (index) {
                             _controller.logoutServiceProvider().then((_){

@@ -7,7 +7,7 @@ import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 class CustomTextFormField extends StatefulWidget {
   final int? maxLength;
   final double expansionHeight;
-  final String? hint, iconPath;
+  final String? hint, iconPath, hintText;
   final bool showVisibilityOptionForPassword, isBorderNeeded, isRequiredField;
   final bool isFieldExpanded;
 
@@ -39,7 +39,7 @@ class CustomTextFormField extends StatefulWidget {
       left: 30.0,
       right: 30.0,
       top: 20.0,
-    ),
+    ), this.hintText = "",
   }) : super(key: key);
 
   @override
@@ -157,6 +157,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
                 border: InputBorder.none,
+                hintText: widget.hintText,
               ),
               controller: widget.formController,
               inputFormatters: [

@@ -41,8 +41,9 @@ class _ResetVehicleLoginScreenState extends State<ResetVehicleLoginScreen> {
       body: LayoutBuilder(
         builder: (ctx, constraints) {
           return Container(
-            padding: EdgeInsets.all(dp20),
+            padding: EdgeInsets.symmetric(horizontal: dp50, vertical: dp20),
             child: ListView(
+              padding: EdgeInsets.only(top: dp40),
               children: [
                 LargeHeadlineWidget(
                   headline: "Reset Vehicle Login",
