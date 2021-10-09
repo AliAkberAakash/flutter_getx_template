@@ -61,7 +61,7 @@ abstract class GSStrings {
   static const contact_us_title = "Contact Us";
   static const contact_us_subtitle =
       "More than 10 years of \ntransporting experience at your \nservice.";
-  static const contact_us_company_information = "Company Information";
+  static const contact_us_company_information = "Your Information";
   static const contact_us_full_name = "Full Name";
   static const contact_us_phone_number = "Phone Number";
   static const contact_us_email_address = "Email Address";

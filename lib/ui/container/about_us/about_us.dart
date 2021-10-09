@@ -51,6 +51,7 @@ class _AboutUsViewState extends State<AboutUsView> {
                   Expanded(
                     child: BodyWidget(data: model),
                   ),
+
                 ],
               );
             }return Container(
@@ -183,8 +184,10 @@ class _BodyWidgetState extends State<BodyWidget>
                       fit: BoxFit.cover,
                     ),
                   ),
-                  CustomAppPromotionWidget(data:widget.data),
+
                   WhyChooseUsWidget(),
+                  CustomAppPromotionWidget(data:widget.data)
+
                 ],
               ),
             ),
@@ -206,32 +209,31 @@ class _BodyWidgetState extends State<BodyWidget>
               ),
               tabs: [
                 TabBarCustomTab(title: "Our Mission"),
-                TabBarCustomTab(title: "Vision"),
+                TabBarCustomTab(title: "Our Vision"),
               ],
             ),
           ),
-/*          SliverToBoxAdapter(
-            child: Container(
-              width: double.maxFinite,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
 
-                ],
-              ),
-            ),
-          ),*/
+
+
+
         ];
       },
-      body: Container(
-        child: TabBarView(
-          physics: BouncingScrollPhysics(),
-          controller: _tabController,
-          children: [
-            MissionAndVisionListWidget(data:widget.data.data.first.missionText),
-            MissionAndVisionListWidget(data:widget.data.data.first.visionText),
-          ],
-        ),
+      body: Column(
+        children: [
+          Expanded(
+            child: Container(
+              child: TabBarView(
+                    physics: BouncingScrollPhysics(),
+                    controller: _tabController,
+                    children: [
+                   MissionAndVisionListWidget(data:widget.data.data.first.missionText),
+                      MissionAndVisionListWidget(data:widget.data.data.first.visionText),
+                    ],
+                  ),
+              ),
+          ),
+        ],
       ),
     );
   }
@@ -243,19 +245,7 @@ class MissionAndVisionListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      padding: const EdgeInsets.only(bottom: 32.0, top: 32.0),
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      scrollDirection: Axis.vertical,
-      itemBuilder: (BuildContext context, int index) {
-        return MissionAndVisionItemWidget(data:this.data);
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        return SizedBox(height: 46.0);
-      },
-      itemCount: 1,
-    );
+    return MissionAndVisionItemWidget(data:this.data);
   }
 }
 

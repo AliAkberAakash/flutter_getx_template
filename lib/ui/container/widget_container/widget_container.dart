@@ -55,6 +55,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
     hp = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -101,7 +102,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
               BottomBarItem(
                 iconString: "",
                 isSelected: selectedBottomBarIndex == 1,
-                title: "Book a Bus",
+                title: "Add a Bus",
                 index: 1,
                 onTap: (int position){
 

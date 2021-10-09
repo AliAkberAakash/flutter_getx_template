@@ -37,6 +37,7 @@ class _ContactUsViewState extends State<ContactUsView> {
         statusBarBrightness: Brightness.dark,
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
