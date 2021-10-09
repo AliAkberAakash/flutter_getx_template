@@ -9,7 +9,7 @@ import 'package:go_share/ui/container/UIConstants/Fonts.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/about_us/AboutUsController.dart';
-
+//hello world
 class AboutUsView extends StatefulWidget {
   const AboutUsView({Key? key}) : super(key: key);
 
