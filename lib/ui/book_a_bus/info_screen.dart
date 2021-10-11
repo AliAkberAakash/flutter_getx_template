@@ -393,6 +393,9 @@ class _InfoScreenState extends State<InfoScreen> {
 
   _datePicker(TextEditingController controller, String hint, int type){
     return TextField(
+      onTap: (){
+        _selectDate(context, type);
+      },
       readOnly: true,
       controller: controller,
       style: TextStyle(
@@ -402,14 +405,9 @@ class _InfoScreenState extends State<InfoScreen> {
       ),
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        suffixIcon: IconButton(
-          onPressed: (){
-            _selectDate(context, type);
-          },
-          icon: Icon(
-            Icons.date_range,
-            color: accent,
-          ),
+        suffixIcon: Icon(
+          Icons.date_range,
+          color: accent,
         ),
         contentPadding: EdgeInsets.only(left: 10),
         hintText: hint,
@@ -433,6 +431,9 @@ class _InfoScreenState extends State<InfoScreen> {
   _timePicker(TextEditingController controller){
 
     return TextField(
+      onTap: (){
+        _selectTime();
+      },
       readOnly: true,
       controller: controller,
       style: TextStyle(
@@ -442,14 +443,9 @@ class _InfoScreenState extends State<InfoScreen> {
       ),
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        suffixIcon: IconButton(
-          onPressed: (){
-            _selectTime();
-          },
-          icon: Icon(
-            Icons.access_time_outlined,
-            color: accent,
-          ),
+        suffixIcon: Icon(
+          Icons.access_time_outlined,
+          color: accent,
         ),
         contentPadding: EdgeInsets.only(left: 10),
         hintText: "Select time",
@@ -488,7 +484,8 @@ class _InfoScreenState extends State<InfoScreen> {
       initialTime: TimeOfDay.now(),
       context: context,
     );
-    selectedTimeController.text =  "${selectedTime?.hour}:${selectedTime?.minute}";
+    NumberFormat formatter = new NumberFormat("00");
+    selectedTimeController.text =  "${formatter.format(selectedTime?.hour)}:${formatter.format(selectedTime?.minute)}:00";
   }
 
 }
