@@ -11,6 +11,7 @@ import 'package:go_share/ui/common_widgets/common_text_field.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
+import 'package:go_share/util/lib/toast.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/date_time_utils.dart';
 import 'package:go_share/utils/dimens.dart';
@@ -308,31 +309,33 @@ class _InfoScreenState extends State<InfoScreen> {
                   PositiveButton(
                     text: "Next",
                     onClicked: () {
-                      List<String> newChild = [];
-                      List<int> existingChild = [];
+                      if(validate()){
+                        List<String> newChild = [];
+                        List<int> existingChild = [];
 
-                      for (var controller in childControllerList)
-                      {
-                        Datum? child = currentState.data!.firstWhere((element) => element.name==controller.text, orElse: (){
-                          return Datum(id: -1, userId: -1, name: "null", createdAt: DateTime.now(), updatedAt: DateTime.now());
-                        });
-                        if(child.id==-1){
-                          newChild.add(controller.text);
-                        }else existingChild.add(child.id);
+                        for (var controller in childControllerList)
+                        {
+                          Datum? child = currentState.data!.firstWhere((element) => element.name==controller.text, orElse: (){
+                            return Datum(id: -1, userId: -1, name: "null", createdAt: DateTime.now(), updatedAt: DateTime.now());
+                          });
+                          if(child.id==-1){
+                            newChild.add(controller.text);
+                          }else existingChild.add(child.id);
+                        }
+
+                        var infoRequest = InfoRequest(
+                          childNames: newChild,
+                          startDate: startDate,
+                          endDate: endDate,
+                          pickupTime: selectedTimeController.text,
+                        );
+
+                        Get.to(
+                          AddressScreen(
+                            infoRequest: infoRequest,
+                          ),
+                        );
                       }
-
-                      var infoRequest = InfoRequest(
-                        childNames: newChild,
-                        startDate: startDate,
-                        endDate: endDate,
-                        pickupTime: selectedTimeController.text,
-                      );
-
-                      Get.to(
-                        AddressScreen(
-                          infoRequest: infoRequest,
-                        ),
-                      );
                     },
                   ),
                 ],
@@ -343,6 +346,15 @@ class _InfoScreenState extends State<InfoScreen> {
 
       }),
     );
+  }
+
+  bool validate(){
+    if(childWidgetList.isEmpty){
+      ToastUtil.show("Please select atleast one child");
+      return false;
+    }
+
+    return true;
   }
 
   DateTime selectedDate = DateTime.now();
