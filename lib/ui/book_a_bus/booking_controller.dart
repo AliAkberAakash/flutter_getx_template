@@ -78,8 +78,15 @@ class BookingController extends GetxController{
   }
 
   getChildList() async{
-    var response = await repository.getChildList();
-    childListResponse.value = response;
+    if(await repository.isGeneralUserLoggedIn()) {
+      var response = await repository.getChildList();
+      childListResponse.value = response;
+    }else{
+      childListResponse.value = ChildrenListResponse(
+        success: true,
+        msg: "Not logged in",
+      );
+    }
   }
 
 }

@@ -78,7 +78,8 @@ class _InfoScreenState extends State<InfoScreen> {
         }else{
           if(currentState.success) {
 
-            var suggestion = currentState.data!.map((e) => e.name).toList();
+            List<String> suggestion = currentState.data!=null ? currentState.data!.map((e) => e.name).toList()
+            : [];
 
             return Container(
               padding: EdgeInsets.all(dp20),

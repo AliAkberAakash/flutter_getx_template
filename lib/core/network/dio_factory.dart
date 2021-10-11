@@ -16,13 +16,20 @@ class DioFactory {
     this._dio = Dio();
 
     this._dio!.interceptors.add(
+      // PrettyDioLogger(
+      //   requestHeader: kDebugMode,
+      //   requestBody: kDebugMode,
+      //   responseBody: kDebugMode,
+      //   responseHeader: kDebugMode,
+      //   error: kDebugMode,
+      // ),
       PrettyDioLogger(
-        requestHeader: kDebugMode,
-        requestBody: kDebugMode,
-        responseBody: kDebugMode,
-        responseHeader: kDebugMode,
-        error: kDebugMode,
-      ),
+          requestHeader: true,
+          requestBody: true,
+          responseBody: true,
+          responseHeader: true,
+          error: true,
+        ),
     );
   }
 
