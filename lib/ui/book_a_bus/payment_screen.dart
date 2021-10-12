@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:go_share/data/models/booking/address_request.dart';
 import 'package:go_share/data/models/booking/booking_request.dart';
+import 'package:go_share/data/models/booking/booking_response.dart';
 import 'package:go_share/data/models/booking/info_request.dart';
 import 'package:go_share/data/models/one_map/one_map_response.dart';
 import 'package:go_share/data/repository/service_partner_repository.dart';
@@ -349,7 +350,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           VSpacer20(),
           TextFieldHeadline(headline: "Total Seat"),
           VSpacer10(),
-          TextFieldValueWidget(headline: '5 Seats'),
+          TextFieldValueWidget(headline: (infoRequest.childId.length+infoRequest.childNames.length).toString()),
           VSpacer20(),
           TextFieldHeadline(headline: "Total Distance"),
           VSpacer10(),
@@ -446,7 +447,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 
-  void showSuccessSheet(BuildContext context) {
+  void showSuccessSheet(BuildContext context, BookingResponse response) {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
@@ -522,7 +523,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               onClick: (){
                                 Get.back();
                                 Get.to(
-                                  InvoiceScreen(),
+                                  InvoiceScreen(bookingResponse: response,),
                                 );
                               },
                               text: "View Invoice",
@@ -565,7 +566,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         price: 53,
         verbatim: "hhh",
       );
-      placeBooking(request);
+      var response = await placeBooking(request);
     }else showErrorSheet(context);
   }
 
@@ -573,7 +574,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     var response = await controller.placeBooking(request);
     Get.back();
     if(response.success){
-      showSuccessSheet(context);
+      showSuccessSheet(context, response);
     }else{
       ToastUtil.show(response.msg);
     }
