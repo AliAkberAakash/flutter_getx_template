@@ -385,6 +385,11 @@ class _InfoScreenState extends State<InfoScreen> {
     //   return false;
     // }
 
+    if(newChild.isEmpty){
+        ToastUtil.show("Please select at least one child");
+        return false;
+    }
+
     print("StartDate $startDate");
     print("EndDate $endDate");
     print("time $pickedTime");
