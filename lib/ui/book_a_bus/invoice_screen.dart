@@ -51,7 +51,7 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
           VSpacer20(),
           TextFieldHeadline(headline: "Total Travel Number"),
           VSpacer10(),
-          TextFieldValueWidget(headline: '${widget.bookingResponse.data?.bookedSeat}'),
+          TextFieldValueWidget(headline: "${daysDiff(widget.bookingResponse.data!.startDate, widget.bookingResponse.data!.endDate)+1}"),
           VSpacer20(),
           // TextFieldHeadline(headline: "Child Name"),
           // VSpacer10(),
