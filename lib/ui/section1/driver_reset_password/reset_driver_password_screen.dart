@@ -165,7 +165,7 @@ class _ResetDriverPasswordScreenState extends State<ResetDriverPasswordScreen> {
                         Padding(
                           padding: const EdgeInsets.all(10),
                           child: Text(
-                            "Your charity program has been successfully created.\n Now you can check and maintain in your\n'activity' menu.",
+                            "Password reset successful! Please login again.",
                             style: GoogleFonts.manrope(
                               color: GSColors.text_secondary,
                               fontSize: dp14,

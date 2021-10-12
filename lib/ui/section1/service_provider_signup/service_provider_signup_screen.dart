@@ -121,6 +121,7 @@ class _ServiceProviderSignupScreenState extends State<ServiceProviderSignupScree
             ),
             VSpacer40(),
             TextFieldHeadline(headline: 'Business Identification Number'),
+            TextFieldHeadline(headline: '(NRIC for individual owner)'),
             VSpacer10(),
             CommonTextField(
               controller: businessIdNumController,
