@@ -6,6 +6,7 @@ import 'package:go_share/data/models/booking/booking_request.dart';
 import 'package:go_share/data/models/booking/booking_response.dart';
 import 'package:go_share/data/models/booking/child_list_response.dart';
 import 'package:go_share/data/models/booking/my_booking_list_response.dart';
+import 'package:go_share/data/models/booking/pricing_response.dart';
 import 'package:go_share/data/models/booking/rating_request.dart';
 import 'package:go_share/data/models/booking/rating_response.dart';
 import 'package:go_share/data/models/driver/driver_login_request.dart';
@@ -609,6 +610,16 @@ class Repository{
         found: 0,
         totalNumPages: 0, pageNum: 0, results:[],
       );
+    }
+  }
+
+  Future<PricingResponse> getPricing() async{
+    try{
+      var response = await helper.get(NetworkConstants.PRICING);
+      return PricingResponse.fromJson(response.data);
+    }catch(e){
+      logger.d(e);
+      return PricingResponse(success: false, data: []);
     }
   }
 

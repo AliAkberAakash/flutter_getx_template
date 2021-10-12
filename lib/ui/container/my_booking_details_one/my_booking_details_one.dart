@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/custom_filled_button.dart';
+import 'package:go_share/data/models/booking/booking_response.dart';
 import 'package:go_share/data/models/booking/my_booking_list_response.dart';
 import 'package:go_share/ui/book_a_bus/invoice_screen.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
@@ -471,7 +472,10 @@ class BookingItemBodyWidget extends StatelessWidget {
         InkWell(
           onTap: (){
             Get.to(
-              InvoiceScreen()
+              InvoiceScreen(bookingResponse: BookingResponse(
+                success: false,
+                msg: ""
+              ),)
             );
           },
           child: Container(

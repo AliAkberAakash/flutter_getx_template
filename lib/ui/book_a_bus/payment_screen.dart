@@ -548,7 +548,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         endDate: infoRequest.endDate,
         pickupTime: infoRequest.pickupTime,
         dropoffTime: infoRequest.dropOffTime,
-        newChilds: infoRequest.childNames,
+        newChilds: /*infoRequest.childNames*/["one"],
         existingChilds: infoRequest.childId,
         numberOfDays: daysDiff(infoRequest.startDate, infoRequest.endDate),
         bookedSeat: infoRequest.childNames.length+infoRequest.childId.length,
