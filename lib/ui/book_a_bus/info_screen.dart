@@ -41,7 +41,7 @@ class _InfoScreenState extends State<InfoScreen> {
   TextEditingController endTimeController = TextEditingController();
   TextEditingController selectedTimeController = TextEditingController();
 
-  List<String> newChild = [];
+  List<String> newChild = ["child"];
   List<int> existingChild = [];
 
   @override
@@ -81,11 +81,8 @@ class _InfoScreenState extends State<InfoScreen> {
         if(currentState==null){
           return LoadingWidget();
         }else{
-          if(currentState.success) {
-
             List<String> suggestion = currentState.data!=null ? currentState.data!.map((e) => e.name).toList()
             : [];
-
             return Container(
               padding: EdgeInsets.all(dp20),
               child: ListView(
@@ -358,7 +355,6 @@ class _InfoScreenState extends State<InfoScreen> {
                 ],
               ),
             );
-          } else return ErrorScreen();
         }
 
       }),
