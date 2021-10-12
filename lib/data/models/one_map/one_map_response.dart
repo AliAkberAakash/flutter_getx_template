@@ -44,7 +44,6 @@ class Result {
     required this.y,
     required this.latitude,
     required this.longitude,
-    required this.longtitude,
   });
 
   String searchval;
@@ -57,7 +56,6 @@ class Result {
   String y;
   String latitude;
   String longitude;
-  String longtitude;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
     searchval: json["SEARCHVAL"],
@@ -70,7 +68,6 @@ class Result {
     y: json["Y"],
     latitude: json["LATITUDE"],
     longitude: json["LONGITUDE"],
-    longtitude: json["LONGTITUDE"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -84,6 +81,5 @@ class Result {
     "Y": y,
     "LATITUDE": latitude,
     "LONGITUDE": longitude,
-    "LONGTITUDE": longtitude,
   };
 }

@@ -51,8 +51,8 @@ class BookingRequest {
   String dropoffPostalCode;
   String pickupRemarks;
   String dropoffRemarks;
-  int distance;
-  int price;
+  double distance;
+  double price;
   String verbatim;
 
   factory BookingRequest.fromJson(Map<String, dynamic> json) => BookingRequest(

@@ -162,7 +162,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   ),
                   Spacer(),
                   Text(
-                    "S\$47.00",
+                    "S\$${(addressRequest.distance*5).toStringAsFixed(2)}",
                     style: GoogleFonts.manrope(
                       color: accent,
                       fontSize: dp20,
@@ -354,7 +354,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           VSpacer20(),
           TextFieldHeadline(headline: "Total Distance"),
           VSpacer10(),
-          TextFieldValueWidget(headline: '30 Km'),
+          TextFieldValueWidget(headline: '${addressRequest.distance.toStringAsFixed(2)} km'),
           VSpacer20(),
           TextFieldHeadline(headline: "Cost per Kilometer"),
           VSpacer10(),
@@ -362,7 +362,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           VSpacer20(),
           TextFieldHeadline(headline: "Total Travel Number"),
           VSpacer10(),
-          TextFieldValueWidget(headline: '12'),
+          TextFieldValueWidget(headline: "${daysDiff(infoRequest.startDate, infoRequest.endDate)+1}"),
           VSpacer20(),
           _getChildPart(),
           Row(
@@ -548,7 +548,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         endDate: infoRequest.endDate,
         pickupTime: infoRequest.pickupTime,
         dropoffTime: infoRequest.dropOffTime,
-        newChilds: /*infoRequest.childNames*/["one"],
+        newChilds: infoRequest.childNames,
         existingChilds: infoRequest.childId,
         numberOfDays: daysDiff(infoRequest.startDate, infoRequest.endDate),
         bookedSeat: infoRequest.childNames.length+infoRequest.childId.length,
@@ -562,8 +562,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
         dropoffPostalCode: addressRequest.dropOffPostalCode,
         pickupRemarks: addressRequest.pickupRemarks,
         dropoffRemarks: addressRequest.dropOffRemarks,
-        distance: 10,
-        price: 53,
+        distance: addressRequest.distance,
+        price: addressRequest.distance*5,
         verbatim: "hhh",
       );
       var response = await placeBooking(request);

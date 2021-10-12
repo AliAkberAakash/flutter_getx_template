@@ -39,6 +39,7 @@ dependencies:
   flutter_rating_bar: ^4.0.0
   geocoding: ^2.0.1
   flutter_google_places: ^0.3.0
+  geolocator: ^7.7.0
 
   # Data
   get_storage: ^2.0.1

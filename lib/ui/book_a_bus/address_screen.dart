@@ -1,10 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:go_share/data/models/booking/address_request.dart';
 import 'package:go_share/data/models/booking/info_request.dart';
 import 'package:go_share/data/models/google_map/geocoding_response.dart';
 import 'package:go_share/ui/common_widgets/post_code_field.dart';
-import 'package:go_share/ui/common_widgets/text_field_value_widget.dart';
 import 'package:go_share/util/lib/toast.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:get/get.dart';
@@ -58,6 +59,8 @@ class _AddressScreenState extends State<AddressScreen> {
 
   String pickupPostCode = "";
   String dropOffPostCode = "";
+
+  double distance = 0.0;
 
   _AddressScreenState(this.infoRequest);
 
@@ -301,7 +304,8 @@ class _AddressScreenState extends State<AddressScreen> {
                           dropOffPostalCode: dropOffPostCodeController.text,
                           dropOffLocation: dropOffAddressController.text,
                           dropOffRemarks: dropOffRemarksController.text,
-                          comments: commentsController.text
+                          comments: commentsController.text,
+                          distance: distance
                         );
 
                         Get.to(
@@ -329,6 +333,7 @@ class _AddressScreenState extends State<AddressScreen> {
   }
 
   bool validate(){
+    calculateDistance();
     // if(pickupPostCode != pickupPostCodeController.text) {
     //   ToastUtil.show("Post code does not match with pickup address");
     //   return false;
@@ -434,5 +439,44 @@ class _AddressScreenState extends State<AddressScreen> {
     //}
 
   }
+
+
+  calculateDistance(){
+    if(_controller.pickUpResponse.found == 1 && _controller.dropOffResponse.found == 1){
+      try{
+        var pickupLat =
+        double.parse(_controller.pickUpResponse.results[0].latitude);
+        var pickupLng =
+        double.parse(_controller.pickUpResponse.results[0].longitude);
+
+        var dropOffLat =
+        double.parse(_controller.dropOffResponse.results[0].latitude);
+        var dropOffLng = double.parse(
+            _controller.dropOffResponse.results[0].longitude);
+
+        distance = calculateDist(
+          pickupLat,
+          pickupLng,
+          dropOffLat,
+          dropOffLng,
+        );
+
+        logger.d("distance : $distance");
+
+      }catch(e){
+        logger.d(e);
+      }
+    }
+  }
+
+  double calculateDist(lat1, lon1, lat2, lon2){
+    var p = 0.017453292519943295;
+    var c = cos;
+    var a = 0.5 - c((lat2 - lat1) * p)/2 +
+        c(lat1 * p) * c(lat2 * p) *
+            (1 - c((lon2 - lon1) * p))/2;
+    return 12742 * asin(sqrt(a));
+  }
+
 
 }

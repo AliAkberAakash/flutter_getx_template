@@ -1,12 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:go_share/core/ui/error_screen.dart';
 import 'package:go_share/core/ui/loading_widget.dart';
-import 'package:go_share/data/models/booking/child_list_response.dart';
 import 'package:go_share/data/models/booking/info_request.dart';
 import 'package:go_share/ui/book_a_bus/address_screen.dart';
 import 'package:go_share/ui/book_a_bus/booking_controller.dart';
-import 'package:go_share/ui/common_widgets/auto_complete_text.dart';
 import 'package:go_share/ui/common_widgets/common_text_field.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
@@ -18,6 +17,7 @@ import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
 
 class InfoScreen extends StatefulWidget {
   const InfoScreen({Key? key}) : super(key: key);
@@ -30,6 +30,9 @@ class _InfoScreenState extends State<InfoScreen> {
 
   final bookingController = BookingController(Get.find());
 
+  final logger = Logger();
+
+  double distance = 0.0;
   int seat=0;
   String timeFormat="AM";
   List<Widget> childWidgetList = [];
