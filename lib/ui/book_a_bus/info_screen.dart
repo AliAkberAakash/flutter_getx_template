@@ -7,6 +7,7 @@ import 'package:go_share/data/models/booking/info_request.dart';
 import 'package:go_share/ui/book_a_bus/address_screen.dart';
 import 'package:go_share/ui/book_a_bus/booking_controller.dart';
 import 'package:go_share/ui/common_widgets/auto_complete_text.dart';
+import 'package:go_share/ui/common_widgets/common_text_field.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
@@ -62,11 +63,15 @@ class _InfoScreenState extends State<InfoScreen> {
         VSpacer20(),
         TextFieldHeadline(headline: "Child Name*"),
         VSpacer20(),
-        AutoCompleteTextField(
+        CommonTextField(
           controller: controller,
           hint: "Child Name",
-          suggestions: suggestions,
         ),
+        // AutoCompleteTextField(
+        //   controller: controller,
+        //   hint: "Child Name",
+        //   suggestions: suggestions,
+        // ),
       ],
     );
   }
@@ -74,13 +79,12 @@ class _InfoScreenState extends State<InfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx((){
-
-        var currentState = bookingController.childListResponse.value;
-
-        if(currentState==null){
-          return LoadingWidget();
-        }else{
+      body: Obx(
+        (){
+          var currentState = bookingController.childListResponse.value;
+          if(currentState==null){
+            return LoadingWidget();
+          }else{
             List<String> suggestion = currentState.data!=null ? currentState.data!.map((e) => e.name).toList()
             : [];
             return Container(
@@ -312,24 +316,31 @@ class _InfoScreenState extends State<InfoScreen> {
                     onClicked: () {
                       newChild.clear();
                       existingChild.clear();
-                      for (var controller in childControllerList)
-                      {
-                        Datum? child = currentState.data!.firstWhere(
-                                (element) => element.name==controller.text,
-                            orElse: (){
-                          return Datum(
-                            id: -1,
-                            userId: -1,
-                            name: controller.text,
-                            createdAt: DateTime.now(),
-                            updatedAt: DateTime.now(),
-                          );
-                        });
-                        if(child.id==-1){
-                          if(child.name.isNotEmpty)
-                            newChild.add(controller.text);
-                        }else existingChild.add(child.id);
+
+                      for (var controller1 in childControllerList){
+                        if(controller1.text.isNotEmpty){
+                          newChild.add(controller1.text);
+                        }
                       }
+
+                      // for (var controller in childControllerList)
+                      // {
+                      //   Datum? child = currentState.data!.firstWhere(
+                      //           (element) => element.name==controller.text,
+                      //       orElse: (){
+                      //     return Datum(
+                      //       id: -1,
+                      //       userId: -1,
+                      //       name: controller.text,
+                      //       createdAt: DateTime.now(),
+                      //       updatedAt: DateTime.now(),
+                      //     );
+                      //   });
+                      //   if(child.id==-1){
+                      //     if(child.name.isNotEmpty)
+                      //       newChild.add(controller.text);
+                      //   }else existingChild.add(child.id);
+                      // }
 
                       if(validate()){
 
@@ -342,7 +353,7 @@ class _InfoScreenState extends State<InfoScreen> {
                           dropOffTime: dropOffTime ?? "00:00:00",
                         );
 
-                        print(infoRequest.toJson());
+                       // print(infoRequest.toJson());
 
                         Get.to(
                           AddressScreen(
@@ -355,9 +366,9 @@ class _InfoScreenState extends State<InfoScreen> {
                 ],
               ),
             );
-        }
-
-      }),
+          }
+        },
+      ),
     );
   }
 
@@ -370,6 +381,10 @@ class _InfoScreenState extends State<InfoScreen> {
     //   ToastUtil.show("Please select at least one child");
     //   return false;
     // }
+
+    print("StartDate $startDate");
+    print("EndDate $endDate");
+    print("time $pickedTime");
 
     if(startDate == null || endDate == null){
         ToastUtil.show("Please select start date");
