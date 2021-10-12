@@ -177,7 +177,8 @@ class _UpdateVehicleScreenState extends State<UpdateVehicleScreen> {
 
     Get.back();
     if(response.data != null){
-      modalBottomSheetMenuPending(context);
+      Get.back();
+      Get.back();
     }
 
     ToastUtil.show(response.msg ?? "Server Error");
