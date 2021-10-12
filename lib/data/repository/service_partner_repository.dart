@@ -22,6 +22,7 @@ import 'package:go_share/data/models/general_user/profile/general_user_profile_r
 import 'package:go_share/data/models/general_user/profile/profile_update_request.dart';
 import 'package:go_share/data/models/general_user/profile/profile_update_response.dart';
 import 'package:go_share/data/models/google_map/geocoding_response.dart';
+import 'package:go_share/data/models/one_map/one_map_response.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_request.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_response.dart';
 import 'package:go_share/data/models/service_partner/auth/password_reset_code_request.dart';
@@ -584,6 +585,30 @@ class Repository{
     } catch (e) {
       logger.d(e);
       return ChildrenListResponse(success: false, msg: 'Data Parsing Error');
+    }
+  }
+
+  Future<OneMapResponse> getAddressFromCoordinates(String postalCode) async{
+    try{
+
+      var url = "https://developers.onemap.sg/commonapi/search";
+
+      var response = await helper.getRawWithParams(
+          url,
+          {
+            "searchVal":postalCode,
+            "returnGeom":"Y",
+            "getAddrDetails":"Y",
+            "pageNum":1
+          }
+      );
+      return OneMapResponse.fromJson(response.data);
+    }catch(e){
+      logger.d(e);
+      return OneMapResponse(
+        found: 0,
+        totalNumPages: 0, pageNum: 0, results:[],
+      );
     }
   }
 

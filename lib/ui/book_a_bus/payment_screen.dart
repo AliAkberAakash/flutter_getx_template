@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:go_share/data/models/booking/address_request.dart';
 import 'package:go_share/data/models/booking/booking_request.dart';
 import 'package:go_share/data/models/booking/info_request.dart';
+import 'package:go_share/data/models/one_map/one_map_response.dart';
 import 'package:go_share/data/repository/service_partner_repository.dart';
 import 'package:go_share/ui/book_a_bus/booking_controller.dart';
 import 'package:go_share/ui/book_a_bus/invoice_screen.dart';
@@ -30,6 +31,8 @@ import 'package:logger/logger.dart';
 
 class PaymentScreen extends StatefulWidget {
 
+  final OneMapResponse pickupResponse;
+  final OneMapResponse dropOffResponse;
   final AddressRequest addressRequest;
   final InfoRequest infoRequest;
 
@@ -37,6 +40,8 @@ class PaymentScreen extends StatefulWidget {
     Key? key,
     required this.addressRequest,
     required this.infoRequest,
+    required this.pickupResponse,
+    required this.dropOffResponse,
   }) : super(key: key);
 
   @override
@@ -540,19 +545,19 @@ class _PaymentScreenState extends State<PaymentScreen> {
       var request = BookingRequest(
         startDate: infoRequest.startDate,
         endDate: infoRequest.endDate,
-        pickupTime: "11:00:00"/*infoRequest.pickupTime*/,
-        dropoffTime: "12:07:00",
+        pickupTime: infoRequest.pickupTime,
+        dropoffTime: infoRequest.dropOffTime,
         newChilds: infoRequest.childNames,
-        existingChilds: [1],
-        numberOfDays: 1,
-        bookedSeat: infoRequest.childNames.length,
+        existingChilds: infoRequest.childId,
+        numberOfDays: daysDiff(infoRequest.startDate, infoRequest.endDate),
+        bookedSeat: infoRequest.childNames.length+infoRequest.childId.length,
         pickupAddress: addressRequest.pickupLocation,
         dropoffAddress: addressRequest.dropOffLocation,
-        pickupLongitude: "hhh",
-        pickupLatitude: "hhh",
+        pickupLongitude: "E 148° 55' 57.921",
+        pickupLatitude: "S 20° 49' 31.5935",
         pickupPostalCode: addressRequest.pickupPostalCode,
-        dropoffLongitude: "hhh",
-        dropoffLatitude: "hhh",
+        dropoffLongitude: "S 20° 49' 31.5935",
+        dropoffLatitude: "E 148° 55' 57.921",
         dropoffPostalCode: addressRequest.dropOffPostalCode,
         pickupRemarks: addressRequest.pickupRemarks,
         dropoffRemarks: addressRequest.dropOffRemarks,

@@ -7,7 +7,6 @@ import 'package:go_share/data/models/booking/info_request.dart';
 import 'package:go_share/ui/book_a_bus/address_screen.dart';
 import 'package:go_share/ui/book_a_bus/booking_controller.dart';
 import 'package:go_share/ui/common_widgets/auto_complete_text.dart';
-import 'package:go_share/ui/common_widgets/common_text_field.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
@@ -34,17 +33,22 @@ class _InfoScreenState extends State<InfoScreen> {
   String timeFormat="AM";
   List<Widget> childWidgetList = [];
   List<TextEditingController> childControllerList = [];
-  DateTime startDate = DateTime.now();
-  DateTime endDate = DateTime.now();
+  DateTime? startDate;
+  DateTime? endDate;
+  TimeOfDay? pickedTime;
+  String? dropOffTime;
   TextEditingController startTimeController = TextEditingController();
   TextEditingController endTimeController = TextEditingController();
   TextEditingController selectedTimeController = TextEditingController();
 
+  List<String> newChild = [];
+  List<int> existingChild = [];
+
   @override
   void initState() {
     bookingController.getChildList();
-    var controller = new TextEditingController();
-    childControllerList.add(controller);
+    // var controller = new TextEditingController();
+    // childControllerList.add(controller);
     // childWidgetList.add(
     //   _childWidget(childControllerList[0], [""])
     // );
@@ -309,26 +313,39 @@ class _InfoScreenState extends State<InfoScreen> {
                   PositiveButton(
                     text: "Next",
                     onClicked: () {
-                      if(validate()){
-                        List<String> newChild = [];
-                        List<int> existingChild = [];
-
-                        for (var controller in childControllerList)
-                        {
-                          Datum? child = currentState.data!.firstWhere((element) => element.name==controller.text, orElse: (){
-                            return Datum(id: -1, userId: -1, name: "null", createdAt: DateTime.now(), updatedAt: DateTime.now());
-                          });
-                          if(child.id==-1){
+                      newChild.clear();
+                      existingChild.clear();
+                      for (var controller in childControllerList)
+                      {
+                        Datum? child = currentState.data!.firstWhere(
+                                (element) => element.name==controller.text,
+                            orElse: (){
+                          return Datum(
+                            id: -1,
+                            userId: -1,
+                            name: controller.text,
+                            createdAt: DateTime.now(),
+                            updatedAt: DateTime.now(),
+                          );
+                        });
+                        if(child.id==-1){
+                          if(child.name.isNotEmpty)
                             newChild.add(controller.text);
-                          }else existingChild.add(child.id);
-                        }
+                        }else existingChild.add(child.id);
+                      }
+
+                      if(validate()){
 
                         var infoRequest = InfoRequest(
                           childNames: newChild,
-                          startDate: startDate,
-                          endDate: endDate,
+                          childId: existingChild,
+                          startDate: formatDate(startDate!),
+                          endDate: formatDate(endDate!),
                           pickupTime: selectedTimeController.text,
+                          dropOffTime: dropOffTime ?? "00:00:00",
                         );
+
+                        print(infoRequest.toJson());
 
                         Get.to(
                           AddressScreen(
@@ -349,8 +366,22 @@ class _InfoScreenState extends State<InfoScreen> {
   }
 
   bool validate(){
-    if(childWidgetList.isEmpty){
-      ToastUtil.show("Please select atleast one child");
+
+    print(newChild.length);
+    print(existingChild.length);
+
+    // if(newChild.isEmpty && existingChild.isEmpty){
+    //   ToastUtil.show("Please select at least one child");
+    //   return false;
+    // }
+
+    if(startDate == null || endDate == null){
+        ToastUtil.show("Please select start date");
+        return false;
+    }
+
+    if(pickedTime == null){
+      ToastUtil.show("Please select pickup time");
       return false;
     }
 
@@ -378,17 +409,21 @@ class _InfoScreenState extends State<InfoScreen> {
     if (picked != null && picked != selectedDate)
       setState(() {
         if(type==1) {
+          startDate = picked;
+          endDate = picked;
           startTimeController.text=speakDate(picked);
+          endTimeController.text=speakDate(picked);
         } else {
+          endDate = picked;
           endTimeController.text=speakDate(picked);
         }
         selectedDate = picked;
       });
   }
 
-  String formatDate(DateTime date){
-    var outputFormat = DateFormat('MM.dd.yyyy');
-    return outputFormat.format(date);
+  DateTime formatDate(DateTime date){
+    var outputFormat = DateFormat('yyyy-MM-dd');
+    return DateTime.parse(outputFormat.format(date));
   }
 
   _datePicker(TextEditingController controller, String hint, int type){
@@ -484,8 +519,10 @@ class _InfoScreenState extends State<InfoScreen> {
       initialTime: TimeOfDay.now(),
       context: context,
     );
+    pickedTime = selectedTime;
     NumberFormat formatter = new NumberFormat("00");
     selectedTimeController.text =  "${formatter.format(selectedTime?.hour)}:${formatter.format(selectedTime?.minute)}:00";
+    dropOffTime =  "${formatter.format((selectedTime?.hour)??0+1)}:${formatter.format(selectedTime?.minute)}:01";
   }
 
 }

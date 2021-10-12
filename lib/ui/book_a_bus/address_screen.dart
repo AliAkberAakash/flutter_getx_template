@@ -190,24 +190,26 @@ class _AddressScreenState extends State<AddressScreen> {
                   ),
                 ),
                 HSpacer20(),
-                Obx((){
-                  return Container(
-                    width: 180,
-                    child: TextFieldValueWidget(
-                      headline: _controller.pickupAddress.value,
-                    ),
-                  );
-                })
+                Spacer(),
+                // Obx((){
+                //   return Container(
+                //     width: 180,
+                //     child: TextFieldValueWidget(
+                //       headline: _controller.pickupAddress.value,
+                //     ),
+                //   );
+                // })
               ],
             ),
             VSpacer20(),
-            CommonTextField(
-              onTap: (){
-                getPickupLocation();
-              },
-              controller: pickupAddressController,
-              hint: "Location",
-            ),
+            Obx((){
+              pickupAddressController.text = _controller.pickupAddress.value;
+              return CommonTextField(
+                enabled: false,
+                controller: pickupAddressController,
+                hint: "Location",
+              );
+            }),
             VSpacer20(),
             TextFieldHeadline(headline: "Pickup Remarks"),
             VSpacer20(),
@@ -228,24 +230,28 @@ class _AddressScreenState extends State<AddressScreen> {
                   ),
                 ),
                 HSpacer20(),
-                Obx((){
-                  return Container(
-                    width: 180,
-                    child: TextFieldValueWidget(
-                      headline: _controller.dropOffAddress.value,
-                    ),
-                  );
-                }),
+                Spacer(),
+                // Obx((){
+                //   return Container(
+                //     width: 180,
+                //     child: TextFieldValueWidget(
+                //       headline: _controller.dropOffAddress.value,
+                //     ),
+                //   );
+                // }),
               ],
             ),
             VSpacer20(),
-            CommonTextField(
-              onTap: (){
-                getDropOffLocation();
-              },
-              controller: dropOffAddressController,
-              hint: "Location",
-            ),
+            Obx((){
+
+              dropOffAddressController.text = _controller.dropOffAddress.value;
+
+              return CommonTextField(
+                enabled: false,
+                controller: dropOffAddressController,
+                hint: "Location",
+              );
+            }),
             VSpacer20(),
             TextFieldHeadline(headline: "Drop Off Remarks"),
             VSpacer20(),
@@ -298,7 +304,16 @@ class _AddressScreenState extends State<AddressScreen> {
                           comments: commentsController.text
                         );
 
-                        Get.to(PaymentScreen(addressRequest: addressRequest, infoRequest: infoRequest,));
+                        Get.to(
+                          PaymentScreen(
+                            addressRequest: addressRequest,
+                            infoRequest: infoRequest,
+                            dropOffResponse: _controller.dropOffResponse,
+                            pickupResponse: _controller.pickUpResponse,
+                          ),
+                        );
+                      }else{
+                        ToastUtil.show("Please fill required fields");
                       }
                     },
                   ),
@@ -323,6 +338,11 @@ class _AddressScreenState extends State<AddressScreen> {
     //   ToastUtil.show("Post code does not match with drop off address");
     //   return false;
     // }
+
+    return pickupPostCodeController.text.isNotEmpty
+        && pickupAddressController.text.isNotEmpty
+        && dropOffPostCodeController.text.isNotEmpty
+        && dropOffAddressController.text.isNotEmpty;
 
     return true;
   }
