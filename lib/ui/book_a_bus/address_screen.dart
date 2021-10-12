@@ -205,7 +205,7 @@ class _AddressScreenState extends State<AddressScreen> {
             Obx((){
               pickupAddressController.text = _controller.pickupAddress.value;
               return CommonTextField(
-                enabled: false,
+                //enabled: false,
                 controller: pickupAddressController,
                 hint: "Location",
               );
@@ -247,7 +247,7 @@ class _AddressScreenState extends State<AddressScreen> {
               dropOffAddressController.text = _controller.dropOffAddress.value;
 
               return CommonTextField(
-                enabled: false,
+                //enabled: false,
                 controller: dropOffAddressController,
                 hint: "Location",
               );
