@@ -6,8 +6,7 @@ import 'package:go_share/utils/shared_pref_utils.dart';
 import '../../utils/constants.dart';
 import 'dio_factory.dart';
 
-class ApiBaseHelper{
-
+class ApiBaseHelper {
   final DioFactory dioFactory;
 
   ApiBaseHelper({required this.dioFactory});
@@ -16,7 +15,8 @@ class ApiBaseHelper{
     await setToken();
     try {
       // make the network call
-      final response = await dioFactory.getDio().get(NetworkConstants.BASE_URL+endUrl);
+      final response =
+          await dioFactory.getDio().get(NetworkConstants.BASE_URL + endUrl);
       //return the response
       return _returnResponse(response);
     } on SocketException {
@@ -28,18 +28,21 @@ class ApiBaseHelper{
     await setDriverToken();
     try {
       // make the network call
-      final response = await dioFactory.getDio().get(NetworkConstants.BASE_URL+endUrl);
+      final response =
+          await dioFactory.getDio().get(NetworkConstants.BASE_URL + endUrl);
       //return the response
       return _returnResponse(response);
     } on SocketException {
       throw FetchDataException('No Internet connection');
     }
   }
+
   Future<Response> getGeneralUser(String endUrl) async {
     await setGeneralUserToken();
     try {
       // make the network call
-      final response = await dioFactory.getDio().get(NetworkConstants.BASE_URL+endUrl);
+      final response =
+          await dioFactory.getDio().get(NetworkConstants.BASE_URL + endUrl);
       //return the response
       return _returnResponse(response);
     } on SocketException {
@@ -47,15 +50,14 @@ class ApiBaseHelper{
     }
   }
 
-
-  Future<Response> getWithParams(String endUrl, Map<String, dynamic> params) async {
+  Future<Response> getWithParams(
+      String endUrl, Map<String, dynamic> params) async {
     await setToken();
     try {
       // make the network call
-      final response = await dioFactory.getDio().get(
-        NetworkConstants.BASE_URL+endUrl,
-        queryParameters: params
-      );
+      final response = await dioFactory
+          .getDio()
+          .get(NetworkConstants.BASE_URL + endUrl, queryParameters: params);
       //return the response
       return _returnResponse(response);
     } on SocketException {
@@ -63,13 +65,12 @@ class ApiBaseHelper{
     }
   }
 
-  Future<Response> getRawWithParams(String url, Map<String, dynamic> params) async {
+  Future<Response> getRawWithParams(
+      String url, Map<String, dynamic> params) async {
     try {
       // make the network call
-      final response = await dioFactory.getDio().get(
-          url,
-          queryParameters: params
-      );
+      final response =
+          await dioFactory.getDio().get(url, queryParameters: params);
       //return the response
       return _returnResponse(response);
     } on SocketException {
@@ -77,30 +78,29 @@ class ApiBaseHelper{
     }
   }
 
-  Future<Response> postWithParams(String endUrl, Map<String, dynamic> params) async {
+  Future<Response> postWithParams(
+      String endUrl, Map<String, dynamic> params) async {
     await setToken();
     try {
       // make the network call
-      final response = await dioFactory.getDio().post(
-          NetworkConstants.BASE_URL+endUrl,
-          queryParameters: params
-      );
+      final response = await dioFactory
+          .getDio()
+          .post(NetworkConstants.BASE_URL + endUrl, queryParameters: params);
       //return the response
       return _returnResponse(response);
     } on SocketException {
       throw FetchDataException('No Internet connection');
     }
   }
-  
 
   Future<Response> post(String endUrl, Map<String, dynamic> body) async {
     await setToken();
     try {
       // make the network call
       final response = await dioFactory.getDio().post(
-          NetworkConstants.BASE_URL+endUrl,
-          data: body,
-      );
+            NetworkConstants.BASE_URL + endUrl,
+            data: body,
+          );
       //return the response
       return _returnResponse(response);
     } on SocketException {
@@ -113,9 +113,9 @@ class ApiBaseHelper{
     try {
       // make the network call
       final response = await dioFactory.getDio().post(
-        NetworkConstants.BASE_URL+endUrl,
-        data: body,
-      );
+            NetworkConstants.BASE_URL + endUrl,
+            data: body,
+          );
       //return the response
       return _returnResponse(response);
     } on SocketException {
@@ -123,14 +123,15 @@ class ApiBaseHelper{
     }
   }
 
-  Future<Response> postGeneralUser(String endUrl, Map<String, dynamic> body) async {
+  Future<Response> postGeneralUser(
+      String endUrl, Map<String, dynamic> body) async {
     await setGeneralUserToken();
     try {
       // make the network call
       final response = await dioFactory.getDio().post(
-        NetworkConstants.BASE_URL+endUrl,
-        data: body,
-      );
+            NetworkConstants.BASE_URL + endUrl,
+            data: body,
+          );
       //return the response
       return _returnResponse(response);
     } on SocketException {
@@ -138,20 +139,21 @@ class ApiBaseHelper{
     }
   }
 
-  Future<Response> postMultiPart(String endUrl,String key, File file, Map<String, dynamic> body) async {
+  Future<Response> postMultiPart(
+      String endUrl, String key, File file, Map<String, dynamic> body) async {
     await setToken();
 
     String fileName = file.path.split('/').last;
     FormData formData = FormData.fromMap(body);
-    formData.files.add(MapEntry(key, await MultipartFile.fromFile(file.path, filename:fileName)));
-
+    formData.files.add(MapEntry(
+        key, await MultipartFile.fromFile(file.path, filename: fileName)));
 
     try {
       // make the network call
       final response = await dioFactory.getDio().post(
-        NetworkConstants.BASE_URL+endUrl,
-        data: formData,
-      );
+            NetworkConstants.BASE_URL + endUrl,
+            data: formData,
+          );
 
       return _returnResponse(response);
     } on SocketException {
@@ -159,20 +161,43 @@ class ApiBaseHelper{
     }
   }
 
-  Future<Response> postGeneralUserMultiPart(String endUrl,String key, File file, Map<String, dynamic> body) async {
+  Future<Response> postGeneralUserMultiPart(String endUrl, File? userImage,
+      File? careTakerImage, Map<String, dynamic> body) async {
     await setGeneralUserToken();
-
-    String fileName = file.path.split('/').last;
     FormData formData = FormData.fromMap(body);
-    formData.files.add(MapEntry(key, await MultipartFile.fromFile(file.path, filename:fileName)));
 
+    if (userImage != null) {
+      String fileName = userImage.path.split('/').last;
+      formData.files.add(
+        MapEntry(
+          "image",
+          await MultipartFile.fromFile(
+            userImage.path,
+            filename: fileName,
+          ),
+        ),
+      );
+    }
+
+    if (careTakerImage != null) {
+      String fileName = careTakerImage.path.split('/').last;
+      formData.files.add(
+        MapEntry(
+          "caretaker_image",
+          await MultipartFile.fromFile(
+            careTakerImage.path,
+            filename: fileName,
+          ),
+        ),
+      );
+    }
 
     try {
       // make the network call
       final response = await dioFactory.getDio().post(
-        NetworkConstants.BASE_URL+endUrl,
-        data: formData,
-      );
+            NetworkConstants.BASE_URL + endUrl,
+            data: formData,
+          );
 
       return _returnResponse(response);
     } on SocketException {
@@ -180,38 +205,31 @@ class ApiBaseHelper{
     }
   }
 
-  Future<void> setToken() async{
+  Future<void> setToken() async {
     var token = await SharedPrefUtil.getString(NetworkConstants.AUTHORIZATION);
-    dioFactory.getDio().options = BaseOptions(
-        headers: {
-          NetworkConstants.ACCEPT : NetworkConstants.ACCEPT_TYPE,
-          NetworkConstants.AUTHORIZATION : token,
-        }
-    );
+    dioFactory.getDio().options = BaseOptions(headers: {
+      NetworkConstants.ACCEPT: NetworkConstants.ACCEPT_TYPE,
+      NetworkConstants.AUTHORIZATION: token,
+    });
   }
 
-  Future<void> setGeneralUserToken() async{
-    var token = await SharedPrefUtil.getString(NetworkConstants.GENERAL_USER_TOKEN);
-    dioFactory.getDio().options = BaseOptions(
-        headers: {
-          NetworkConstants.ACCEPT : NetworkConstants.ACCEPT_TYPE,
-          NetworkConstants.AUTHORIZATION : token,
-        }
-    );
+  Future<void> setGeneralUserToken() async {
+    var token =
+        await SharedPrefUtil.getString(NetworkConstants.GENERAL_USER_TOKEN);
+    dioFactory.getDio().options = BaseOptions(headers: {
+      NetworkConstants.ACCEPT: NetworkConstants.ACCEPT_TYPE,
+      NetworkConstants.AUTHORIZATION: token,
+    });
   }
 
-  Future<void> setDriverToken() async{
+  Future<void> setDriverToken() async {
     var token = await SharedPrefUtil.getString(NetworkConstants.DRIVER_TOKEN);
-    dioFactory.getDio().options = BaseOptions(
-        headers: {
-          NetworkConstants.ACCEPT : NetworkConstants.ACCEPT_TYPE,
-          NetworkConstants.AUTHORIZATION : token,
-        }
-    );
+    dioFactory.getDio().options = BaseOptions(headers: {
+      NetworkConstants.ACCEPT: NetworkConstants.ACCEPT_TYPE,
+      NetworkConstants.AUTHORIZATION: token,
+    });
   }
-
 }
-
 
 Response _returnResponse(Response response) {
   switch (response.statusCode) {

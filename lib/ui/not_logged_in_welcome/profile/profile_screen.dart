@@ -135,7 +135,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 VSpacer20(),
                 OutlinedMaterialButton(onClick: (){
-                  Get.to(EditProfileScreen(user: user,));
+                  Get.to(EditProfileScreen(user: user,))?.then((value){
+                    _controller.getGeneralUserProfile();
+                  });
                 }, text: "Update My Profile"),
               ],
             );

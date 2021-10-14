@@ -502,23 +502,21 @@ class Repository{
       return GeneralUserSignupResponse(success: false, msg: 'Data Parsing Error');
     }
   }
-  Future<UpdateProfileResponse> updateGeneralUserProfile(File? file,
-      UpdateProfileRequest request) async {
+  Future<UpdateProfileResponse> updateGeneralUserProfile(
+      File? user,
+      File? careTaker,
+      UpdateProfileRequest request,
+      ) async {
     try {
 
       var responseJson;
 
-      if(file!=null){
-        responseJson = await helper.postGeneralUserMultiPart(
-            NetworkConstants.GU_UPDATE_PROFILE,
-            "image",
-            file,
-            request.toJson());
-      }else{
-        responseJson = await helper.postGeneralUser(
-            NetworkConstants.GU_UPDATE_PROFILE,
-            request.toJson());
-      }
+      responseJson = await helper.postGeneralUserMultiPart(
+        NetworkConstants.GU_UPDATE_PROFILE,
+        user,
+        careTaker,
+        request.toJson(),
+      );
 
       if (responseJson.statusCode == 200) {
         return UpdateProfileResponse.fromJson(responseJson.data);

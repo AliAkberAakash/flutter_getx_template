@@ -140,7 +140,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   phone: phoneNumberController.text,
                   nric: nricController.text,
                   dateOfBirth: selectedDate,
-                  caretakerPhone: careTakerNameController.text,
+                  caretakerPhone: careTakerNumberController.text,
                   caretakerAddress: "N/A",
                   caretakerName: careTakerNameController.text
                 );
@@ -155,7 +155,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   update(UpdateProfileRequest request) async{
-    var response = await _controller.updateUserProfile(_image, request);
+    var response = await _controller.updateUserProfile(_image, _careTakerImage, request);
     Get.back();
     ToastUtil.show(response.msg);
     if(response.data!=null){
@@ -266,7 +266,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ),
       ),
       TextButton(
-        onPressed: () {},
+        onPressed: () {
+          setState(() {
+            _image=null;
+          });
+        },
         child: Container(
           height: dp40,
           width: dp80,
@@ -319,7 +323,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ),
       ),
       TextButton(
-        onPressed: () {},
+        onPressed: () {
+          setState(() {
+            _careTakerImage=null;
+          });
+        },
         child: Container(
           height: dp40,
           width: dp80,
