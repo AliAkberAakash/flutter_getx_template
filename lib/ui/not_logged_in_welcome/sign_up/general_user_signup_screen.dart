@@ -130,13 +130,19 @@ class _GeneralUserSignupScreenState extends State<GeneralUserSignupScreen> {
                           showLoader();
                           if (validatePassword()) {
                             if(validate()){
-                              var request = GeneralUserSignupRequest(
+                              if(!isChecked) {
+                                Get.back();
+                                ToastUtil.show("Please agree to our terms and conditions");
+                              } else{
+                                var request = GeneralUserSignupRequest(
                                   name: nameController.text,
                                   email: emailController.text,
                                   phone: phoneNumberController.text,
                                   password: passwordController.text,
-                                  address: addressController.text);
-                              signup(request);
+                                  address: addressController.text,
+                                );
+                                signup(request);
+                              }
                             }else{
                               Get.back();
                               ToastUtil.show("Please fill all fields");
@@ -174,11 +180,16 @@ class _GeneralUserSignupScreenState extends State<GeneralUserSignupScreen> {
   }
 
   bool validate(){
+
     return nameController.text.trim().isNotEmpty
         && emailController.text.trim().isNotEmpty
         && phoneNumberController.text.trim().isNotEmpty
         && addressController.text.trim().isNotEmpty
         && passwordController.text.trim().isNotEmpty;
+  }
+
+  validateCheck(){
+
   }
 
   void signup(GeneralUserSignupRequest request) async {
