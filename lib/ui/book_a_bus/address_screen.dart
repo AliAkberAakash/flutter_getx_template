@@ -67,23 +67,40 @@ class _AddressScreenState extends State<AddressScreen> {
   @override
   void initState() {
 
-    pickupPostCodeController.addListener(() {
-      var text = pickupPostCodeController.text;
-      if(text.length==6){
-        var postCode = int.parse(pickupPostCodeController.text);
-        setState(() {
-          if(postCode>=600000 && postCode<=689999){
-            pickupPostCodeErrorText=null;
-            _controller.getPickupAddressFromPO(postCode.toString());
-          }else{
-            pickupPostCodeErrorText = "Invalid Post Code";
-          }
-        });
-      }
+    // pickupPostCodeController.addListener(
+    //   () {
+    //     var text = pickupPostCodeController.text;
+    //     if(text.length==6){
+    //       var postCode = int.parse(pickupPostCodeController.text);
+    //       setState(
+    //         () {
+    //           if(postCode>=600000 && postCode<=689999){
+    //             pickupPostCodeErrorText=null;
+    //             _controller.getPickupAddressFromPO(postCode.toString());
+    //           }else{
+    //             pickupPostCodeErrorText = "Invalid Post Code";
+    //           }
+    //         },
+    //       );
+    //     }
+    //   },
+    // );
 
-    });
+    // pickupAddressController.addListener(
+    //   () {
+    //     var text = pickupAddressController.text;
+    //     _controller.getPickupAddressFromPO(text);
+    //   },
+    // );
+    //
+    // dropOffAddressController.addListener(
+    //   () {
+    //     var text = pickupAddressController.text;
+    //     _controller.getPickupAddressFromPO(text);
+    //   },
+    // );
 
-    dropOffPostCodeController.addListener(() {
+    /*dropOffPostCodeController.addListener(() {
       var text =dropOffPostCodeController.text;
       if(text.length==6){
         var postCode = int.parse(dropOffPostCodeController.text);
@@ -97,7 +114,7 @@ class _AddressScreenState extends State<AddressScreen> {
         });
       }
 
-    });
+    });*/
 
     super.initState();
   }
@@ -182,15 +199,55 @@ class _AddressScreenState extends State<AddressScreen> {
             ),
             VSpacer20(),
             Row(
+              children: [
+                Expanded(
+                  child: Obx((){
+                    pickupAddressController.text = _controller.pickupAddress.value;
+                    return CommonTextField(
+                      //enabled: false,
+                      controller: pickupAddressController,
+                      hint: "Location",
+                    );
+                  }),
+                ),
+                HSpacer10(),
+                MaterialButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(
+                            dp10
+                        )
+                    ),
+                  ),
+                  height: dp48,
+                  minWidth: dp48,
+                  color: accent,
+                  child: Icon(
+                    Icons.search,
+                    color: white,
+                  ),
+                  onPressed: (){
+                    _controller.getPickupAddressFromPO(pickupAddressController.text);
+                  },
+                )
+              ],
+            ),
+            VSpacer20(),
+            Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Flexible(
-                  child: PostCodeField(
-                    errorText: pickupPostCodeErrorText,
-                    type: TextInputType.number,
-                    controller: pickupPostCodeController,
-                    hint: "Postal Code",
-                  ),
+                  child: Obx((){
+
+                    pickupPostCodeController.text = _controller.pickupPostalCode.value;
+
+                    return PostCodeField(
+                      errorText: pickupPostCodeErrorText,
+                      type: TextInputType.number,
+                      controller: pickupPostCodeController,
+                      hint: "Postal Code",
+                    );
+                  }),
                 ),
                 HSpacer20(),
                 Spacer(),
@@ -204,15 +261,6 @@ class _AddressScreenState extends State<AddressScreen> {
                 // })
               ],
             ),
-            VSpacer20(),
-            Obx((){
-              pickupAddressController.text = _controller.pickupAddress.value;
-              return CommonTextField(
-                //enabled: false,
-                controller: pickupAddressController,
-                hint: "Location",
-              );
-            }),
             VSpacer20(),
             TextFieldHeadline(headline: "Pickup Remarks"),
             VSpacer20(),

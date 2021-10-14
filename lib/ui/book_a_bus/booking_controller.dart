@@ -20,7 +20,9 @@ class BookingController extends GetxController{
   late OneMapResponse dropOffResponse;
 
   var pickupAddress = "".obs;
+  var pickupPostalCode = "".obs;
   var dropOffAddress = "".obs;
+  var dropOffPostalCode = "".obs;
   var logger = Logger();
 
   // getPickupAddressFromPO(String postalCode) async{
@@ -52,10 +54,11 @@ class BookingController extends GetxController{
     var response = await repository.getAddressFromCoordinates(postalCode);
     logger.d(response.found);
     pickUpResponse = response;
-    if(response.found==1){
+    if(response.found!=0){
       if(response.results.isNotEmpty) {
         var results = response.results;
         pickupAddress.value = results[0].address;
+        pickupPostalCode.value = results[0].postal;
       }
     }else {
       logger.d("result component is empty");
