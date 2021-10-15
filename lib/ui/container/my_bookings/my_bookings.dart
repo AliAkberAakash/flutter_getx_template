@@ -148,9 +148,9 @@ class _BodyWidgetState extends State<BodyWidget>
         else {
 
           List<Booking> allList = response.data?.bookings ?? [];
-          List<Booking> pendingList = response.data?.bookings.where((element) => element.isApproved==0).toList() ?? [];
-          List<Booking> ongoingList = response.data?.bookings.where((element) => element.isApproved==1 && element.isFinished==0).toList() ?? [];
-          List<Booking> approvedList = response.data?.bookings.where((element) => element.isApproved==1 && element.isFinished==1).toList() ?? [];
+          List<Booking> pendingList = response.data?.bookings.where((element) => element.currentStatus == "Pending").toList() ?? [];
+          List<Booking> ongoingList = response.data?.bookings.where((element) => element.currentStatus == "Ongoing").toList() ?? [];
+          List<Booking> approvedList = response.data?.bookings.where((element) => element.currentStatus == "Finished").toList() ?? [];
 
           return Column(
             children: [
