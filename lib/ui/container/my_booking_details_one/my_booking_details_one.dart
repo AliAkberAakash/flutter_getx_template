@@ -72,7 +72,7 @@ class BodyWidget extends StatelessWidget {
         TitleWidget(),
         BookingItemWidget(booking: booking,),
         LocationInfoWidget(booking : booking),
-        VehicleInfoWidget(),
+        booking.currentStatus=="Pending" ? Container() : VehicleInfoWidget(),
         getType(booking)=="Finished?" ? CustomFilledButton(
           margin: const EdgeInsets.only(
             left: 30.0,

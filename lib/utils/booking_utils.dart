@@ -5,20 +5,20 @@ import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'colors.dart';
 
 String getType(Booking booking){
-  if(booking.isApproved==0)
+  if(booking.currentStatus=="Pending")
     return "Pending";
   else{
-    if(booking.isFinished==0)
+    if(booking.currentStatus=="Ongoing")
       return "On Going";
     else return "Finished";
   }
 }
 
 Color getColor(Booking booking){
-  if(booking.isApproved==0)
+  if(booking.currentStatus=="Pending")
     return GSColors.pending_Color;
   else{
-    if(booking.isFinished==0)
+    if(booking.currentStatus=="Ongoing")
       return GSColors.ongoing_Color;
     else return finishedChipColor;
   }
