@@ -74,6 +74,7 @@ class BookingController extends GetxController{
       if(response.results.isNotEmpty) {
         var results = response.results;
         dropOffAddress.value = results[0].address;
+        dropOffPostalCode.value = results[0].postal;
       }
     }else {
       logger.d("result component is empty");

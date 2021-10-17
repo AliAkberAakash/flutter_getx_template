@@ -272,13 +272,53 @@ class _AddressScreenState extends State<AddressScreen> {
             VSpacer20(),
             Row(
               children: [
-                Flexible(
-                  child: PostCodeField(
-                    type: TextInputType.number,
-                    errorText: dropOffPostCodeErrorText,
-                    controller: dropOffPostCodeController,
-                    hint: "Postal Code",
+                Expanded(
+                  child: Obx((){
+                    dropOffAddressController.text = _controller.dropOffAddress.value;
+                    return CommonTextField(
+                      //enabled: false,
+                      controller: dropOffAddressController,
+                      hint: "Location",
+                    );
+                  }),
+                ),
+                HSpacer10(),
+                MaterialButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(
+                            dp10
+                        )
+                    ),
                   ),
+                  height: dp48,
+                  minWidth: dp48,
+                  color: accent,
+                  child: Icon(
+                    Icons.search,
+                    color: white,
+                  ),
+                  onPressed: (){
+                    _controller.getDropOffAddressFromPO(dropOffAddressController.text);
+                  },
+                ),
+              ],
+            ),
+            VSpacer20(),
+            Row(
+              children: [
+                Flexible(
+                  child: Obx((){
+
+                    dropOffPostCodeController.text = _controller.dropOffPostalCode.value;
+
+                    return PostCodeField(
+                      type: TextInputType.number,
+                      //errorText: dropOffPostCodeErrorText,
+                      controller: dropOffPostCodeController,
+                      hint: "Postal Code",
+                    );
+                  }),
                 ),
                 HSpacer20(),
                 Spacer(),
@@ -292,17 +332,6 @@ class _AddressScreenState extends State<AddressScreen> {
                 // }),
               ],
             ),
-            VSpacer20(),
-            Obx((){
-
-              dropOffAddressController.text = _controller.dropOffAddress.value;
-
-              return CommonTextField(
-                //enabled: false,
-                controller: dropOffAddressController,
-                hint: "Location",
-              );
-            }),
             VSpacer20(),
             TextFieldHeadline(headline: "Drop Off Remarks"),
             VSpacer20(),
