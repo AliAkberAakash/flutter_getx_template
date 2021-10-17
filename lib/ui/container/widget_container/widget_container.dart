@@ -17,6 +17,7 @@ import 'package:go_share/ui/container/terms_and_conditions/terms_and_conditions.
 import 'package:go_share/ui/container/widget_container/widget_container_controller.dart';
 import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
+import 'package:go_share/ui/not_logged_in_welcome/navigation_container/navigation_container.dart';
 import 'package:go_share/ui/not_logged_in_welcome/welcome/welcome_screen.dart';
 import 'package:go_share/ui/section1/driver_login/driver_login_screen.dart';
 import 'package:go_share/ui/section4/widgets/menu_page_button.dart';
@@ -212,46 +213,54 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                 children: [
                   Obx((){
                     var currentState = _controller.userState.value;
-                    return Padding(
-                      padding: EdgeInsets.all(dp20),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            radius: dp30,
-                            backgroundImage: NetworkImage(
-                              currentState==null ? "" : (currentState.image ?? ""),
-                            ),
-                          ),
-                          HSpacer20(),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                currentState==null ? "No user logged in" : currentState.name,
-                                style: GoogleFonts.manrope(
-                                  color: darkText,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: dp16,
-                                ),
+                    return InkWell(
+                      onTap: (){
+                        if(currentState!=null){
+                          Get.back();
+                          Get.to(NavigationContainer());
+                        }
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.all(dp20),
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: dp30,
+                              backgroundImage: NetworkImage(
+                                currentState==null ? "" : (currentState.image ?? ""),
                               ),
-                              currentState==null ? InkWell(
-                                onTap: (){
-                                  Get.back();
-                                  Get.to(
-                                    NotLoggedInWelcome(),
-                                  );
-                                },
-                                child: Text(
-                                  "Tap to login",
+                            ),
+                            HSpacer20(),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  currentState==null ? "No user logged in" : currentState.name,
+                                  style: GoogleFonts.manrope(
+                                    color: darkText,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: dp16,
+                                  ),
+                                ),
+                                currentState==null ? InkWell(
+                                  onTap: (){
+                                    Get.back();
+                                    Get.to(
+                                      NotLoggedInWelcome(),
+                                    );
+                                  },
+                                  child: Text(
+                                    "Tap to login",
+                                    style: GoogleFonts.manrope(),
+                                  ),
+                                ) :  Text(
+                                  currentState.email,
                                   style: GoogleFonts.manrope(),
                                 ),
-                              ) :  Text(
-                                currentState.email,
-                                style: GoogleFonts.manrope(),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   }),

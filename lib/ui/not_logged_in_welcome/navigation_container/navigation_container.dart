@@ -136,37 +136,42 @@ class _NavigationContainerState extends State<NavigationContainer> {
               height: height - 100,
               child: Column(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.all(dp20),
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          radius: dp30,
-                          backgroundImage: NetworkImage(
-                            "https://images.unsplash.com/photo-1563306406-e66174fa3787",
+                  Obx((){
+
+                    var currentState = _controller.userState.value;
+
+                    return Padding(
+                      padding: EdgeInsets.all(dp20),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            radius: dp30,
+                            backgroundImage: NetworkImage(
+                             currentState==null ? "" : (currentState.image ?? ""),
+                            ),
                           ),
-                        ),
-                        HSpacer20(),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Violet Norman",
-                              style: GoogleFonts.manrope(
-                                color: darkText,
-                                fontWeight: FontWeight.bold,
-                                fontSize: dp16,
+                          HSpacer20(),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                currentState?.name ?? "",
+                                style: GoogleFonts.manrope(
+                                  color: darkText,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: dp16,
+                                ),
                               ),
-                            ),
-                            Text(
-                              "bayer_martin@yahoo.com",
-                              style: GoogleFonts.manrope(),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                              Text(
+                                currentState?.email ?? "",
+                                style: GoogleFonts.manrope(),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
                   VSpacer10(),
                   Container(
                     height: 1,
