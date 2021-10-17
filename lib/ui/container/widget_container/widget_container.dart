@@ -14,6 +14,7 @@ import 'package:go_share/ui/container/lost_and_found/lost_and_found.dart';
 import 'package:go_share/ui/container/our_service/our_service.dart';
 import 'package:go_share/ui/container/privacy_and_concern/privacy_and_concern.dart';
 import 'package:go_share/ui/container/terms_and_conditions/terms_and_conditions.dart';
+import 'package:go_share/ui/container/widget_container/widget_container_controller.dart';
 import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
 import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
 import 'package:go_share/ui/not_logged_in_welcome/welcome/welcome_screen.dart';
@@ -36,6 +37,8 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
   late Widget body;
   late int selectedBottomBarIndex;
   var hp;
+
+  final _controller = WidgetContainerController();
 
   @override
   void initState() {
@@ -207,45 +210,51 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
               height: height - 100,
               child: Column(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.all(dp20),
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          radius: dp30,
-                          backgroundImage: NetworkImage(
-                            "https://images.unsplash.com/photo-1563306406-e66174fa3787",
-                          ),
-                        ),
-                        HSpacer20(),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "No user logged in",
-                              style: GoogleFonts.manrope(
-                                color: darkText,
-                                fontWeight: FontWeight.bold,
-                                fontSize: dp16,
-                              ),
+                  Obx((){
+                    var currentState = _controller.userState.value;
+                    return Padding(
+                      padding: EdgeInsets.all(dp20),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            radius: dp30,
+                            backgroundImage: NetworkImage(
+                              currentState==null ? "" : (currentState.image ?? ""),
                             ),
-                            InkWell(
-                              onTap: (){
-                                Get.back();
-                                Get.to(
-                                  NotLoggedInWelcome(),
-                                );
-                              },
-                              child: Text(
-                                "Tap to login",
+                          ),
+                          HSpacer20(),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                currentState==null ? "No user logged in" : currentState.name,
+                                style: GoogleFonts.manrope(
+                                  color: darkText,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: dp16,
+                                ),
+                              ),
+                              currentState==null ? InkWell(
+                                onTap: (){
+                                  Get.back();
+                                  Get.to(
+                                    NotLoggedInWelcome(),
+                                  );
+                                },
+                                child: Text(
+                                  "Tap to login",
+                                  style: GoogleFonts.manrope(),
+                                ),
+                              ) :  Text(
+                                currentState.email,
                                 style: GoogleFonts.manrope(),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
                   Expanded(
                     child: ListView(
                       children: [
