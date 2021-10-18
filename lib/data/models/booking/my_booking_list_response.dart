@@ -142,8 +142,8 @@ class Booking {
   int bookedSeat;
   String pickupAddress;
   String dropoffAddress;
-  int price;
-  int distance;
+  double? price;
+  double? distance;
   String? rating;
   int isApproved;
   int isPaid;
