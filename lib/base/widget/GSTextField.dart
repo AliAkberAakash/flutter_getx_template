@@ -11,7 +11,8 @@ class GSTextField extends StatelessWidget {
   String hints;
 
   final TextEditingController controller;
-  GSTextField({required this.hints, required this.controller});
+  final TextInputType type;
+  GSTextField({required this.hints, required this.controller, this.type = TextInputType.text});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +25,7 @@ class GSTextField extends StatelessWidget {
         border: Border.all(color: GSColors.gray_normal),
       ),
       child: TextField(
+        keyboardType: type,
         controller: controller,
         decoration: InputDecoration(
             border: InputBorder.none,

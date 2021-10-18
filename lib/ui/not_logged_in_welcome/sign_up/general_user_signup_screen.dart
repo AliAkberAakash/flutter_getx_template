@@ -80,6 +80,7 @@ class _GeneralUserSignupScreenState extends State<GeneralUserSignupScreen> {
                         height: GSSizeConstants.padding12,
                       ),
                       GSTextField(
+                        type: TextInputType.phone,
                         controller: phoneNumberController,
                         hints: GSStrings.phone_number,
                       ),
@@ -87,6 +88,7 @@ class _GeneralUserSignupScreenState extends State<GeneralUserSignupScreen> {
                         height: GSSizeConstants.padding12,
                       ),
                       GSTextField(
+                        type: TextInputType.emailAddress,
                         controller: emailController,
                         hints: GSStrings.email_address,
                       ),
