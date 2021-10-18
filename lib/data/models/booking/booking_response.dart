@@ -61,8 +61,8 @@ class Data {
   int bookedSeat;
   String pickupAddress;
   String dropoffAddress;
-  int price;
-  int distance;
+  double? price;
+  double? distance;
   int? rating;
   int isApproved;
   int isPaid;

@@ -352,7 +352,7 @@ class _InfoScreenState extends State<InfoScreen> {
                           childId: existingChild,
                           startDate: formatDate(startDate!),
                           endDate: formatDate(endDate!),
-                          pickupTime: selectedTimeController.text,
+                          pickupTime: "${selectedTimeController.text}:00",
                           dropOffTime: dropOffTime ?? "00:00:00",
                         );
 
@@ -540,7 +540,7 @@ class _InfoScreenState extends State<InfoScreen> {
     );
     pickedTime = selectedTime;
     NumberFormat formatter = new NumberFormat("00");
-    selectedTimeController.text =  "${formatter.format(selectedTime?.hour)}:${formatter.format(selectedTime?.minute)}:00";
+    selectedTimeController.text =  "${formatter.format(selectedTime?.hour)}:${formatter.format(selectedTime?.minute)}";
     dropOffTime =  "${formatter.format((selectedTime?.hour)??0+1)}:${formatter.format(selectedTime?.minute)}:01";
   }
 
