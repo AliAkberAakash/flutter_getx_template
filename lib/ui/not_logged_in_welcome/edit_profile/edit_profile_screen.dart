@@ -244,7 +244,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       )
           : CircleAvatar(
         radius: dp35,
-        backgroundImage: Image.network(user.image!, fit: BoxFit.cover).image,
+        backgroundImage: Image.network(user.image ?? "", fit: BoxFit.cover).image,
       ),
       TextButton(
         onPressed: () => _getImage(),
@@ -301,7 +301,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       )
           : CircleAvatar(
         radius: dp35,
-        backgroundImage: Image.network(user.caretakerImage!, fit: BoxFit.cover).image,
+        backgroundImage: Image.network(user.caretakerImage ?? "", fit: BoxFit.cover).image,
       ),
       TextButton(
         onPressed: () => _getCareTakerImage(),
