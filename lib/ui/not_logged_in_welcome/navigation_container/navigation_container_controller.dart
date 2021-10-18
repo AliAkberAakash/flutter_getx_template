@@ -21,7 +21,7 @@ class NavigationContainerController extends GetxController{
   }
 
   getUser() async{
-    var jsonString = await SharedPrefUtil.getString(PreferenceKey.generalUser);
+    var jsonString = await SharedPrefUtil.getString(NetworkConstants.GENERAL_USER_PROFILE);
     if(jsonString.isNotEmpty){
       var userJson = jsonDecode(jsonString);
       var user = User.fromJson(userJson);
