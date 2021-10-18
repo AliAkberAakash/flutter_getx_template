@@ -22,9 +22,13 @@ class NavigationContainerController extends GetxController{
 
   getUser() async{
     var jsonString = await SharedPrefUtil.getString(PreferenceKey.generalUser);
-    var userJson = jsonDecode(jsonString);
-    var user = User.fromJson(userJson);
-    userState.value = user;
+    if(jsonString.isNotEmpty){
+      var userJson = jsonDecode(jsonString);
+      var user = User.fromJson(userJson);
+      userState.value = user;
+    }else{
+      userState.value = null;
+    }
   }
 
 }

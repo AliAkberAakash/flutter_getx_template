@@ -211,6 +211,7 @@ class Repository{
   }
   Future logoutGeneralUser() async{
     await SharedPrefUtil.delete(NetworkConstants.GENERAL_USER_TOKEN);
+    await SharedPrefUtil.delete(NetworkConstants.GENERAL_USER_PROFILE);
   }
 
   

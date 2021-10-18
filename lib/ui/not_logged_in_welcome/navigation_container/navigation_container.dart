@@ -100,6 +100,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
                     title: "Menu",
                     index: 2,
                     onTap: (int position) {
+                      _controller.getUser();
                       _showMenu(constraints.maxHeight);
                     },
                   ),

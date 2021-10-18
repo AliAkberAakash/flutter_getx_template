@@ -19,7 +19,7 @@ class SignInController extends GetxController{
   }
   Future storeUser(User user) async{
     String jsonString = json.encode(user.toJson());
-    await SharedPrefUtil.writeString(PreferenceKey.generalUser, jsonString);
+    await SharedPrefUtil.writeString(NetworkConstants.GENERAL_USER_PROFILE, jsonString);
   }
 
   Future storeToken(String token) async {

@@ -117,6 +117,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                 title: "Menu",
                 index: 2,
                 onTap: (int position) {
+                  _controller.getUser();
                   showMenuBottomSheet(hp, context);
                 },
               ),
