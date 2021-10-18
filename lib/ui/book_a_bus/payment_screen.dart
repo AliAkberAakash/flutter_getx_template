@@ -5,7 +5,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:go_share/data/models/booking/address_request.dart';
 import 'package:go_share/data/models/booking/booking_request.dart';
+import 'package:go_share/data/models/booking/booking_response.dart';
 import 'package:go_share/data/models/booking/info_request.dart';
+import 'package:go_share/data/models/one_map/one_map_response.dart';
 import 'package:go_share/data/repository/service_partner_repository.dart';
 import 'package:go_share/ui/book_a_bus/booking_controller.dart';
 import 'package:go_share/ui/book_a_bus/invoice_screen.dart';
@@ -30,6 +32,8 @@ import 'package:logger/logger.dart';
 
 class PaymentScreen extends StatefulWidget {
 
+  final OneMapResponse pickupResponse;
+  final OneMapResponse dropOffResponse;
   final AddressRequest addressRequest;
   final InfoRequest infoRequest;
 
@@ -37,6 +41,8 @@ class PaymentScreen extends StatefulWidget {
     Key? key,
     required this.addressRequest,
     required this.infoRequest,
+    required this.pickupResponse,
+    required this.dropOffResponse,
   }) : super(key: key);
 
   @override
@@ -156,7 +162,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   ),
                   Spacer(),
                   Text(
-                    "S\$47.00",
+                    "S\$${(addressRequest.distance*5).toStringAsFixed(2)}",
                     style: GoogleFonts.manrope(
                       color: accent,
                       fontSize: dp20,
@@ -340,23 +346,23 @@ class _PaymentScreenState extends State<PaymentScreen> {
           VSpacer20(),
           TextFieldHeadline(headline: "Order ID"),
           VSpacer10(),
-          TextFieldValueWidget(headline: '#9070979234'),
+          TextFieldValueWidget(headline: '#'),
           VSpacer20(),
           TextFieldHeadline(headline: "Total Seat"),
           VSpacer10(),
-          TextFieldValueWidget(headline: '5 Seats'),
+          TextFieldValueWidget(headline: (infoRequest.childId.length+infoRequest.childNames.length).toString()),
           VSpacer20(),
           TextFieldHeadline(headline: "Total Distance"),
           VSpacer10(),
-          TextFieldValueWidget(headline: '30 Km'),
+          TextFieldValueWidget(headline: '${addressRequest.distance.toStringAsFixed(2)} km'),
           VSpacer20(),
           TextFieldHeadline(headline: "Cost per Kilometer"),
           VSpacer10(),
-          TextFieldValueWidget(headline: '\$14/km'),
+          TextFieldValueWidget(headline: 'S\$5/km'),
           VSpacer20(),
           TextFieldHeadline(headline: "Total Travel Number"),
           VSpacer10(),
-          TextFieldValueWidget(headline: '12'),
+          TextFieldValueWidget(headline: "${daysDiff(infoRequest.startDate, infoRequest.endDate)+1}"),
           VSpacer20(),
           _getChildPart(),
           Row(
@@ -441,7 +447,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 
-  void showSuccessSheet(BuildContext context) {
+  void showSuccessSheet(BuildContext context, BookingResponse response) {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
@@ -517,7 +523,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               onClick: (){
                                 Get.back();
                                 Get.to(
-                                  InvoiceScreen(),
+                                  InvoiceScreen(bookingResponse: response,),
                                 );
                               },
                               text: "View Invoice",
@@ -540,27 +546,27 @@ class _PaymentScreenState extends State<PaymentScreen> {
       var request = BookingRequest(
         startDate: infoRequest.startDate,
         endDate: infoRequest.endDate,
-        pickupTime: "11:00:00"/*infoRequest.pickupTime*/,
-        dropoffTime: "12:07:00",
+        pickupTime: infoRequest.pickupTime,
+        dropoffTime: infoRequest.dropOffTime,
         newChilds: infoRequest.childNames,
-        existingChilds: [1],
-        numberOfDays: 1,
-        bookedSeat: infoRequest.childNames.length,
+        existingChilds: infoRequest.childId,
+        numberOfDays: daysDiff(infoRequest.startDate, infoRequest.endDate),
+        bookedSeat: infoRequest.childNames.length+infoRequest.childId.length,
         pickupAddress: addressRequest.pickupLocation,
         dropoffAddress: addressRequest.dropOffLocation,
-        pickupLongitude: "hhh",
-        pickupLatitude: "hhh",
+        pickupLongitude: "E 148° 55' 57.921",
+        pickupLatitude: "S 20° 49' 31.5935",
         pickupPostalCode: addressRequest.pickupPostalCode,
-        dropoffLongitude: "hhh",
-        dropoffLatitude: "hhh",
+        dropoffLongitude: "S 20° 49' 31.5935",
+        dropoffLatitude: "E 148° 55' 57.921",
         dropoffPostalCode: addressRequest.dropOffPostalCode,
         pickupRemarks: addressRequest.pickupRemarks,
         dropoffRemarks: addressRequest.dropOffRemarks,
-        distance: 10,
-        price: 53,
+        distance: addressRequest.distance,
+        price: addressRequest.distance*5,
         verbatim: "hhh",
       );
-      placeBooking(request);
+      var response = await placeBooking(request);
     }else showErrorSheet(context);
   }
 
@@ -568,7 +574,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     var response = await controller.placeBooking(request);
     Get.back();
     if(response.success){
-      showSuccessSheet(context);
+      showSuccessSheet(context, response);
     }else{
       ToastUtil.show(response.msg);
     }

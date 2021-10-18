@@ -13,7 +13,7 @@ class UpdateVehicleDetailsResponse {
 
   bool success;
   Data? data;
-  String msg;
+  String? msg;
 
   factory UpdateVehicleDetailsResponse.fromJson(Map<String, dynamic> json) => UpdateVehicleDetailsResponse(
     success: json["success"],
@@ -66,12 +66,12 @@ class Data {
   String attendantPhone;
   String attendantNric;
   DateTime attendantDob;
-  int status;
-  int isVerified;
+  int? status;
+  int? isVerified;
   DateTime? approvedDate;
   DateTime createdAt;
   DateTime? updatedAt;
-  String availableStatus;
+  String? availableStatus;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     id: json["id"],

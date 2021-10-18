@@ -15,7 +15,7 @@ class MyBookingListResponse {
 
   factory MyBookingListResponse.fromJson(Map<String, dynamic> json) => MyBookingListResponse(
     success: json["success"],
-    data: json["data"]==null ? null : Data.fromJson(json["data"]),
+    data: json["data"] == null ? null : Data.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -35,11 +35,11 @@ class Data {
     this.emailVerifiedAt,
     required this.createdAt,
     this.updatedAt,
-    this.image,
+    required this.image,
     required this.nric,
     required this.caretakerName,
     required this.caretakerAddress,
-    this.caretakerImage,
+    required this.caretakerImage,
     required this.caretakerPhone,
     required this.bookings,
   });
@@ -53,11 +53,11 @@ class Data {
   DateTime? emailVerifiedAt;
   DateTime createdAt;
   DateTime? updatedAt;
-  String? image;
+  String image;
   String nric;
   String caretakerName;
   String caretakerAddress;
-  String? caretakerImage;
+  String caretakerImage;
   String caretakerPhone;
   List<Booking> bookings;
 
@@ -67,10 +67,10 @@ class Data {
     email: json["email"],
     phone: json["phone"],
     address: json["address"],
-    dateOfBirth:DateTime.parse(json["date_of_birth"]),
-    emailVerifiedAt: json["email_verified_at"]==null ? null : DateTime.parse(json["email_verified_at"]),
+    dateOfBirth: DateTime.parse(json["date_of_birth"]),
+    emailVerifiedAt: json["email_verified_at"] == null ? null : DateTime.parse(json["email_verified_at"]),
     createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: json["updated_at"]== null ? null : DateTime.parse(json["updated_at"]),
+    updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
     image: json["image"],
     nric: json["nric"],
     caretakerName: json["caretaker_name"],
@@ -161,7 +161,7 @@ class Booking {
     isPaid: json["is_paid"],
     isFinished: json["is_finished"],
     createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: json["updated_at"]==null ? null : DateTime.parse(json["updated_at"]),
+    updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
     currentStatus: json["current_status"],
   );
 

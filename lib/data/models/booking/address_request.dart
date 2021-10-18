@@ -13,6 +13,7 @@ class AddressRequest {
     required this.dropOffLocation,
     required this.dropOffRemarks,
     this.comments,
+    required this.distance,
   });
 
   String pickupPostalCode;
@@ -22,6 +23,7 @@ class AddressRequest {
   String dropOffLocation;
   String dropOffRemarks;
   String? comments;
+  double distance;
 
   factory AddressRequest.fromJson(Map<String, dynamic> json) => AddressRequest(
     pickupPostalCode: json["pickup_postal_code"],
@@ -31,6 +33,7 @@ class AddressRequest {
     dropOffLocation: json["drop_off_location"],
     dropOffRemarks: json["drop_off_remarks"],
     comments: json["comments"],
+    distance: json["distance"]
   );
 
   Map<String, dynamic> toJson() => {
@@ -41,5 +44,6 @@ class AddressRequest {
     "drop_off_location": dropOffLocation,
     "drop_off_remarks": dropOffRemarks,
     "comments": comments,
+    "distance" : distance,
   };
 }

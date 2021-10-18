@@ -8,17 +8,20 @@ class CommonTextField extends StatelessWidget {
   final String hint;
   final TextInputType type;
   final Function? onTap;
+  final bool enabled;
 
   const CommonTextField({
     required this.controller,
     this.hint = "",
     this.type = TextInputType.text,
-    this.onTap
+    this.onTap,
+    this.enabled = true,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      enabled: enabled,
       onTap: (){
         if(onTap!=null)
           onTap!();

@@ -157,7 +157,7 @@ class _ServiceProviderPasswordResetScreenState extends State<ServiceProviderPass
                         Padding(
                           padding: const EdgeInsets.all(10),
                           child: Text(
-                            "Password reset successful! Please Login again.",
+                            "Password reset successful! Please login again.",
                             style: GoogleFonts.manrope(
                               color: GSColors.text_secondary,
                               fontSize: dp14,

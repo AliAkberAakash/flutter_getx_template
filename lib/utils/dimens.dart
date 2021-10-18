@@ -21,6 +21,7 @@ const double dp32 = 32.0;
 const double dp35 = 35.0;
 const double dp40 = 40.0;
 const double dp45 = 45.0;
+const double dp48 = 48.0;
 const double dp80 = 80.0;
 const double dp85 = 85.0;
 const double dp50 = 50.0;

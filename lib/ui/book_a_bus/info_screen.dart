@@ -1,22 +1,23 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:go_share/core/ui/error_screen.dart';
 import 'package:go_share/core/ui/loading_widget.dart';
-import 'package:go_share/data/models/booking/child_list_response.dart';
 import 'package:go_share/data/models/booking/info_request.dart';
 import 'package:go_share/ui/book_a_bus/address_screen.dart';
 import 'package:go_share/ui/book_a_bus/booking_controller.dart';
-import 'package:go_share/ui/common_widgets/auto_complete_text.dart';
 import 'package:go_share/ui/common_widgets/common_text_field.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
+import 'package:go_share/util/lib/toast.dart';
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/date_time_utils.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
 
 class InfoScreen extends StatefulWidget {
   const InfoScreen({Key? key}) : super(key: key);
@@ -29,21 +30,29 @@ class _InfoScreenState extends State<InfoScreen> {
 
   final bookingController = BookingController(Get.find());
 
+  final logger = Logger();
+
+  double distance = 0.0;
   int seat=0;
   String timeFormat="AM";
   List<Widget> childWidgetList = [];
   List<TextEditingController> childControllerList = [];
-  DateTime startDate = DateTime.now();
-  DateTime endDate = DateTime.now();
+  DateTime? startDate;
+  DateTime? endDate;
+  TimeOfDay? pickedTime;
+  String? dropOffTime;
   TextEditingController startTimeController = TextEditingController();
   TextEditingController endTimeController = TextEditingController();
   TextEditingController selectedTimeController = TextEditingController();
 
+  List<String> newChild = ["child"];
+  List<int> existingChild = [];
+
   @override
   void initState() {
     bookingController.getChildList();
-    var controller = new TextEditingController();
-    childControllerList.add(controller);
+    // var controller = new TextEditingController();
+    // childControllerList.add(controller);
     // childWidgetList.add(
     //   _childWidget(childControllerList[0], [""])
     // );
@@ -57,11 +66,15 @@ class _InfoScreenState extends State<InfoScreen> {
         VSpacer20(),
         TextFieldHeadline(headline: "Child Name*"),
         VSpacer20(),
-        AutoCompleteTextField(
+        CommonTextField(
           controller: controller,
           hint: "Child Name",
-          suggestions: suggestions,
         ),
+        // AutoCompleteTextField(
+        //   controller: controller,
+        //   hint: "Child Name",
+        //   suggestions: suggestions,
+        // ),
       ],
     );
   }
@@ -69,17 +82,14 @@ class _InfoScreenState extends State<InfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx((){
-
-        var currentState = bookingController.childListResponse.value;
-
-        if(currentState==null){
-          return LoadingWidget();
-        }else{
-          if(currentState.success) {
-
-            var suggestion = currentState.data!.map((e) => e.name).toList();
-
+      body: Obx(
+        (){
+          var currentState = bookingController.childListResponse.value;
+          if(currentState==null){
+            return LoadingWidget();
+          }else{
+            List<String> suggestion = currentState.data!=null ? currentState.data!.map((e) => e.name).toList()
+            : [];
             return Container(
               padding: EdgeInsets.all(dp20),
               child: ListView(
@@ -307,41 +317,94 @@ class _InfoScreenState extends State<InfoScreen> {
                   PositiveButton(
                     text: "Next",
                     onClicked: () {
-                      List<String> newChild = [];
-                      List<int> existingChild = [];
+                      newChild.clear();
+                      existingChild.clear();
 
-                      for (var controller in childControllerList)
-                      {
-                        Datum? child = currentState.data!.firstWhere((element) => element.name==controller.text, orElse: (){
-                          return Datum(id: -1, userId: -1, name: "null", createdAt: DateTime.now(), updatedAt: DateTime.now());
-                        });
-                        if(child.id==-1){
-                          newChild.add(controller.text);
-                        }else existingChild.add(child.id);
+                      for (var controller1 in childControllerList){
+                        if(controller1.text.isNotEmpty){
+                          newChild.add(controller1.text);
+                        }
                       }
 
-                      var infoRequest = InfoRequest(
-                        childNames: newChild,
-                        startDate: startDate,
-                        endDate: endDate,
-                        pickupTime: selectedTimeController.text,
-                      );
+                      // for (var controller in childControllerList)
+                      // {
+                      //   Datum? child = currentState.data!.firstWhere(
+                      //           (element) => element.name==controller.text,
+                      //       orElse: (){
+                      //     return Datum(
+                      //       id: -1,
+                      //       userId: -1,
+                      //       name: controller.text,
+                      //       createdAt: DateTime.now(),
+                      //       updatedAt: DateTime.now(),
+                      //     );
+                      //   });
+                      //   if(child.id==-1){
+                      //     if(child.name.isNotEmpty)
+                      //       newChild.add(controller.text);
+                      //   }else existingChild.add(child.id);
+                      // }
 
-                      Get.to(
-                        AddressScreen(
-                          infoRequest: infoRequest,
-                        ),
-                      );
+                      if(validate()){
+
+                        var infoRequest = InfoRequest(
+                          childNames: newChild,
+                          childId: existingChild,
+                          startDate: formatDate(startDate!),
+                          endDate: formatDate(endDate!),
+                          pickupTime: selectedTimeController.text,
+                          dropOffTime: dropOffTime ?? "00:00:00",
+                        );
+
+                       // print(infoRequest.toJson());
+
+                        Get.to(
+                          AddressScreen(
+                            infoRequest: infoRequest,
+                          ),
+                        );
+                      }
                     },
                   ),
                 ],
               ),
             );
-          } else return ErrorScreen();
-        }
-
-      }),
+          }
+        },
+      ),
     );
+  }
+
+  bool validate(){
+
+    print(newChild.length);
+    print(existingChild.length);
+
+    // if(newChild.isEmpty && existingChild.isEmpty){
+    //   ToastUtil.show("Please select at least one child");
+    //   return false;
+    // }
+
+    if(newChild.isEmpty){
+        ToastUtil.show("Please select at least one child");
+        return false;
+    }
+
+    print("StartDate $startDate");
+    print("EndDate $endDate");
+    print("time $pickedTime");
+
+    if(startDate == null || endDate == null){
+        ToastUtil.show("Please select start date");
+        return false;
+    }
+
+    if(pickedTime == null){
+      ToastUtil.show("Please select pickup time");
+      return false;
+    }
+
+    return true;
   }
 
   DateTime selectedDate = DateTime.now();
@@ -365,21 +428,28 @@ class _InfoScreenState extends State<InfoScreen> {
     if (picked != null && picked != selectedDate)
       setState(() {
         if(type==1) {
+          startDate = picked;
+          endDate = picked;
           startTimeController.text=speakDate(picked);
+          endTimeController.text=speakDate(picked);
         } else {
+          endDate = picked;
           endTimeController.text=speakDate(picked);
         }
         selectedDate = picked;
       });
   }
 
-  String formatDate(DateTime date){
-    var outputFormat = DateFormat('MM.dd.yyyy');
-    return outputFormat.format(date);
+  DateTime formatDate(DateTime date){
+    var outputFormat = DateFormat('yyyy-MM-dd');
+    return DateTime.parse(outputFormat.format(date));
   }
 
   _datePicker(TextEditingController controller, String hint, int type){
     return TextField(
+      onTap: (){
+        _selectDate(context, type);
+      },
       readOnly: true,
       controller: controller,
       style: TextStyle(
@@ -389,14 +459,9 @@ class _InfoScreenState extends State<InfoScreen> {
       ),
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        suffixIcon: IconButton(
-          onPressed: (){
-            _selectDate(context, type);
-          },
-          icon: Icon(
-            Icons.date_range,
-            color: accent,
-          ),
+        suffixIcon: Icon(
+          Icons.date_range,
+          color: accent,
         ),
         contentPadding: EdgeInsets.only(left: 10),
         hintText: hint,
@@ -420,6 +485,9 @@ class _InfoScreenState extends State<InfoScreen> {
   _timePicker(TextEditingController controller){
 
     return TextField(
+      onTap: (){
+        _selectTime();
+      },
       readOnly: true,
       controller: controller,
       style: TextStyle(
@@ -429,14 +497,9 @@ class _InfoScreenState extends State<InfoScreen> {
       ),
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        suffixIcon: IconButton(
-          onPressed: (){
-            _selectTime();
-          },
-          icon: Icon(
-            Icons.access_time_outlined,
-            color: accent,
-          ),
+        suffixIcon: Icon(
+          Icons.access_time_outlined,
+          color: accent,
         ),
         contentPadding: EdgeInsets.only(left: 10),
         hintText: "Select time",
@@ -475,7 +538,10 @@ class _InfoScreenState extends State<InfoScreen> {
       initialTime: TimeOfDay.now(),
       context: context,
     );
-    selectedTimeController.text =  "${selectedTime?.hour}:${selectedTime?.minute}";
+    pickedTime = selectedTime;
+    NumberFormat formatter = new NumberFormat("00");
+    selectedTimeController.text =  "${formatter.format(selectedTime?.hour)}:${formatter.format(selectedTime?.minute)}:00";
+    dropOffTime =  "${formatter.format((selectedTime?.hour)??0+1)}:${formatter.format(selectedTime?.minute)}:01";
   }
 
 }

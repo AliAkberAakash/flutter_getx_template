@@ -1,10 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:go_share/data/models/booking/address_request.dart';
 import 'package:go_share/data/models/booking/info_request.dart';
 import 'package:go_share/data/models/google_map/geocoding_response.dart';
 import 'package:go_share/ui/common_widgets/post_code_field.dart';
-import 'package:go_share/ui/common_widgets/text_field_value_widget.dart';
 import 'package:go_share/util/lib/toast.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:get/get.dart';
@@ -59,28 +60,47 @@ class _AddressScreenState extends State<AddressScreen> {
   String pickupPostCode = "";
   String dropOffPostCode = "";
 
+  double distance = 0.0;
+
   _AddressScreenState(this.infoRequest);
 
   @override
   void initState() {
 
-    pickupPostCodeController.addListener(() {
-      var text = pickupPostCodeController.text;
-      if(text.length==6){
-        var postCode = int.parse(pickupPostCodeController.text);
-        setState(() {
-          if(postCode>=600000 && postCode<=689999){
-            pickupPostCodeErrorText=null;
-            _controller.getPickupAddressFromPO(postCode.toString());
-          }else{
-            pickupPostCodeErrorText = "Invalid Post Code";
-          }
-        });
-      }
+    // pickupPostCodeController.addListener(
+    //   () {
+    //     var text = pickupPostCodeController.text;
+    //     if(text.length==6){
+    //       var postCode = int.parse(pickupPostCodeController.text);
+    //       setState(
+    //         () {
+    //           if(postCode>=600000 && postCode<=689999){
+    //             pickupPostCodeErrorText=null;
+    //             _controller.getPickupAddressFromPO(postCode.toString());
+    //           }else{
+    //             pickupPostCodeErrorText = "Invalid Post Code";
+    //           }
+    //         },
+    //       );
+    //     }
+    //   },
+    // );
 
-    });
+    // pickupAddressController.addListener(
+    //   () {
+    //     var text = pickupAddressController.text;
+    //     _controller.getPickupAddressFromPO(text);
+    //   },
+    // );
+    //
+    // dropOffAddressController.addListener(
+    //   () {
+    //     var text = pickupAddressController.text;
+    //     _controller.getPickupAddressFromPO(text);
+    //   },
+    // );
 
-    dropOffPostCodeController.addListener(() {
+    /*dropOffPostCodeController.addListener(() {
       var text =dropOffPostCodeController.text;
       if(text.length==6){
         var postCode = int.parse(dropOffPostCodeController.text);
@@ -94,7 +114,7 @@ class _AddressScreenState extends State<AddressScreen> {
         });
       }
 
-    });
+    });*/
 
     super.initState();
   }
@@ -179,34 +199,67 @@ class _AddressScreenState extends State<AddressScreen> {
             ),
             VSpacer20(),
             Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Flexible(
-                  child: PostCodeField(
-                    errorText: pickupPostCodeErrorText,
-                    type: TextInputType.number,
-                    controller: pickupPostCodeController,
-                    hint: "Postal Code",
-                  ),
+                Expanded(
+                  child: Obx((){
+                    pickupAddressController.text = _controller.pickupAddress.value;
+                    return CommonTextField(
+                      //enabled: false,
+                      controller: pickupAddressController,
+                      hint: "Location",
+                    );
+                  }),
                 ),
-                HSpacer20(),
-                Obx((){
-                  return Container(
-                    width: 180,
-                    child: TextFieldValueWidget(
-                      headline: _controller.pickupAddress.value,
+                HSpacer10(),
+                MaterialButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(
+                            dp10
+                        )
                     ),
-                  );
-                })
+                  ),
+                  height: dp48,
+                  minWidth: dp48,
+                  color: accent,
+                  child: Icon(
+                    Icons.search,
+                    color: white,
+                  ),
+                  onPressed: (){
+                    _controller.getPickupAddressFromPO(pickupAddressController.text);
+                  },
+                )
               ],
             ),
             VSpacer20(),
-            CommonTextField(
-              onTap: (){
-                getPickupLocation();
-              },
-              controller: pickupAddressController,
-              hint: "Location",
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Flexible(
+                  child: Obx((){
+
+                    pickupPostCodeController.text = _controller.pickupPostalCode.value;
+
+                    return PostCodeField(
+                      errorText: pickupPostCodeErrorText,
+                      type: TextInputType.number,
+                      controller: pickupPostCodeController,
+                      hint: "Postal Code",
+                    );
+                  }),
+                ),
+                HSpacer20(),
+                Spacer(),
+                // Obx((){
+                //   return Container(
+                //     width: 180,
+                //     child: TextFieldValueWidget(
+                //       headline: _controller.pickupAddress.value,
+                //     ),
+                //   );
+                // })
+              ],
             ),
             VSpacer20(),
             TextFieldHeadline(headline: "Pickup Remarks"),
@@ -228,24 +281,28 @@ class _AddressScreenState extends State<AddressScreen> {
                   ),
                 ),
                 HSpacer20(),
-                Obx((){
-                  return Container(
-                    width: 180,
-                    child: TextFieldValueWidget(
-                      headline: _controller.dropOffAddress.value,
-                    ),
-                  );
-                }),
+                Spacer(),
+                // Obx((){
+                //   return Container(
+                //     width: 180,
+                //     child: TextFieldValueWidget(
+                //       headline: _controller.dropOffAddress.value,
+                //     ),
+                //   );
+                // }),
               ],
             ),
             VSpacer20(),
-            CommonTextField(
-              onTap: (){
-                getDropOffLocation();
-              },
-              controller: dropOffAddressController,
-              hint: "Location",
-            ),
+            Obx((){
+
+              dropOffAddressController.text = _controller.dropOffAddress.value;
+
+              return CommonTextField(
+                //enabled: false,
+                controller: dropOffAddressController,
+                hint: "Location",
+              );
+            }),
             VSpacer20(),
             TextFieldHeadline(headline: "Drop Off Remarks"),
             VSpacer20(),
@@ -295,10 +352,20 @@ class _AddressScreenState extends State<AddressScreen> {
                           dropOffPostalCode: dropOffPostCodeController.text,
                           dropOffLocation: dropOffAddressController.text,
                           dropOffRemarks: dropOffRemarksController.text,
-                          comments: commentsController.text
+                          comments: commentsController.text,
+                          distance: distance
                         );
 
-                        Get.to(PaymentScreen(addressRequest: addressRequest, infoRequest: infoRequest,));
+                        Get.to(
+                          PaymentScreen(
+                            addressRequest: addressRequest,
+                            infoRequest: infoRequest,
+                            dropOffResponse: _controller.dropOffResponse,
+                            pickupResponse: _controller.pickUpResponse,
+                          ),
+                        );
+                      }else{
+                        ToastUtil.show("Please fill required fields");
                       }
                     },
                   ),
@@ -314,6 +381,7 @@ class _AddressScreenState extends State<AddressScreen> {
   }
 
   bool validate(){
+    calculateDistance();
     // if(pickupPostCode != pickupPostCodeController.text) {
     //   ToastUtil.show("Post code does not match with pickup address");
     //   return false;
@@ -323,6 +391,11 @@ class _AddressScreenState extends State<AddressScreen> {
     //   ToastUtil.show("Post code does not match with drop off address");
     //   return false;
     // }
+
+    return pickupPostCodeController.text.isNotEmpty
+        && pickupAddressController.text.isNotEmpty
+        && dropOffPostCodeController.text.isNotEmpty
+        && dropOffAddressController.text.isNotEmpty;
 
     return true;
   }
@@ -414,5 +487,44 @@ class _AddressScreenState extends State<AddressScreen> {
     //}
 
   }
+
+
+  calculateDistance(){
+    if(_controller.pickUpResponse.found == 1 && _controller.dropOffResponse.found == 1){
+      try{
+        var pickupLat =
+        double.parse(_controller.pickUpResponse.results[0].latitude);
+        var pickupLng =
+        double.parse(_controller.pickUpResponse.results[0].longitude);
+
+        var dropOffLat =
+        double.parse(_controller.dropOffResponse.results[0].latitude);
+        var dropOffLng = double.parse(
+            _controller.dropOffResponse.results[0].longitude);
+
+        distance = calculateDist(
+          pickupLat,
+          pickupLng,
+          dropOffLat,
+          dropOffLng,
+        );
+
+        logger.d("distance : $distance");
+
+      }catch(e){
+        logger.d(e);
+      }
+    }
+  }
+
+  double calculateDist(lat1, lon1, lat2, lon2){
+    var p = 0.017453292519943295;
+    var c = cos;
+    var a = 0.5 - c((lat2 - lat1) * p)/2 +
+        c(lat1 * p) * c(lat2 * p) *
+            (1 - c((lon2 - lon1) * p))/2;
+    return 12742 * asin(sqrt(a));
+  }
+
 
 }

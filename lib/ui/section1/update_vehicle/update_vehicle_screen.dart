@@ -112,7 +112,7 @@ class _UpdateVehicleScreenState extends State<UpdateVehicleScreen> {
             VSpacer10(),
             CommonTextField(
               controller: driverLicenseNumberController,
-              type: TextInputType.number,
+              type: TextInputType.text,
             ),
             VSpacer40(),
             TextFieldHeadline(headline: 'Driver License Issue Date'),
@@ -177,10 +177,11 @@ class _UpdateVehicleScreenState extends State<UpdateVehicleScreen> {
 
     Get.back();
     if(response.data != null){
-      modalBottomSheetMenuPending(context);
+      Get.back();
+      Get.back();
     }
 
-    ToastUtil.show(response.msg);
+    ToastUtil.show(response.msg ?? "Server Error");
 
   }
 

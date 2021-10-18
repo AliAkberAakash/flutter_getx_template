@@ -6,6 +6,7 @@ import 'package:go_share/data/models/booking/booking_request.dart';
 import 'package:go_share/data/models/booking/booking_response.dart';
 import 'package:go_share/data/models/booking/child_list_response.dart';
 import 'package:go_share/data/models/booking/my_booking_list_response.dart';
+import 'package:go_share/data/models/booking/pricing_response.dart';
 import 'package:go_share/data/models/booking/rating_request.dart';
 import 'package:go_share/data/models/booking/rating_response.dart';
 import 'package:go_share/data/models/driver/driver_login_request.dart';
@@ -22,6 +23,7 @@ import 'package:go_share/data/models/general_user/profile/general_user_profile_r
 import 'package:go_share/data/models/general_user/profile/profile_update_request.dart';
 import 'package:go_share/data/models/general_user/profile/profile_update_response.dart';
 import 'package:go_share/data/models/google_map/geocoding_response.dart';
+import 'package:go_share/data/models/one_map/one_map_response.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_request.dart';
 import 'package:go_share/data/models/service_partner/auth/login/service_partner_login_response.dart';
 import 'package:go_share/data/models/service_partner/auth/password_reset_code_request.dart';
@@ -500,23 +502,21 @@ class Repository{
       return GeneralUserSignupResponse(success: false, msg: 'Data Parsing Error');
     }
   }
-  Future<UpdateProfileResponse> updateGeneralUserProfile(File? file,
-      UpdateProfileRequest request) async {
+  Future<UpdateProfileResponse> updateGeneralUserProfile(
+      File? user,
+      File? careTaker,
+      UpdateProfileRequest request,
+      ) async {
     try {
 
       var responseJson;
 
-      if(file!=null){
-        responseJson = await helper.postGeneralUserMultiPart(
-            NetworkConstants.GU_UPDATE_PROFILE,
-            "image",
-            file,
-            request.toJson());
-      }else{
-        responseJson = await helper.postGeneralUser(
-            NetworkConstants.GU_UPDATE_PROFILE,
-            request.toJson());
-      }
+      responseJson = await helper.postGeneralUserMultiPart(
+        NetworkConstants.GU_UPDATE_PROFILE,
+        user,
+        careTaker,
+        request.toJson(),
+      );
 
       if (responseJson.statusCode == 200) {
         return UpdateProfileResponse.fromJson(responseJson.data);
@@ -584,6 +584,40 @@ class Repository{
     } catch (e) {
       logger.d(e);
       return ChildrenListResponse(success: false, msg: 'Data Parsing Error');
+    }
+  }
+
+  Future<OneMapResponse> getAddressFromCoordinates(String postalCode) async{
+    try{
+
+      var url = "https://developers.onemap.sg/commonapi/search";
+
+      var response = await helper.getRawWithParams(
+          url,
+          {
+            "searchVal":postalCode,
+            "returnGeom":"Y",
+            "getAddrDetails":"Y",
+            "pageNum":1
+          }
+      );
+      return OneMapResponse.fromJson(response.data);
+    }catch(e){
+      logger.d(e);
+      return OneMapResponse(
+        found: 0,
+        totalNumPages: 0, pageNum: 0, results:[],
+      );
+    }
+  }
+
+  Future<PricingResponse> getPricing() async{
+    try{
+      var response = await helper.get(NetworkConstants.PRICING);
+      return PricingResponse.fromJson(response.data);
+    }catch(e){
+      logger.d(e);
+      return PricingResponse(success: false, data: []);
     }
   }
 

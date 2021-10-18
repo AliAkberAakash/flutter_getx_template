@@ -9,8 +9,16 @@ class EditProfileController extends GetxController{
 
   final Repository _repository = Get.find();
 
-  Future<UpdateProfileResponse> updateUserProfile(File? file, UpdateProfileRequest request) async{
-    return await _repository.updateGeneralUserProfile(file, request);
+  Future<UpdateProfileResponse> updateUserProfile(
+    File? userImage,
+    File? careTakerImage,
+    UpdateProfileRequest request,
+  ) async{
+    return await _repository.updateGeneralUserProfile(
+      userImage,
+      careTakerImage,
+      request,
+    );
   }
 
 }
