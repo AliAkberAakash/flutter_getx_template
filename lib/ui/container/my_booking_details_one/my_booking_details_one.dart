@@ -202,28 +202,30 @@ class LocationInfoWidget extends StatelessWidget {
                 ),
               ),
               HSpacer20(),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TitleSubtitleWidget(
-                    title: "Pickup Point",
-                    subtitle: "${booking.pickupAddress}",
-                    margin: const EdgeInsets.only(
-                      bottom: 24.0,
-                      top: 24.0,
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TitleSubtitleWidget(
+                      title: "Pickup Point",
+                      subtitle: "${booking.pickupAddress}",
+                      margin: const EdgeInsets.only(
+                        bottom: 24.0,
+                        top: 24.0,
+                      ),
                     ),
-                  ),
-                  TitleSubtitleWidget(
-                    title: "Postal Code",
-                    subtitle: "",
-                    margin: const EdgeInsets.only(bottom: 24.0),
-                  ),
-                  TitleSubtitleWidget(
-                    title: "Pickup Remark",
-                    subtitle: " ",
-                    margin: const EdgeInsets.only(bottom: 48.0),
-                  ),
-                ],
+                    TitleSubtitleWidget(
+                      title: "Postal Code",
+                      subtitle: "",
+                      margin: const EdgeInsets.only(bottom: 24.0),
+                    ),
+                    TitleSubtitleWidget(
+                      title: "Pickup Remark",
+                      subtitle: " ",
+                      margin: const EdgeInsets.only(bottom: 48.0),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
