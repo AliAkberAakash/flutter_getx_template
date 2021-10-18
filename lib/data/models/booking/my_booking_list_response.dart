@@ -37,10 +37,10 @@ class Data {
     this.updatedAt,
     required this.image,
     required this.nric,
-    required this.caretakerName,
-    required this.caretakerAddress,
-    required this.caretakerImage,
-    required this.caretakerPhone,
+    this.caretakerName,
+    this.caretakerAddress,
+    this.caretakerImage,
+    this.caretakerPhone,
     required this.bookings,
   });
 
@@ -55,10 +55,10 @@ class Data {
   DateTime? updatedAt;
   String image;
   String nric;
-  String caretakerName;
-  String caretakerAddress;
-  String caretakerImage;
-  String caretakerPhone;
+  String? caretakerName;
+  String? caretakerAddress;
+  String? caretakerImage;
+  String? caretakerPhone;
   List<Booking> bookings;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -135,7 +135,7 @@ class Booking {
   String dropoffAddress;
   int price;
   int distance;
-  double? rating;
+  String? rating;
   int isApproved;
   int isPaid;
   int isFinished;
