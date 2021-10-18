@@ -538,6 +538,7 @@ class Repository{
       return MyBookingListResponse.fromJson(response.data);
     }catch(e){
       logger.d(e);
+      print(e.toString());
       return MyBookingListResponse(
           success: false
       );

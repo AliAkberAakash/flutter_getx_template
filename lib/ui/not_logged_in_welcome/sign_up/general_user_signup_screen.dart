@@ -244,7 +244,7 @@ class _GeneralUserSignupScreenState extends State<GeneralUserSignupScreen> {
                         Padding(
                           padding: const EdgeInsets.all(10),
                           child: Text(
-                            "Your account sas been successfully created. Please login!",
+                            "Your account has been successfully created. Please login!",
                             style: GoogleFonts.manrope(
                               color: GSColors.text_secondary,
                               fontSize: dp14,

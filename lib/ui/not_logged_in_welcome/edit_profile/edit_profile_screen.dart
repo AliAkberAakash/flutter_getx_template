@@ -98,13 +98,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             VSpacer10(),
             CommonTextField(controller: fullNameController),
             VSpacer40(),
-            TextFieldHeadline(headline: 'Email Address'),
+            TextFieldHeadline(
+              headline: 'Email Address',
+            ),
             VSpacer10(),
-            CommonTextField(controller: emailController),
+            CommonTextField(
+              controller: emailController,
+              type: TextInputType.emailAddress,
+            ),
             VSpacer40(),
             TextFieldHeadline(headline: 'Phone Number'),
             VSpacer10(),
-            CommonTextField(controller: phoneNumberController),
+            CommonTextField(
+              controller: phoneNumberController,
+              type: TextInputType.phone,
+            ),
             VSpacer40(),
             TextFieldHeadline(headline: 'Address'),
             VSpacer10(),
@@ -128,7 +136,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             VSpacer40(),
             TextFieldHeadline(headline: 'Caretaker Mobile Number'),
             VSpacer10(),
-            CommonTextField(controller: careTakerNumberController),
+            CommonTextField(
+              controller: careTakerNumberController,
+              type: TextInputType.phone,
+            ),
             VSpacer40(),
             PositiveButton(
               text: "Update Now",

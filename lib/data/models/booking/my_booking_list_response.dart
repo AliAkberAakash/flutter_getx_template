@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:logger/logger.dart';
+
 MyBookingListResponse myBookingListResponseFromJson(String str) => MyBookingListResponse.fromJson(json.decode(str));
 
 String myBookingListResponseToJson(MyBookingListResponse data) => json.encode(data.toJson());
@@ -31,12 +33,12 @@ class Data {
     required this.email,
     required this.phone,
     required this.address,
-    required this.dateOfBirth,
+    this.dateOfBirth,
     this.emailVerifiedAt,
     required this.createdAt,
     this.updatedAt,
-    required this.image,
-    required this.nric,
+    this.image,
+    this.nric,
     this.caretakerName,
     this.caretakerAddress,
     this.caretakerImage,
@@ -45,40 +47,47 @@ class Data {
   });
 
   int id;
-  String name;
-  String email;
-  String phone;
-  String address;
-  DateTime dateOfBirth;
+  String? name;
+  String? email;
+  String? phone;
+  String? address;
+  DateTime? dateOfBirth;
   DateTime? emailVerifiedAt;
   DateTime createdAt;
   DateTime? updatedAt;
-  String image;
-  String nric;
+  String? image;
+  String? nric;
   String? caretakerName;
   String? caretakerAddress;
   String? caretakerImage;
   String? caretakerPhone;
   List<Booking> bookings;
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-    id: json["id"],
-    name: json["name"],
-    email: json["email"],
-    phone: json["phone"],
-    address: json["address"],
-    dateOfBirth: DateTime.parse(json["date_of_birth"]),
-    emailVerifiedAt: json["email_verified_at"] == null ? null : DateTime.parse(json["email_verified_at"]),
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-    image: json["image"],
-    nric: json["nric"],
-    caretakerName: json["caretaker_name"],
-    caretakerAddress: json["caretaker_address"],
-    caretakerImage: json["caretaker_image"],
-    caretakerPhone: json["caretaker_phone"],
-    bookings: List<Booking>.from(json["bookings"].map((x) => Booking.fromJson(x))),
-  );
+  factory Data.fromJson(Map<String, dynamic> json){
+      return Data(
+        id: json["id"],
+        name: json["name"],
+        email: json["email"],
+        phone: json["phone"],
+        address: json["address"],
+        dateOfBirth: json["date_of_birth"]==null ? null : DateTime.parse(json["date_of_birth"]),
+        emailVerifiedAt: json["email_verified_at"] == null
+            ? null
+            : DateTime.parse(json["email_verified_at"]),
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: json["updated_at"] == null
+            ? null
+            : DateTime.parse(json["updated_at"]),
+        image: json["image"],
+        nric: json["nric"],
+        caretakerName: json["caretaker_name"],
+        caretakerAddress: json["caretaker_address"],
+        caretakerImage: json["caretaker_image"],
+        caretakerPhone: json["caretaker_phone"],
+        bookings: List<Booking>.from(
+            json["bookings"].map((x) => Booking.fromJson(x))),
+      );
+  }
 
   Map<String, dynamic> toJson() => {
     "id": id,
@@ -86,7 +95,7 @@ class Data {
     "email": email,
     "phone": phone,
     "address": address,
-    "date_of_birth": "${dateOfBirth.year.toString().padLeft(4, '0')}-${dateOfBirth.month.toString().padLeft(2, '0')}-${dateOfBirth.day.toString().padLeft(2, '0')}",
+    "date_of_birth": "${dateOfBirth?.year.toString().padLeft(4, '0')}-${dateOfBirth?.month.toString().padLeft(2, '0')}-${dateOfBirth?.day.toString().padLeft(2, '0')}",
     "email_verified_at": emailVerifiedAt?.toIso8601String(),
     "created_at": createdAt.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),
