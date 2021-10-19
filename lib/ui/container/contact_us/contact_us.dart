@@ -37,6 +37,7 @@ class _ContactUsViewState extends State<ContactUsView> {
         statusBarBrightness: Brightness.dark,
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -212,7 +213,8 @@ class _FormListWidgetState extends State<FormListWidget> {
                 submitData();
               },
             ),
-            VSpacer40(),
+            VSpacer80(),
+
           ],
         ),
       ),
@@ -246,26 +248,13 @@ class _FormListWidgetState extends State<FormListWidget> {
                         Padding(
                           padding: const EdgeInsets.all(10),
                           child: Text(
-                            "Thank you",
+                            "Thanks for your query",
+                            textAlign: TextAlign.center,
                             style: GoogleFonts.manrope(
                               color: GSColors.green_secondary,
                               fontSize: dp25,
                               fontWeight: FontWeight.bold,
                             ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Text(
-                            "Your charity program has been successfully "
-                                "created.\n Now you can check and maintain "
-                                "\in your\n'activity' menu.",
-                            style: GoogleFonts.manrope(
-                              color: GSColors.text_secondary,
-                              fontSize: dp14,
-                              fontWeight: FontWeight.normal,
-                            ),
-                            textAlign: TextAlign.center,
                           ),
                         ),
                       ],

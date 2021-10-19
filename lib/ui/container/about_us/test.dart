@@ -39,26 +39,26 @@ class _AboutUsViewState extends State<AboutUsView> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: FutureBuilder<AboutUsModel>(
-          future: _getaboutUsData(),
-          builder: (context, snapshot) {
-            if(snapshot.hasData){
-              AboutUsModel model=snapshot.data!;
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TitleWidget(),
-                  Expanded(
-                    child: BodyWidget(data: model),
-                  ),
+            future: _getaboutUsData(),
+            builder: (context, snapshot) {
+              if(snapshot.hasData){
+                AboutUsModel model=snapshot.data!;
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TitleWidget(),
+                    Expanded(
+                      child: BodyWidget(data: model),
+                    ),
 
-                ],
-              );
-            }return Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                child: Center(child: CircularProgressIndicator()));
-          }
+                  ],
+                );
+              }return Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  child: Center(child: CircularProgressIndicator()));
+            }
         ),
       ),
     );
@@ -70,12 +70,12 @@ class _AboutUsViewState extends State<AboutUsView> {
     print("response${response.data}");
     return response;
 
-      // if(response != null) {
-      //
-      // }
-      // else{
-      //   new AboutUsModel(data:new List());
-      // }
+    // if(response != null) {
+    //
+    // }
+    // else{
+    //   new AboutUsModel(data:new List());
+    // }
   }
 }
 
@@ -161,23 +161,39 @@ class _BodyWidgetState extends State<BodyWidget>
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        child: Column(
-          children: [
-            IntroductionWidget(data:widget.data),
-            Container(
+    return NestedScrollView(
+      controller: _scrollController,
+      physics: BouncingScrollPhysics(),
+      headerSliverBuilder: (context, value) {
+        return [
+          SliverToBoxAdapter(
+            child: Container(
               width: double.maxFinite,
-              margin: const EdgeInsets.only(
-                top: 0.0,
-              ),
-              child: Image.asset(
-                "images/ic_demo_testimonial_one.png",
-                height: 440.0,
-                fit: BoxFit.cover,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  IntroductionWidget(data:widget.data),
+                  Container(
+                    width: double.maxFinite,
+                    margin: const EdgeInsets.only(
+                      top: 0.0,
+                    ),
+                    child: Image.asset(
+                      "images/ic_demo_testimonial_one.png",
+                      height: 440.0,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+
+                  WhyChooseUsWidget(),
+                  CustomAppPromotionWidget(data:widget.data)
+
+                ],
               ),
             ),
-            TabBar(
+          ),
+          SliverToBoxAdapter(
+            child: TabBar(
               physics: BouncingScrollPhysics(),
               isScrollable: false,
               labelColor: GSColors.green_secondary,
@@ -196,21 +212,28 @@ class _BodyWidgetState extends State<BodyWidget>
                 TabBarCustomTab(title: "Our Vision"),
               ],
             ),
-            Container(
-                  height: 300,
-                  child: TabBarView(
-                    physics: BouncingScrollPhysics(),
-                    controller: _tabController,
-                    children: [
-                      MissionAndVisionListWidget(data:widget.data.data.first.missionText),
-                      MissionAndVisionListWidget(data:widget.data.data.first.visionText),
-                    ],
-                  ),
+          ),
+
+
+
+
+        ];
+      },
+      body: Column(
+        children: [
+          Expanded(
+            child: Container(
+              child: TabBarView(
+                physics: BouncingScrollPhysics(),
+                controller: _tabController,
+                children: [
+                  MissionAndVisionListWidget(data:widget.data.data.first.missionText),
+                  MissionAndVisionListWidget(data:widget.data.data.first.visionText),
+                ],
+              ),
             ),
-            WhyChooseUsWidget(),
-            CustomAppPromotionWidget(data:widget.data)
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -317,7 +340,7 @@ class IntroductionWidget extends StatelessWidget {
           ),
           Html(
             data: data.data.first.wwvText,),
-         /* Text(
+          /* Text(
             data.data.first.wwvText,
             style: GSTextStyles.make12xw400Style(
               color: GSColors.text_light,

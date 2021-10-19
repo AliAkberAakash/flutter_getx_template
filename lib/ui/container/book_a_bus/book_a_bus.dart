@@ -1,13 +1,46 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/custom_filled_button.dart';
 import 'package:go_share/data/models/container/FaqModel.dart';
+import 'package:go_share/ui/book_a_bus/info_screen.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
+import 'package:go_share/ui/container/about_us/about_us.dart';
 import 'package:go_share/ui/container/contact_us/contact_us.dart';
+import 'package:go_share/ui/container/home/home.dart';
+import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
+import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/constants.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:go_share/ui/book_a_bus/info_screen.dart';
+import 'package:go_share/ui/container/UIConstants/Colors.dart';
+import 'package:go_share/ui/container/about_us/about_us.dart';
+import 'package:go_share/ui/container/contact_us/contact_us.dart';
+import 'package:go_share/ui/container/faq/faq.dart';
+import 'package:go_share/ui/container/home/home.dart';
+import 'package:go_share/ui/container/lost_and_found/lost_and_found.dart';
+import 'package:go_share/ui/container/our_service/our_service.dart';
+import 'package:go_share/ui/container/privacy_and_concern/privacy_and_concern.dart';
+import 'package:go_share/ui/container/terms_and_conditions/terms_and_conditions.dart';
+import 'package:go_share/ui/navigation_container/widgets/bottom_bar_item.dart';
+import 'package:go_share/ui/navigation_container/widgets/menu_items.dart';
+import 'package:go_share/ui/not_logged_in_welcome/welcome/welcome_screen.dart';
+import 'package:go_share/ui/section1/driver_login/driver_login_screen.dart';
+import 'package:go_share/ui/section4/widgets/menu_page_button.dart';
+import 'package:go_share/utils/colors.dart';
+import 'package:go_share/utils/constants.dart';
+import 'package:go_share/utils/dimens.dart';
+import 'package:go_share/utils/spacers.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class BookABusView extends StatefulWidget {
   FaqModel? data;
@@ -19,7 +52,15 @@ class BookABusView extends StatefulWidget {
   _BookABusViewState createState() => _BookABusViewState();
 }
 
+
 class _BookABusViewState extends State<BookABusView> {
+  late int selectedBottomBarIndex=0;
+  late Widget body;
+  @override
+  void initState() {
+    body=_index();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -31,37 +72,304 @@ class _BookABusViewState extends State<BookABusView> {
         statusBarBrightness: Brightness.dark,
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TitleWidget(data:widget.data,index:widget.categoryId,name:widget.name),
-            Expanded(
-              child: FaqListWidget(data:widget.data,index:widget.categoryId),
+        extendBodyBehindAppBar: true,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: GSColors.green_secondary,
+          child: Container(
+            height: 60,
+            width: 60,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                    colors: [gradientDark, gradientLight],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight
+                )
             ),
-            CustomFilledButton(
-              margin: const EdgeInsets.only(
-                left: 30.0,
-                right: 30.0,
-                top: 32.0,
-                bottom: 16.0,
+            child: Center(
+              child: SvgPicture.asset(
+                AssetConstants.ic_bus_svg,
               ),
-              borderRadius: 8.0,
-              borderColor: GSColors.green_secondary,
-              backgroundColor: Colors.transparent,
-              textColor: GSColors.green_secondary,
-              title: GSStrings.book_a_bus_contact_with_us,
-              onTap: () {
-                Get.to(
-                  ContactUsView()
-                );
-              },
             ),
-          ],
+          ),
+          onPressed: () {
+            Get.to(
+              InfoScreen(),
+            );
+          },
         ),
+
+        bottomNavigationBar: BottomAppBar(
+          child: Container(
+            height: 60,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                BottomBarItem(
+                  iconString: AssetConstants.ic_home_svg,
+                  isSelected: selectedBottomBarIndex == 0,
+                  title: "Home",
+                  index: 0,
+                  onTap: _changeBottomBarIndex,
+                ),
+                BottomBarItem(
+                  iconString: "",
+                  isSelected: selectedBottomBarIndex == 1,
+                  title: "Add a Bus",
+                  index: 1,
+                  onTap: (int position){
+
+                  },
+                ),
+                BottomBarItem(
+                  iconString: AssetConstants.ic_menu_svg,
+                  isSelected: selectedBottomBarIndex == 2,
+                  title: "Menu",
+                  index: 2,
+                  onTap: (int position) {
+                    showMenuBottomSheet(MediaQuery.of(context).size.height, context);
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+
+        body: body
       ),
     );
+
+  }
+
+  showMenuBottomSheet(double height, BuildContext context) {
+    showModalBottomSheet(
+      backgroundColor: Colors.white,
+      isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(dp20),
+          topRight: Radius.circular(dp20),
+        ),
+      ),
+      context: context,
+      builder: (context) {
+        return Wrap(
+          children: [
+            Container(
+              height: height - 100,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(dp20),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          radius: dp30,
+                          backgroundImage: NetworkImage(
+                            "https://images.unsplash.com/photo-1563306406-e66174fa3787",
+                          ),
+                        ),
+                        HSpacer20(),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "No user logged in",
+                              style: GoogleFonts.manrope(
+                                color: darkText,
+                                fontWeight: FontWeight.bold,
+                                fontSize: dp16,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: (){
+                                Get.back();
+                                Get.to(
+                                  NotLoggedInWelcome(),
+                                );
+                              },
+                              child: Text(
+                                "Tap to login",
+                                style: GoogleFonts.manrope(),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        MenuItem(
+                          isSelected: 3 == selectedBottomBarIndex,
+                          index: 3,
+                          title: "About Us",
+                          icon: AssetConstants.ic_about_us_svg,
+                          onClick: (index) {
+                            _changeBottomBarIndex(index);
+                          },
+                        ),
+                        MenuItem(
+                          isSelected: 4 == selectedBottomBarIndex,
+                          index: 4,
+                          title: "Our Services",
+                          icon: AssetConstants.ic_refund_request_svg,
+                          onClick: (index) {
+                            _changeBottomBarIndex(index);
+                          },
+                        ),
+                        MenuItem(
+                          isSelected: 5 == selectedBottomBarIndex,
+                          index: 5,
+                          title: "FAQ",
+                          icon: AssetConstants.ic_faq_svg,
+                          onClick: (index) {
+                            _changeBottomBarIndex(index);
+                          },
+                        ),
+                        MenuItem(
+                          isSelected: 6 == selectedBottomBarIndex,
+                          index: 6,
+                          title: "Lost & Found",
+                          icon: AssetConstants.ic_lost_and_found_new_svg,
+                          onClick: (index) {
+                            _changeBottomBarIndex(index);
+                          },
+                        ),
+                        MenuItem(
+                          isSelected: 7 == selectedBottomBarIndex,
+                          index: 7,
+                          title: "Terms & Condition",
+                          icon: AssetConstants.ic_notification_svg,
+                          onClick: (index) {
+                            _changeBottomBarIndex(index);
+                          },
+                        ),
+                        MenuItem(
+                          isSelected: 8 == selectedBottomBarIndex,
+                          index: 8,
+                          title: "Privacy & Concern",
+                          icon: AssetConstants.ic_privacy_and_concern_svg,
+                          onClick: (index) {
+                            print("8 is clicked?");
+                            _changeBottomBarIndex(index);
+                          },
+                        ),
+                        MenuItem(
+                          isSelected: 9 == selectedBottomBarIndex,
+                          index: 9,
+                          title: "Contact Us",
+                          icon: AssetConstants.ic_contact_us_svg,
+                          onClick: (index) {
+                            _changeBottomBarIndex(index);
+                          },
+                        ),
+                        MenuItem(
+                          isSelected: 10 == selectedBottomBarIndex,
+                          index: 10,
+                          title: "Driver Login",
+                          icon: AssetConstants.ic_driver_login_svg,
+                          onClick: (index) {
+                            Get.back();
+                            Get.to(
+                              DriverLoginScreen(),
+                            );
+                          },
+                        ),
+                        MenuButtonOutlineStock(),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+  Widget _index(){
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TitleWidget(data:widget.data,index:widget.categoryId,name:widget.name),
+        Expanded(
+          child: FaqListWidget(data:widget.data,index:widget.categoryId),
+        ),
+        CustomFilledButton(
+          margin: const EdgeInsets.only(
+            left: 30.0,
+            right: 30.0,
+            top: 32.0,
+            bottom: 16.0,
+          ),
+          borderRadius: 8.0,
+          borderColor: GSColors.green_secondary,
+          backgroundColor: Colors.transparent,
+          textColor: GSColors.green_secondary,
+          title: GSStrings.book_a_bus_contact_with_us,
+          onTap: () {
+            Get.to(
+                ContactUsView()
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  void _changeBottomBarIndex(int index) {
+    if (index >= 3) Get.back();
+
+    setState(() {
+      selectedBottomBarIndex = index;
+
+      switch (index) {
+        case 0:
+          body = HomeView();
+          break;
+
+        case 1:
+          body = AboutUsView();
+          break;
+
+        case 3:
+          body = AboutUsView();
+          break;
+
+        case 4:
+          body = OurServiceView();
+          break;
+
+        case 5:
+          body = FaqView();
+          break;
+
+        case 6:
+          body = LostAndFoundView();
+          break;
+
+        case 7:
+          body = TermsAndConditionsView();
+          break;
+
+        case 8:
+          body = PrivacyAndConcernView();
+          break;
+
+        case 9:
+          body = ContactUsView();
+          break;
+
+        default:
+          break;
+      }
+    });
   }
 }
 
