@@ -3,8 +3,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:go_share/data/models/booking/address_request.dart';
+import 'package:go_share/ui/book_a_bus/address_search_page.dart';
 import 'package:go_share/data/models/booking/info_request.dart';
 import 'package:go_share/data/models/google_map/geocoding_response.dart';
+import 'package:go_share/ui/book_a_bus/widgets/outlined_text.dart';
 import 'package:go_share/ui/common_widgets/post_code_field.dart';
 import 'package:go_share/util/lib/toast.dart';
 import 'package:google_maps_webservice/places.dart';
@@ -202,51 +204,61 @@ class _AddressScreenState extends State<AddressScreen> {
               children: [
                 Expanded(
                   child: Obx((){
-                    pickupAddressController.text = _controller.pickupAddress.value;
-                    return CommonTextField(
-                      //enabled: false,
-                      controller: pickupAddressController,
-                      hint: "Location",
+                    return OutlinedText(
+                      text: _controller.pickupAddress.value,
+                      onClick: (){
+                        Get.to(AddressSearchPage())?.then((value){
+                          if(value!=null){
+                            _controller.pickupAddress.value = value.address;
+                            _controller.pickupPostalCode.value = value.postal;
+                          }
+                        });
+                      },
+                      //text: pickupAddressController.text,
                     );
                   }),
                 ),
-                HSpacer10(),
-                MaterialButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(
-                            dp10
-                        )
-                    ),
-                  ),
-                  height: dp48,
-                  minWidth: dp48,
-                  color: accent,
-                  child: Icon(
-                    Icons.search,
-                    color: white,
-                  ),
-                  onPressed: (){
-                    _controller.getPickupAddressFromPO(pickupAddressController.text);
-                  },
-                )
+                // HSpacer10(),
+                // MaterialButton(
+                //   shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.all(
+                //         Radius.circular(
+                //             dp10
+                //         )
+                //     ),
+                //   ),
+                //   height: dp48,
+                //   minWidth: dp48,
+                //   color: accent,
+                //   child: Icon(
+                //     Icons.search,
+                //     color: white,
+                //   ),
+                //   onPressed: (){
+                //     _controller.getPickupAddressFromPO(pickupAddressController.text);
+                //   },
+                // )
               ],
             ),
             VSpacer20(),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Flexible(
+                Expanded(
                   child: Obx((){
 
-                    pickupPostCodeController.text = _controller.pickupPostalCode.value;
+                  //  pickupPostCodeController.text = _controller.pickupPostalCode.value;
 
-                    return PostCodeField(
-                      errorText: pickupPostCodeErrorText,
-                      type: TextInputType.number,
-                      controller: pickupPostCodeController,
-                      hint: "Postal Code",
+                    return OutlinedText(
+                      text: _controller.pickupPostalCode.value,
                     );
+
+                    // return PostCodeField(
+                    //   errorText: pickupPostCodeErrorText,
+                    //   type: TextInputType.number,
+                    //   controller: pickupPostCodeController,
+                    //   hint: "Postal Code",
+                    // );
                   }),
                 ),
                 HSpacer20(),
@@ -274,50 +286,60 @@ class _AddressScreenState extends State<AddressScreen> {
               children: [
                 Expanded(
                   child: Obx((){
-                    dropOffAddressController.text = _controller.dropOffAddress.value;
-                    return CommonTextField(
-                      //enabled: false,
-                      controller: dropOffAddressController,
-                      hint: "Location",
+                    return OutlinedText(
+                      text: _controller.dropOffAddress.value,
+                      onClick: (){
+                        Get.to(AddressSearchPage())?.then((value){
+                          if(value!=null){
+                            _controller.dropOffAddress.value = value.address;
+                            _controller.dropOffPostalCode.value = value.postal;
+                          }
+                        });
+                      },
+                      //text: pickupAddressController.text,
                     );
                   }),
                 ),
-                HSpacer10(),
-                MaterialButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(
-                            dp10
-                        )
-                    ),
-                  ),
-                  height: dp48,
-                  minWidth: dp48,
-                  color: accent,
-                  child: Icon(
-                    Icons.search,
-                    color: white,
-                  ),
-                  onPressed: (){
-                    _controller.getDropOffAddressFromPO(dropOffAddressController.text);
-                  },
-                ),
+                // HSpacer10(),
+                // MaterialButton(
+                //   shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.all(
+                //         Radius.circular(
+                //             dp10
+                //         )
+                //     ),
+                //   ),
+                //   height: dp48,
+                //   minWidth: dp48,
+                //   color: accent,
+                //   child: Icon(
+                //     Icons.search,
+                //     color: white,
+                //   ),
+                //   onPressed: (){
+                //     _controller.getDropOffAddressFromPO(dropOffAddressController.text);
+                //   },
+                // ),
               ],
             ),
             VSpacer20(),
             Row(
               children: [
-                Flexible(
+                Expanded(
                   child: Obx((){
 
-                    dropOffPostCodeController.text = _controller.dropOffPostalCode.value;
+                    //dropOffPostCodeController.text = _controller.dropOffPostalCode.value;
 
-                    return PostCodeField(
-                      type: TextInputType.number,
-                      //errorText: dropOffPostCodeErrorText,
-                      controller: dropOffPostCodeController,
-                      hint: "Postal Code",
+                    return OutlinedText(
+                      text: _controller.dropOffPostalCode.value,
                     );
+
+                    // return PostCodeField(
+                    //   type: TextInputType.number,
+                    //   //errorText: dropOffPostCodeErrorText,
+                    //   controller: dropOffPostCodeController,
+                    //   hint: "Postal Code",
+                    // );
                   }),
                 ),
                 HSpacer20(),
