@@ -274,7 +274,21 @@ class _AddressScreenState extends State<AddressScreen> {
               ],
             ),
             VSpacer20(),
-            TextFieldHeadline(headline: "Pickup Remarks"),
+            Row(
+              children: [
+                Flexible(child: TextFieldHeadline(headline: "Pickup Remarks")),
+                HSpacer5(),
+                Tooltip(
+                  preferBelow: false,
+                  waitDuration: Duration(milliseconds: 0),
+                  message: "bla bla",
+                  child: Text(
+                    "(i)",
+                    style: GoogleFonts.robotoMono(color: accent, fontSize: dp15),
+                  ),
+                )
+              ],
+            ),
             VSpacer20(),
             CommonTextField(
               controller: pickupRemarksController,
@@ -355,7 +369,21 @@ class _AddressScreenState extends State<AddressScreen> {
               ],
             ),
             VSpacer20(),
-            TextFieldHeadline(headline: "Drop Off Remarks"),
+            Row(
+              children: [
+                Flexible(child: TextFieldHeadline(headline: "Drop Off Remarks")),
+                HSpacer5(),
+                Tooltip(
+                  preferBelow: false,
+                  waitDuration: Duration(milliseconds: 0),
+                  message: "bla bla",
+                  child: Text(
+                    "(i)",
+                    style: GoogleFonts.robotoMono(color: accent, fontSize: dp15),
+                  ),
+                )
+              ],
+            ),
             VSpacer20(),
             CommonTextField(
               controller: dropOffRemarksController,
