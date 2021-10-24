@@ -36,8 +36,8 @@ class _InfoScreenState extends State<InfoScreen> {
   int seat=0;
   String timeFormat="AM";
 
-  TextEditingController startTimeController = TextEditingController();
-  TextEditingController endTimeController = TextEditingController();
+  TextEditingController startDateController = TextEditingController();
+  TextEditingController endDateController = TextEditingController();
   TextEditingController selectedTimeController = TextEditingController();
 
   List<String> newChild = ["child"];
@@ -46,11 +46,17 @@ class _InfoScreenState extends State<InfoScreen> {
   @override
   void initState() {
     bookingController.getChildList();
-    // var controller = new TextEditingController();
-    // childControllerList.add(controller);
-    // childWidgetList.add(
-    //   _childWidget(childControllerList[0], [""])
-    // );
+    if(bookingController.startDate!=null){
+      startDateController.text = speakDate(bookingController.startDate!);
+    }
+    if(bookingController.endDate!=null){
+      endDateController.text=speakDate(bookingController.endDate!);
+    }
+    if(bookingController.pickedTime!=null){
+      selectedTime = bookingController.pickedTime;
+      NumberFormat formatter = new NumberFormat("00");
+      selectedTimeController.text =  "${formatter.format(selectedTime?.hour)}:${formatter.format(selectedTime?.minute)}";
+    }
     super.initState();
   }
 
@@ -235,7 +241,7 @@ class _InfoScreenState extends State<InfoScreen> {
                           children: [
                             TextFieldHeadline(headline: "Start Date*"),
                             VSpacer20(),
-                            _datePicker(startTimeController, "Start date", 1),
+                            _datePicker(startDateController, "Start date", 1),
                           ],
                         ),
                       ),
@@ -246,7 +252,7 @@ class _InfoScreenState extends State<InfoScreen> {
                           children: [
                             TextFieldHeadline(headline: "End Date*"),
                             VSpacer20(),
-                            _datePicker(endTimeController, "End Date", 2),
+                            _datePicker(endDateController, "End Date", 2),
                           ],
                         ),
                       ),
@@ -426,8 +432,8 @@ class _InfoScreenState extends State<InfoScreen> {
           if(calculateDifference(picked)>=0){
             bookingController.startDate = picked;
             bookingController.endDate = picked;
-            startTimeController.text=speakDate(picked);
-            endTimeController.text=speakDate(picked);
+            startDateController.text=speakDate(picked);
+            endDateController.text=speakDate(picked);
           }else{
             ToastUtil.show("Start date can not be before ${speakDate(DateTime.now())}");
           }
@@ -435,7 +441,7 @@ class _InfoScreenState extends State<InfoScreen> {
           if(bookingController.startDate!=null) {
             if (calculateDifference(picked, d2: bookingController.startDate) >= 0) {
               bookingController.endDate = picked;
-              endTimeController.text = speakDate(picked);
+              endDateController.text = speakDate(picked);
             }else{
               ToastUtil.show("End date can not be before ${speakDate(bookingController.startDate!)}");
             }
