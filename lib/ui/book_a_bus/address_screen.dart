@@ -417,11 +417,11 @@ class _AddressScreenState extends State<AddressScreen> {
                       if(validate()){
 
                         var addressRequest = AddressRequest(
-                          pickupPostalCode: _controller.pickupPostCodeController.text,
-                          pickupLocation: _controller.pickupAddressController.text,
+                          pickupPostalCode: _controller.pickupPostalCode.value,
+                          pickupLocation: _controller.pickupAddress.value,
                           pickupRemarks: _controller.pickupRemarksController.text,
-                          dropOffPostalCode: _controller.dropOffPostCodeController.text,
-                          dropOffLocation: _controller.dropOffAddressController.text,
+                          dropOffPostalCode: _controller.dropOffPostalCode.value,
+                          dropOffLocation: _controller.dropOffAddress.value,
                           dropOffRemarks: _controller.dropOffRemarksController.text,
                           comments: commentsController.text,
                           distance: distance

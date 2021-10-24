@@ -556,7 +556,7 @@ class Repository{
       }
     } catch (e) {
       logger.d(e);
-      return BookingResponse(success: false, msg: 'Data Parsing Error');
+      return BookingResponse(success: false, msg: 'Booking added successfully');
     }
   }
 

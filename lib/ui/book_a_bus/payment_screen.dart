@@ -550,7 +550,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         dropoffTime: infoRequest.dropOffTime,
         newChilds: infoRequest.childNames,
         existingChilds: infoRequest.childId,
-        numberOfDays: daysDiff(infoRequest.startDate, infoRequest.endDate),
+        numberOfDays: daysDiff(infoRequest.startDate, infoRequest.endDate)+1,
         bookedSeat: infoRequest.childNames.length+infoRequest.childId.length,
         pickupAddress: addressRequest.pickupLocation,
         dropoffAddress: addressRequest.dropOffLocation,
@@ -564,7 +564,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         dropoffRemarks: addressRequest.dropOffRemarks,
         distance: addressRequest.distance,
         price: addressRequest.distance*5,
-        verbatim: "hhh",
+        verbatim: "none",
       );
       var response = await placeBooking(request);
     }else showErrorSheet(context);
