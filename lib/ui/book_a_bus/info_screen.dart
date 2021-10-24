@@ -423,18 +423,38 @@ class _InfoScreenState extends State<InfoScreen> {
     if (picked != null && picked != selectedDate)
       setState(() {
         if(type==1) {
-          bookingController.startDate = picked;
-          bookingController.endDate = picked;
-          startTimeController.text=speakDate(picked);
-          endTimeController.text=speakDate(picked);
+          if(calculateDifference(picked)>=0){
+            bookingController.startDate = picked;
+            bookingController.endDate = picked;
+            startTimeController.text=speakDate(picked);
+            endTimeController.text=speakDate(picked);
+          }else{
+            ToastUtil.show("Start date can not be before ${speakDate(DateTime.now())}");
+          }
         } else {
-          bookingController.endDate = picked;
-          endTimeController.text=speakDate(picked);
+          if(bookingController.startDate!=null) {
+            if (calculateDifference(picked, d2: bookingController.startDate) >= 0) {
+              bookingController.endDate = picked;
+              endTimeController.text = speakDate(picked);
+            }else{
+              ToastUtil.show("End date can not be before ${speakDate(bookingController.startDate!)}");
+            }
+          }else{
+            ToastUtil.show("Select start date first");
+          }
         }
         selectedDate = picked;
       });
   }
 
+  int calculateDifference(DateTime date, {DateTime? d2}) {
+    late DateTime now;
+    if(d2==null)
+      now = DateTime.now();
+    else now = d2;
+    return DateTime(date.year, date.month, date.day).difference(DateTime(now.year, now.month, now.day)).inDays;
+  }
+  
   DateTime formatDate(DateTime date){
     var outputFormat = DateFormat('yyyy-MM-dd');
     return DateTime.parse(outputFormat.format(date));
