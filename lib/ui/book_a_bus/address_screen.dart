@@ -561,7 +561,7 @@ class _AddressScreenState extends State<AddressScreen> {
 
 
   calculateDistance(){
-    if(_controller.pickUpResponse.found == 1 && _controller.dropOffResponse.found == 1){
+    if(_controller.pickUpResponse.found >= 1 && _controller.dropOffResponse.found >= 1){
       try{
         var pickupLat =
         double.parse(_controller.pickUpResponse.results[0].latitude);
