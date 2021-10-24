@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:go_share/data/models/booking/booking_request.dart';
 import 'package:go_share/data/models/booking/booking_response.dart';
 import 'package:go_share/data/models/booking/child_list_response.dart';
+import 'package:go_share/data/models/booking/pricing_response.dart';
 import 'package:go_share/data/models/google_map/geocoding_response.dart';
 import 'package:go_share/data/models/one_map/one_map_response.dart';
 import 'package:go_share/data/repository/service_partner_repository.dart';
@@ -13,7 +14,9 @@ class BookingController extends GetxController{
 
   final Repository repository;
 
-  BookingController(this.repository);
+  BookingController(this.repository){
+    getPricing();
+  }
 
   var childListResponse = Rx<ChildrenListResponse?>(null);
   var pickupAddressResponse = Rx<GeoCodingResponse?>(null);
@@ -26,6 +29,9 @@ class BookingController extends GetxController{
   var dropOffAddress = "".obs;
   var dropOffPostalCode = "".obs;
   var logger = Logger();
+
+  var pricingResponse = Rx<PricingResponse?>(null);
+  var pricePerKm = 5.0.obs;
 
   // Info Page Variables
   List<Widget> childWidgetList = [];
@@ -165,6 +171,11 @@ class BookingController extends GetxController{
         msg: "Not logged in",
       );
     }
+  }
+
+  getPricing() async{
+    var response = await repository.getPricing();
+    pricingResponse.value = response;
   }
 
 }

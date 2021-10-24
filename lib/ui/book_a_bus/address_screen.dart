@@ -416,6 +416,10 @@ class _AddressScreenState extends State<AddressScreen> {
                     onClicked: () {
                       if(validate()){
 
+                        double price = calculatePrice();
+
+                        print("Price is $price");
+
                         var addressRequest = AddressRequest(
                           pickupPostalCode: _controller.pickupPostalCode.value,
                           pickupLocation: _controller.pickupAddress.value,
@@ -424,7 +428,8 @@ class _AddressScreenState extends State<AddressScreen> {
                           dropOffLocation: _controller.dropOffAddress.value,
                           dropOffRemarks: _controller.dropOffRemarksController.text,
                           comments: commentsController.text,
-                          distance: distance
+                          distance: distance,
+                          price: price*distance,
                         );
 
                         Get.to(
@@ -449,6 +454,38 @@ class _AddressScreenState extends State<AddressScreen> {
         ),
       ),
     );
+  }
+
+  double calculatePrice(){
+
+    var price = 5.00;
+
+    if(_controller.pricingResponse.value!=null){
+      var response = _controller.pricingResponse.value;
+      if(response!.success && response.data.length>0){
+        var time = infoRequest.pickupTime;
+        for(var slot in response.data){
+          if(isWithinTimeSlot(slot.startTime, slot.endTime, time)){
+            price = slot.value.toDouble();
+            break;
+          }
+        }
+      }
+    }
+
+    return price;
+  }
+
+  bool isWithinTimeSlot(String start, String end, String pickup){
+    var startTime = stringToTime(start);
+    var endTime = stringToTime(end);
+    var pickupTime = stringToTime(pickup);
+
+    return (pickupTime.compareTo(startTime)>=1 && pickupTime.compareTo(endTime)<=1);
+  }
+
+  TimeOfDay stringToTime(String s){
+    return TimeOfDay(hour:int.parse(s.split(":")[0]),minute: int.parse(s.split(":")[1]));
   }
 
   bool validate(){
@@ -598,4 +635,14 @@ class _AddressScreenState extends State<AddressScreen> {
   }
 
 
+}
+
+extension TimeOfDayExtension on TimeOfDay {
+  int compareTo(TimeOfDay other) {
+    if (this.hour < other.hour) return -1;
+    if (this.hour > other.hour) return 1;
+    if (this.minute < other.minute) return -1;
+    if (this.minute > other.minute) return 1;
+    return 0;
+  }
 }
