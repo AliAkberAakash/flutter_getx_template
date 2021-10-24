@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_share/data/models/booking/booking_request.dart';
 import 'package:go_share/data/models/booking/booking_response.dart';
@@ -24,6 +26,25 @@ class BookingController extends GetxController{
   var dropOffAddress = "".obs;
   var dropOffPostalCode = "".obs;
   var logger = Logger();
+
+  // Info Page Variables
+  List<Widget> childWidgetList = [];
+  List<TextEditingController> childControllerList = [];
+  DateTime? startDate;
+  DateTime? endDate;
+  TimeOfDay? pickedTime;
+  String? dropOffTime;
+
+  //Address Page Variables
+  final pickupRemarksController = TextEditingController();
+  final pickupPostCodeController = TextEditingController();
+  final pickupAddressController = TextEditingController();
+
+  final dropOffRemarksController = TextEditingController();
+  final dropOffPostCodeController = TextEditingController();
+  final dropOffAddressController = TextEditingController();
+
+  final commentsController  = TextEditingController();
 
   // getPickupAddressFromPO(String postalCode) async{
   //   var response = await repository.getGeoCodingResponse(postalCode);

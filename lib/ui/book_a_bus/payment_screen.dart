@@ -54,7 +54,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
   final AddressRequest addressRequest;
   final InfoRequest infoRequest;
 
-  final controller = BookingController(Get.find());
+  final BookingController controller = Get.find();
 
   var selectedPayment = "p";
   late ExpandableController expandableController;

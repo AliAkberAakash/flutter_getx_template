@@ -28,19 +28,14 @@ class InfoScreen extends StatefulWidget {
 
 class _InfoScreenState extends State<InfoScreen> {
 
-  final bookingController = BookingController(Get.find());
+  final BookingController bookingController = Get.find();
 
   final logger = Logger();
 
   double distance = 0.0;
   int seat=0;
   String timeFormat="AM";
-  List<Widget> childWidgetList = [];
-  List<TextEditingController> childControllerList = [];
-  DateTime? startDate;
-  DateTime? endDate;
-  TimeOfDay? pickedTime;
-  String? dropOffTime;
+
   TextEditingController startTimeController = TextEditingController();
   TextEditingController endTimeController = TextEditingController();
   TextEditingController selectedTimeController = TextEditingController();
@@ -179,9 +174,9 @@ class _InfoScreenState extends State<InfoScreen> {
                               onPressed: () {
                                 setState(() {
                                   if (seat > 1) seat--;
-                                  if (childWidgetList.length > 1) {
-                                    childWidgetList.removeLast();
-                                    childControllerList.removeLast();
+                                  if (bookingController.childWidgetList.length > 1) {
+                                    bookingController.childWidgetList.removeLast();
+                                    bookingController.childControllerList.removeLast();
                                   }
                                 });
                               },
@@ -212,9 +207,9 @@ class _InfoScreenState extends State<InfoScreen> {
                                 setState(() {
                                   seat++;
                                   var controller = TextEditingController();
-                                  childControllerList.add(controller);
-                                  childWidgetList.add(_childWidget(
-                                      childControllerList.last, suggestion));
+                                  bookingController.childControllerList.add(controller);
+                                  bookingController.childWidgetList.add(_childWidget(
+                                      bookingController.childControllerList.last, suggestion));
                                 });
                               },
                               icon: Icon(
@@ -229,7 +224,7 @@ class _InfoScreenState extends State<InfoScreen> {
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: childWidgetList,
+                    children: bookingController.childWidgetList,
                   ),
                   VSpacer20(),
                   Row(
@@ -320,7 +315,7 @@ class _InfoScreenState extends State<InfoScreen> {
                       newChild.clear();
                       existingChild.clear();
 
-                      for (var controller1 in childControllerList){
+                      for (var controller1 in bookingController.childControllerList){
                         if(controller1.text.isNotEmpty){
                           newChild.add(controller1.text);
                         }
@@ -350,10 +345,10 @@ class _InfoScreenState extends State<InfoScreen> {
                         var infoRequest = InfoRequest(
                           childNames: newChild,
                           childId: existingChild,
-                          startDate: formatDate(startDate!),
-                          endDate: formatDate(endDate!),
+                          startDate: formatDate(bookingController.startDate!),
+                          endDate: formatDate(bookingController.endDate!),
                           pickupTime: "${selectedTimeController.text}:00",
-                          dropOffTime: dropOffTime ?? "00:00:00",
+                          dropOffTime: bookingController.dropOffTime ?? "00:00:00",
                         );
 
                        // print(infoRequest.toJson());
@@ -390,16 +385,16 @@ class _InfoScreenState extends State<InfoScreen> {
         return false;
     }
 
-    print("StartDate $startDate");
-    print("EndDate $endDate");
-    print("time $pickedTime");
+    print("StartDate ${bookingController.startDate}");
+    print("EndDate ${bookingController.endDate}");
+    print("time ${bookingController.pickedTime}");
 
-    if(startDate == null || endDate == null){
+    if(bookingController.startDate == null || bookingController.endDate == null){
         ToastUtil.show("Please select start date");
         return false;
     }
 
-    if(pickedTime == null){
+    if(bookingController.pickedTime == null){
       ToastUtil.show("Please select pickup time");
       return false;
     }
@@ -428,12 +423,12 @@ class _InfoScreenState extends State<InfoScreen> {
     if (picked != null && picked != selectedDate)
       setState(() {
         if(type==1) {
-          startDate = picked;
-          endDate = picked;
+          bookingController.startDate = picked;
+          bookingController.endDate = picked;
           startTimeController.text=speakDate(picked);
           endTimeController.text=speakDate(picked);
         } else {
-          endDate = picked;
+          bookingController.endDate = picked;
           endTimeController.text=speakDate(picked);
         }
         selectedDate = picked;
@@ -538,10 +533,10 @@ class _InfoScreenState extends State<InfoScreen> {
       initialTime: TimeOfDay.now(),
       context: context,
     );
-    pickedTime = selectedTime;
+    bookingController.pickedTime = selectedTime;
     NumberFormat formatter = new NumberFormat("00");
     selectedTimeController.text =  "${formatter.format(selectedTime?.hour)}:${formatter.format(selectedTime?.minute)}";
-    dropOffTime =  "${formatter.format((selectedTime?.hour)??0+1)}:${formatter.format(selectedTime?.minute)}:01";
+    bookingController.dropOffTime =  "${formatter.format((selectedTime?.hour)??0+1)}:${formatter.format(selectedTime?.minute)}:01";
   }
 
 }

@@ -44,19 +44,11 @@ class _AddressScreenState extends State<AddressScreen> {
   final homeScaffoldKey = GlobalKey<ScaffoldState>();
   final searchScaffoldKey = GlobalKey<ScaffoldState>();
 
-  final _controller = BookingController(Get.find());
+  final BookingController _controller = Get.find();
   final logger = Logger();
 
-  final pickupRemarksController = TextEditingController();
-  final pickupPostCodeController = TextEditingController();
-  final pickupAddressController = TextEditingController();
   String? pickupPostCodeErrorText;
-
-  final dropOffRemarksController = TextEditingController();
-  final dropOffPostCodeController = TextEditingController();
-  final dropOffAddressController = TextEditingController();
   String? dropOffPostCodeErrorText;
-
   final commentsController  = TextEditingController();
 
   String pickupPostCode = "";
@@ -291,7 +283,7 @@ class _AddressScreenState extends State<AddressScreen> {
             ),
             VSpacer20(),
             CommonTextField(
-              controller: pickupRemarksController,
+              controller: _controller.pickupRemarksController,
             ),
             VSpacer40(),
             TextFieldHeadline(headline: "Drop Off Location*"),
@@ -386,7 +378,7 @@ class _AddressScreenState extends State<AddressScreen> {
             ),
             VSpacer20(),
             CommonTextField(
-              controller: dropOffRemarksController,
+              controller: _controller.dropOffRemarksController,
             ),
             VSpacer20(),
             TextFieldHeadline(headline: "Write your comments"),
@@ -425,12 +417,12 @@ class _AddressScreenState extends State<AddressScreen> {
                       if(validate()){
 
                         var addressRequest = AddressRequest(
-                          pickupPostalCode: pickupPostCodeController.text,
-                          pickupLocation: pickupAddressController.text,
-                          pickupRemarks: pickupRemarksController.text,
-                          dropOffPostalCode: dropOffPostCodeController.text,
-                          dropOffLocation: dropOffAddressController.text,
-                          dropOffRemarks: dropOffRemarksController.text,
+                          pickupPostalCode: _controller.pickupPostCodeController.text,
+                          pickupLocation: _controller.pickupAddressController.text,
+                          pickupRemarks: _controller.pickupRemarksController.text,
+                          dropOffPostalCode: _controller.dropOffPostCodeController.text,
+                          dropOffLocation: _controller.dropOffAddressController.text,
+                          dropOffRemarks: _controller.dropOffRemarksController.text,
                           comments: commentsController.text,
                           distance: distance
                         );
@@ -471,17 +463,17 @@ class _AddressScreenState extends State<AddressScreen> {
     //   return false;
     // }
 
-    return pickupPostCodeController.text.isNotEmpty
-        && pickupAddressController.text.isNotEmpty
-        && dropOffPostCodeController.text.isNotEmpty
-        && dropOffAddressController.text.isNotEmpty;
+    return _controller.pickupPostCodeController.text.isNotEmpty
+        && _controller.pickupAddressController.text.isNotEmpty
+        && _controller.dropOffPostCodeController.text.isNotEmpty
+        && _controller.dropOffAddressController.text.isNotEmpty;
 
     return true;
   }
 
   getPickupLocation() async{
     Prediction? p = await PlacesAutocomplete.show(
-      startText: pickupAddressController.text,
+      startText: _controller.pickupAddressController.text,
       context: context,
       offset: 0,
       radius: 10000,
@@ -512,7 +504,7 @@ class _AddressScreenState extends State<AddressScreen> {
 
     if(p != null)
       setState(() {
-        pickupAddressController.text=p.description ?? "" ;
+        _controller.pickupAddressController.text=p.description ?? "" ;
       });
 
   }
@@ -547,7 +539,7 @@ class _AddressScreenState extends State<AddressScreen> {
 
     if(p!=null){
       setState(() {
-        dropOffAddressController.text=p.description ?? "";
+        _controller.dropOffAddressController.text=p.description ?? "";
       });
     }
   }
@@ -557,11 +549,11 @@ class _AddressScreenState extends State<AddressScreen> {
   }
 
   getPickupAddress() async{
-    var response = await _controller.getPickupAddressFromPO(pickupPostCodeController.text.trim());
+    var response = await _controller.getPickupAddressFromPO(_controller.pickupPostCodeController.text.trim());
 
     //if(response.status=="OK"){
       setState(() {
-        pickupAddressController.text = response.results[0].formattedAddress;
+        _controller.pickupAddressController.text = response.results[0].formattedAddress;
       });
     //}
 

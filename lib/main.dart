@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:go_share/data/local/service/theme_service.dart';
 import 'package:go_share/data/repository/service_partner_repository.dart';
 import 'package:go_share/essential/translations.dart';
+import 'package:go_share/ui/book_a_bus/booking_controller.dart';
 import 'package:go_share/ui/container/widget_container/widget_container.dart';
 import 'package:go_share/ui/section1/service_provider_profile/service_provider_profile_controller.dart';
 import 'package:go_share/ui/section1/service_provider_vehicle_list/service_provider_vehicle_list_controller.dart';
@@ -25,6 +26,7 @@ Future<void> initializeAppEssentials() async {
   Get.put(Repository());
   Get.put(ServiceProviderProfileController());
   Get.put(ServiceProviderVehicleListController());
+  Get.put(BookingController(Get.find()));
 
   Get.log('All services started...');
 }
