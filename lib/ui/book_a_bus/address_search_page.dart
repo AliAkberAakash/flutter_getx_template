@@ -67,7 +67,7 @@ class _AddressSearchPageState extends State<AddressSearchPage> {
                   return ListView.builder(
                     itemCount: searchResults.length,
                     itemBuilder: (ctx, idx){
-                      return SearchItem(res: searchResults[idx]);
+                      return SearchItem(res: searchResults[idx], response: searchResponse,);
                     },
                   );
                 }else return Container();
@@ -82,15 +82,19 @@ class _AddressSearchPageState extends State<AddressSearchPage> {
 
 class SearchItem extends StatelessWidget {
 
+  final OneMapResponse response;
   final Result res;
 
-  const SearchItem({Key? key, required this.res}) : super(key: key);
+  const SearchItem({Key? key, required this.res, required this.response}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Get.back(result: res);
+        Get.back(result: {
+          "result" : res,
+          "response" : response
+        });
       },
       child: Container(
         padding: EdgeInsets.all(dp10),

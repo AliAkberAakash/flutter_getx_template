@@ -575,6 +575,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     Get.back();
     if(response.success){
       showSuccessSheet(context, response);
+      controller.clearFields();
     }else{
       ToastUtil.show(response.msg);
     }
@@ -637,11 +638,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             child: PendingButton(
                               text: "Login",
                               onClick: (){
-                                Get.back();
-                                Get.back();
-                                Get.back();
-                                Get.back();
-                                Get.to(NotLoggedInWelcome());
+                                Get.to(NotLoggedInWelcome(isFromPayment: true,));
                               },
                             ),
                           ),

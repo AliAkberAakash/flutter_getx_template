@@ -19,6 +19,11 @@ import '../sign_in/sign_in_screen.dart';
 
 
 class NotLoggedInWelcome extends StatefulWidget {
+
+  final bool isFromPayment;
+
+  const NotLoggedInWelcome({Key? key, this.isFromPayment = false}) : super(key: key);
+
   @override
   _NotLoggedInWelcomeState createState() => _NotLoggedInWelcomeState();
 }
@@ -106,7 +111,7 @@ class _NotLoggedInWelcomeState extends State<NotLoggedInWelcome> {
                         GSButton(
                           text: GSStrings.sign_in,
                           onClick: (){
-                            Get.to(NSignInScreen());
+                            Get.to(NSignInScreen(isFromPayment: widget.isFromPayment,));
                           },
                         ),
                         SizedBox(

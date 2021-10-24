@@ -19,6 +19,11 @@ import 'package:google_fonts/google_fonts.dart';
 import '../navigation_container/navigation_container.dart';
 
 class NSignInScreen extends StatefulWidget {
+
+  final bool isFromPayment;
+
+  const NSignInScreen({Key? key, this.isFromPayment = false}) : super(key: key);
+
   @override
   _Sec4SignInScreenState createState() => _Sec4SignInScreenState();
 }
@@ -191,8 +196,15 @@ class _Sec4SignInScreenState extends State<NSignInScreen> {
     if(response.data != null){
       await _controller.storeToken(response.data!.token);
       await _controller.storeUser(response.data!.user);
-      Get.back();
-      Get.off(NavigationContainer());
+
+      if(widget.isFromPayment){
+        Get.back();
+        Get.back();
+        Get.back();
+      }else{
+        Get.back();
+        Get.off(NavigationContainer());
+      }
     }
 
   }

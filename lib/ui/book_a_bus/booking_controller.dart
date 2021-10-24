@@ -46,6 +46,25 @@ class BookingController extends GetxController{
 
   final commentsController  = TextEditingController();
 
+  clearFields(){
+    childWidgetList = [];
+    childControllerList = [];
+    startDate = null;
+    endDate = null;
+    pickedTime = null;
+    dropOffTime = null;
+
+    pickupRemarksController.text="";
+    pickupPostCodeController.text="";
+    pickupAddressController.text="";
+
+    dropOffRemarksController.text="";
+    dropOffPostCodeController.text="";
+    dropOffAddressController.text="";
+    commentsController.text="";
+
+  }
+
   // getPickupAddressFromPO(String postalCode) async{
   //   var response = await repository.getGeoCodingResponse(postalCode);
   //   logger.d(response.status);

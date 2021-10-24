@@ -7,7 +7,6 @@ import 'package:go_share/ui/book_a_bus/address_search_page.dart';
 import 'package:go_share/data/models/booking/info_request.dart';
 import 'package:go_share/data/models/google_map/geocoding_response.dart';
 import 'package:go_share/ui/book_a_bus/widgets/outlined_text.dart';
-import 'package:go_share/ui/common_widgets/post_code_field.dart';
 import 'package:go_share/util/lib/toast.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:get/get.dart';
@@ -185,12 +184,7 @@ class _AddressScreenState extends State<AddressScreen> {
               ],
             ),
             VSpacer20(),
-            InkWell(
-              onTap: (){
-                getPickupLocation();
-              },
-              child: TextFieldHeadline(headline: "Pickup Location*"),
-            ),
+            TextFieldHeadline(headline: "Pickup Location*"),
             VSpacer20(),
             Row(
               children: [
@@ -201,8 +195,11 @@ class _AddressScreenState extends State<AddressScreen> {
                       onClick: (){
                         Get.to(AddressSearchPage())?.then((value){
                           if(value!=null){
-                            _controller.pickupAddress.value = value.address;
-                            _controller.pickupPostalCode.value = value.postal;
+                            var result = value["result"];
+                            var response = value["response"];
+                            _controller.pickUpResponse = response;
+                            _controller.pickupAddress.value = result.address;
+                            _controller.pickupPostalCode.value = result.postal;
                           }
                         });
                       },
@@ -297,8 +294,11 @@ class _AddressScreenState extends State<AddressScreen> {
                       onClick: (){
                         Get.to(AddressSearchPage())?.then((value){
                           if(value!=null){
-                            _controller.dropOffAddress.value = value.address;
-                            _controller.dropOffPostalCode.value = value.postal;
+                            var result = value["result"];
+                            var response = value["response"];
+                            _controller.dropOffResponse = response;
+                            _controller.dropOffAddress.value = result.address;
+                            _controller.dropOffPostalCode.value = result.postal;
                           }
                         });
                       },
@@ -463,10 +463,10 @@ class _AddressScreenState extends State<AddressScreen> {
     //   return false;
     // }
 
-    return _controller.pickupPostCodeController.text.isNotEmpty
-        && _controller.pickupAddressController.text.isNotEmpty
-        && _controller.dropOffPostCodeController.text.isNotEmpty
-        && _controller.dropOffAddressController.text.isNotEmpty;
+    return _controller.pickupAddress.isNotEmpty
+        && _controller.pickupPostalCode.isNotEmpty
+        && _controller.dropOffAddress.isNotEmpty
+        && _controller.dropOffPostalCode.isNotEmpty;
 
     return true;
   }
