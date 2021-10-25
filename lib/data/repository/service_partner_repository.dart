@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:go_share/core/network/api_base_helper.dart';
 import 'package:go_share/core/network/dio_factory.dart';
+import 'package:go_share/data/models/booking/booking_details_response.dart';
 import 'package:go_share/data/models/booking/booking_request.dart';
 import 'package:go_share/data/models/booking/booking_response.dart';
 import 'package:go_share/data/models/booking/child_list_response.dart';
@@ -621,6 +622,16 @@ class Repository{
     }catch(e){
       logger.d(e);
       return PricingResponse(success: false, data: []);
+    }
+  }
+
+  Future<BookingDetailsResponse> getBookingDetails(int id) async{
+    try{
+      var response = await helper.getGeneralUser(NetworkConstants.BOOKING_DETAILS+"/$id");
+      return BookingDetailsResponse.fromJson(response.data);
+    }catch(e){
+      logger.d(e);
+      return BookingDetailsResponse(success: false);
     }
   }
 

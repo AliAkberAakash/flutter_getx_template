@@ -7,6 +7,7 @@ import 'package:go_share/data/models/booking/booking_response.dart';
 import 'package:go_share/data/models/booking/my_booking_list_response.dart';
 import 'package:go_share/ui/book_a_bus/invoice_screen.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
+import 'package:go_share/ui/container/my_booking_details_one/my_booking_controller.dart';
 import 'package:go_share/ui/container/provide_feedback/provide_feedback.dart';
 import 'package:go_share/ui/container/refund_request/refund_request.dart';
 import 'package:go_share/ui/container/UIConstants/Fonts.dart';
@@ -32,6 +33,14 @@ class _MyBookingDetailsOneViewState extends State<MyBookingDetailsOneView> {
   final Booking booking;
 
   _MyBookingDetailsOneViewState(this.booking);
+
+  final controller = MyBookingController();
+
+  @override
+  void initState() {
+    controller.getBookingDetails(booking.id);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -506,7 +515,7 @@ class BookingItemBodyWidget extends StatelessWidget {
                   textAlign: TextAlign.start,
                 ),
                 Text(
-                  "S\$${booking.price}",
+                  "S\$${booking.price?.toStringAsFixed(2)}",
                   style: GSTextStyles.make18xw700Style(
                     color: GSColors.gray_primary,
                   ),

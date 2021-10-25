@@ -76,6 +76,7 @@ class NetworkConstants {
   static const RATE_BOOKING = "user/booking/rating";
   static const CHILD_LIST = "user/children";
   static const PRICING = "pricings";
+  static const BOOKING_DETAILS = "user/booking";
 
   // Google api url
   static const GET_ADDRESS_FROM_PO_CODE= "https://maps.googleapis.com/maps/api/geocode/json";
