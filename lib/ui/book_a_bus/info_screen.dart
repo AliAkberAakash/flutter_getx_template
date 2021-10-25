@@ -33,15 +33,14 @@ class _InfoScreenState extends State<InfoScreen> {
   final logger = Logger();
 
   double distance = 0.0;
-  int seat=0;
+
   String timeFormat="AM";
 
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
   TextEditingController selectedTimeController = TextEditingController();
 
-  List<String> newChild = ["child"];
-  List<int> existingChild = [];
+
 
   @override
   void initState() {
@@ -179,7 +178,7 @@ class _InfoScreenState extends State<InfoScreen> {
                             IconButton(
                               onPressed: () {
                                 setState(() {
-                                  if (seat > 1) seat--;
+                                  if (bookingController.seat > 1) bookingController.seat--;
                                   if (bookingController.childWidgetList.length > 1) {
                                     bookingController.childWidgetList.removeLast();
                                     bookingController.childControllerList.removeLast();
@@ -200,7 +199,7 @@ class _InfoScreenState extends State<InfoScreen> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: dp20),
                               child: Text(
-                                seat.toString(),
+                                bookingController.seat.toString(),
                               ),
                             ),
                             Container(
@@ -211,7 +210,7 @@ class _InfoScreenState extends State<InfoScreen> {
                             IconButton(
                               onPressed: () {
                                 setState(() {
-                                  seat++;
+                                  bookingController.seat++;
                                   var controller = TextEditingController();
                                   bookingController.childControllerList.add(controller);
                                   bookingController.childWidgetList.add(_childWidget(
@@ -318,12 +317,12 @@ class _InfoScreenState extends State<InfoScreen> {
                   PositiveButton(
                     text: "Next",
                     onClicked: () {
-                      newChild.clear();
-                      existingChild.clear();
+                      bookingController.newChild.clear();
+                      bookingController.existingChild.clear();
 
                       for (var controller1 in bookingController.childControllerList){
                         if(controller1.text.isNotEmpty){
-                          newChild.add(controller1.text);
+                          bookingController.newChild.add(controller1.text);
                         }
                       }
 
@@ -349,8 +348,8 @@ class _InfoScreenState extends State<InfoScreen> {
                       if(validate()){
 
                         var infoRequest = InfoRequest(
-                          childNames: newChild,
-                          childId: existingChild,
+                          childNames: bookingController.newChild,
+                          childId: bookingController.existingChild,
                           startDate: formatDate(bookingController.startDate!),
                           endDate: formatDate(bookingController.endDate!),
                           pickupTime: "${selectedTimeController.text}:00",
@@ -378,15 +377,12 @@ class _InfoScreenState extends State<InfoScreen> {
 
   bool validate(){
 
-    print(newChild.length);
-    print(existingChild.length);
-
     // if(newChild.isEmpty && existingChild.isEmpty){
     //   ToastUtil.show("Please select at least one child");
     //   return false;
     // }
 
-    if(newChild.isEmpty){
+    if(bookingController.newChild.isEmpty){
         ToastUtil.show("Please select at least one child");
         return false;
     }

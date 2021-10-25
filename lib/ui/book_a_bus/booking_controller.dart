@@ -34,12 +34,15 @@ class BookingController extends GetxController{
   var pricePerKm = 5.0.obs;
 
   // Info Page Variables
+  List<String> newChild = ["child"];
+  List<int> existingChild = [];
   List<Widget> childWidgetList = [];
   List<TextEditingController> childControllerList = [];
   DateTime? startDate;
   DateTime? endDate;
   TimeOfDay? pickedTime;
   String? dropOffTime;
+  int seat=0;
 
   //Address Page Variables
   final pickupRemarksController = TextEditingController();
@@ -53,12 +56,15 @@ class BookingController extends GetxController{
   final commentsController  = TextEditingController();
 
   clearFields(){
+    newChild = [];
+    existingChild = [];
     childWidgetList = [];
     childControllerList = [];
     startDate = null;
     endDate = null;
     pickedTime = null;
     dropOffTime = null;
+    seat = 0;
 
     pickupRemarksController.text="";
     pickupPostCodeController.text="";
