@@ -91,8 +91,8 @@ class BodyWidget extends StatelessWidget {
         TitleWidget(),
         BookingItemWidget(booking: booking, bookingResponse: bookingResponse,),
         LocationInfoWidget(booking : booking),
-        booking.data?.isFinished==0 ? Container() : VehicleInfoWidget(),
-        getType(booking)=="Finished?" ? CustomFilledButton(
+        // getType(booking)=="Finished" ? Container() : VehicleInfoWidget(response: booking,),
+        getType(booking)=="Finished" ? CustomFilledButton(
           margin: const EdgeInsets.only(
             left: 30.0,
             right: 30.0,
@@ -304,8 +304,12 @@ class LocationInfoWidget extends StatelessWidget {
 }
 
 class VehicleInfoWidget extends StatelessWidget {
+
+  final BookingDetailsResponse response;
+
   const VehicleInfoWidget({
     Key? key,
+    required this.response,
   }) : super(key: key);
 
   @override
@@ -342,15 +346,15 @@ class VehicleInfoWidget extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.only(bottom: 20.0),
                   width: double.maxFinite,
-                  child: Image.asset(
-                    "images/ic_demo_vehicle.png",
+                  child: Image.network(
+                    "",
                     height: 192.0,
                     fit: BoxFit.cover,
                   ),
                 ),
                 TitleSubtitleWidget(
                   title: "Vehicle number",
-                  subtitle: "Toyota GA 121893",
+                  subtitle: "${response.data?.existRideInfo?.vehicleId}",
                   margin: const EdgeInsets.only(bottom: 24.0),
                 ),
                 TitleSubtitleWidget(
