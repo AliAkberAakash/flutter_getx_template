@@ -574,6 +574,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
     var response = await controller.placeBooking(request);
     Get.back();
     if(response.success){
+      Get.back();
+      Get.back();
+      Get.back();
       showSuccessSheet(context, response);
       controller.clearFields();
     }else{

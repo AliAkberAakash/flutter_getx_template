@@ -75,6 +75,11 @@ class BookingController extends GetxController{
     dropOffAddressController.text="";
     commentsController.text="";
 
+   pickupAddress.value = "";
+   pickupPostalCode.value = "";
+   dropOffAddress.value = "";
+   dropOffPostalCode.value = "";
+
   }
 
   // getPickupAddressFromPO(String postalCode) async{
