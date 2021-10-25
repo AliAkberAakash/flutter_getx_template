@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/custom_filled_button.dart';
+import 'package:go_share/core/ui/loading_widget.dart';
+import 'package:go_share/data/models/booking/booking_details_response.dart';
 import 'package:go_share/data/models/booking/booking_response.dart';
 import 'package:go_share/data/models/booking/my_booking_list_response.dart';
 import 'package:go_share/ui/book_a_bus/invoice_screen.dart';
@@ -12,7 +14,7 @@ import 'package:go_share/ui/container/provide_feedback/provide_feedback.dart';
 import 'package:go_share/ui/container/refund_request/refund_request.dart';
 import 'package:go_share/ui/container/UIConstants/Fonts.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
-import 'package:go_share/utils/booking_utils.dart';
+import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/date_time_utils.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
@@ -57,7 +59,14 @@ class _MyBookingDetailsOneViewState extends State<MyBookingDetailsOneView> {
         body: SafeArea(
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
-            child: BodyWidget(booking: booking,),
+            child: Obx((){
+
+              var currentResponse = controller.bookingDetails.value;
+
+              if(currentResponse==null)
+                return LoadingWidget();
+              else return BodyWidget(booking: currentResponse, bookingResponse: booking,);
+            }),
           ),
         ),
       ),
@@ -67,9 +76,10 @@ class _MyBookingDetailsOneViewState extends State<MyBookingDetailsOneView> {
 
 class BodyWidget extends StatelessWidget {
 
-  final Booking booking;
+  final BookingDetailsResponse booking;
+  final Booking bookingResponse;
 
-  const BodyWidget({Key? key, required this.booking}) : super(key: key);
+  const BodyWidget({Key? key, required this.booking, required this.bookingResponse}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -79,9 +89,9 @@ class BodyWidget extends StatelessWidget {
       children: [
         VSpacer20(),
         TitleWidget(),
-        BookingItemWidget(booking: booking,),
+        BookingItemWidget(booking: booking, bookingResponse: bookingResponse,),
         LocationInfoWidget(booking : booking),
-        booking.currentStatus=="Pending" ? Container() : VehicleInfoWidget(),
+        booking.data?.isFinished==0 ? Container() : VehicleInfoWidget(),
         getType(booking)=="Finished?" ? CustomFilledButton(
           margin: const EdgeInsets.only(
             left: 30.0,
@@ -157,7 +167,7 @@ class TitleWidget extends StatelessWidget {
 
 class LocationInfoWidget extends StatelessWidget {
 
-  final Booking booking;
+  final BookingDetailsResponse booking;
 
   const LocationInfoWidget({
     Key? key,
@@ -217,7 +227,7 @@ class LocationInfoWidget extends StatelessWidget {
                   children: [
                     TitleSubtitleWidget(
                       title: "Pickup Point",
-                      subtitle: "${booking.pickupAddress}",
+                      subtitle: "${booking.data?.pickupAddress}",
                       margin: const EdgeInsets.only(
                         bottom: 24.0,
                         top: 24.0,
@@ -225,12 +235,12 @@ class LocationInfoWidget extends StatelessWidget {
                     ),
                     TitleSubtitleWidget(
                       title: "Postal Code",
-                      subtitle: "",
+                      subtitle: "${booking.data?.bookingInformation?.pickupPostalCode}",
                       margin: const EdgeInsets.only(bottom: 24.0),
                     ),
                     TitleSubtitleWidget(
                       title: "Pickup Remark",
-                      subtitle: " ",
+                      subtitle: "${booking.data?.bookingInformation?.pickupRemarks ?? "--"}",
                       margin: const EdgeInsets.only(bottom: 48.0),
                     ),
                   ],
@@ -268,7 +278,7 @@ class LocationInfoWidget extends StatelessWidget {
               children: [
                 TitleSubtitleWidget(
                   title: "Drop-Off Point",
-                  subtitle: "${booking.dropoffAddress}",
+                  subtitle: "${booking.data?.dropoffAddress}",
                   margin: const EdgeInsets.only(
                     bottom: 24.0,
                     top: 24.0,
@@ -276,12 +286,12 @@ class LocationInfoWidget extends StatelessWidget {
                 ),
                 TitleSubtitleWidget(
                   title: "Postal Code",
-                  subtitle: "650372 Singapore",
+                  subtitle: "${booking.data?.bookingInformation?.dropoffPostalCode}",
                   margin: const EdgeInsets.only(bottom: 24.0),
                 ),
                 TitleSubtitleWidget(
                   title: "Drop-Off Remark",
-                  subtitle: "",
+                  subtitle: "${booking.data?.bookingInformation?.dropoffRemarks ?? "--"}",
                   margin: const EdgeInsets.only(bottom: 0.0),
                 ),
               ],
@@ -374,11 +384,13 @@ class VehicleInfoWidget extends StatelessWidget {
 
 class BookingItemWidget extends StatelessWidget {
 
-  final Booking booking;
+  final BookingDetailsResponse booking;
+  final Booking bookingResponse;
 
   const BookingItemWidget({
     Key? key,
     required this.booking,
+    required this.bookingResponse,
   }) : super(key: key);
 
   @override
@@ -418,7 +430,7 @@ class BookingItemWidget extends StatelessWidget {
               left: 20.0,
               right: 20.0,
             ),
-            child: BookingItemBodyWidget(booking: booking,),
+            child: BookingItemBodyWidget(booking: booking, bookingResponse: bookingResponse,),
           ),
         ],
       ),
@@ -428,10 +440,12 @@ class BookingItemWidget extends StatelessWidget {
 
 class BookingItemBodyWidget extends StatelessWidget {
 
-  final Booking booking;
+  final BookingDetailsResponse booking;
+  final Booking bookingResponse;
 
   const BookingItemBodyWidget({
     Key? key, required this.booking,
+    required this.bookingResponse,
   }) : super(key: key);
 
   @override
@@ -449,14 +463,14 @@ class BookingItemBodyWidget extends StatelessWidget {
               flex: 5,
               child: TitleSubtitleWidget(
                 title: "Pickup Time",
-                subtitle: "${booking.pickupTime}",
+                subtitle: "${booking.data?.pickupTime}",
               ),
             ),
             Expanded(
               flex: 2,
               child: TitleSubtitleWidget(
                 title: "Booked Seat",
-                subtitle: "${booking.bookedSeat}",
+                subtitle: "${booking.data?.bookedSeat}",
               ),
             ),
           ],
@@ -468,26 +482,23 @@ class BookingItemBodyWidget extends StatelessWidget {
               flex: 5,
               child: TitleSubtitleWidget(
                 title: "Start Date",
-                subtitle: speakDate(booking.startDate),
+                subtitle: speakDate(booking.data!.startDate),
               ),
             ),
             Expanded(
               flex: 2,
               child: TitleSubtitleWidget(
                 title: "End Date",
-                subtitle: speakDate(booking.endDate),
+                subtitle: speakDate(booking.data!.endDate),
               ),
             ),
           ],
         ),
         InkWell(
           onTap: (){
-            Get.to(
-              InvoiceScreen(bookingResponse: BookingResponse(
-                success: false,
-                msg: ""
-              ),)
-            );
+            // Get.to(
+            //   InvoiceScreen(bookingResponse: nu,)
+            // );
           },
           child: Container(
             decoration: const BoxDecoration(
@@ -515,7 +526,7 @@ class BookingItemBodyWidget extends StatelessWidget {
                   textAlign: TextAlign.start,
                 ),
                 Text(
-                  "S\$${booking.price?.toStringAsFixed(2)}",
+                  "S\$${booking.data?.price?.toStringAsFixed(2)}",
                   style: GSTextStyles.make18xw700Style(
                     color: GSColors.gray_primary,
                   ),
@@ -532,7 +543,7 @@ class BookingItemBodyWidget extends StatelessWidget {
 
 class BookingItemHeaderWidget extends StatelessWidget {
 
-  final Booking booking;
+  final BookingDetailsResponse booking;
 
   const BookingItemHeaderWidget({
     Key? key, required this.booking,
@@ -558,7 +569,7 @@ class BookingItemHeaderWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: Text(
-                "#${booking.id}",
+                "#${booking.data?.id}",
                 style: GSTextStyles.make20xw700Style(
                   color: GSColors.gray_primary,
                 ),
@@ -636,3 +647,21 @@ class TitleSubtitleWidget extends StatelessWidget {
     );
   }
 }
+String getType(BookingDetailsResponse booking){
+  if(booking.data?.isFinished==0){
+    if(booking.data?.isPaid==0)
+      return "Pending";
+    else return "On Going";
+  }return "Finished";
+}
+
+Color getColor(BookingDetailsResponse booking){
+
+  if(booking.data?.isFinished==0){
+    if(booking.data?.isPaid==0)
+      return GSColors.pending_Color;
+    else return GSColors.ongoing_Color;
+  }else return finishedChipColor;
+
+}
+

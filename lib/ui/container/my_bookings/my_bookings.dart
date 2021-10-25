@@ -13,7 +13,7 @@ import 'package:go_share/ui/container/UIConstants/Strings.dart';
 import 'package:go_share/ui/container/my_booking_details_one/my_booking_details_one.dart';
 import 'package:go_share/ui/container/my_booking_details_two/my_booking_details_two.dart';
 import 'package:go_share/ui/container/my_bookings/my_bookings_controller.dart';
-import 'package:go_share/utils/booking_utils.dart';
+import 'package:go_share/utils/booking_utils.dart' as bu;
 import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/date_time_utils.dart';
 import 'package:go_share/utils/dimens.dart';
@@ -443,7 +443,7 @@ class BookingItemHeaderWidget extends StatelessWidget {
         ),
         Container(
           decoration: BoxDecoration(
-            color: getColor(booking).withOpacity(0.1),
+            color: bu.getColor(booking).withOpacity(0.1),
             borderRadius: const BorderRadius.all(
               const Radius.circular(dp20),
             ),
@@ -453,9 +453,9 @@ class BookingItemHeaderWidget extends StatelessWidget {
             vertical: 8.0,
           ),
           child: Text(
-            getType(booking),
+            bu.getType(booking),
             style: GSTextStyles.make13xw700Style(
-              color: getColor(booking),
+              color: bu.getColor(booking),
             ),
             textAlign: TextAlign.start,
           ),

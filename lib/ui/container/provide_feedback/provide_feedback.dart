@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import 'package:go_share/base/widget/custom_filled_button.dart';
 import 'package:go_share/base/widget/custom_text_form_field.dart';
+import 'package:go_share/data/models/booking/booking_details_response.dart';
 import 'package:go_share/data/models/booking/my_booking_list_response.dart';
 import 'package:go_share/data/models/booking/rating_request.dart';
 import 'package:go_share/ui/common_widgets/common_loading_dialog.dart';
@@ -18,7 +19,7 @@ import 'package:go_share/utils/dimens.dart';
 
 class ProvideFeedbackView extends StatefulWidget {
 
-  final Booking booking;
+  final BookingDetailsResponse booking;
 
   const ProvideFeedbackView({Key? key, required this.booking}) : super(key: key);
 
@@ -28,7 +29,7 @@ class ProvideFeedbackView extends StatefulWidget {
 
 class _ProvideFeedbackViewState extends State<ProvideFeedbackView> {
 
-  final Booking booking;
+  final BookingDetailsResponse booking;
 
   _ProvideFeedbackViewState(this.booking);
 
@@ -57,7 +58,7 @@ class _ProvideFeedbackViewState extends State<ProvideFeedbackView> {
 
 class BodyWidget extends StatefulWidget {
 
-  final Booking booking;
+  final BookingDetailsResponse booking;
 
   const BodyWidget({Key? key, required this.booking}) : super(key: key);
 
@@ -69,7 +70,7 @@ class _BodyWidgetState extends State<BodyWidget> {
   late TextEditingController reasonController;
 
   final _controller = FeedbackController();
-  final Booking booking;
+  final BookingDetailsResponse booking;
 
   double _rating = 0.0;
   var hp;
@@ -151,7 +152,7 @@ class _BodyWidgetState extends State<BodyWidget> {
           onTap: () {
             showLoader();
             var request = RatingRequest(
-                id: booking.id,
+                id: booking.data?.id ?? -1,
                 rating: _rating,
                 verbatim: "rating",
             );
