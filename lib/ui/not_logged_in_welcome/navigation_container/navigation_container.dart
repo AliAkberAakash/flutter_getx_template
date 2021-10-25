@@ -27,7 +27,10 @@ import 'package:google_fonts/google_fonts.dart';
 import '../profile/profile_screen.dart';
 
 class NavigationContainer extends StatefulWidget {
-  const NavigationContainer({Key? key}) : super(key: key);
+
+  final bool showBookingScreen;
+
+  const NavigationContainer({Key? key, this.showBookingScreen = false}) : super(key: key);
 
   @override
   _NavigationContainerState createState() => _NavigationContainerState();
@@ -38,6 +41,14 @@ class _NavigationContainerState extends State<NavigationContainer> {
   int _selectedItem = 3;
 
   final _controller = NavigationContainerController();
+
+  @override
+  void initState() {
+    if(widget.showBookingScreen){
+      _selectedItem = 4;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

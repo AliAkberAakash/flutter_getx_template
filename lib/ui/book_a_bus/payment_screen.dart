@@ -19,6 +19,7 @@ import 'package:go_share/ui/common_widgets/positive_button.dart';
 import 'package:go_share/ui/common_widgets/text_field_headline.dart';
 import 'package:go_share/ui/common_widgets/text_field_value_widget.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
+import 'package:go_share/ui/not_logged_in_welcome/navigation_container/navigation_container.dart';
 import 'package:go_share/ui/not_logged_in_welcome/welcome/welcome_screen.dart';
 import 'package:go_share/ui/section4/widgets/pending_button.dart';
 import 'package:go_share/util/lib/toast.dart';
@@ -505,9 +506,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               text: "My Booking List",
                               onClicked: (){
                                 Get.back();
-                                Get.back();
-                                Get.back();
-                                Get.back();
+                                Get.to(NavigationContainer(showBookingScreen: true,));
                               },
                             ),
                           ),
@@ -524,7 +523,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                 Get.back();
                                 Get.to(
                                   InvoiceScreen(bookingResponse: response,),
-                                );
+                                )?.then((value){
+                                  Get.to(NavigationContainer(showBookingScreen: true,));
+                                });
                               },
                               text: "View Invoice",
                             ),
@@ -573,15 +574,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
   placeBooking(BookingRequest request) async{
     var response = await controller.placeBooking(request);
     Get.back();
-    if(response.success){
-      Get.back();
-      Get.back();
-      Get.back();
-      showSuccessSheet(context, response);
-      controller.clearFields();
-    }else{
-      ToastUtil.show(response.msg);
-    }
+    Get.back();
+    Get.back();
+    Get.back();
+    showSuccessSheet(context, response);
+    controller.clearFields();
+    ToastUtil.show(response.msg);
   }
 
   void showErrorSheet(BuildContext context) {

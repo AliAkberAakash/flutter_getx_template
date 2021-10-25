@@ -21,8 +21,9 @@ import '../sign_in/sign_in_screen.dart';
 class NotLoggedInWelcome extends StatefulWidget {
 
   final bool isFromPayment;
+  final bool goToBookingScreen;
 
-  const NotLoggedInWelcome({Key? key, this.isFromPayment = false}) : super(key: key);
+  const NotLoggedInWelcome({Key? key, this.isFromPayment = false, this.goToBookingScreen = false}) : super(key: key);
 
   @override
   _NotLoggedInWelcomeState createState() => _NotLoggedInWelcomeState();
