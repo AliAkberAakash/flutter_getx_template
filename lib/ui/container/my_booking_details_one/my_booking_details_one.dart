@@ -463,7 +463,7 @@ class BookingItemBodyWidget extends StatelessWidget {
               flex: 5,
               child: TitleSubtitleWidget(
                 title: "Pickup Time",
-                subtitle: "${booking.data?.pickupTime}",
+                subtitle: "${booking.data?.pickupTime.substring(0,5)}",
               ),
             ),
             Expanded(
@@ -497,7 +497,15 @@ class BookingItemBodyWidget extends StatelessWidget {
         InkWell(
           onTap: (){
             // Get.to(
-            //   InvoiceScreen(bookingResponse: nu,)
+            //   InvoiceScreen(
+            //     bookingResponse: BookingResponse(
+            //         success: true,
+            //         msg: "",
+            //         data: Data(
+            //
+            //         )
+            //     ),
+            //   )
             // );
           },
           child: Container(
