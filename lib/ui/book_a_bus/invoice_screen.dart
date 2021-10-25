@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:go_share/data/models/booking/booking_response.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
 import 'package:go_share/ui/common_widgets/outlined_material_button.dart';
@@ -8,6 +9,8 @@ import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/date_time_utils.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
+
+import 'booking_controller.dart';
 
 class InvoiceScreen extends StatefulWidget {
 
@@ -20,6 +23,9 @@ class InvoiceScreen extends StatefulWidget {
 }
 
 class _InvoiceScreenState extends State<InvoiceScreen> {
+
+  final BookingController controller = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,11 +49,11 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
           VSpacer20(),
           TextFieldHeadline(headline: "Total Distance"),
           VSpacer10(),
-          TextFieldValueWidget(headline: "${widget.bookingResponse.data?.distance}"),
+          TextFieldValueWidget(headline: "${widget.bookingResponse.data?.distance?.toStringAsFixed(2)}"),
           VSpacer20(),
-          TextFieldHeadline(headline: "Cost per Kilometer"),
+          TextFieldHeadline(headline: "Cost per km"),
           VSpacer10(),
-          TextFieldValueWidget(headline: 'S\$5/km'),
+          TextFieldValueWidget(headline: 'S\$${controller.pricePerKm}/km'),
           VSpacer20(),
           TextFieldHeadline(headline: "Total Travel Number"),
           VSpacer10(),
@@ -73,7 +79,7 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
                 children: [
                   TextFieldHeadline(headline: "Time"),
                   VSpacer10(),
-                  TextFieldValueWidget(headline: "${widget.bookingResponse.data!.pickupTime}"),
+                  TextFieldValueWidget(headline: "${widget.bookingResponse.data!.pickupTime.substring(0,5)}"),
                 ],
               )
             ],
@@ -131,7 +137,7 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(child: TextFieldHeadline(headline: "Total Amount")),
-              Flexible(child: TextFieldValueWidget(headline: 'S\$47.00')),
+              Flexible(child: TextFieldValueWidget(headline: "S\$${widget.bookingResponse.data?.price?.toStringAsFixed(2)}")),
             ],
           ),
           VSpacer40(),

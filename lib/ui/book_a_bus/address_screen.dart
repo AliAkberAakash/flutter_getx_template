@@ -418,6 +418,8 @@ class _AddressScreenState extends State<AddressScreen> {
 
                         double price = calculatePrice();
 
+                        _controller.pricePerKm.value = price;
+
                         print("Price is $price");
 
                         var addressRequest = AddressRequest(
