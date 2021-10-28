@@ -201,16 +201,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     child: Row(
                       children: [
                         Text(
-                          "Credit Card",
+                          "Pay Now",
                           style: GoogleFonts.manrope(
                             color: darkText,
                           ),
                         ),
                         Spacer(),
                         Image.asset(
-                          "images/ic_visa.png",
+                          "images/icons/ic_paynow_logo.png",
                           height: dp30,
-                          width: dp50,
+                          width: dp70,
+                          fit: BoxFit.fitWidth,
                         ),
                       ],
                     ),
@@ -225,11 +226,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   activeColor: accent,
                   value: "v",
                   groupValue: selectedPayment,
-                  onChanged: (String? value){
-                    setState(() {
-                      selectedPayment = value!;
-                    });
-                  },
+                  onChanged: null,
+                  // onChanged: (String? value){
+                  //   setState(() {
+                  //     selectedPayment = value!;
+                  //   });
+                  // },
                 ),
                 HSpacer20(),
                 Expanded(
@@ -244,14 +246,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     child: Row(
                       children: [
                         Text(
-                          "Paypal",
+                          "Credit Card",
                           style: GoogleFonts.manrope(
                             color: darkText,
                           ),
                         ),
                         Spacer(),
                         Image.asset(
-                          "images/ic_paypal.png",
+                          "images/ic_visa.png",
                           height: dp30,
                           width: dp50,
                         ),
