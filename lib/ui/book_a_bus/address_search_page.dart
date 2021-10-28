@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_share/data/models/one_map/one_map_response.dart';
@@ -17,7 +19,16 @@ class AddressSearchPage extends StatefulWidget {
 class _AddressSearchPageState extends State<AddressSearchPage> {
 
   TextEditingController addressController = TextEditingController();
+  Timer? _debounce;
+  String query = "";
+  int _debouncetime = 500;
   final controller = SearchController();
+
+  @override
+  void initState() {
+    addressController.addListener(_onSearchChanged);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,26 +46,26 @@ class _AddressSearchPageState extends State<AddressSearchPage> {
                     hint: "Search here",
                   ),
                 ),
-                HSpacer10(),
-                MaterialButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(
-                            dp10
-                        )
-                    ),
-                  ),
-                  height: dp48,
-                  minWidth: dp48,
-                  color: accent,
-                  child: Icon(
-                    Icons.search,
-                    color: white,
-                  ),
-                  onPressed: (){
-                    controller.searchAddress(addressController.text);
-                  },
-                ),
+                // HSpacer10(),
+                // MaterialButton(
+                //   shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.all(
+                //         Radius.circular(
+                //             dp10
+                //         )
+                //     ),
+                //   ),
+                //   height: dp48,
+                //   minWidth: dp48,
+                //   color: accent,
+                //   child: Icon(
+                //     Icons.search,
+                //     color: white,
+                //   ),
+                //   onPressed: (){
+                //     controller.searchAddress(addressController.text);
+                //   },
+                // ),
               ],
             ),
             Expanded(
@@ -77,6 +88,22 @@ class _AddressSearchPageState extends State<AddressSearchPage> {
         ),
       ),
     );
+  }
+
+  _onSearchChanged() {
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    _debounce = Timer(Duration(milliseconds: _debouncetime), () {
+      if (addressController.text != "") {
+        controller.searchAddress(addressController.text);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    addressController.removeListener(_onSearchChanged);
+    addressController.dispose();
+    super.dispose();
   }
 }
 
