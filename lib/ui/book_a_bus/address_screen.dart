@@ -415,33 +415,34 @@ class _AddressScreenState extends State<AddressScreen> {
                     text: "Next",
                     onClicked: () {
                       if(validate()){
+                        if(validatePickupPostCode() && validateDropOffPostCode()){
+                          double price = calculatePrice();
 
-                        double price = calculatePrice();
+                          _controller.pricePerKm.value = price;
 
-                        _controller.pricePerKm.value = price;
+                          print("Price is $price");
 
-                        print("Price is $price");
+                          var addressRequest = AddressRequest(
+                            pickupPostalCode: _controller.pickupPostalCode.value,
+                            pickupLocation: _controller.pickupAddress.value,
+                            pickupRemarks: _controller.pickupRemarksController.text,
+                            dropOffPostalCode: _controller.dropOffPostalCode.value,
+                            dropOffLocation: _controller.dropOffAddress.value,
+                            dropOffRemarks: _controller.dropOffRemarksController.text,
+                            comments: commentsController.text,
+                            distance: distance,
+                            price: price*distance,
+                          );
 
-                        var addressRequest = AddressRequest(
-                          pickupPostalCode: _controller.pickupPostalCode.value,
-                          pickupLocation: _controller.pickupAddress.value,
-                          pickupRemarks: _controller.pickupRemarksController.text,
-                          dropOffPostalCode: _controller.dropOffPostalCode.value,
-                          dropOffLocation: _controller.dropOffAddress.value,
-                          dropOffRemarks: _controller.dropOffRemarksController.text,
-                          comments: commentsController.text,
-                          distance: distance,
-                          price: price*distance,
-                        );
-
-                        Get.to(
-                          PaymentScreen(
-                            addressRequest: addressRequest,
-                            infoRequest: infoRequest,
-                            dropOffResponse: _controller.dropOffResponse,
-                            pickupResponse: _controller.pickUpResponse,
-                          ),
-                        );
+                          Get.to(
+                            PaymentScreen(
+                              addressRequest: addressRequest,
+                              infoRequest: infoRequest,
+                              dropOffResponse: _controller.dropOffResponse,
+                              pickupResponse: _controller.pickUpResponse,
+                            ),
+                          );
+                        }
                       }else{
                         ToastUtil.show("Please fill required fields");
                       }
@@ -504,10 +505,34 @@ class _AddressScreenState extends State<AddressScreen> {
 
     return _controller.pickupAddress.isNotEmpty
         && _controller.pickupPostalCode.isNotEmpty
+        && _controller.pickupRemarksController.text.isNotEmpty
+        && _controller.dropOffRemarksController.text.isNotEmpty
         && _controller.dropOffAddress.isNotEmpty
         && _controller.dropOffPostalCode.isNotEmpty;
 
     return true;
+  }
+
+  validatePickupPostCode(){
+    var text = _controller.pickupPostalCode.value;
+    var pickupPostCode = int.parse(text);
+    if(pickupPostCode>=600000 && pickupPostCode<=689999){
+      return true;
+    }else{
+      ToastUtil.show("Invalid pickup post code");
+      return false;
+    }
+  }
+
+  validateDropOffPostCode(){
+    var text = _controller.dropOffPostalCode.value;
+    var dropOffPostCode = int.parse(text);
+    if(dropOffPostCode>=600000 && dropOffPostCode<=689999){
+      return true;
+    }else{
+      ToastUtil.show("Invalid pickup post code");
+      return false;
+    }
   }
 
   getPickupLocation() async{
