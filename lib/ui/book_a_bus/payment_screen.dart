@@ -11,6 +11,7 @@ import 'package:go_share/data/models/one_map/one_map_response.dart';
 import 'package:go_share/data/repository/service_partner_repository.dart';
 import 'package:go_share/ui/book_a_bus/booking_controller.dart';
 import 'package:go_share/ui/book_a_bus/invoice_screen.dart';
+import 'package:go_share/ui/book_a_bus/qr_screen.dart';
 import 'package:go_share/ui/common_widgets/common_loading_dialog.dart';
 import 'package:go_share/ui/common_widgets/grey_button.dart';
 import 'package:go_share/ui/common_widgets/large_headline_widget.dart';
@@ -579,7 +580,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
     Get.back();
     Get.back();
     Get.back();
-    showSuccessSheet(context, response);
+    Get.to(QRScreen());
+    //showSuccessSheet(context, response);
     controller.clearFields();
     ToastUtil.show(response.msg);
   }

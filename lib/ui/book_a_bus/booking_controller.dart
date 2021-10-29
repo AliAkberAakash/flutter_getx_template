@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'package:go_share/data/models/booking/booking_request.dart';
 import 'package:go_share/data/models/booking/booking_response.dart';
 import 'package:go_share/data/models/booking/child_list_response.dart';
-import 'package:go_share/data/models/booking/pay_now_request.dart';
+import 'package:go_share/data/models/booking/pay_now_request.dart' as pnr;
+import 'package:go_share/data/models/booking/pay_now_response.dart';
 import 'package:go_share/data/models/booking/pricing_response.dart';
 import 'package:go_share/data/models/google_map/geocoding_response.dart';
 import 'package:go_share/data/models/one_map/one_map_response.dart';
@@ -22,6 +23,8 @@ class BookingController extends GetxController{
 
   var childListResponse = Rx<ChildrenListResponse?>(null);
   var pickupAddressResponse = Rx<GeoCodingResponse?>(null);
+
+  var payNowResponse = Rx<PayNowResponse?>(null);
 
   late OneMapResponse pickUpResponse;
   late OneMapResponse dropOffResponse;
@@ -192,21 +195,23 @@ class BookingController extends GetxController{
   }
 
   makePayment(String userId, String bookingId) async{
-    var paymentRequest = PayNowRequest(data: PayNowRequestData(
-        relationships: Relationships(
-          customerProfile: CustomerProfile(
-            data: CustomerProfileData(
+    var paymentRequest = pnr.PayNowRequest(data: pnr.PayNowRequestData(
+        relationships: pnr.Relationships(
+          customerProfile: pnr.CustomerProfile(
+            data: pnr.CustomerProfileData(
                 id: userId,
             ),
           ),
         ),
-        attributes: Attributes(
+        attributes: pnr.Attributes(
           merchantPrefix: 'GOSHARE',
           referenceId: userId+"::"+bookingId,
         ),
       ),
     );
     var response = await repository.makePaymentRequest(paymentRequest);
+
+    payNowResponse.value = response;
 
     logger.d("This is pay now response", response.toJson());
     logger.d(response.data?.id);
