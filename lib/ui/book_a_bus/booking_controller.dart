@@ -17,6 +17,7 @@ class BookingController extends GetxController{
 
   BookingController(this.repository){
     getPricing();
+    makePayment("1", "2");
   }
 
   var childListResponse = Rx<ChildrenListResponse?>(null);
@@ -205,7 +206,10 @@ class BookingController extends GetxController{
         ),
       ),
     );
-    await repository.makePaymentRequest(paymentRequest);
+    var response = await repository.makePaymentRequest(paymentRequest);
+
+    logger.d("This is pay now response", response.toJson());
+    logger.d(response.data?.id);
   }
 
 }

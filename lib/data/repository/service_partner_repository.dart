@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:go_share/core/network/api_base_helper.dart';
@@ -640,7 +641,9 @@ class Repository{
   Future<PayNowResponse> makePaymentRequest(PayNowRequest request) async{
     try{
       var response = await helper.postPayNow(NetworkConstants.PAYMENT_REQUEST, request.toJson());
-      return PayNowResponse.fromJson(response.data);
+      logger.d(response.data);
+      logger.d(response);
+      return PayNowResponse.fromJson(jsonDecode(response.data.toString()));
     }catch(e){
       logger.d(e);
       return PayNowResponse();

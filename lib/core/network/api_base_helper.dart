@@ -242,7 +242,10 @@ class ApiBaseHelper {
       final response = await dioFactory.getDio().post(
         endUrl,
         data: body,
-        options: Options(headers: <String, String>{'authorization': auth})
+        options: Options(headers:{
+          'Authorization': auth,
+          "Content-Type":" application/vnd.api+json"
+        })
       );
       //return the response
       return _returnResponse(response);
@@ -256,6 +259,8 @@ class ApiBaseHelper {
 Response _returnResponse(Response response) {
   switch (response.statusCode) {
     case 200:
+      return response;
+    case 201:
       return response;
       break;
     case 400:
