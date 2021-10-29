@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:go_share/data/models/booking/booking_request.dart';
 import 'package:go_share/data/models/booking/booking_response.dart';
 import 'package:go_share/data/models/booking/child_list_response.dart';
+import 'package:go_share/data/models/booking/pay_now_request.dart';
 import 'package:go_share/data/models/booking/pricing_response.dart';
 import 'package:go_share/data/models/google_map/geocoding_response.dart';
 import 'package:go_share/data/models/one_map/one_map_response.dart';
@@ -187,6 +188,24 @@ class BookingController extends GetxController{
   getPricing() async{
     var response = await repository.getPricing();
     pricingResponse.value = response;
+  }
+
+  makePayment(String userId, String bookingId) async{
+    var paymentRequest = PayNowRequest(data: PayNowRequestData(
+        relationships: Relationships(
+          customerProfile: CustomerProfile(
+            data: CustomerProfileData(
+                id: userId,
+            ),
+          ),
+        ),
+        attributes: Attributes(
+          merchantPrefix: 'GOSHARE',
+          referenceId: userId+"::"+bookingId,
+        ),
+      ),
+    );
+    await repository.makePaymentRequest(paymentRequest);
   }
 
 }

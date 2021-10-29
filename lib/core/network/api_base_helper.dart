@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:go_share/core/failure/exceptions/network_exception.dart';
@@ -229,6 +230,27 @@ class ApiBaseHelper {
       NetworkConstants.AUTHORIZATION: token,
     });
   }
+
+  Future<Response> postPayNow(String endUrl, Map<String, dynamic> body) async {
+
+    final userName = "test_66f99742202704902e1df68583408168";
+    final password = "4a45ae6a-6d50-4e37-9926-ffb4b1242051";
+    var auth = 'Basic '+base64Encode(utf8.encode('$userName:$password'));
+
+    try {
+      // make the network call
+      final response = await dioFactory.getDio().post(
+        endUrl,
+        data: body,
+        options: Options(headers: <String, String>{'authorization': auth})
+      );
+      //return the response
+      return _returnResponse(response);
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    }
+  }
+
 }
 
 Response _returnResponse(Response response) {

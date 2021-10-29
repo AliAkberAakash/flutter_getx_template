@@ -78,6 +78,9 @@ class NetworkConstants {
   static const PRICING = "pricings";
   static const BOOKING_DETAILS = "user/booking";
 
+  // PayNow url
+  static const PAYMENT_REQUEST = "https://sandbox.xfers.io/api/v4/payment_methods/paynow";
+
   // Google api url
   static const GET_ADDRESS_FROM_PO_CODE= "https://maps.googleapis.com/maps/api/geocode/json";
 

@@ -7,6 +7,8 @@ import 'package:go_share/data/models/booking/booking_request.dart';
 import 'package:go_share/data/models/booking/booking_response.dart';
 import 'package:go_share/data/models/booking/child_list_response.dart';
 import 'package:go_share/data/models/booking/my_booking_list_response.dart';
+import 'package:go_share/data/models/booking/pay_now_request.dart';
+import 'package:go_share/data/models/booking/pay_now_response.dart';
 import 'package:go_share/data/models/booking/pricing_response.dart';
 import 'package:go_share/data/models/booking/rating_request.dart';
 import 'package:go_share/data/models/booking/rating_response.dart';
@@ -632,6 +634,16 @@ class Repository{
     }catch(e){
       logger.d(e);
       return BookingDetailsResponse(success: false);
+    }
+  }
+
+  Future<PayNowResponse> makePaymentRequest(PayNowRequest request) async{
+    try{
+      var response = await helper.postPayNow(NetworkConstants.PAYMENT_REQUEST, request.toJson());
+      return PayNowResponse.fromJson(response.data);
+    }catch(e){
+      logger.d(e);
+      return PayNowResponse();
     }
   }
 
