@@ -220,7 +220,7 @@ class _BodyWidgetState extends State<BodyWidget> {
               Container(
                   height: 500,
                   width: 200,
-                  child: Center(child: Text("No Evening Service Today"))),
+                  child: Center(child: Text("No Service Today"))),
             ],
           ));
     } else{
@@ -257,7 +257,7 @@ class _BodyWidgetState extends State<BodyWidget> {
               Container(
                 height: 500,
                   width: 200,
-                  child: Center(child: Text("No Evening Service Today"))),
+                  child: Center(child: Text("No Service Today"))),
             ],
           ));
     }

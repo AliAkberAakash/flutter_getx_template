@@ -144,9 +144,9 @@ class _FormListWidgetState extends State<FormListWidget> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
       child: Container(
         width: double.maxFinite,
+        height: MediaQuery.of(context).size.height+300,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -213,7 +213,6 @@ class _FormListWidgetState extends State<FormListWidget> {
                 submitData();
               },
             ),
-            VSpacer80(),
 
           ],
         ),
