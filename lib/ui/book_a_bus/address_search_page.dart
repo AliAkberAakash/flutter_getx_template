@@ -43,7 +43,7 @@ class _AddressSearchPageState extends State<AddressSearchPage> {
                 Expanded(
                   child: CommonTextField(
                     controller: addressController,
-                    hint: "Search here",
+                    hint: "Search here location or postal code",
                   ),
                 ),
                 // HSpacer10(),
