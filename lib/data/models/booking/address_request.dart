@@ -15,6 +15,7 @@ class AddressRequest {
     this.comments,
     required this.distance,
     required this.price,
+    required this.pricePerKm,
   });
 
   String pickupPostalCode;
@@ -26,6 +27,7 @@ class AddressRequest {
   String? comments;
   double distance;
   double price;
+  double pricePerKm;
 
   factory AddressRequest.fromJson(Map<String, dynamic> json) => AddressRequest(
     pickupPostalCode: json["pickup_postal_code"],
@@ -37,6 +39,7 @@ class AddressRequest {
     comments: json["comments"],
     distance: json["distance"],
     price: json["price"],
+    pricePerKm : json["price_per_km"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -49,5 +52,6 @@ class AddressRequest {
     "comments": comments,
     "distance" : distance,
     "price" : price,
+    "price_per_km" : pricePerKm,
   };
 }

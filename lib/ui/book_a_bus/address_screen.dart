@@ -432,6 +432,7 @@ class _AddressScreenState extends State<AddressScreen> {
                             comments: commentsController.text,
                             distance: distance,
                             price: price*distance,
+                            pricePerKm: price
                           );
 
                           Get.to(

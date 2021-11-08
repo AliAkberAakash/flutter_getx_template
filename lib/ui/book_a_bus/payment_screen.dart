@@ -362,7 +362,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           VSpacer20(),
           TextFieldHeadline(headline: "Cost per Kilometer"),
           VSpacer10(),
-          TextFieldValueWidget(headline: 'S\$5/km'),
+          TextFieldValueWidget(headline: 'S\$${addressRequest.pricePerKm}/km'),
           VSpacer20(),
           TextFieldHeadline(headline: "Total Travel Number"),
           VSpacer10(),
