@@ -580,7 +580,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     Get.back();
     Get.back();
     Get.back();
-    Get.to(QRScreen());
+    Get.to(QRScreen(response: response,));
     //showSuccessSheet(context, response);
     controller.clearFields();
     ToastUtil.show(response.msg);
