@@ -127,9 +127,9 @@ class _DriverLoginScreenState extends State<DriverLoginScreen> {
                             ],
                           ),
                         ),*/
-                    SizedBox(height: 10,),
-                    Align(
-                        child: Text("Forget Password ? Reset Here")),
+                    // SizedBox(height: 10,),
+                    // Align(
+                    //     child: Text("Forget Password ? Reset Here")),
                     VSpacer40(),
                     GSButton(
                       text: GSStrings.sign_in,

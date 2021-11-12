@@ -177,6 +177,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   _datePicker(TextEditingController controller, String hint, int type){
     return TextField(
       readOnly: true,
+      onTap: (){
+        _selectDate(context);
+      },
       controller: controller,
       style: TextStyle(
         color: darkText,
@@ -185,14 +188,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       ),
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        suffixIcon: IconButton(
-          onPressed: (){
-            _selectDate(context);
-          },
-          icon: Icon(
-            Icons.date_range,
-            color: accent,
-          ),
+        suffixIcon: Icon(
+          Icons.date_range,
+          color: accent,
         ),
         contentPadding: EdgeInsets.only(left: 10),
         hintText: hint,
