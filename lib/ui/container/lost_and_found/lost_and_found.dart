@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:go_share/base/widget/custom_filled_button.dart';
 import 'package:go_share/base/widget/custom_text_form_field.dart';
+import 'package:go_share/data/models/MessageResponse.dart';
 import 'package:go_share/data/models/container/lostandfound/LostAndFoundModel.dart';
 import 'package:go_share/data/models/container/lostandfound/LostAndFoundResponse.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
@@ -171,7 +172,7 @@ class _FormListWidgetState extends State<FormListWidget> {
               inputType: TextInputType.text,
               hint: GSStrings.lost_and_found_description,
               isFieldExpanded: true,
-              isRequiredField: false,
+              isRequiredField: true,
             ),
             CustomFilledButton(
               margin: const EdgeInsets.only(
@@ -185,7 +186,19 @@ class _FormListWidgetState extends State<FormListWidget> {
               textColor: Colors.white,
               title: GSStrings.submit,
               onTap: () {
-                _submitTask();
+                if(descriptionController.text.isNotEmpty && timeAndDateController.text.isNotEmpty && vehicleNumberController.text.isNotEmpty && bookingIdController.text.isNotEmpty){
+                  if(bookingIdController.text.isNumericOnly){
+                    _submitTask();
+                  }else{
+                    showToast("Booking ID must be number");
+                  }
+
+                }else{
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("Please Filled Required Data"),
+                  ));
+                }
+
 
               },
             ),
@@ -261,7 +274,17 @@ class _FormListWidgetState extends State<FormListWidget> {
     controller.lostAndFoundServiceProvider(model).then((value) => {
       if(value is LostAndFoundResponse){
         showSuccessSheet(context)
-      }});
+      }else if(value is MessageResponse){
+        showToast(value.msg)
+      }
+    });
   }
+
+  showToast(String text){
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(text),
+    ));
+  }
+
 
 }

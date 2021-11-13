@@ -13,7 +13,7 @@ class LostAndFoundController extends GetxController{
 
   final ContainerRepository repository = new ContainerRepository();
 
-  Future<LostAndFoundResponse> lostAndFoundServiceProvider(LostAndFoundModel model) async{
+  Future<dynamic> lostAndFoundServiceProvider(LostAndFoundModel model) async{
     var response = await repository.postLostandFoundData(model);
     return response;
   }
