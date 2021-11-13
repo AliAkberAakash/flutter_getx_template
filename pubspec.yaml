@@ -39,6 +39,7 @@ dependencies:
   flutter_rating_bar: ^4.0.0
   geocoding: ^2.0.1
   flutter_google_places: ^0.3.0
+  screenshot: ^1.2.3
 
   # Data
   get_storage: ^2.0.1
@@ -51,6 +52,7 @@ dependencies:
   logger: ^1.1.0
   flutter_html: ^2.1.2
   launch_review: ^3.0.1
+  image_gallery_saver: '^1.7.1'
 
 dev_dependencies:
   build_runner: ^2.0.4
