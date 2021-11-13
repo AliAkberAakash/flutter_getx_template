@@ -44,6 +44,7 @@ class CustomAppPromotionWidget extends StatelessWidget {
                   InkWell(
                     onTap:(){
                       LaunchReview.launch(androidAppId:data.data.first.playStoreLink, iOSAppId: data.data.first.appStoreLink);
+
                     },
                     child: Image.asset(
                       "images/ic_download_ios_app.png",
