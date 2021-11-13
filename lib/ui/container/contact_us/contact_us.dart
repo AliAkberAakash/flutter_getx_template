@@ -191,13 +191,14 @@ class _FormListWidgetState extends State<FormListWidget> {
               formController: websiteUrlController,
               inputType: TextInputType.url,
               hint: GSStrings.contact_us_website_url,
-              isRequiredField: true,
+              isRequiredField: false,
             ),
             CustomTextFormField(
               formController: feedbackController,
               inputType: TextInputType.text,
               hint: GSStrings.contact_us_your_feedback,
-              isFieldExpanded: true,
+              isFieldExpanded: false,
+              isRequiredField:false
             ),
             CustomFilledButton(
               margin: const EdgeInsets.only(
@@ -211,11 +212,10 @@ class _FormListWidgetState extends State<FormListWidget> {
               textColor: Colors.white,
               title: GSStrings.submit,
               onTap: () {
-                if(fullNameController.text.isNotEmpty && phoneNumberController.text.isNotEmpty && emailController.text.isNotEmpty && feedbackController.text.isNotEmpty){
-
+                if(fullNameController.text.isNotEmpty && phoneNumberController.text.isNotEmpty && emailController.text.isNotEmpty){
                   submitData();
                 }else{
-
+                  showToast("Please Filled Required Data");
                 }
 
               },

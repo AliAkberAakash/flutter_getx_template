@@ -138,6 +138,8 @@ class FaqListWidget extends StatelessWidget {
     return ListView.builder(
         itemCount: newLIst.length,
         itemBuilder: (context,i){
+          print(newLIst.length);
+          print(newLIst[i].question);
           Widget nextPage = BookABusView(data: data,categoryId:data!.data[i].category.id,name :data!.data[i].category.name);
            return Padding(
              padding: const EdgeInsets.all(8.0),
