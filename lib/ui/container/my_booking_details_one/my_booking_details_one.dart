@@ -57,17 +57,26 @@ class _MyBookingDetailsOneViewState extends State<MyBookingDetailsOneView> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
-          child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Obx((){
+          child: Obx((){
 
-              var currentResponse = controller.bookingDetails.value;
+            var currentResponse = controller.bookingDetails.value;
 
-              if(currentResponse==null)
-                return LoadingWidget();
-              else return BodyWidget(booking: currentResponse, bookingResponse: booking,);
-            }),
-          ),
+            if(currentResponse==null)
+              return Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  LoadingWidget(),
+                ],
+              );
+            else return SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+                child: BodyWidget(
+                  booking: currentResponse,
+                  bookingResponse: booking,
+                ),
+            );
+          }),
         ),
       ),
     );
