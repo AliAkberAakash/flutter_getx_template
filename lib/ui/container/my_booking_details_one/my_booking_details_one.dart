@@ -7,6 +7,7 @@ import 'package:go_share/core/ui/loading_widget.dart';
 import 'package:go_share/data/models/booking/booking_details_response.dart';
 import 'package:go_share/data/models/booking/booking_response.dart';
 import 'package:go_share/data/models/booking/my_booking_list_response.dart';
+import 'package:go_share/ui/book_a_bus/booking_controller.dart';
 import 'package:go_share/ui/book_a_bus/invoice_screen.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/my_booking_details_one/my_booking_controller.dart';
@@ -41,6 +42,7 @@ class _MyBookingDetailsOneViewState extends State<MyBookingDetailsOneView> {
   @override
   void initState() {
     controller.getBookingDetails(booking.id);
+    controller.getInvoice(booking.id);
     super.initState();
   }
 
@@ -72,6 +74,7 @@ class _MyBookingDetailsOneViewState extends State<MyBookingDetailsOneView> {
             else return SingleChildScrollView(
               physics: BouncingScrollPhysics(),
                 child: BodyWidget(
+                  controller: controller,
                   booking: currentResponse,
                   bookingResponse: booking,
                 ),
@@ -85,10 +88,11 @@ class _MyBookingDetailsOneViewState extends State<MyBookingDetailsOneView> {
 
 class BodyWidget extends StatelessWidget {
 
+  final MyBookingController controller;
   final BookingDetailsResponse booking;
   final Booking bookingResponse;
 
-  const BodyWidget({Key? key, required this.booking, required this.bookingResponse}) : super(key: key);
+  const BodyWidget({Key? key, required this.booking, required this.bookingResponse, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +102,7 @@ class BodyWidget extends StatelessWidget {
       children: [
         VSpacer20(),
         TitleWidget(),
-        BookingItemWidget(booking: booking, bookingResponse: bookingResponse,),
+        BookingItemWidget(controller: controller, booking: booking, bookingResponse: bookingResponse,),
         LocationInfoWidget(booking : booking),
         // getType(booking)=="Finished" ? Container() : VehicleInfoWidget(response: booking,),
         getType(booking)=="Finished" ? CustomFilledButton(
@@ -397,6 +401,7 @@ class VehicleInfoWidget extends StatelessWidget {
 
 class BookingItemWidget extends StatelessWidget {
 
+  final MyBookingController controller;
   final BookingDetailsResponse booking;
   final Booking bookingResponse;
 
@@ -404,6 +409,7 @@ class BookingItemWidget extends StatelessWidget {
     Key? key,
     required this.booking,
     required this.bookingResponse,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -443,7 +449,7 @@ class BookingItemWidget extends StatelessWidget {
               left: 20.0,
               right: 20.0,
             ),
-            child: BookingItemBodyWidget(booking: booking, bookingResponse: bookingResponse,),
+            child: BookingItemBodyWidget(controller: controller, booking: booking, bookingResponse: bookingResponse,),
           ),
         ],
       ),
@@ -453,12 +459,14 @@ class BookingItemWidget extends StatelessWidget {
 
 class BookingItemBodyWidget extends StatelessWidget {
 
+  final MyBookingController controller;
   final BookingDetailsResponse booking;
   final Booking bookingResponse;
 
   const BookingItemBodyWidget({
     Key? key, required this.booking,
     required this.bookingResponse,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -509,17 +517,8 @@ class BookingItemBodyWidget extends StatelessWidget {
         ),
         InkWell(
           onTap: (){
-            // Get.to(
-            //   InvoiceScreen(
-            //     bookingResponse: BookingResponse(
-            //         success: true,
-            //         msg: "",
-            //         data: Data(
-            //
-            //         )
-            //     ),
-            //   )
-            // );
+            if(controller.invoiceResponse.value!=null)
+             Get.to(InvoiceScreen(bookingResponse: controller.invoiceResponse.value!,));
           },
           child: Container(
             decoration: const BoxDecoration(

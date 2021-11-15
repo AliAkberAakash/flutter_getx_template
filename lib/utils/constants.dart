@@ -77,6 +77,7 @@ class NetworkConstants {
   static const CHILD_LIST = "user/children";
   static const PRICING = "pricings";
   static const BOOKING_DETAILS = "user/booking";
+  static const INVOICE_DETAILS = "/booking";
 
   // PayNow url
   static const PAYMENT_REQUEST = "https://sandbox.xfers.io/api/v4/payment_methods/paynow";
