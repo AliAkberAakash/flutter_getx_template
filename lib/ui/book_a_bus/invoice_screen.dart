@@ -49,7 +49,7 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
           VSpacer20(),
           TextFieldHeadline(headline: "Total Distance"),
           VSpacer10(),
-          TextFieldValueWidget(headline: "${widget.bookingResponse.data?.distance?.toStringAsFixed(2)}"),
+          TextFieldValueWidget(headline: "${widget.bookingResponse.data?.distance?.toStringAsFixed(2)} km"),
           VSpacer20(),
           TextFieldHeadline(headline: "Cost per km"),
           VSpacer10(),
