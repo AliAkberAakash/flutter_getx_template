@@ -118,7 +118,7 @@ class _BookABusViewState extends State<BookABusView> {
                 BottomBarItem(
                   iconString: "",
                   isSelected: selectedBottomBarIndex == 1,
-                  title: "Add a Bus",
+                  title: "Book a Bus",
                   index: 1,
                   onTap: (int position){
 
