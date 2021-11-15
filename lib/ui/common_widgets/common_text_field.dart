@@ -9,6 +9,7 @@ class CommonTextField extends StatelessWidget {
   final TextInputType type;
   final Function? onTap;
   final bool enabled;
+  final FocusNode? focusNode;
 
   const CommonTextField({
     required this.controller,
@@ -16,11 +17,13 @@ class CommonTextField extends StatelessWidget {
     this.type = TextInputType.text,
     this.onTap,
     this.enabled = true,
+    this.focusNode,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      focusNode: focusNode,
       enabled: enabled,
       onTap: (){
         if(onTap!=null)

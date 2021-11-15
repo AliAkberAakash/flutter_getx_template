@@ -3,17 +3,25 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_share/data/models/booking/booking_response.dart';
 import 'package:go_share/ui/book_a_bus/booking_controller.dart';
+import 'package:go_share/ui/book_a_bus/invoice_screen.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
+import 'package:go_share/ui/not_logged_in_welcome/navigation_container/navigation_container.dart';
 import 'package:go_share/util/lib/toast.dart';
+import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 class QRScreen extends StatefulWidget {
- QRScreen({Key? key}) : super(key: key);
+
+ final BookingResponse bookingResponse;
+
+ QRScreen({Key? key, required this.bookingResponse}) : super(key: key);
 
   @override
   _QRScreenState createState() => _QRScreenState();
@@ -53,6 +61,17 @@ class _QRScreenState extends State<QRScreen> {
                     width: dp220,
                   ),
                 ),
+                InkWell(
+                  onTap: (){
+                    saveImage();
+                  },
+                  child: Text(
+                    "Download Image",
+                    style: GoogleFonts.manrope(
+                      fontSize: 18,
+                    )
+                  ),
+                ),
                 VSpacer20(),
                 Row(
                   children: [
@@ -60,31 +79,57 @@ class _QRScreenState extends State<QRScreen> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: dp20),
                         child: PositiveButton(
-                          text: "Download",
+                          text: "My Booking List",
                           onClicked: () {
-                            saveImage();
+                            Get.back();
+                            Get.back();
+                            Get.back();
+                            Get.to(NavigationContainer(showBookingScreen: true,));
                           },
                         ),
                       ),
                     ),
                   ],
                 ),
-                // VSpacer20(),
-                // Row(
-                //   children: [
-                //     Expanded(
-                //       child: Padding(
-                //         padding: const EdgeInsets.symmetric(horizontal: dp20),
-                //         child: PositiveButton(
-                //           text: "Submit",
-                //           onClicked: () {
-                //             //todo
-                //           },
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // )
+                VSpacer20(),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: dp20),
+                        child: OutlinedButton(
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all<OutlinedBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(dp10),
+                                  ),
+                                )),
+                            side: MaterialStateProperty.all<BorderSide>(
+                                BorderSide(
+                                  color: accent,
+                                  width: 1,
+                                )
+                            ),
+                          ),
+                          onPressed: (){
+                            Get.to(InvoiceScreen(bookingResponse: widget.bookingResponse));
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(dp10),
+                            child: Text(
+                              "View Invoice",
+                              style: GoogleFonts.manrope(
+                                color: accent,
+                                fontSize: dp20,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
             ],
             ),
           );
