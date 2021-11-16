@@ -233,8 +233,8 @@ class ApiBaseHelper {
 
   Future<Response> postPayNow(String endUrl, Map<String, dynamic> body) async {
 
-    final userName = "test_66f99742202704902e1df68583408168";
-    final password = "4a45ae6a-6d50-4e37-9926-ffb4b1242051";
+    final userName = "zDxpc4G5mKFwbKcax9Kkv2z3qnxtuGeedFDYnZnzTVw";
+    final password = "yGLRTdPg35JgJJK9yzXH_FEihRwzezyjos3B7yL8w-4";
     var auth = 'Basic '+base64Encode(utf8.encode('$userName:$password'));
 
     try {

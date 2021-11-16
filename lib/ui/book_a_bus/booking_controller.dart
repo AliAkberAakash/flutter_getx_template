@@ -18,8 +18,10 @@ class BookingController extends GetxController{
 
   BookingController(this.repository){
     getPricing();
-    makePayment("1", "2");
   }
+
+  var pickupToolTip = Rx<bool>(false);
+  var dropOffToolTip = Rx<bool>(false);
 
   var childListResponse = Rx<ChildrenListResponse?>(null);
   var pickupAddressResponse = Rx<GeoCodingResponse?>(null);
@@ -174,7 +176,10 @@ class BookingController extends GetxController{
   }
 
   Future<BookingResponse> placeBooking(BookingRequest request) async{
-    return await repository.placeBooking(request);
+    var response = await repository.placeBooking(request);
+    if(response.data?.bookingInformation != null)
+      await makePayment("response.data.userId", response.data!.bookingInformation!.bookingId.toString());
+    return response;
   }
 
   getChildList() async{
@@ -205,7 +210,7 @@ class BookingController extends GetxController{
         ),
         attributes: pnr.Attributes(
           merchantPrefix: 'GOSHARE',
-          referenceId: userId+"::"+bookingId,
+          referenceId: bookingId,
         ),
       ),
     );

@@ -40,6 +40,7 @@ dependencies:
   geocoding: ^2.0.1
   flutter_google_places: ^0.3.0
   screenshot: ^1.2.3
+  simple_tooltip: ^1.0.0
 
   # Data
   get_storage: ^2.0.1

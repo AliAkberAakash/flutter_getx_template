@@ -21,6 +21,7 @@ import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
+import 'package:simple_tooltip/simple_tooltip.dart';
 
 import 'payment_screen.dart';
 
@@ -37,6 +38,17 @@ class AddressScreen extends StatefulWidget {
 const kGoogleApiKey = "AIzaSyBXu9gZE7h8rsOysVadX-XJ5WbvBwOKEqc";
 
 class _AddressScreenState extends State<AddressScreen> {
+
+  String tooltipText = "Please indicate specific instructions for pick-up or drop-off. Here are some examples:\n"
+  "HDB:\n"
+  "a) in front of the block at lift lobby (lobby number: a, b, or c, shelter)\n"
+  "b) bus stop in front of the block\n"
+  "c) specific location near block (shelter, rubbish chute, loading bay, etc.)\n"
+  "d) between Blk (no.) and Blk (no.) pick up shelter\n\n"
+  "2. Condo\n"
+  "a) general pick up point behind guardhouse\n"
+  "b) at Blk (no.) lobby\n"
+  "c) car park lift lobby\n";
 
   final InfoRequest infoRequest;
 
@@ -267,15 +279,38 @@ class _AddressScreenState extends State<AddressScreen> {
               children: [
                 Flexible(child: TextFieldHeadline(headline: "Pickup Remarks")),
                 HSpacer5(),
-                Tooltip(
-                  preferBelow: false,
-                  waitDuration: Duration(milliseconds: 0),
-                  message: "bla bla",
-                  child: Text(
-                    "(i)",
-                    style: GoogleFonts.robotoMono(color: accent, fontSize: dp15),
+                Obx(()=>SimpleTooltip(
+                  maxHeight: MediaQuery.of(context).size.height*0.3,
+                  borderColor: accent,
+                  tooltipTap: () {
+                    //_controller.pickupToolTip.value = !_controller.pickupToolTip.value;
+                  },
+                  animationDuration: Duration(seconds: 1),
+                  show: _controller.pickupToolTip.value,
+                  tooltipDirection: TooltipDirection.down,
+                  child: InkWell(
+                    onTap: (){
+                      _controller.pickupToolTip.value = !_controller.pickupToolTip.value;
+                    },
+                    child: Text(
+                      "(i)",
+                      style: GoogleFonts.robotoMono(color: accent, fontSize: dp15),
+                    ),
                   ),
-                )
+                  content: Material(
+                    color: Colors.transparent,
+                    elevation: 0,
+                    child: SingleChildScrollView(
+                      child: Text(
+                        tooltipText,
+                        style: GoogleFonts.manrope(
+                          color: Colors.black,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),),
               ],
             ),
             VSpacer20(),
@@ -365,15 +400,38 @@ class _AddressScreenState extends State<AddressScreen> {
               children: [
                 Flexible(child: TextFieldHeadline(headline: "Drop Off Remarks")),
                 HSpacer5(),
-                Tooltip(
-                  preferBelow: false,
-                  waitDuration: Duration(milliseconds: 0),
-                  message: "bla bla",
-                  child: Text(
-                    "(i)",
-                    style: GoogleFonts.robotoMono(color: accent, fontSize: dp15),
+                Obx(()=>SimpleTooltip(
+                  maxHeight: MediaQuery.of(context).size.height*0.3,
+                  borderColor: accent,
+                  tooltipTap: () {
+                    //_controller.pickupToolTip.value = !_controller.pickupToolTip.value;
+                  },
+                  animationDuration: Duration(seconds: 1),
+                  show: _controller.dropOffToolTip.value,
+                  tooltipDirection: TooltipDirection.down,
+                  child: InkWell(
+                    onTap: (){
+                      _controller.dropOffToolTip.value = !_controller.dropOffToolTip.value;
+                    },
+                    child: Text(
+                      "(i)",
+                      style: GoogleFonts.robotoMono(color: accent, fontSize: dp15),
+                    ),
                   ),
-                )
+                  content: Material(
+                    color: Colors.transparent,
+                    elevation: 0,
+                    child: SingleChildScrollView(
+                      child: Text(
+                        tooltipText,
+                        style: GoogleFonts.manrope(
+                          color: Colors.black,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),),
               ],
             ),
             VSpacer20(),
