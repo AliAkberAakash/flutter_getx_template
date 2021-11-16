@@ -7,6 +7,7 @@ import 'package:go_share/data/models/booking/booking_details_response.dart';
 import 'package:go_share/data/models/booking/booking_request.dart';
 import 'package:go_share/data/models/booking/booking_response.dart';
 import 'package:go_share/data/models/booking/child_list_response.dart';
+import 'package:go_share/data/models/booking/invoice_response.dart';
 import 'package:go_share/data/models/booking/my_booking_list_response.dart';
 import 'package:go_share/data/models/booking/pay_now_request.dart';
 import 'package:go_share/data/models/booking/pay_now_response.dart';
@@ -650,13 +651,13 @@ class Repository{
     }
   }
 
-  Future<BookingResponse> getInvoiceResponse(int id) async{
+  Future<InvoiceResponse> getInvoiceResponse(int id) async{
     try{
       var response = await helper.getGeneralUser(NetworkConstants.INVOICE_DETAILS+"/$id/invoice");
-      return BookingResponse.fromJson(response.data);
+      return InvoiceResponse.fromJson(response.data);
     }catch(e){
       logger.d(e);
-      return BookingResponse(success: false, msg: 'Booking added successfully');
+      return InvoiceResponse(success: false, msg: 'Booking added successfully', data: []);
     }
   }
 

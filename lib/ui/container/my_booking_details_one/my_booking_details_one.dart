@@ -20,6 +20,8 @@ import 'package:go_share/utils/date_time_utils.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 
+import 'invoice_screen_for_booking.dart';
+
 class MyBookingDetailsOneView extends StatefulWidget {
 
   final Booking booking;
@@ -518,7 +520,7 @@ class BookingItemBodyWidget extends StatelessWidget {
         InkWell(
           onTap: (){
             if(controller.invoiceResponse.value!=null)
-             Get.to(InvoiceScreen(bookingResponse: controller.invoiceResponse.value!,));
+             Get.to(InvoiceScreenForBooking(invoiceResponse: controller.invoiceResponse.value!,));
           },
           child: Container(
             decoration: const BoxDecoration(
