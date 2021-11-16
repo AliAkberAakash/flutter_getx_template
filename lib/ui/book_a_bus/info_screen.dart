@@ -557,8 +557,17 @@ class _InfoScreenState extends State<InfoScreen> {
     );
     bookingController.pickedTime = selectedTime;
     NumberFormat formatter = new NumberFormat("00");
-    selectedTimeController.text =  "${formatter.format(selectedTime?.hour)}:${formatter.format(selectedTime?.minute)}";
-    bookingController.dropOffTime =  "${formatter.format((selectedTime?.hour)??0+1)}:${formatter.format(selectedTime?.minute)}:01";
+    selectedTimeController.text =  "${formatter.format(selectedTime?.hour)}:${getMinutes(formatter.format(selectedTime?.minute))}";
+    bookingController.dropOffTime =  "${formatter.format((selectedTime?.hour)??0+1)}:${getMinutes(formatter.format(selectedTime?.minute))}:01";
+  }
+
+  getMinutes(String minutes){
+    var hr = int.parse(minutes[0]);
+    var mn = int.parse(minutes[1]);
+
+    if(mn==0) return "$hr$mn";
+    if(mn>5) return "${hr+1}0";
+    else return "${hr}5";
   }
 
 }

@@ -1,7 +1,10 @@
-import 'dart:io';
+
+
+import 'dart:convert';
 
 import 'package:go_share/core/network/api_base_helper.dart';
 import 'package:go_share/core/network/dio_factory.dart';
+import 'package:go_share/data/models/MessageResponse.dart';
 import 'package:go_share/data/models/container/AboutUsModel.dart';
 import 'package:go_share/data/models/container/FaqModel.dart';
 import 'package:go_share/data/models/container/contactus/ContactUsModel.dart';
@@ -52,17 +55,18 @@ class ContainerRepository{
 
 
   Future<dynamic> postContactUsData(ContactUsModel request) async {
-
-    try{
-      var responseJson = await helper.post(
-        NetworkConstants.CONTACT_US,
-        request.toJson(),
-      );
+    var responseJson = await helper.post(
+      NetworkConstants.CONTACT_US,
+      request.toJson(),
+    );
+    var jsonsDataString = responseJson.data;
+    var str = json.encode(jsonsDataString);
+    print(str);
+    var data=json.decode(str);
+    if(data["success"]==false){
+      return MessageResponse.fromJson(responseJson.data);
+    }else{
       return ContactUsResponse.fromJson(responseJson.data);
-
-    }catch(e){
-      logger.d(e);
-
     }
 
   }
@@ -74,7 +78,18 @@ class ContainerRepository{
         NetworkConstants.LOSTANDFOUND,
         request.toJson(),
       );
-      return LostAndFoundResponse.fromJson(responseJson.data);
+      var jsonsDataString = responseJson.data;
+      var str = json.encode(jsonsDataString);
+      print(str);
+      var data=json.decode(str);
+      if(data["success"]==false){
+        return MessageResponse.fromJson(responseJson.data);
+      }else{
+        return LostAndFoundResponse.fromJson(responseJson.data);
+      }
+
+
+
 
     }catch(e){
       logger.d(e);

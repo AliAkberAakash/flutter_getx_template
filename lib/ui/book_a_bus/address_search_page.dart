@@ -18,6 +18,7 @@ class AddressSearchPage extends StatefulWidget {
 
 class _AddressSearchPageState extends State<AddressSearchPage> {
 
+  var focusNode = FocusNode();
   TextEditingController addressController = TextEditingController();
   Timer? _debounce;
   String query = "";
@@ -27,6 +28,7 @@ class _AddressSearchPageState extends State<AddressSearchPage> {
   @override
   void initState() {
     addressController.addListener(_onSearchChanged);
+    focusNode.requestFocus();
     super.initState();
   }
 
@@ -42,6 +44,7 @@ class _AddressSearchPageState extends State<AddressSearchPage> {
               children: [
                 Expanded(
                   child: CommonTextField(
+                    focusNode: focusNode,
                     controller: addressController,
                     hint: "Search here location or postal code",
                   ),

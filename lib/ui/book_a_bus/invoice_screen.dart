@@ -9,6 +9,7 @@ import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/date_time_utils.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
+import 'package:logger/logger.dart';
 
 import 'booking_controller.dart';
 
@@ -25,6 +26,12 @@ class InvoiceScreen extends StatefulWidget {
 class _InvoiceScreenState extends State<InvoiceScreen> {
 
   final BookingController controller = Get.find();
+
+  @override
+  void initState() {
+    Logger().d(widget.bookingResponse.data);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

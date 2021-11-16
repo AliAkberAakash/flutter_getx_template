@@ -650,4 +650,14 @@ class Repository{
     }
   }
 
+  Future<BookingResponse> getInvoiceResponse(int id) async{
+    try{
+      var response = await helper.getGeneralUser(NetworkConstants.INVOICE_DETAILS+"/$id/invoice");
+      return BookingResponse.fromJson(response.data);
+    }catch(e){
+      logger.d(e);
+      return BookingResponse(success: false, msg: 'Booking added successfully');
+    }
+  }
+
 }

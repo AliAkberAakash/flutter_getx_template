@@ -118,7 +118,7 @@ class _BookABusViewState extends State<BookABusView> {
                 BottomBarItem(
                   iconString: "",
                   isSelected: selectedBottomBarIndex == 1,
-                  title: "Add a Bus",
+                  title: "Book a Bus",
                   index: 1,
                   onTap: (int position){
 
@@ -293,33 +293,33 @@ class _BookABusViewState extends State<BookABusView> {
     );
   }
   Widget _index(){
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        TitleWidget(data:widget.data,index:widget.categoryId,name:widget.name),
-        Expanded(
-          child: FaqListWidget(data:widget.data,index:widget.categoryId),
-        ),
-        CustomFilledButton(
-          margin: const EdgeInsets.only(
-            left: 30.0,
-            right: 30.0,
-            top: 32.0,
-            bottom: 16.0,
+    return  Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TitleWidget(data:widget.data,index:widget.categoryId,name:widget.name),
+          Expanded(
+            child: FaqListWidget(data:widget.data,index:widget.categoryId),
           ),
-          borderRadius: 8.0,
-          borderColor: GSColors.green_secondary,
-          backgroundColor: Colors.transparent,
-          textColor: GSColors.green_secondary,
-          title: GSStrings.book_a_bus_contact_with_us,
-          onTap: () {
-            Get.to(
-                ContactUsView()
-            );
-          },
-        ),
-      ],
+          CustomFilledButton(
+            margin: const EdgeInsets.only(
+              left: 30.0,
+              right: 30.0,
+              top: 32.0,
+              bottom: 35.0,
+            ),
+            borderRadius: 8.0,
+            borderColor: GSColors.green_secondary,
+            backgroundColor: Colors.transparent,
+            textColor: GSColors.green_secondary,
+            title: GSStrings.book_a_bus_contact_with_us,
+            onTap: () {
+              Get.to(
+                  ContactUsView()
+              );
+            },
+          ),
+        ],
     );
   }
 
@@ -485,7 +485,7 @@ class _FaqListWidgetState extends State<FaqListWidget> {
       scrollDirection: Axis.vertical,
       itemCount: list.length,
       itemBuilder: (BuildContext context, int index) {
-        return FaqItemWidget(list:list[0],index:index);
+        return FaqItemWidget(list:list[index],index:index);
       },
       separatorBuilder: (BuildContext context, int index) {
         return SizedBox(height: 40.0);

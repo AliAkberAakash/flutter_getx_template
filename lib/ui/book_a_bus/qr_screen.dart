@@ -7,8 +7,6 @@ import 'package:go_share/data/models/booking/booking_response.dart';
 import 'package:go_share/ui/book_a_bus/booking_controller.dart';
 import 'package:go_share/ui/book_a_bus/invoice_screen.dart';
 import 'package:go_share/ui/common_widgets/positive_button.dart';
-import 'package:go_share/ui/container/UIConstants/Colors.dart';
-import 'package:go_share/ui/container/UIConstants/UISizeConstants.dart';
 import 'package:go_share/ui/not_logged_in_welcome/navigation_container/navigation_container.dart';
 import 'package:go_share/util/lib/toast.dart';
 import 'package:go_share/utils/colors.dart';
@@ -21,12 +19,12 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 class QRScreen extends StatefulWidget {
 
- final BookingResponse response;
+ final BookingResponse bookingResponse;
 
- QRScreen({Key? key, required this.response}) : super(key: key);
+ QRScreen({Key? key, required this.bookingResponse}) : super(key: key);
 
   @override
-  _QRScreenState createState() => _QRScreenState(response);
+  _QRScreenState createState() => _QRScreenState(bookingResponse);
 }
 
 class _QRScreenState extends State<QRScreen> {
@@ -83,7 +81,6 @@ class _QRScreenState extends State<QRScreen> {
                   ),
                 ),
                 VSpacer20(),
-                VSpacer20(),
                 Row(
                   children: [
                     Expanded(
@@ -93,7 +90,9 @@ class _QRScreenState extends State<QRScreen> {
                           text: "My Booking List",
                           onClicked: () {
                             Get.back();
-                            Get.to(NavigationContainer(showBookingScreen: true));
+                            Get.back();
+                            Get.back();
+                            Get.to(NavigationContainer(showBookingScreen: true,));
                           },
                         ),
                       ),
@@ -107,29 +106,38 @@ class _QRScreenState extends State<QRScreen> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: dp20),
                         child: OutlinedButton(
-                          child: Text(
-                            "View Invoice",
-                            style: GoogleFonts.manrope(
-                              color: accent,
-                              fontSize: dp20,
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all<OutlinedBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(dp10),
+                                  ),
+                                )),
+                            side: MaterialStateProperty.all<BorderSide>(
+                                BorderSide(
+                                  color: accent,
+                                  width: 1,
+                                )
                             ),
                           ),
-                          style: OutlinedButton.styleFrom(
-                            primary: GSColors.green_secondary,
-                            side: BorderSide(color: GSColors.green_secondary),
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(GSBorderRadius.radius8))),
-                            minimumSize: GSSizes.size316x56,
-                          ),
-                          onPressed: () {
-                            Get.to(InvoiceScreen(bookingResponse: bookingResponse));
+                          onPressed: (){
+                            Get.to(InvoiceScreen(bookingResponse: widget.bookingResponse));
                           },
+                          child: Padding(
+                            padding: const EdgeInsets.all(dp10),
+                            child: Text(
+                              "View Invoice",
+                              style: GoogleFonts.manrope(
+                                color: accent,
+                                fontSize: dp20,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ],
-                ),
+                )
             ],
             ),
           );

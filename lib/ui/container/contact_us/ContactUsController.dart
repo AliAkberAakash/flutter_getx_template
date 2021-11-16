@@ -13,7 +13,7 @@ class ContactUsController extends GetxController{
 
   final ContainerRepository repository = new ContainerRepository();
 
-  Future<ContactUsResponse> ContactUsServiceProvider(ContactUsModel model) async{
+  Future<dynamic> ContactUsServiceProvider(ContactUsModel model) async{
     var response = await repository.postContactUsData(model);
     return response;
   }
