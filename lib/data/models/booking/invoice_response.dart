@@ -1,35 +1,35 @@
 import 'dart:convert';
 
-InvoiceResponse invoiceResponseFromJson(String str) => InvoiceResponse.fromJson(json.decode(str));
+InvoiceResponse bookingResponseFromJson(String str) => InvoiceResponse.fromJson(json.decode(str));
 
-String invoiceResponseToJson(InvoiceResponse data) => json.encode(data.toJson());
+String bookingResponseToJson(InvoiceResponse data) => json.encode(data.toJson());
 
 class InvoiceResponse {
   InvoiceResponse({
     required this.success,
     required this.msg,
-    required this.data,
+    this.data,
   });
 
   bool success;
   String msg;
-  List<Datum> data;
+  Data? data;
 
   factory InvoiceResponse.fromJson(Map<String, dynamic> json) => InvoiceResponse(
     success: json["success"],
     msg: json["msg"],
-    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+    data:json["data"]==null ? null :  Data.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {
     "success": success,
     "msg": msg,
-    "data": List<dynamic>.from(data.map((x) => x.toJson())),
+    "data": data?.toJson(),
   };
 }
 
-class Datum {
-  Datum({
+class Data {
+  Data({
     required this.id,
     required this.userId,
     required this.startDate,
@@ -46,8 +46,9 @@ class Datum {
     required this.isApproved,
     required this.isPaid,
     required this.isFinished,
-    required this.childrens,
-    required this.payment,
+    required this.createdAt,
+    this.updatedAt,
+    this.bookingInformation,
   });
 
   int id;
@@ -60,16 +61,17 @@ class Datum {
   int bookedSeat;
   String pickupAddress;
   String dropoffAddress;
-  double price;
-  double distance;
-  dynamic rating;
+  double? price;
+  double? distance;
+  int? rating;
   int isApproved;
   int isPaid;
   int isFinished;
-  List<Children> childrens;
-  List<dynamic> payment;
+  DateTime createdAt;
+  DateTime? updatedAt;
+  BookingInformation? bookingInformation;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
     id: json["id"],
     userId: json["user_id"],
     startDate: DateTime.parse(json["start_date"]),
@@ -80,14 +82,15 @@ class Datum {
     bookedSeat: json["booked_seat"],
     pickupAddress: json["pickup_address"],
     dropoffAddress: json["dropoff_address"],
-    price: json["price"].toDouble(),
-    distance: json["distance"].toDouble(),
+    price: json["price"]?.toDouble(),
+    distance: json["distance"]?.toDouble(),
     rating: json["rating"],
     isApproved: json["is_approved"],
     isPaid: json["is_paid"],
     isFinished: json["is_finished"],
-    childrens: List<Children>.from(json["childrens"].map((x) => Children.fromJson(x))),
-    payment: List<dynamic>.from(json["payment"].map((x) => x)),
+    createdAt: DateTime.parse(json["created_at"]),
+    updatedAt:json["updated_at"]==null ? null : DateTime.parse(json["updated_at"]),
+    bookingInformation: json["booking_information"]==null ? null : BookingInformation.fromJson(json["booking_information"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -107,35 +110,72 @@ class Datum {
     "is_approved": isApproved,
     "is_paid": isPaid,
     "is_finished": isFinished,
-    "childrens": List<dynamic>.from(childrens.map((x) => x.toJson())),
-    "payment": List<dynamic>.from(payment.map((x) => x)),
+    "created_at": createdAt.toIso8601String(),
+    "updated_at": updatedAt?.toIso8601String(),
+    "booking_information": bookingInformation?.toJson(),
   };
 }
 
-class Children {
-  Children({
+class BookingInformation {
+  BookingInformation({
     required this.id,
-    required this.userId,
-    required this.name,
-    required this.laravelThroughKey,
+    required this.bookingId,
+    required this.pickupLongitude,
+    required this.pickupLatitude,
+    required this.pickupPostalCode,
+    required this.dropoffLongitude,
+    required this.dropoffLatitude,
+    required this.dropoffPostalCode,
+    this.pickupRemarks,
+    this.dropoffRemarks,
+    this.verbatim,
+    required this.createdAt,
+    this.updatedAt,
   });
 
   int id;
-  int userId;
-  String name;
-  int laravelThroughKey;
+  int bookingId;
+  String pickupLongitude;
+  String pickupLatitude;
+  String pickupPostalCode;
+  String dropoffLongitude;
+  String dropoffLatitude;
+  String dropoffPostalCode;
+  String? pickupRemarks;
+  String? dropoffRemarks;
+  String? verbatim;
+  DateTime createdAt;
+  DateTime? updatedAt;
 
-  factory Children.fromJson(Map<String, dynamic> json) => Children(
+  factory BookingInformation.fromJson(Map<String, dynamic> json) => BookingInformation(
     id: json["id"],
-    userId: json["user_id"],
-    name: json["name"],
-    laravelThroughKey: json["laravel_through_key"],
+    bookingId: json["booking_id"],
+    pickupLongitude: json["pickup_longitude"],
+    pickupLatitude: json["pickup_latitude"],
+    pickupPostalCode: json["pickup_postal_code"],
+    dropoffLongitude: json["dropoff_longitude"],
+    dropoffLatitude: json["dropoff_latitude"],
+    dropoffPostalCode: json["dropoff_postal_code"],
+    pickupRemarks: json["pickup_remarks"],
+    dropoffRemarks: json["dropoff_remarks"],
+    verbatim: json["verbatim"],
+    createdAt: DateTime.parse(json["created_at"]),
+    updatedAt: DateTime.parse(json["updated_at"]),
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "user_id": userId,
-    "name": name,
-    "laravel_through_key": laravelThroughKey,
+    "booking_id": bookingId,
+    "pickup_longitude": pickupLongitude,
+    "pickup_latitude": pickupLatitude,
+    "pickup_postal_code": pickupPostalCode,
+    "dropoff_longitude": dropoffLongitude,
+    "dropoff_latitude": dropoffLatitude,
+    "dropoff_postal_code": dropoffPostalCode,
+    "pickup_remarks": pickupRemarks,
+    "dropoff_remarks": dropoffRemarks,
+    "verbatim": verbatim,
+    "created_at": createdAt.toIso8601String(),
+    "updated_at": updatedAt?.toIso8601String(),
   };
 }

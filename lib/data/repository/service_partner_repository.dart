@@ -653,11 +653,11 @@ class Repository{
 
   Future<InvoiceResponse> getInvoiceResponse(int id) async{
     try{
-      var response = await helper.getGeneralUser(NetworkConstants.INVOICE_DETAILS+"/$id/invoice");
+      var response = await helper.getGeneralUser(NetworkConstants. INVOICE_DETAILS+"/$id/invoice");
       return InvoiceResponse.fromJson(response.data);
     }catch(e){
       logger.d(e);
-      return InvoiceResponse(success: false, msg: 'Booking added successfully', data: []);
+      return InvoiceResponse(success: false, msg: 'Booking added successfully');
     }
   }
 

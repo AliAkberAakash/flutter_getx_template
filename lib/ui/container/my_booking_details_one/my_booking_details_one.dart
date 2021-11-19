@@ -102,7 +102,12 @@ class BodyWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        VSpacer20(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            BackButton(),
+          ],
+        ),
         TitleWidget(),
         BookingItemWidget(controller: controller, booking: booking, bookingResponse: bookingResponse,),
         LocationInfoWidget(booking : booking),
