@@ -282,7 +282,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                           isSelected: 4 == selectedBottomBarIndex,
                           index: 4,
                           title: "Our Services",
-                          icon: AssetConstants.ic_refund_request_svg,
+                          icon: AssetConstants.ic_menu_service,
                           onClick: (index) {
                             _changeBottomBarIndex(index);
                           },
@@ -309,7 +309,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                           isSelected: 7 == selectedBottomBarIndex,
                           index: 7,
                           title: "Terms & Condition",
-                          icon: AssetConstants.ic_notification_svg,
+                          icon: AssetConstants.ic_tc_svg,
                           onClick: (index) {
                             _changeBottomBarIndex(index);
                           },

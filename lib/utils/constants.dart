@@ -9,8 +9,11 @@ class AssetConstants {
   static const signup_bg_image = "images/signup_bg_image.png";
   static const logoTransparent = "images/ic_logo_transparent.png";
 
+
   static const base_icon_path = "images/icons/";
   static const ic_menu_svg = base_icon_path + "ic_menu.svg";
+  static const ic_menu_service = base_icon_path + "gear.svg";
+  static const ic_tc_svg = base_icon_path + "tc.svg";
   static const ic_home_svg = base_icon_path + "ic_home.svg";
   static const ic_free_busy_list_svg = base_icon_path + "ic_free_busy_list.svg";
   static const ic_bus_svg = base_icon_path + "ic_bus.svg";
