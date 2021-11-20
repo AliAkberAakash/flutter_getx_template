@@ -46,7 +46,7 @@ class _AddressSearchPageState extends State<AddressSearchPage> {
                   child: CommonTextField(
                     focusNode: focusNode,
                     controller: addressController,
-                    hint: "Search here location or postal code",
+                    hint: "Search by Postal Code OR Address",
                   ),
                 ),
                 // HSpacer10(),
