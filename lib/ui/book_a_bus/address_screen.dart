@@ -278,42 +278,29 @@ class _AddressScreenState extends State<AddressScreen> {
             Row(
               children: [
                 Flexible(child: TextFieldHeadline(headline: "Pickup Remarks")),
-                HSpacer5(),
-                Obx(()=>SimpleTooltip(
-                  maxHeight: MediaQuery.of(context).size.height*0.3,
-                  borderColor: accent,
-                  tooltipTap: () {
-                    //_controller.pickupToolTip.value = !_controller.pickupToolTip.value;
+                IconButton(
+                  onPressed: () {
+                    _controller.pickupRemarksInfo.value = !_controller.pickupRemarksInfo.value;
                   },
-                  animationDuration: Duration(seconds: 1),
-                  show: _controller.pickupToolTip.value,
-                  tooltipDirection: TooltipDirection.down,
-                  child: InkWell(
-                    onTap: (){
-                      _controller.pickupToolTip.value = !_controller.pickupToolTip.value;
-                    },
-                    child: Text(
-                      "(i)",
-                      style: GoogleFonts.robotoMono(color: accent, fontSize: dp15),
-                    ),
+                  icon: Icon(
+                    Icons.info_outlined,
+                    color: accent,
+                    size: 18,
                   ),
-                  content: Material(
-                    color: Colors.transparent,
-                    elevation: 0,
-                    child: SingleChildScrollView(
-                      child: Text(
-                        tooltipText,
-                        style: GoogleFonts.manrope(
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),),
+                ),
               ],
             ),
-            VSpacer20(),
+            Obx((){
+              return _controller.pickupRemarksInfo.value ?
+              Text(
+                tooltipText,
+                  style: GoogleFonts.manrope(
+                    color: Colors.black54,
+                    fontSize: 14,
+                  ),
+              ) : Container();
+            }),
+            VSpacer10(),
             CommonTextField(
               controller: _controller.pickupRemarksController,
             ),
@@ -400,41 +387,29 @@ class _AddressScreenState extends State<AddressScreen> {
               children: [
                 Flexible(child: TextFieldHeadline(headline: "Drop Off Remarks")),
                 HSpacer5(),
-                Obx(()=>SimpleTooltip(
-                  maxHeight: MediaQuery.of(context).size.height*0.3,
-                  borderColor: accent,
-                  tooltipTap: () {
-                    //_controller.pickupToolTip.value = !_controller.pickupToolTip.value;
+                IconButton(
+                  onPressed: () {
+                    _controller.dropOffRemarksInfo.value = !_controller.dropOffRemarksInfo.value;
                   },
-                  animationDuration: Duration(seconds: 1),
-                  show: _controller.dropOffToolTip.value,
-                  tooltipDirection: TooltipDirection.down,
-                  child: InkWell(
-                    onTap: (){
-                      _controller.dropOffToolTip.value = !_controller.dropOffToolTip.value;
-                    },
-                    child: Text(
-                      "(i)",
-                      style: GoogleFonts.robotoMono(color: accent, fontSize: dp15),
-                    ),
+                  icon: Icon(
+                    Icons.info_outlined,
+                    color: accent,
+                    size: 18,
                   ),
-                  content: Material(
-                    color: Colors.transparent,
-                    elevation: 0,
-                    child: SingleChildScrollView(
-                      child: Text(
-                        tooltipText,
-                        style: GoogleFonts.manrope(
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),),
+                ),
               ],
             ),
-            VSpacer20(),
+            Obx((){
+              return _controller.dropOffRemarksInfo.value ?
+              Text(
+                tooltipText,
+                style: GoogleFonts.manrope(
+                  color: Colors.black54,
+                  fontSize: 14,
+                ),
+              ) : Container();
+            }),
+            VSpacer10(),
             CommonTextField(
               controller: _controller.dropOffRemarksController,
             ),
