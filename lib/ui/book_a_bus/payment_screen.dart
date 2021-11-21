@@ -419,6 +419,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
           VSpacer10(),
           TextFieldValueWidget(headline: addressRequest.dropOffRemarks),
           VSpacer20(),
+          TextFieldHeadline(headline: "Comments"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: addressRequest.comments ?? ""),
+          VSpacer20(),
 
         ],
       ),
