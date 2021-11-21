@@ -571,7 +571,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         pickupRemarks: addressRequest.pickupRemarks,
         dropoffRemarks: addressRequest.dropOffRemarks,
         distance: addressRequest.distance,
-        price: addressRequest.distance*5,
+        price: addressRequest.distance*addressRequest.pricePerKm*infoRequest.childNames.length,
         verbatim: "none",
       );
       var response = await placeBooking(request);
