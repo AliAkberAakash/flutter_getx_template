@@ -417,7 +417,7 @@ class _AddressScreenState extends State<AddressScreen> {
             TextFieldHeadline(headline: "Write your comments"),
             VSpacer20(),
             TextFormField(
-              controller: commentsController,
+              controller: _controller.commentsController,
               maxLines: 3,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -462,7 +462,7 @@ class _AddressScreenState extends State<AddressScreen> {
                             dropOffPostalCode: _controller.dropOffPostalCode.value,
                             dropOffLocation: _controller.dropOffAddress.value,
                             dropOffRemarks: _controller.dropOffRemarksController.text,
-                            comments: commentsController.text,
+                            comments: _controller.commentsController.text,
                             distance: distance,
                             price: price*distance,
                             pricePerKm: price

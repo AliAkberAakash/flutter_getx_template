@@ -164,7 +164,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   ),
                   Spacer(),
                   Text(
-                    "S\$${(addressRequest.price).toStringAsFixed(2)}",
+                    "S\$${(addressRequest.price*infoRequest.childNames.length).toStringAsFixed(2)}",
                     style: GoogleFonts.manrope(
                       color: accent,
                       fontSize: dp20,
