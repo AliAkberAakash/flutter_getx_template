@@ -161,7 +161,8 @@ class _DriverLoginScreenState extends State<DriverLoginScreen> {
     var response = await _controller.loginDriver(request);
 
     if(response.data != null){
-      await _controller.storeToken(response.data!.token);
+      if(response.data!.token != null)
+      await _controller.storeToken(response.data!.token!);
       Get.off(DriverContainer());
     }
 

@@ -39,7 +39,7 @@ class Data {
     this.approvedDate,
     required this.createdAt,
     required this.updatedAt,
-    required this.availableStatus,
+    //required this.availableStatus,
   });
 
   int id;
@@ -61,7 +61,7 @@ class Data {
   dynamic approvedDate;
   DateTime createdAt;
   DateTime updatedAt;
-  String availableStatus;
+ // String availableStatus;
 
   factory Data.fromJson(Map<String, dynamic> json) =>
       Data(
@@ -84,7 +84,7 @@ class Data {
         approvedDate: json["approved_date"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        availableStatus: json["available_status"],
+        //availableStatus: json["available_status"],
       );
 
   Map<String, dynamic> toJson() =>
@@ -112,6 +112,6 @@ class Data {
         "approved_date": approvedDate,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "available_status": availableStatus,
+        //"available_status": availableStatus,
       };
 }
