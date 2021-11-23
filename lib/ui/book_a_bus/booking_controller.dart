@@ -62,6 +62,9 @@ class BookingController extends GetxController{
 
   final commentsController  = TextEditingController();
 
+  var pickupRemarksInfo = Rx<bool>(false);
+  var dropOffRemarksInfo = Rx<bool>(false);
+
   clearFields(){
     newChild = [];
     existingChild = [];

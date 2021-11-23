@@ -164,7 +164,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   ),
                   Spacer(),
                   Text(
-                    "S\$${(addressRequest.price).toStringAsFixed(2)}",
+                    "S\$${(addressRequest.price*infoRequest.childNames.length).toStringAsFixed(2)}",
                     style: GoogleFonts.manrope(
                       color: accent,
                       fontSize: dp20,
@@ -419,6 +419,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
           VSpacer10(),
           TextFieldValueWidget(headline: addressRequest.dropOffRemarks),
           VSpacer20(),
+          TextFieldHeadline(headline: "Comments"),
+          VSpacer10(),
+          TextFieldValueWidget(headline: addressRequest.comments ?? ""),
+          VSpacer20(),
 
         ],
       ),
@@ -567,7 +571,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         pickupRemarks: addressRequest.pickupRemarks,
         dropoffRemarks: addressRequest.dropOffRemarks,
         distance: addressRequest.distance,
-        price: addressRequest.distance*5,
+        price: addressRequest.distance*addressRequest.pricePerKm*infoRequest.childNames.length,
         verbatim: "none",
       );
       var response = await placeBooking(request);

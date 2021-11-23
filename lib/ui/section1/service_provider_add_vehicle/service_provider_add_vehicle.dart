@@ -187,7 +187,7 @@ class _ServiceProviderAddVehicleScreenState extends State<ServiceProviderAddVehi
   }
 
   String formatDate(DateTime date){
-    var outputFormat = DateFormat('yyyy-MM-dd');
+    var outputFormat = DateFormat('dd-MM-yyyy');
     return outputFormat.format(date);
   }
 
