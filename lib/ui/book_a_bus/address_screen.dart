@@ -67,6 +67,9 @@ class _AddressScreenState extends State<AddressScreen> {
 
   double distance = 0.0;
 
+  final pickUpRemarksFocus = FocusNode();
+  final dropOffRemarksFocus = FocusNode();
+
   _AddressScreenState(this.infoRequest);
 
   @override
@@ -212,6 +215,7 @@ class _AddressScreenState extends State<AddressScreen> {
                             _controller.pickUpResponse = response;
                             _controller.pickupAddress.value = result.address;
                             _controller.pickupPostalCode.value = result.postal;
+                            FocusScope.of(context).requestFocus(pickUpRemarksFocus);
                           }
                         });
                       },
@@ -302,6 +306,7 @@ class _AddressScreenState extends State<AddressScreen> {
             }),
             VSpacer10(),
             CommonTextField(
+              focusNode: pickUpRemarksFocus,
               controller: _controller.pickupRemarksController,
             ),
             VSpacer40(),
@@ -321,6 +326,7 @@ class _AddressScreenState extends State<AddressScreen> {
                             _controller.dropOffResponse = response;
                             _controller.dropOffAddress.value = result.address;
                             _controller.dropOffPostalCode.value = result.postal;
+                            FocusScope.of(context).requestFocus(dropOffRemarksFocus);
                           }
                         });
                       },
@@ -411,6 +417,7 @@ class _AddressScreenState extends State<AddressScreen> {
             }),
             VSpacer10(),
             CommonTextField(
+              focusNode: dropOffRemarksFocus,
               controller: _controller.dropOffRemarksController,
             ),
             VSpacer20(),
