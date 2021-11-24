@@ -232,31 +232,13 @@ class _InfoScreenState extends State<InfoScreen> {
                     children: bookingController.childWidgetList,
                   ),
                   VSpacer20(),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            TextFieldHeadline(headline: "Start Date*"),
-                            VSpacer20(),
-                            _datePicker(startDateController, "Start date", 1),
-                          ],
-                        ),
-                      ),
-                      HSpacer20(),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            TextFieldHeadline(headline: "End Date*"),
-                            VSpacer20(),
-                            _datePicker(endDateController, "End Date", 2),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                  TextFieldHeadline(headline: "Start Date*"),
+                  VSpacer20(),
+                  _datePicker(startDateController, "Start date", 1),
+                  VSpacer20(),
+                  TextFieldHeadline(headline: "End Date*"),
+                  VSpacer20(),
+                  _datePicker(endDateController, "End Date", 2),
                   VSpacer20(),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
