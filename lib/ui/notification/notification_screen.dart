@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/UIConstants/GSWidgetStyles.dart';
 import 'package:go_share/ui/container/UIConstants/Strings.dart';
@@ -6,6 +7,8 @@ import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'notification_controller.dart';
 
 class NotificationScreenPage extends StatefulWidget {
   const NotificationScreenPage({Key? key}) : super(key: key);
@@ -15,19 +18,16 @@ class NotificationScreenPage extends StatefulWidget {
 }
 
 class _NotificationScreenPageState extends State<NotificationScreenPage> {
+
+  final NotificationController notificationController = NotificationController();
+
   var hp, wp;
-  List<bool> isClicked = [
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ];
+
+  @override
+  void initState() {
+    notificationController.getAllChildList();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,57 +41,63 @@ class _NotificationScreenPageState extends State<NotificationScreenPage> {
           children: [
             VSpacer20(),
             TitleWidget(),
-            Expanded(
-              child: ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          isClicked[index] = !isClicked[index];
-                        });
-                      },
-                      child: Container(
-                        height: dp80,
-                        width: wp,
-                        color: isClicked[index] ? gradientDark : light_grey_white,
-                        padding: EdgeInsets.symmetric(horizontal: dp10),
-                        margin: EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
+            Obx((){
+              var response = notificationController.allChildListResponse.value;
+
+              if(response?.data!=null){
+                var childList = response!.data!;
+
+                return Expanded(
+                  child: ListView.builder(
+                      itemCount: childList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return GestureDetector(
+                          onTap: () {
+                            //todo
+                          },
+                          child: Container(
+                            height: dp80,
+                            width: wp,
+                            color: /*isClicked[index] ?*/ gradientDark/* : light_grey_white*/,
+                            padding: EdgeInsets.symmetric(horizontal: dp10),
+                            margin: EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  'Violet Norman',
-                                  style: TextStyle(
-                                      color: isClicked[index] ? white : black,
-                                      fontWeight: FontWeight.bold),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Violet Norman',
+                                      style: TextStyle(
+                                          color: /*isClicked[index] ? white :*/ black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      'Block 372 Bukit Batok Street 31.',
+                                      style: TextStyle(
+                                          color: /*isClicked[index] ? white :*/ grey,
+                                          fontSize: dp12),
+                                    )
+                                  ],
                                 ),
-                                Text(
-                                  'Block 372 Bukit Batok Street 31.',
-                                  style: TextStyle(
-                                      color: isClicked[index] ? white : grey,
-                                      fontSize: dp12),
-                                )
+                                CircleAvatar(
+                                  radius: dp20,
+                                  backgroundColor: /*isClicked[index] ? primaryDark :*/ greyBorder,
+                                  child: Icon(
+                                    Icons.check,
+                                    color: /*isClicked[index] ? white :*/ black,
+                                  ),
+                                ),
                               ],
                             ),
-                            CircleAvatar(
-                              radius: dp20,
-                              backgroundColor: isClicked[index] ? primaryDark : greyBorder,
-                              child: Icon(
-                                Icons.check,
-                                color: isClicked[index] ? white : black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }),
-            ),
+                          ),
+                        );
+                      }),
+                );
+              }else return Container();
+            }),
           ],
         ),
       ),

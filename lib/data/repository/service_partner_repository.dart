@@ -14,6 +14,8 @@ import 'package:go_share/data/models/booking/pay_now_response.dart';
 import 'package:go_share/data/models/booking/pricing_response.dart';
 import 'package:go_share/data/models/booking/rating_request.dart';
 import 'package:go_share/data/models/booking/rating_response.dart';
+import 'package:go_share/data/models/driver/child_list_response.dart';
+import 'package:go_share/data/models/driver/child_list_update_response.dart';
 import 'package:go_share/data/models/driver/driver_login_request.dart';
 import 'package:go_share/data/models/driver/driver_login_response.dart';
 import 'package:go_share/data/models/driver/driver_password_reset_code_response.dart';
@@ -653,7 +655,7 @@ class Repository{
 
   Future<InvoiceResponse> getInvoiceResponse(int id) async{
     try{
-      var response = await helper.getGeneralUser(NetworkConstants. INVOICE_DETAILS+"/$id/invoice");
+      var response = await helper.getGeneralUser(NetworkConstants.INVOICE_DETAILS+"/$id/invoice");
       return InvoiceResponse.fromJson(response.data);
     }catch(e){
       logger.d(e);
@@ -661,4 +663,29 @@ class Repository{
     }
   }
 
+  Future<ChildListResponse> getAllChildList() async{
+    try{
+      var response = await helper.getDriver(NetworkConstants.ALL_CHILD_LIST);
+      return ChildListResponse.fromJson(response.data);
+    }catch(e){
+      logger.d(e);
+      return ChildListResponse(success: false, msg: 'Failed to fetch child list');
+    }
+  }
+
+  Future<ChildListUpdateResponse> updateChildList(int id) async{
+    try{
+      var requestBody = {
+        "booking_travel_id":id
+      };
+      var response = await helper.postDriver(
+          NetworkConstants.UPDATE_CHILD, requestBody);
+      return ChildListUpdateResponse.fromJson(response.data);
+    }catch(e){
+      logger.d(e);
+      return ChildListUpdateResponse(success: false,
+          msg: 'Failed to update child list');
+    }
+  }
+  
 }
