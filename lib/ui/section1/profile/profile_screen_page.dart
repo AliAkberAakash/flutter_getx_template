@@ -66,19 +66,6 @@ class _ProfileScreenPageState extends State<ProfileScreenPage> {
                   ),
                 ),
                 SizedBox(height: dp40),
-                Text(
-                  response.data!.driverName,
-                  style: TextStyle(
-                      color: black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: dp20),
-                ),
-                SizedBox(height: dp10),
-                Text(
-                  'bayer_martin@yahoo.com',
-                  style: TextStyle(fontSize: dp18),
-                ),
-                SizedBox(height: dp40),
                 Text('Bus No'),
                 SizedBox(height: dp10),
                 Text(
@@ -88,6 +75,19 @@ class _ProfileScreenPageState extends State<ProfileScreenPage> {
                       fontWeight: FontWeight.bold,
                       fontSize: dp18),
                 ),
+                SizedBox(height: dp40),
+                Text(
+                  response.data!.driverName,
+                  style: TextStyle(
+                      color: black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: dp20),
+                ),
+                SizedBox(height: dp10),
+                // Text(
+                //   'bayer_martin@yahoo.com',
+                //   style: TextStyle(fontSize: dp18),
+                // ),
                 SizedBox(height: dp40),
                 Text('Attendant Name'),
                 SizedBox(height: dp10),

@@ -45,21 +45,29 @@ class _NotificationScreenPageState extends State<NotificationScreenPage> {
             Obx((){
               var response = notificationController.allChildListResponse.value;
 
-              if(response?.data!=null){
-                var childList = response!.data!;
+              if(response!=null){
+                if(response!.data!=null){
+                  var childList = response!.data!;
 
-                return Expanded(
-                  child: ListView.builder(
-                      itemCount: childList.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ChildWidget(
-                          key: new UniqueKey(),
-                          childData: childList[index],
-                          notificationController: notificationController,
-                        );
-                      }),
+                  return Expanded(
+                    child: ListView.builder(
+                        itemCount: childList.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ChildWidget(
+                            key: new UniqueKey(),
+                            childData: childList[index],
+                            notificationController: notificationController,
+                          );
+                        }),
+                  );
+                }else return Expanded(
+                  child: Container(
+                    child: Center(
+                      child: Text("No booking found"),
+                    ),
+                  ),
                 );
-              }else return Expanded(
+              }else  return Expanded(
                 child: Container(
                   child: Center(
                     child: CircularProgressIndicator(),
@@ -139,8 +147,39 @@ class _ChildWidgetState extends State<ChildWidget> {
               ),
               InkWell(
                 onTap: (){
-                  if(data.isFinished == 0)
-                    notificationController.updateChild(data.bookingTravelId);
+
+                  Widget yesButton = TextButton(
+                    child: Text("Yes"),
+                    onPressed: () {
+                      notificationController.updateChild(data.bookingTravelId);
+
+                    },
+                  );
+
+                  Widget noButton = TextButton(
+                    child: Text("No"),
+                    onPressed: () {
+                      Get.back();
+                    },
+                  );
+
+
+                  // set up the AlertDialog
+                  AlertDialog alert = AlertDialog(
+                    title: Text("Confirm"),
+                    content: Text("Are you sure you want to end this ride?"),
+                    actions: [
+                      yesButton,
+                      noButton
+                    ],
+                  );
+
+
+                  if(data.isFinished == 0){
+                    showDialog(context: context, builder: (context){
+                      return alert;
+                    });
+                  }
                 },
                 child: CircleAvatar(
                   radius: dp20,

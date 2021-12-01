@@ -39,7 +39,9 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
       appBar: AppBar(
         backgroundColor: white,
         elevation: 0,
-        leading: BackButton(),
+        leading: BackButton(
+          color: black_5,
+        ),
       ),
       body: ListView(
         padding: EdgeInsets.all(dp20),
@@ -56,7 +58,7 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
           VSpacer20(),
           TextFieldHeadline(headline: "Total Distance"),
           VSpacer10(),
-          TextFieldValueWidget(headline: "${widget.bookingResponse.data?.distance?.toStringAsFixed(2)}"),
+          TextFieldValueWidget(headline: "${widget.bookingResponse.data?.distance?.toStringAsFixed(2)}km"),
           VSpacer20(),
           TextFieldHeadline(headline: "Cost per km"),
           VSpacer10(),
