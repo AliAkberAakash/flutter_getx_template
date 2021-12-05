@@ -164,7 +164,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   ),
                   Spacer(),
                   Text(
-                    "S\$${(addressRequest.price*infoRequest.childNames.length).toStringAsFixed(2)}",
+                    "S\$${(double.parse(addressRequest.distance.toStringAsFixed(2))*double.parse(addressRequest.pricePerKm.toStringAsFixed(2))*infoRequest.childNames.length).toStringAsFixed(2)}",
                     style: GoogleFonts.manrope(
                       color: accent,
                       fontSize: dp20,
@@ -570,8 +570,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
         dropoffPostalCode: addressRequest.dropOffPostalCode,
         pickupRemarks: addressRequest.pickupRemarks,
         dropoffRemarks: addressRequest.dropOffRemarks,
-        distance: addressRequest.distance,
-        price: addressRequest.distance*addressRequest.pricePerKm*infoRequest.childNames.length,
+        distance: double.parse(addressRequest.distance.toStringAsFixed(2)),
+        price: double.parse(addressRequest.distance.toStringAsFixed(2))*double.parse(addressRequest.pricePerKm.toStringAsFixed(2))*infoRequest.childNames.length,
         verbatim: "none",
         comment: addressRequest.comments,
       );
