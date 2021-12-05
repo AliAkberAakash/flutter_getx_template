@@ -85,6 +85,10 @@ class _UpdateVehicleScreenState extends State<UpdateVehicleScreen> {
     mainWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(),
+        elevation: 0,
+      ),
       body: SafeArea(
         child: ListView(
           physics: BouncingScrollPhysics(),

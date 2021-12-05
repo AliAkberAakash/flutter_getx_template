@@ -80,6 +80,10 @@ class _ServicePartnerProfileUpdateScreenState extends State<ServicePartnerProfil
     mainWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(),
+        elevation: 0,
+      ),
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.all(dp20),

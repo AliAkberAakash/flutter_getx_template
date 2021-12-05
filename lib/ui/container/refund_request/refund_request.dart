@@ -30,6 +30,10 @@ class _RefundRequestViewState extends State<RefundRequestView> {
         statusBarBrightness: Brightness.dark,
       ),
       child: Scaffold(
+        appBar: AppBar(
+          leading: BackButton(),
+          elevation: 0,
+        ),
         backgroundColor: Colors.white,
         body: SafeArea(
           child: SingleChildScrollView(
