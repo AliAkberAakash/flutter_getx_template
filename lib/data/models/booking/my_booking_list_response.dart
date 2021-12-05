@@ -130,6 +130,7 @@ class Booking {
     required this.createdAt,
     this.updatedAt,
     required this.currentStatus,
+    required this.comment,
   });
 
   int id;
@@ -151,6 +152,7 @@ class Booking {
   DateTime createdAt;
   DateTime? updatedAt;
   String currentStatus;
+  String? comment;
 
   factory Booking.fromJson(Map<String, dynamic> json) => Booking(
     id: json["id"],
@@ -172,6 +174,7 @@ class Booking {
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
     currentStatus: json["current_status"],
+    comment: json["comment"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -194,5 +197,6 @@ class Booking {
     "created_at": createdAt.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),
     "current_status": currentStatus,
+    "comment": comment,
   };
 }

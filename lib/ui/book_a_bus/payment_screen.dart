@@ -573,6 +573,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         distance: addressRequest.distance,
         price: addressRequest.distance*addressRequest.pricePerKm*infoRequest.childNames.length,
         verbatim: "none",
+        comment: addressRequest.comments,
       );
       var response = await placeBooking(request);
     }else showErrorSheet(context);

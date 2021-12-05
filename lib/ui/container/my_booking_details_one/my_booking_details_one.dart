@@ -9,6 +9,8 @@ import 'package:go_share/data/models/booking/booking_response.dart';
 import 'package:go_share/data/models/booking/my_booking_list_response.dart';
 import 'package:go_share/ui/book_a_bus/booking_controller.dart';
 import 'package:go_share/ui/book_a_bus/invoice_screen.dart';
+import 'package:go_share/ui/common_widgets/text_field_headline.dart';
+import 'package:go_share/ui/common_widgets/text_field_value_widget.dart';
 import 'package:go_share/ui/container/UIConstants/Colors.dart';
 import 'package:go_share/ui/container/my_booking_details_one/my_booking_controller.dart';
 import 'package:go_share/ui/container/provide_feedback/provide_feedback.dart';
@@ -110,7 +112,7 @@ class BodyWidget extends StatelessWidget {
         ),
         TitleWidget(),
         BookingItemWidget(controller: controller, booking: booking, bookingResponse: bookingResponse,),
-        LocationInfoWidget(booking : booking),
+        LocationInfoWidget(booking : booking, bookingResponse: bookingResponse,),
         // getType(booking)=="Finished" ? Container() : VehicleInfoWidget(response: booking,),
         getType(booking)=="Finished" ? CustomFilledButton(
           margin: const EdgeInsets.only(
@@ -188,10 +190,12 @@ class TitleWidget extends StatelessWidget {
 class LocationInfoWidget extends StatelessWidget {
 
   final BookingDetailsResponse booking;
+  final Booking bookingResponse;
 
   const LocationInfoWidget({
     Key? key,
     required this.booking,
+    required this.bookingResponse,
   }) : super(key: key);
 
   @override
@@ -313,6 +317,20 @@ class LocationInfoWidget extends StatelessWidget {
                   title: "Drop-Off Remark",
                   subtitle: "${booking.data?.bookingInformation?.dropoffRemarks ?? "--"}",
                   margin: const EdgeInsets.only(bottom: 0.0),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: dp10,),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextFieldHeadline(
+                        headline: "Comments",
+                      ),
+                      VSpacer10(),
+                      TextFieldValueWidget(headline: bookingResponse.comment ?? ""),
+                    ],
+                  ),
                 ),
               ],
             ),

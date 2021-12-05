@@ -31,6 +31,7 @@ class BookingRequest {
     required this.distance,
     required this.price,
     required this.verbatim,
+    required this.comment,
   });
 
   DateTime startDate;
@@ -54,6 +55,7 @@ class BookingRequest {
   double distance;
   double price;
   String verbatim;
+  String? comment;
 
   factory BookingRequest.fromJson(Map<String, dynamic> json) => BookingRequest(
     startDate: DateTime.parse(json["start_date"]),
@@ -77,6 +79,7 @@ class BookingRequest {
     distance: json["distance"],
     price: json["price"],
     verbatim: json["verbatim"],
+    comment: json["comment"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -101,5 +104,6 @@ class BookingRequest {
     "distance": distance,
     "price": price,
     "verbatim": verbatim,
+    "comment": comment
   };
 }
