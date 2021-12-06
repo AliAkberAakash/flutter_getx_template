@@ -34,6 +34,10 @@ class _ServiceProviderPasswordResetScreenState extends State<ServiceProviderPass
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(),
+        elevation: 0,
+      ),
       body: LayoutBuilder(
         builder: (ctx, constraints) {
           return Container(

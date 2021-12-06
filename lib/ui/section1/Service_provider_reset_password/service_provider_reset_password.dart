@@ -35,7 +35,10 @@ class _ServiceProviderResetPasswordState extends State<ServiceProviderResetPassw
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //backgroundColor: GSColors.green_primary,
+        appBar: AppBar(
+          leading: BackButton(),
+          elevation: 0,
+        ),
         body: SafeArea(
             child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
