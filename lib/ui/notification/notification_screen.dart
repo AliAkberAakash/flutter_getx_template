@@ -38,18 +38,20 @@ class _NotificationScreenPageState extends State<NotificationScreenPage> {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: dp20),
-        child: Column(
-          children: [
-            VSpacer20(),
-            TitleWidget(),
-            Obx((){
-              var response = notificationController.allChildListResponse.value;
+        child: Obx((){
+          var response = notificationController.allChildListResponse.value;
 
-              if(response!=null){
-                if(response!.data!=null){
-                  var childList = response!.data!;
+          if(response!=null){
+            if(response!.data!=null){
+              var childList = response!.data!;
 
-                  return Expanded(
+              return Column(
+                children: [
+                  VSpacer20(),
+                  childList.isNotEmpty
+                    ? TitleWidget(childListResponse: response,)
+                    : Container(),
+                  Expanded(
                     child: ListView.builder(
                         itemCount: childList.length,
                         itemBuilder: (BuildContext context, int index) {
@@ -59,24 +61,24 @@ class _NotificationScreenPageState extends State<NotificationScreenPage> {
                             notificationController: notificationController,
                           );
                         }),
-                  );
-                }else return Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Text("No booking found"),
-                    ),
                   ),
-                );
-              }else  return Expanded(
-                child: Container(
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
+                ],
               );
-            }),
-          ],
-        ),
+            }else return Expanded(
+              child: Container(
+                child: Center(
+                  child: Text("No booking found"),
+                ),
+              ),
+            );
+          }else  return Expanded(
+            child: Container(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          );
+        }),
       ),
     );
   }
@@ -135,12 +137,12 @@ class _ChildWidgetState extends State<ChildWidget> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      // Text(
-                      //   "${data.}",
-                      //   style: TextStyle(
-                      //       color:data.isFinished==1 ? white : grey,
-                      //       fontSize: dp12),
-                      // )
+                      Text(
+                        "${data.ride!.destination}",
+                        style: TextStyle(
+                            color:data.isFinished==1 ? white : grey,
+                            fontSize: dp12),
+                      )
                     ],
                   ),
                 ),
@@ -197,6 +199,7 @@ class _ChildWidgetState extends State<ChildWidget> {
           isExpanded ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              VSpacer10(),
               Text(
                 "Child List",
                 textAlign: TextAlign.start,
@@ -223,8 +226,12 @@ class _ChildWidgetState extends State<ChildWidget> {
 
 
 class TitleWidget extends StatelessWidget {
+
+  final ChildListResponse childListResponse;
+
   const TitleWidget({
     Key? key,
+    required this.childListResponse,
   }) : super(key: key);
 
   @override
@@ -243,7 +250,7 @@ class TitleWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "#VA45647",
+                "#${childListResponse.data[0].bookingId}",
                 textAlign: TextAlign.start,
                 style: GSTextStyles.make28xw700Style(
                   color: GSColors.gray_primary,
@@ -266,7 +273,7 @@ class TitleWidget extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "10:00am",
+                          "${childListResponse.data[0].ride!.startTime}",
                           textAlign: TextAlign.start,
                           style: GSTextStyles.make16xw400Style(
                             color: GSColors.gray_secondary,
@@ -286,7 +293,7 @@ class TitleWidget extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "11:00am",
+                          "${childListResponse.data[0].ride!.endTime}",
                           textAlign: TextAlign.start,
                           style: GSTextStyles.make16xw400Style(
                             color: GSColors.gray_secondary,
