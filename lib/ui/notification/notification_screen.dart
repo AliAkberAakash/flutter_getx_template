@@ -151,8 +151,10 @@ class _ChildWidgetState extends State<ChildWidget> {
                   Widget yesButton = TextButton(
                     child: Text("Yes"),
                     onPressed: () {
-                      notificationController.updateChild(data.bookingTravelId);
-
+                      Get.back();
+                      if(data.bookingTravelId!=null)
+                        notificationController
+                          .updateChild(data.bookingTravelId!);
                     },
                   );
 

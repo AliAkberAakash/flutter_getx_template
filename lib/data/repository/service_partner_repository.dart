@@ -669,7 +669,7 @@ class Repository{
       return ChildListResponse.fromJson(response.data);
     }catch(e){
       logger.d(e);
-      return ChildListResponse(success: false, msg: 'Failed to fetch child list');
+      return ChildListResponse(success: false, msg: 'Failed to fetch child list', data: []);
     }
   }
 
