@@ -60,6 +60,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     nricController.text=user.nric ?? "";
     careTakerNameController.text = user.caretakerName ?? "";
     careTakerNumberController.text=user.caretakerPhone ?? "";
+    if(user.dateOfBirth != null)
+      dateController.text = speakDate(user.dateOfBirth!);
 
     super.initState();
   }
