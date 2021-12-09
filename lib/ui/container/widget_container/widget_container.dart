@@ -25,6 +25,7 @@ import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/constants.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
+import 'package:go_share/utils/string_utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class WidgetContainerView extends StatefulWidget {
@@ -229,7 +230,7 @@ class _WidgetContainerViewState extends State<WidgetContainerView> {
                             CircleAvatar(
                               radius: dp30,
                               backgroundImage: NetworkImage(
-                                currentState==null ? "" : (currentState.image ?? ""),
+                                currentState==null ? "" : getImagePath(currentState.image ?? ""),
                               ),
                             ),
                             HSpacer20(),

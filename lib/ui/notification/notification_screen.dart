@@ -130,13 +130,13 @@ class _ChildWidgetState extends State<ChildWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        "#${data.bookingId}",
-                        style: TextStyle(
-                          color:data.isFinished==1 ? white : black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      // Text(
+                      //   "#${data.bookingId}",
+                      //   style: TextStyle(
+                      //     color:data.isFinished==1 ? white : black,
+                      //     fontWeight: FontWeight.bold,
+                      //   ),
+                      // ),
                       Text(
                         "${data.ride!.destination}",
                         style: TextStyle(
@@ -250,7 +250,7 @@ class TitleWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "#${childListResponse.data[0].bookingId}",
+                "${childListResponse.data[0].ride?.name ?? ""}",
                 textAlign: TextAlign.start,
                 style: GSTextStyles.make28xw700Style(
                   color: GSColors.gray_primary,

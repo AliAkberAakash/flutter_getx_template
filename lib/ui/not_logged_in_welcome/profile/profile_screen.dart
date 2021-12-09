@@ -11,6 +11,7 @@ import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/date_time_utils.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
+import 'package:go_share/utils/string_utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../edit_profile/edit_profile_screen.dart';
@@ -57,7 +58,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     CircleAvatar(
                       radius: dp30,
                       backgroundImage: NetworkImage(
-                        user.image ?? "",
+                        getImagePath(user.image ?? ""),
                       ),
                     ),
                     HSpacer20(),
@@ -110,7 +111,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     CircleAvatar(
                       radius: dp30,
                       backgroundImage: NetworkImage(
-                        user.caretakerImage ?? "",
+                        getImagePath(user.caretakerImage ?? ""),
                       ),
                     ),
                     HSpacer20(),

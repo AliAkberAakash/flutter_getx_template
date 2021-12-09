@@ -14,6 +14,7 @@ import 'package:go_share/utils/colors.dart';
 import 'package:go_share/utils/date_time_utils.dart';
 import 'package:go_share/utils/dimens.dart';
 import 'package:go_share/utils/spacers.dart';
+import 'package:go_share/utils/string_utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -253,7 +254,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       )
           : CircleAvatar(
         radius: dp35,
-        backgroundImage: Image.network(user.image ?? "", fit: BoxFit.cover).image,
+        backgroundImage: Image.network(getImagePath(user.image ?? ""), fit: BoxFit.cover).image,
       ),
       TextButton(
         onPressed: () => _getImage(),
@@ -310,7 +311,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       )
           : CircleAvatar(
         radius: dp35,
-        backgroundImage: Image.network(user.caretakerImage ?? "", fit: BoxFit.cover).image,
+        backgroundImage: Image.network(getImagePath(user.caretakerImage ?? ""), fit: BoxFit.cover).image,
       ),
       TextButton(
         onPressed: () => _getCareTakerImage(),
