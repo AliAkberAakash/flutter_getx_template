@@ -113,7 +113,8 @@ class BodyWidget extends StatelessWidget {
         TitleWidget(),
         BookingItemWidget(controller: controller, booking: booking, bookingResponse: bookingResponse,),
         LocationInfoWidget(booking : booking, bookingResponse: bookingResponse,),
-        // getType(booking)=="Finished" ? Container() : VehicleInfoWidget(response: booking,),
+        getType(booking)=="Finished" ?
+        Container() : VehicleInfoWidget(response: booking,),
         getType(booking)=="Finished" ? CustomFilledButton(
           margin: const EdgeInsets.only(
             left: 30.0,
@@ -381,15 +382,15 @@ class VehicleInfoWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  margin: const EdgeInsets.only(bottom: 20.0),
-                  width: double.maxFinite,
-                  child: Image.network(
-                    "",
-                    height: 192.0,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                // Container(
+                //   margin: const EdgeInsets.only(bottom: 20.0),
+                //   width: double.maxFinite,
+                //   child: Image.network(
+                //     "${response.data?.existRideInfo?.}",
+                //     height: 192.0,
+                //     fit: BoxFit.cover,
+                //   ),
+                // ),
                 TitleSubtitleWidget(
                   title: "Vehicle number",
                   subtitle: "${response.data?.existRideInfo?.vehicleId}",
