@@ -11,7 +11,8 @@ jobs:
     - task: FlutterInstall@0
       inputs:
         channel: 'stable'
-        version: 'latest'
+        version: 'custom'
+        customVersion: '2.8.0'
     
     - task: FlutterBuild@0
       inputs:
