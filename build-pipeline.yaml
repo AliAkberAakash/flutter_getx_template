@@ -18,6 +18,7 @@ jobs:
         target: apk
         projectDirectory: $(projectDirectory)
         buildFlavour: dev
+        additionalArguments: -t lib/main_dev.dart
   
     # - task: AndroidSigning@3
     #   displayName: 'Signing and aligning APK file(s) **/*.apk'
