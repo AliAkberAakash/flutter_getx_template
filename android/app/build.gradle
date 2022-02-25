@@ -80,17 +80,23 @@ android {
     }
 
     signingConfigs {
-        release {
+       // release {
            // keyAlias keystoreProperties['keyAlias']
            // keyPassword keystoreProperties['password']
            // storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
            // storePassword keystoreProperties['password']
-        }
+       // }
+       debug {
+       }
     }
 
     buildTypes {
-        release {
-            signingConfig signingConfigs.release
+        //release {
+           // signingConfig signingConfigs.release
+        //}
+        
+        debug {
+            signingConfig signingConfigs.debug
         }
     }
 
