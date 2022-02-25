@@ -81,10 +81,10 @@ android {
 
     signingConfigs {
         release {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['password']
-            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-            storePassword keystoreProperties['password']
+           // keyAlias keystoreProperties['keyAlias']
+           // keyPassword keystoreProperties['password']
+           // storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+           // storePassword keystoreProperties['password']
         }
     }
 
